@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
-    font-family: "Quicksand", "Poppins";
-    font-size: 14px;
+* {
+  font-family: "Quicksand", "Poppins";
+  font-size: 14px;
 }
