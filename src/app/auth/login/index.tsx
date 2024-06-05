@@ -1,11 +1,16 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
 import loginImg from "../../../assets/images/loginImg1.png";
 import AnimatedInput from "../../../components/Inputs/AnimatedInput";
 import { Link } from "react-router-dom";
+import { loginService } from "../../../services/auth.service";
+import { notifications } from "@mantine/notifications";
+import { ClipLoader } from "react-spinners";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const handleEmailChange = (event: React.ChangeEvent<HTMLFormElement>) => {
     console.log(event.target.value);
     setEmail(event.target.value);
@@ -13,13 +18,39 @@ export default function Login() {
   const handlePasswordChange = (event: React.ChangeEvent<HTMLFormElement>) => {
     setPassword(event.target.value);
   };
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    setLoading(true);
     event.preventDefault();
+    if(!email || !password){
+      notifications.show({
+        title: "Error",
+        message: "Email and password are required",
+        color: "red",
+      })
+      setLoading(false);
+      return;
+    }
+    loginService({email: email, password: password})
+      .then((res: any)=>{
+        notifications.show({
+          title: "Success!",
+          message: res.data.message,
+          color: "green",
+        })
+      })
+      .catch((err)=>{
+        notifications.show({
+          title: "Error",
+          message: err.response.data.message,
+          color: "red",
+        })
+      })
+      .finally(()=> setLoading(false));
   };
   return (
     <div className="w-full h-screen flex justify-between items-center md:px-[7vw] px-4">
       <div className="w-full md:w-[45%] h-[90%] flex flex-col">
-        <h1 className="font-extrabold text-lg">Place Pulse</h1>
+        <Link to={"/"} className="font-extrabold text-lg">Place Pulse</Link>
 
         <form
           onSubmit={handleSubmit}
@@ -56,7 +87,9 @@ export default function Login() {
             type="submit"
             className="w-full mt-4 py-3 text-center font-bold rounded-md text-white bg-[#699BFE]"
           >
-            Login
+            {loading ? <div className="w-full h-full flex items-center justify-center">
+              <ClipLoader size={23} color="black"/>
+            </div> : "Login"}
           </button>
           <div className="w-full flex items-center gap-2 justify-end">
             <h1 className="text-sm font-extrabold">Don't have an account?</h1>

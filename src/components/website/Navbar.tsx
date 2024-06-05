@@ -27,7 +27,7 @@ const WebNavbar = () => {
       <div className="flex gap-2 items-center">
         <Link to={"/auth/login"}>Login</Link> |
         <Link
-          to={"/auth/signup"}
+          to={"/auth/register"}
           className="p-1 px-2 bg-[#5984F1] rounded-md text-white"
         >
           Signup
