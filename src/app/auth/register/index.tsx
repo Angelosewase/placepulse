@@ -2,11 +2,15 @@ import React, { useState } from "react";
 import loginImg from "../../../assets/images/loginImg1.png";
 import AnimatedInput from "../../../components/Inputs/AnimatedInput";
 import { Link } from "react-router-dom";
+import { notifications } from "@mantine/notifications";
+import { registerService } from "../../../services/auth.service";
+import { ClipLoader } from "react-spinners";
 
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
+  const [loading, setLoading] = useState(false);
   const handleEmailChange = (event: React.ChangeEvent<HTMLFormElement>) => {
     console.log(event.target.value);
     setEmail(event.target.value);
@@ -19,6 +23,34 @@ export default function Register() {
   };
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setLoading(true);
+    if(!email || !password) {
+      notifications.show({
+        title: "Error",
+        message: "Please fill all the fields",
+        color: "red",
+      })
+      setLoading(false);
+      return;
+    }
+
+    registerService({email, password, phone})
+      .then((res)=>{
+        notifications.show({
+          title: "Success!",
+          message: res.data.message,
+          color: "green",
+        })
+      })
+      .catch((err)=>{
+        console.log(err.response);
+        notifications.show({
+          title: "Error",
+          message: err.response.data.message,
+          color: "red",
+        })
+      })
+      .finally(()=> setLoading(false));
   };
   return (
     <div className="w-full h-screen flex justify-between items-center md:px-[7vw] px-4">
@@ -58,20 +90,27 @@ export default function Register() {
               className=""
             />
           </div>
-
-          <div className="w-full flex justify-end">
+          <div className="w-full flex justify-center gap-10 mt-2">
             <Link
-              to={"/auth/forgot"}
+              to={"/terms"}
               className="text-[#FF8682] font-extrabold text-sm"
             >
-              Forgot Password ?{" "}
+              Terms{" "}
+            </Link>
+            <Link
+              to={"/privacy"}
+              className="text-[#FF8682] font-extrabold text-sm"
+            >
+              Privacy Policy {" "}
             </Link>
           </div>
           <button
             type="submit"
             className="w-full mt-4 py-3 text-center font-bold rounded-md text-white bg-[#699BFE]"
           >
-            Register
+            {loading ? <div className="w-full h-full flex items-center justify-center">
+              <ClipLoader size={23} color="black"/>
+            </div> : "Register"}
           </button>
           <div className="w-full flex items-center gap-2 justify-end">
             <h1 className="text-sm font-extrabold">Already have an account?</h1>
