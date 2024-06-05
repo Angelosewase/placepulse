@@ -87,6 +87,7 @@ export default function Login() {
           </div>
           <button
             type="submit"
+            disabled={loading}
             className="w-full mt-4 py-3 text-center font-bold rounded-md text-white bg-[#699BFE]"
           >
             {loading ? (

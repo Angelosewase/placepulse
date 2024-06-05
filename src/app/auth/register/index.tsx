@@ -24,33 +24,33 @@ export default function Register() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
-    if(!email || !password) {
+    if (!email || !password) {
       notifications.show({
         title: "Error",
         message: "Please fill all the fields",
         color: "red",
-      })
+      });
       setLoading(false);
       return;
     }
 
-    registerService({email, password, phone})
-      .then((res)=>{
+    registerService({ email, password, phone })
+      .then((res) => {
         notifications.show({
           title: "Success!",
           message: res.data.message,
           color: "green",
-        })
+        });
       })
-      .catch((err)=>{
+      .catch((err) => {
         console.log(err.response);
         notifications.show({
           title: "Error",
           message: err.response.data.message,
           color: "red",
-        })
+        });
       })
-      .finally(()=> setLoading(false));
+      .finally(() => setLoading(false));
   };
   return (
     <div className="w-full h-screen flex justify-between items-center md:px-[7vw] px-4">
@@ -101,16 +101,21 @@ export default function Register() {
               to={"/privacy"}
               className="text-[#FF8682] font-extrabold text-sm"
             >
-              Privacy Policy {" "}
+              Privacy Policy{" "}
             </Link>
           </div>
           <button
             type="submit"
+            disabled={loading}
             className="w-full mt-4 py-3 text-center font-bold rounded-md text-white bg-[#699BFE]"
           >
-            {loading ? <div className="w-full h-full flex items-center justify-center">
-              <ClipLoader size={23} color="black"/>
-            </div> : "Register"}
+            {loading ? (
+              <div className="w-full h-full flex items-center justify-center">
+                <ClipLoader size={23} color="black" />
+              </div>
+            ) : (
+              "Register"
+            )}
           </button>
           <div className="w-full flex items-center gap-2 justify-end">
             <h1 className="text-sm font-extrabold">Already have an account?</h1>

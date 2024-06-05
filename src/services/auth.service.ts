@@ -30,3 +30,13 @@ export const registerService = ({
     role: role ?? "USER",
   });
 };
+
+export const forgotPasswordService = ({
+    email
+  }: {
+    email: string;
+  }) => {
+    return AxiosAPI.post("/auth/sendCode", {
+      email
+    });
+  };
