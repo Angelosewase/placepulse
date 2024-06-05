@@ -36,13 +36,13 @@ export default function Forgot() {
         });
         localStorage.setItem("user_mail", email);
         navigate("/auth/verify");
-        
       })
       .catch((err) => {
         console.log(err);
         notifications.show({
           title: "",
-          message: err.response?.data?.message ?? err.message ??  "An Error Occured!",
+          message:
+            err.response?.data?.message ?? err.message ?? "An Error Occured!",
           color: "red",
         });
       })

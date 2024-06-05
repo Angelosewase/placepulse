@@ -61,18 +61,8 @@ function App() {
               </WebLayout>
             }
           />
-          <Route
-            path="/public/terms"
-            element={
-                <TermsAndConditions />
-            }
-          />
-          <Route
-            path="/public/privacy"
-            element={
-                <PrivacyPolicy />
-            }
-          />
+          <Route path="/public/terms" element={<TermsAndConditions />} />
+          <Route path="/public/privacy" element={<PrivacyPolicy />} />
           {/* Auth Routes */}
           <Route path="/auth/login" element={<Login />} />
           <Route path="/auth/register" element={<Signup />} />

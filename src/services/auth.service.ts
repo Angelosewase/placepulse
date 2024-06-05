@@ -36,15 +36,27 @@ export const forgotPasswordService = ({ email }: { email: string }) => {
     email,
   });
 };
-export const verifyCodeService = ({ email, code }: { email: string, code: string }) => {
+export const verifyCodeService = ({
+  email,
+  code,
+}: {
+  email: string;
+  code: string;
+}) => {
   return AxiosAPI.post("/auth/verify", {
     email,
-    code
+    code,
   });
 };
-export const resetPasswordService = ({ email, newPassword }: { email: string, newPassword: string }) => {
+export const resetPasswordService = ({
+  email,
+  newPassword,
+}: {
+  email: string;
+  newPassword: string;
+}) => {
   return AxiosAPI.post("/auth/resetPassword", {
     email,
-    newPassword
+    newPassword,
   });
 };

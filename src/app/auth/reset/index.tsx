@@ -21,11 +21,11 @@ export default function Login() {
   const handlePasswordChange = (event: React.ChangeEvent<HTMLFormElement>) => {
     setPassword(event.target.value);
   };
-  useEffect(()=>{
-    if(!email){
+  useEffect(() => {
+    if (!email) {
       navigate("/auth/forgot");
     }
-  },[])
+  }, []);
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     setLoading(true);
     event.preventDefault();
@@ -38,7 +38,7 @@ export default function Login() {
       setLoading(false);
       return;
     }
-    if(confirmPassword !== password) {
+    if (confirmPassword !== password) {
       notifications.show({
         title: "",
         message: "Passwords Do Not Match",
@@ -55,7 +55,7 @@ export default function Login() {
           color: "green",
         });
         localStorage.removeItem("user_mail");
-        navigate("/")
+        navigate("/");
       })
       .catch((err) => {
         notifications.show({
