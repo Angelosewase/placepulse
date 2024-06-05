@@ -21,36 +21,38 @@ export default function Login() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     setLoading(true);
     event.preventDefault();
-    if(!email || !password){
+    if (!email || !password) {
       notifications.show({
         title: "Error",
         message: "Email and password are required",
         color: "red",
-      })
+      });
       setLoading(false);
       return;
     }
-    loginService({email: email, password: password})
-      .then((res: any)=>{
+    loginService({ email: email, password: password })
+      .then((res: any) => {
         notifications.show({
           title: "Success!",
           message: res.data.message,
           color: "green",
-        })
+        });
       })
-      .catch((err)=>{
+      .catch((err) => {
         notifications.show({
           title: "Error",
           message: err.response.data.message,
           color: "red",
-        })
+        });
       })
-      .finally(()=> setLoading(false));
+      .finally(() => setLoading(false));
   };
   return (
     <div className="w-full h-screen flex justify-between items-center md:px-[7vw] px-4">
       <div className="w-full md:w-[45%] h-[90%] flex flex-col">
-        <Link to={"/"} className="font-extrabold text-lg">Place Pulse</Link>
+        <Link to={"/"} className="font-extrabold text-lg">
+          Place Pulse
+        </Link>
 
         <form
           onSubmit={handleSubmit}
@@ -87,9 +89,13 @@ export default function Login() {
             type="submit"
             className="w-full mt-4 py-3 text-center font-bold rounded-md text-white bg-[#699BFE]"
           >
-            {loading ? <div className="w-full h-full flex items-center justify-center">
-              <ClipLoader size={23} color="black"/>
-            </div> : "Login"}
+            {loading ? (
+              <div className="w-full h-full flex items-center justify-center">
+                <ClipLoader size={23} color="black" />
+              </div>
+            ) : (
+              "Login"
+            )}
           </button>
           <div className="w-full flex items-center gap-2 justify-end">
             <h1 className="text-sm font-extrabold">Don't have an account?</h1>

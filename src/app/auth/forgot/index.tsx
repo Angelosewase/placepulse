@@ -21,7 +21,9 @@ export default function Forgot() {
           onSubmit={handleSubmit}
           className="w-full md:w-[90%] flex flex-col items-start gap-4 mt-[10vh]"
         >
-          <h1 className="text-4xl font-extrabold mb-[5vh]">Forgot Your Password?</h1>
+          <h1 className="text-4xl font-extrabold mb-[5vh]">
+            Forgot Your Password?
+          </h1>
 
           <div className="w-full flex flex-col items-start gap-6">
             <AnimatedInput
