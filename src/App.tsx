@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Reset from "./app/auth/reset";
 import Verify from "./app/auth/verify";
-import Signup from "./app/auth/signup";
+import Signup from "./app/auth/register";
 import Forgot from "./app/auth/forgot";
 import Login from "./app/auth/login";
 import NotFoundPage from "./app/404";
@@ -61,7 +61,7 @@ function App() {
           />
           {/* Auth Routes */}
           <Route path="/auth/login" element={<Login />} />
-          <Route path="/auth/signup" element={<Signup />} />
+          <Route path="/auth/register" element={<Signup />} />
           <Route path="/auth/verify" element={<Verify />} />
           <Route path="/auth/reset" element={<Reset />} />
           <Route path="/auth/forgot" element={<Forgot />} />

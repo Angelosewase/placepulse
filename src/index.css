@@ -5,4 +5,5 @@
 * {
   font-family: "Quicksand", "Poppins";
   font-size: 14px;
+  user-select: none;
 }
