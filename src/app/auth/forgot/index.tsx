@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import loginImg from "../../../assets/images/loginImg1.png";
 import AnimatedInput from "../../../components/Inputs/AnimatedInput";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { notifications } from "@mantine/notifications";
 import { forgotPasswordService } from "../../../services/auth.service";
 import { ClipLoader } from "react-spinners";
 
 export default function Forgot() {
   const [email, setEmail] = useState("");
-  const [loading , setLoading ] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const handleEmailChange = (event: React.ChangeEvent<HTMLFormElement>) => {
     console.log(event.target.value);
     setEmail(event.target.value);
@@ -16,32 +17,36 @@ export default function Forgot() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
-    if(!email){
+    if (!email) {
       setLoading(false);
       notifications.show({
         title: "Error",
         message: "Fill Your Email",
-        color: "red"
-      })
+        color: "red",
+      });
       return;
     }
 
-    forgotPasswordService({email})
-      .then((res)=>{
+    forgotPasswordService({ email })
+      .then((res) => {
         notifications.show({
-          title: "Success",
-          message:  res.data.message,
-          color: "green"
-        })
+          title: "",
+          message: res.data.message,
+          color: "green",
+        });
+        localStorage.setItem("user_mail", email);
+        navigate("/auth/verify");
+        
       })
-      .catch((err)=>{
+      .catch((err) => {
+        console.log(err);
         notifications.show({
-          title: "Error",
-          message: err.response.message,
-          color: "red"
-        })
+          title: "",
+          message: err.response?.data?.message ?? err.message ??  "An Error Occured!",
+          color: "red",
+        });
       })
-      .finally(()=> setLoading(false));
+      .finally(() => setLoading(false));
   };
   return (
     <div className="w-full h-screen flex justify-between items-center md:px-[7vw] px-4">
@@ -70,9 +75,13 @@ export default function Forgot() {
             disabled={loading}
             className="w-full mt-4 py-3 text-center font-bold rounded-md text-white bg-[#699BFE]"
           >
-            {loading ? <div className="w-full h-full flex items-center justify-center">
-              <ClipLoader size={23} color="black"/>
-            </div> : "Submit"}
+            {loading ? (
+              <div className="w-full h-full flex items-center justify-center">
+                <ClipLoader size={23} color="black" />
+              </div>
+            ) : (
+              "Submit"
+            )}
           </button>
           <div className="w-full flex items-center gap-2 justify-end">
             <h1 className="font-extrabold text-sm">Got it ?</h1>

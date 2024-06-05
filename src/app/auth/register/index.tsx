@@ -37,7 +37,7 @@ export default function Register() {
     registerService({ email, password, phone })
       .then((res) => {
         notifications.show({
-          title: "Success!",
+          title: "",
           message: res.data.message,
           color: "green",
         });
@@ -45,7 +45,7 @@ export default function Register() {
       .catch((err) => {
         console.log(err.response);
         notifications.show({
-          title: "Error",
+          title: "",
           message: err.response.data.message,
           color: "red",
         });
@@ -92,13 +92,13 @@ export default function Register() {
           </div>
           <div className="w-full flex justify-center gap-10 mt-2">
             <Link
-              to={"/terms"}
+              to={"/public/terms"}
               className="text-[#FF8682] font-extrabold text-sm"
             >
               Terms{" "}
             </Link>
             <Link
-              to={"/privacy"}
+              to={"/public/privacy"}
               className="text-[#FF8682] font-extrabold text-sm"
             >
               Privacy Policy{" "}

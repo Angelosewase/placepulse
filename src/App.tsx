@@ -12,6 +12,8 @@ import Home from "./components/website/Home";
 import AboutUs from "./components/website/About";
 import Contact from "./components/website/Contact";
 import Services from "./components/website/Services";
+import PrivacyPolicy from "./components/website/Privacy";
+import TermsAndConditions from "./components/website/Terms";
 
 function App() {
   return (
@@ -57,6 +59,18 @@ function App() {
               <WebLayout>
                 <Places />
               </WebLayout>
+            }
+          />
+          <Route
+            path="/public/terms"
+            element={
+                <TermsAndConditions />
+            }
+          />
+          <Route
+            path="/public/privacy"
+            element={
+                <PrivacyPolicy />
             }
           />
           {/* Auth Routes */}

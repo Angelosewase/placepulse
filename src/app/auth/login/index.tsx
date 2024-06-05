@@ -40,7 +40,7 @@ export default function Login() {
       })
       .catch((err) => {
         notifications.show({
-          title: "Error",
+          title: "",
           message: err.response.data.message,
           color: "red",
         });

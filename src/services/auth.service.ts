@@ -31,12 +31,20 @@ export const registerService = ({
   });
 };
 
-export const forgotPasswordService = ({
-    email
-  }: {
-    email: string;
-  }) => {
-    return AxiosAPI.post("/auth/sendCode", {
-      email
-    });
-  };
+export const forgotPasswordService = ({ email }: { email: string }) => {
+  return AxiosAPI.post("/auth/sendCode", {
+    email,
+  });
+};
+export const verifyCodeService = ({ email, code }: { email: string, code: string }) => {
+  return AxiosAPI.post("/auth/verify", {
+    email,
+    code
+  });
+};
+export const resetPasswordService = ({ email, newPassword }: { email: string, newPassword: string }) => {
+  return AxiosAPI.post("/auth/resetPassword", {
+    email,
+    newPassword
+  });
+};
