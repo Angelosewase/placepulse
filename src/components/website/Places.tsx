@@ -110,82 +110,85 @@ const Places = () => {
           })}
         </div>
         <div className="flex flex-col gap-4">
-          {accommodations_data.filter((accommodation)=> accommodation.type === activeAcc).slice(0,4).map((accommodation, index) => {
-            return (
-              <div
-                key={index}
-                className="w-full h-[35vh] flex justify-between rounded-xl"
-              >
-                <div className="w-[35%] h-full relative">
-                  <img
-                    src={accommodation.images[0]}
-                    alt=""
-                    className="w-full h-full rounded-tl-xl"
-                  />
-                  <button className="absolute top-2 right-2 p-2 text-sm font-bold text-[#112211b3] flex items-center gap-1 rounded-lg bg-[#ffffff7c]">
-                    {accommodation.images.length}
-                    <h6>Images</h6>
-                  </button>
-                </div>
-                <div className="w-[60%] flex flex-col items-start justify-start relative pb-3">
-                  <h1 className="w-[70%] font-extrabold text-xl">
-                    {accommodation.name}
-                  </h1>
-                  <div className="flex items-center gap-3">
-                    <FaLocationDot color="black" />
-                    <h6 className="text-[#112211] text-sm font-medium">
-                      {accommodation.location.text}
-                    </h6>
-                  </div>
-                  <div className="flex items-center gap-3 mt-2">
-                    <Rating defaultValue={accommodation.rating} />
-                    <h6 className="text-sm font-bold text-[#112211]">
-                      {accommodation.rating} Star {activeAcc}
-                    </h6>
-
-                    <h6 className="flex items-center gap-2 ml-5">
-                      <FaCoffee color="black" />
-                      <p className="text-sm">
-                        {accommodation.amenities.length}+ Amenities
-                      </p>
-                    </h6>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <button className="w-[3rem] h-[2rem] rounded-sm border border-[#8DD3BB] mt-3 font-bold">
-                      {accommodation.rating}
-                    </button>
-                    <h5 className="text-sm font-extrabold">Very Good</h5>
-                    <p className="text-sm font-semibold">
-                      {Math.floor(Math.random() * 1000) + 1} Reviews
-                    </p>
-                  </div>
-                  <hr className="hotel_divider border border-[#ccc] w-full mt-4" />
-                  <div className="w-full flex items-center gap-3 mt-3">
-                    <button className="w-[4rem] h-[3rem] flex items-center justify-center rounded-md border border-[#8DD3BB] font-bold">
-                      {accommodation.liked ? (
-                        <FaHeart color="black" />
-                      ) : (
-                        <FaRegHeart color="black" />
-                      )}
-                    </button>
-                    <button className="w-full py-3 rounded-md flex items-center font-extrabold justify-center bg-[#699bfe52]">
-                      View Place
+          {accommodations_data
+            .filter((accommodation) => accommodation.type === activeAcc)
+            .slice(0, 4)
+            .map((accommodation, index) => {
+              return (
+                <div
+                  key={index}
+                  className="w-full h-[35vh] flex justify-between rounded-xl"
+                >
+                  <div className="w-[35%] h-full relative">
+                    <img
+                      src={accommodation.images[0]}
+                      alt=""
+                      className="w-full h-full rounded-tl-xl"
+                    />
+                    <button className="absolute top-2 right-2 p-2 text-sm font-bold text-[#112211b3] flex items-center gap-1 rounded-lg bg-[#ffffff7c]">
+                      {accommodation.images.length}
+                      <h6>Images</h6>
                     </button>
                   </div>
-
-                  <div className="absolute right-3 top-2">
-                    <h6 className="font-bold text-[#1122118f] text-sm">
-                      Starting From{" "}
-                    </h6>
-                    <h1 className="text-xl text-[#396FF9] font-extrabold text-right">
-                      {accommodation.price}
+                  <div className="w-[60%] flex flex-col items-start justify-start relative pb-3">
+                    <h1 className="w-[70%] font-extrabold text-xl">
+                      {accommodation.name}
                     </h1>
-                    <p className="text-sm text-right">excl. tax</p>
+                    <div className="flex items-center gap-3">
+                      <FaLocationDot color="black" />
+                      <h6 className="text-[#112211] text-sm font-medium">
+                        {accommodation.location.text}
+                      </h6>
+                    </div>
+                    <div className="flex items-center gap-3 mt-2">
+                      <Rating defaultValue={accommodation.rating} />
+                      <h6 className="text-sm font-bold text-[#112211]">
+                        {accommodation.rating} Star {activeAcc}
+                      </h6>
+
+                      <h6 className="flex items-center gap-2 ml-5">
+                        <FaCoffee color="black" />
+                        <p className="text-sm">
+                          {accommodation.amenities.length}+ Amenities
+                        </p>
+                      </h6>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <button className="w-[3rem] h-[2rem] rounded-sm border border-[#8DD3BB] mt-3 font-bold">
+                        {accommodation.rating}
+                      </button>
+                      <h5 className="text-sm font-extrabold">Very Good</h5>
+                      <p className="text-sm font-semibold">
+                        {Math.floor(Math.random() * 1000) + 1} Reviews
+                      </p>
+                    </div>
+                    <hr className="hotel_divider border border-[#ccc] w-full mt-4" />
+                    <div className="w-full flex items-center gap-3 mt-3">
+                      <button className="w-[4rem] h-[3rem] flex items-center justify-center rounded-md border border-[#8DD3BB] font-bold">
+                        {accommodation.liked ? (
+                          <FaHeart color="black" />
+                        ) : (
+                          <FaRegHeart color="black" />
+                        )}
+                      </button>
+                      <button className="w-full py-3 rounded-md flex items-center font-extrabold justify-center bg-[#699bfe52]">
+                        View Place
+                      </button>
+                    </div>
+
+                    <div className="absolute right-3 top-2">
+                      <h6 className="font-bold text-[#1122118f] text-sm">
+                        Starting From{" "}
+                      </h6>
+                      <h1 className="text-xl text-[#396FF9] font-extrabold text-right">
+                        {accommodation.price}
+                      </h1>
+                      <p className="text-sm text-right">excl. tax</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
           <button className="w-full py-3 mt-[8vh] rounded-sm text-white flex items-center font-extrabold justify-center bg-[#396FF9]">
             Show More Places
           </button>
