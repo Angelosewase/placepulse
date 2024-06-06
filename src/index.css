@@ -7,3 +7,7 @@
   font-size: 14px;
   user-select: none;
 }
+
+.places_tabs_cont{
+  box-shadow: 0px 2px 0px 0px #e0e0e023;
+}
