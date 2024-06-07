@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {  useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { accommodations_data } from "../../constants/dummy";
 import { FaLocationDot } from "react-icons/fa6";
 import CheckInCheckOutDates from "../Calendar/CheckInOut";

@@ -47,7 +47,7 @@ const LoginModal = ({
       .catch((err) => {
         notifications.show({
           title: "",
-          message: err.response?.data?.message ?? err.message ,
+          message: err.response?.data?.message ?? err.message,
           color: "red",
         });
       })
@@ -57,12 +57,15 @@ const LoginModal = ({
     <>
       {isPayment && (
         <div>
-          <Modal opened={isPayment} onClose={closePayment} title="Login to continue">
+          <Modal
+            opened={isPayment}
+            onClose={closePayment}
+            title="Login to continue"
+          >
             <form
               onSubmit={handleSubmit}
               className="w-full flex flex-col items-start gap-4 my-[3vh]"
             >
-              {/* <h1 className="w-full text-center text-4xl font-extrabold mb-[2vh]">Login</h1> */}
 
               <div className="w-full flex flex-col items-start gap-6">
                 <AnimatedInput
