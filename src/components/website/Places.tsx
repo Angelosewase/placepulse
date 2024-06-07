@@ -111,12 +111,11 @@ const Places = () => {
           })}
         </div>
         <div className="flex flex-col gap-4">
-          {accommodations_data
-            .filter((accommodation) => accommodation.type === activeAcc)
-            .length > 0 ? 
+          {accommodations_data.filter(
+            (accommodation) => accommodation.type === activeAcc,
+          ).length > 0 ? (
             <div>
-              {
-                accommodations_data
+              {accommodations_data
                 .filter((accommodation) => accommodation.type === activeAcc)
                 .slice(0, 4)
                 .map((accommodation, index) => {
@@ -151,7 +150,7 @@ const Places = () => {
                           <h6 className="text-sm font-bold text-[#112211]">
                             {accommodation.rating} Star {activeAcc}
                           </h6>
-    
+
                           <h6 className="flex items-center gap-2 ml-5">
                             <FaCoffee color="black" />
                             <p className="text-sm">
@@ -177,11 +176,14 @@ const Places = () => {
                               <FaRegHeart color="black" />
                             )}
                           </button>
-                          <button onClick={()=> navigate(`/places/${index}`)} className="w-full py-3 rounded-md flex items-center font-extrabold justify-center bg-[#699bfe52]">
+                          <button
+                            onClick={() => navigate(`/places/${index}`)}
+                            className="w-full py-3 rounded-md flex items-center font-extrabold justify-center bg-[#699bfe52]"
+                          >
                             View Place
                           </button>
                         </div>
-    
+
                         <div className="absolute right-3 top-2">
                           <h6 className="font-bold text-[#1122118f] text-sm">
                             Starting From{" "}
@@ -194,17 +196,16 @@ const Places = () => {
                       </div>
                     </div>
                   );
-                })
-              }
+                })}
               <button className="w-full py-3 mt-[8vh] rounded-sm text-white flex items-center font-extrabold justify-center bg-[#396FF9]">
                 Show More Places
               </button>
             </div>
-             :  (
-              <div className="w-full flex justify-center mt-7">
-                <h1 className="font-extrabold ">No {activeAcc}s Found!</h1>
-              </div>
-            )}
+          ) : (
+            <div className="w-full flex justify-center mt-7">
+              <h1 className="font-extrabold ">No {activeAcc}s Found!</h1>
+            </div>
+          )}
         </div>
       </div>
     </div>

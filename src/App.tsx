@@ -1,4 +1,4 @@
-import { Suspense } from 'react';
+import { Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 
@@ -18,8 +18,9 @@ import Services from "./components/website/Services";
 import PrivacyPolicy from "./components/website/Privacy";
 import TermsAndConditions from "./components/website/Terms";
 import PageLoader from "./components/loaders/pageLoader";
-import ViewAccommodation from './components/website/ViewAccommodation';
-import BookingPage from './components/website/Booking';
+import ViewAccommodation from "./components/website/ViewAccommodation";
+import BookingPage from "./components/website/Booking";
+import PlaceGallery from "./components/website/PlaceGallery";
 
 function App() {
   return (
@@ -81,6 +82,14 @@ function App() {
               element={
                 <WebLayout>
                   <BookingPage />
+                </WebLayout>
+              }
+            />
+            <Route
+              path="/places/:id/photos"
+              element={
+                <WebLayout>
+                  <PlaceGallery />
                 </WebLayout>
               }
             />
