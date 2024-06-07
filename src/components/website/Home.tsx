@@ -3,11 +3,12 @@ import landingImage2 from "../../assets/images/landing2.png";
 import landingImage3 from "../../assets/images/landing3.png";
 import hotel1 from "../../assets/images/hotel1.png";
 import hotel2 from "../../assets/images/hotel2.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CiLocationOn } from "react-icons/ci";
 import { GrKey } from "react-icons/gr";
 import { IoTimeSharp } from "react-icons/io5";
 const Home = () => {
+  const navigate = useNavigate();
   return (
     <div className=" pt-3 min-h-screen pb-20">
       <div className="w-full px-10 flex  flex-col md:flex-row items-center justify-between mt-3">
@@ -97,7 +98,10 @@ const Home = () => {
             Esse voluptas cumque vel exercitationem. Reiciendis est hic
             accusamus. Non ipsam
           </h6>
-          <button className="w-[8rem] mt-4 py-2 px-4 bg-[#396FF9] rounded-lg text-white">
+          <button
+            onClick={() => navigate("/places")}
+            className="w-[8rem] mt-4 py-2 px-4 bg-[#396FF9] rounded-lg text-white"
+          >
             Find Place
           </button>
         </div>

@@ -1,26 +1,28 @@
-import { Suspense } from "react";
+import { Suspense, lazy } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 
 // Lazy load components
-import Reset from "./app/auth/reset";
-import Verify from "./app/auth/verify";
-import Signup from "./app/auth/register";
-import Forgot from "./app/auth/forgot";
-import Login from "./app/auth/login";
-import NotFoundPage from "./app/404";
-import WebLayout from "./app/website/layout";
-import Places from "./components/website/Places";
-import Home from "./components/website/Home";
-import AboutUs from "./components/website/About";
-import Contact from "./components/website/Contact";
-import Services from "./components/website/Services";
-import PrivacyPolicy from "./components/website/Privacy";
-import TermsAndConditions from "./components/website/Terms";
+const Reset = lazy(() => import("./app/auth/reset"));
+const Verify = lazy(() => import("./app/auth/verify"));
+const Signup = lazy(() => import("./app/auth/register"));
+const Forgot = lazy(() => import("./app/auth/forgot"));
+const Login = lazy(() => import("./app/auth/login"));
+const Places = lazy(() => import("./components/website/Places"));
+const Home = lazy(() => import("./components/website/Home"));
+const AboutUs = lazy(() => import("./components/website/About"));
+const Contact = lazy(() => import("./components/website/Contact"));
+const Services = lazy(() => import("./components/website/Services"));
+const PrivacyPolicy = lazy(() => import("./components/website/Privacy"));
+const TermsAndConditions = lazy(() => import("./components/website/Terms"));
+const PlaceGallery = lazy(() => import("./components/website/PlaceGallery"));
+const ViewAccommodation = lazy(
+  () => import("./components/website/ViewAccommodation"),
+);
+const BookingPage = lazy(() => import("./components/website/Booking"));
 import PageLoader from "./components/loaders/pageLoader";
-import ViewAccommodation from "./components/website/ViewAccommodation";
-import BookingPage from "./components/website/Booking";
-import PlaceGallery from "./components/website/PlaceGallery";
+import WebLayout from "./app/website/layout";
+import NotFoundPage from "./app/404";
 
 function App() {
   return (
