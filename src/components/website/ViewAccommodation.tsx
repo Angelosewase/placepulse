@@ -59,7 +59,7 @@ const ViewAccommodation = () => {
               onClick={() => {
                 navigate(`/booking/place/${accommodation_id}`);
               }}
-              className="px-6 py-3 rounded-sm flex items-center font-extrabold justify-center bg-[#699bfe52]"
+              className="px-6 py-3 rounded-sm flex items-center font-extrabold justify-center bg-[#396FF9] text-white"
             >
               Book Now
             </button>

@@ -110,11 +110,11 @@ const Places = () => {
             );
           })}
         </div>
-        <div className="flex flex-col gap-4">
+        <div className="">
           {accommodations_data.filter(
             (accommodation) => accommodation.type === activeAcc,
           ).length > 0 ? (
-            <div>
+            <div className="flex flex-col gap-4">
               {accommodations_data
                 .filter((accommodation) => accommodation.type === activeAcc)
                 .slice(0, 4)
