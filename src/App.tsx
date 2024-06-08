@@ -23,6 +23,8 @@ const BookingPage = lazy(() => import("./components/website/Booking"));
 import PageLoader from "./components/loaders/pageLoader";
 import WebLayout from "./app/website/layout";
 import NotFoundPage from "./app/404";
+import UserLayout from "./app/_client/user/UserLayout";
+import UserLanding from "./app/_client/user/Landing";
 
 function App() {
   return (
@@ -103,6 +105,12 @@ function App() {
             <Route path="/auth/verify" element={<Verify />} />
             <Route path="/auth/reset" element={<Reset />} />
             <Route path="/auth/forgot" element={<Forgot />} />
+            {/* Auth Routes */}
+            <Route
+              path="/_client/home"
+              element={<UserLayout children={<UserLanding />} />}
+            />
+
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>

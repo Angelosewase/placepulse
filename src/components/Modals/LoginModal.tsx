@@ -66,7 +66,6 @@ const LoginModal = ({
               onSubmit={handleSubmit}
               className="w-full flex flex-col items-start gap-4 my-[3vh]"
             >
-
               <div className="w-full flex flex-col items-start gap-6">
                 <AnimatedInput
                   label="Email"

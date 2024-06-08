@@ -116,7 +116,8 @@ const BookingPage = () => {
                   <p
                     className={`${paymentPortion === "partial" && "text-white"} font-medium text-xs`}
                   >
-                    Pay $207.43 now, and the rest ($207.43) will be
+                    Pay {accommodation.roomTypes[0].price * 0.5} now, and the
+                    rest ({accommodation.roomTypes[0].price * 0.5}) will be
                     automatically charged to the same payment method on Nov 14,
                     2022. No extra fees.
                   </p>
@@ -131,9 +132,10 @@ const BookingPage = () => {
                   </button>
                   <Collapse in={openedInfo}>
                     <p
-                      className={`${paymentPortion === "partial" && "text-white"} font-medium text-xs`}
+                      className={`${paymentPortion === "partial" && "text-white"} font-medium text-xs mt-5`}
                     >
-                      Pay $207.43 now, and the rest ($207.43) will be
+                      Pay {accommodation.roomTypes[0].price * 0.5} now, and the
+                      rest ({accommodation.roomTypes[0].price * 0.5}) will be
                       automatically charged to the same payment method on Nov
                       14, 2022. No extra fees.
                     </p>
@@ -213,7 +215,11 @@ const BookingPage = () => {
             onClick={open}
             className="w-full py-3 mt-3 rounded-sm flex items-center font-extrabold justify-center bg-[#396FF9] text-white"
           >
-            Pay {accommodation.roomTypes[0].price} FRW
+            Pay{" "}
+            {paymentPortion == "full"
+              ? accommodation.roomTypes[0].price
+              : accommodation.roomTypes[0].price * 0.5}{" "}
+            FRW
           </button>
         </div>
       </div>

@@ -25,3 +25,7 @@
   height: 2px !important;
   background: #112211 !important;
 }
+
+.mantine-Menu-dropdown {
+  width: 22rem !important;
+}
