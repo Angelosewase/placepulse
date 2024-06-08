@@ -22,7 +22,7 @@ const AnimatedSelect = ({
     <div className="w-full flex flex-col items-start gap-2 relative">
       <label
         htmlFor={label}
-        className={"absolute left-3 top-3 transition-transform duration-200 transform -translate-y-6 scale-75 z-50 bg-white text-[#1C1B1F] font-medium"}
+        className={"absolute left-3 top-3 transition-transform duration-200 transform -translate-y-6 scale-75 z-50 bg-white text-[#112211] font-medium"}
       >
         {label}
       </label>
