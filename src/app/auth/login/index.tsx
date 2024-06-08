@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import loginImg from "../../../assets/images/loginImg1.png";
 import AnimatedInput from "../../../components/Inputs/AnimatedInput";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { loginService } from "../../../services/auth.service";
 import { notifications } from "@mantine/notifications";
 import { ClipLoader } from "react-spinners";
@@ -11,8 +11,8 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const handleEmailChange = (event: React.ChangeEvent<HTMLFormElement>) => {
-    console.log(event.target.value);
     setEmail(event.target.value);
   };
   const handlePasswordChange = (event: React.ChangeEvent<HTMLFormElement>) => {
@@ -37,6 +37,10 @@ export default function Login() {
           message: res.data.message,
           color: "green",
         });
+        console.log(res.data.data.user.role);
+        if(res.data.data.user.role === "USER"){
+          return navigate("/_client/home")
+        }
       })
       .catch((err) => {
         notifications.show({

@@ -22,10 +22,10 @@ const UserLanding = () => {
                 <div className="w-[70%] bg-white rounded-t-2xl p-6">
                     <h1 className="text-2xl font-extrabold  text-[#112211]">Where are you Heading ?</h1>
                     <div className="w-full flex justify-between gap-2 mt-6">
-                        <AnimatedSelect type="text" label="Hotels" value="" handleChange={()=> {}}/>
-                        <AnimatedSelect type="text" label="Parks" value="" handleChange={()=> {}}/>
-                        <AnimatedSelect type="text" label="Gardens" value="" handleChange={()=> {}}/>
-                        <AnimatedSelect type="text" label="Restaurants" value="" handleChange={()=> {}}/>
+                        <AnimatedSelect label="Hotels" value="" handleChange={()=> {}}/>
+                        <AnimatedSelect label="Parks" value="" handleChange={()=> {}}/>
+                        <AnimatedSelect label="Gardens" value="" handleChange={()=> {}}/>
+                        <AnimatedSelect label="Restaurants" value="" handleChange={()=> {}}/>
                     </div>
                 </div>
             </div>

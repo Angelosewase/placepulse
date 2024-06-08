@@ -1,18 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { Select } from "@mantine/core";
 import React, { useState } from "react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 
 const AnimatedSelect = ({
-  type,
   label,
   handleChange,
   value,
   className,
   showEye,
 }: {
-  type: string;
   label: string;
-  handleChange: React.ChangeEventHandler<HTMLElement>;
+  handleChange: ()=> void;
   value: string;
   className?: string;
   showEye?: boolean;
@@ -27,13 +26,16 @@ const AnimatedSelect = ({
       >
         {label}
       </label>
-      <input
-        type={showPassword ? "text" : type}
-        id={label}
-        value={value}
-        onChange={handleChange}
-        className={`${className} p-3 py-4 w-full border border-[#79747E] rounded-md text-sm text-[#1C1B1F] focus:outline-none focus:border-[#79747E]`}
-      />
+
+        <Select
+            placeholder={`Pick ${label}`}
+            data={[]}
+            value={value}
+            onChange={handleChange}
+            defaultValue="React"
+            clearable
+            className={className}
+        />
       {showEye && (
         <div className="absolute top-5 right-3 cursor-pointer">
           {showPassword ? (
