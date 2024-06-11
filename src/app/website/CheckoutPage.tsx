@@ -14,9 +14,11 @@ const CheckoutPage = () => {
   const params = useParams();
   const accommodation_id = params.id ?? 0;
   const accommodation = accommodations_data[Number(accommodation_id)];
-  const [isAddCardOpen, {open: openAddCard, close: closeAddCard}] = useDisclosure();
-  const [isPaymentOpen, {open: openPayment, close: closePayment}] = useDisclosure();
-    // const [selected, setSelected]= useState(false);
+  const [isAddCardOpen, { open: openAddCard, close: closeAddCard }] =
+    useDisclosure();
+  const [isPaymentOpen, { open: openPayment, close: closePayment }] =
+    useDisclosure();
+  // const [selected, setSelected]= useState(false);
   return (
     <div className="pb-[50vh] px-4 md:px-20">
       <div className="w-full flex justify-start items-center mt-5">
@@ -58,7 +60,11 @@ const CheckoutPage = () => {
                 <h1 className="text-lg font-extrabold">{"Thursday, Dec 8"}</h1>
                 <p className="text-sm">Check In</p>
               </div>
-              <img src={checkInOut} alt="" className="object-fit select-none w-[14vw]" />
+              <img
+                src={checkInOut}
+                alt=""
+                className="object-fit select-none w-[14vw]"
+              />
               <div>
                 <h1 className="text-lg font-extrabold">{"Friday, Dec 9"}</h1>
                 <p className="text-sm">Check Out</p>
@@ -73,19 +79,29 @@ const CheckoutPage = () => {
             </div>
           </div>
           <h1 className="text-sm text-right font-medium text-[#112211] mt-4">
-              Your Booking is highly protected by{" "}
-              <span className="text-black font-extrabold">Place Pulse</span>
+            Your Booking is highly protected by{" "}
+            <span className="text-black font-extrabold">Place Pulse</span>
           </h1>
         </div>
         <div className="w-full md:w-[40%] shadow shadow-[#dedede] p-3">
           <h1 className="mb-3">Payment Details</h1>
-          <Fieldset legend="Payment Method" className="w-full flex overflow-x-auto space-x-4 pay_meth_container">
-            <PaymentMethodCard name="MTN" phone="+250788460119" className="flex-shrink-0"/>
-            <div onClick={openAddCard} className="w-[328px] h-[160px] flex-shrink-0 flex items-center justify-center border-2 border-dashed divide-dashed border-[#396FF9] rounded-xl cursor-pointer">
-                <div className="flex flex-col gap-2 items-center justify-center">
-                  <IoIosAddCircleOutline color="#396FF9" size={39}/>
-                  <h6 className="text-sm">Add a new card</h6>
-                </div>
+          <Fieldset
+            legend="Payment Method"
+            className="w-full flex overflow-x-auto space-x-4 pay_meth_container"
+          >
+            <PaymentMethodCard
+              name="MTN"
+              phone="+250788460119"
+              className="flex-shrink-0"
+            />
+            <div
+              onClick={openAddCard}
+              className="w-[328px] h-[160px] flex-shrink-0 flex items-center justify-center border-2 border-dashed divide-dashed border-[#396FF9] rounded-xl cursor-pointer"
+            >
+              <div className="flex flex-col gap-2 items-center justify-center">
+                <IoIosAddCircleOutline color="#396FF9" size={39} />
+                <h6 className="text-sm">Add a new card</h6>
+              </div>
             </div>
           </Fieldset>
           <button
@@ -95,8 +111,11 @@ const CheckoutPage = () => {
             Pay {16894000} FRW
           </button>
         </div>
-        <PaymentAuthorizationModal opened={isPaymentOpen} close={closePayment}/>
-        <AddCardModal opened={isAddCardOpen} close={closeAddCard}/>
+        <PaymentAuthorizationModal
+          opened={isPaymentOpen}
+          close={closePayment}
+        />
+        <AddCardModal opened={isAddCardOpen} close={closeAddCard} />
       </div>
     </div>
   );
