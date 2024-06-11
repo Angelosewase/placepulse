@@ -25,6 +25,7 @@ import WebLayout from "./app/website/layout";
 import NotFoundPage from "./app/404";
 import UserLayout from "./app/_client/user/UserLayout";
 import UserLanding from "./app/_client/user/Landing";
+import CheckoutPage from "./app/website/CheckoutPage";
 
 function App() {
   return (
@@ -86,6 +87,14 @@ function App() {
               element={
                 <WebLayout>
                   <BookingPage />
+                </WebLayout>
+              }
+            />
+            <Route
+              path="/booking/place/:id/checkout"
+              element={
+                <WebLayout>
+                  <CheckoutPage />
                 </WebLayout>
               }
             />

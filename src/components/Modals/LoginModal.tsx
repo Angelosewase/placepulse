@@ -6,7 +6,6 @@ import { loginService } from "../../services/auth.service";
 import { notifications } from "@mantine/notifications";
 import { ClipLoader } from "react-spinners";
 import { Modal } from "@mantine/core";
-
 const LoginModal = ({
   isPayment,
   closePayment,

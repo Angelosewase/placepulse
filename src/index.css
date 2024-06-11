@@ -29,10 +29,20 @@
 .mantine-Menu-dropdown {
   width: 22rem !important;
 }
-.m_8fb7ebe7{
+.m_8fb7ebe7 {
   height: 0rem !important;
   min-height: 0rem !important;
   padding-top: 1.5rem !important;
   padding-bottom: 1.5rem !important;
   border-color: #112211 !important;
+}
+.pay_meth_container::-webkit-scrollbar {
+  height: 5px !important;
+  background-color: #62616100 !important;
+}
+
+.pay_meth_container::-webkit-scrollbar-thumb {
+  height: 5px !important;
+  background-color: #9a9c99 !important;
+  border-radius: 5px;
 }

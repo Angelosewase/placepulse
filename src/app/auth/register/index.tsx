@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import loginImg from "../../../assets/images/loginImg1.png";
 import AnimatedInput from "../../../components/Inputs/AnimatedInput";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { notifications } from "@mantine/notifications";
 import { registerService } from "../../../services/auth.service";
 import { ClipLoader } from "react-spinners";
@@ -11,6 +11,7 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const handleEmailChange = (event: React.ChangeEvent<HTMLFormElement>) => {
     console.log(event.target.value);
     setEmail(event.target.value);
@@ -41,6 +42,7 @@ export default function Register() {
           message: res.data.message,
           color: "green",
         });
+        navigate("/auth/verify");
       })
       .catch((err) => {
         console.log(err.response);

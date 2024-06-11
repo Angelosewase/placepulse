@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { loginService } from "../../../services/auth.service";
 import { notifications } from "@mantine/notifications";
 import { ClipLoader } from "react-spinners";
+import cookie from "react-cookies";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -38,8 +39,17 @@ export default function Login() {
           color: "green",
         });
         console.log(res.data.data.user.role);
-        if(res.data.data.user.role === "USER"){
-          return navigate("/_client/home")
+        if (res.data.data.user.role === "USER") {
+          console.log(res.data.data);
+          const expires = new Date();
+          expires.setDate(Date.now() + 1000 * 2);
+          cookie.save("auth_token", res.data.data.token, {
+            path: "/",
+          });
+          cookie.save("auth_USER", res.data.data.user.role, {
+            path: "/",
+          });
+          return navigate("/_client/home");
         }
       })
       .catch((err) => {

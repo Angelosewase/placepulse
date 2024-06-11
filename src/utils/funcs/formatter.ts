@@ -9,3 +9,9 @@ export const SnakeCaseToPascalCaseSpaced = (text: string) => {
     )
     .join(" ");
 };
+
+export const separatePhoneNumber = (phoneNumber: string) =>{
+  return (
+    phoneNumber.toString().slice(0,4) + " " +  phoneNumber.toString().slice(4,7) + " " + phoneNumber.toString().slice(7,10) +  " " + phoneNumber.toString().slice(10,13)
+  )
+}

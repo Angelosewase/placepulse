@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { accommodations_data } from "../../constants/dummy";
 import { FaLocationDot } from "react-icons/fa6";
 import CheckInCheckOutDates from "../Calendar/CheckInOut";
-import { format } from "date-fns";
+import { differenceInDays, format } from "date-fns";
 import { Collapse, Radio } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IoChevronBackCircleOutline } from "react-icons/io5";
 import LoginModal from "../Modals/LoginModal";
-
+import cookie from "react-cookies";
 const BookingPage = () => {
   const params = useParams();
   const accommodation_id = params.id ?? 0;
@@ -18,10 +18,27 @@ const BookingPage = () => {
   const [paymentPortion, setPaymentPortion] = useState("full");
   const [openedInfo, { toggle }] = useDisclosure(false);
   const [isPayment, { open, close }] = useDisclosure(false);
-  // const navigate = useNavigate();
+  const token = cookie.load("auth_token");
+  const navigate = useNavigate();
+  const dateDifference =
+    checkIn && checkOut ? differenceInDays(checkOut, checkIn) : 0;
 
   const formatDate = (date: Date | null, text?: string) => {
     return date ? format(date, "MMMM dd") : `Select ${text}`;
+  };
+
+  const priceToPay = () => {
+    const multiplier = paymentPortion == "full" ? 1 : 0.5;
+    const dateDiff = dateDifference === 0 ? 1 : dateDifference;
+    return dateDiff * multiplier * accommodation.roomTypes[0].price;
+  };
+
+  const handlePaymentCheckout = () => {
+    if (!token) {
+      open();
+    } else {
+      navigate(`/booking/place/${accommodation_id}/checkout`);
+    }
   };
 
   return (
@@ -53,7 +70,12 @@ const BookingPage = () => {
                   {formatDate(checkIn, "Check In")}
                 </h1>
                 <div className="border rounded-sm mt-4 p-3">
-                  <CheckInCheckOutDates value={checkIn} onChange={setCheckIn} />
+                  <CheckInCheckOutDates
+                    value={checkIn}
+                    onChange={setCheckIn}
+                    min={new Date()}
+                    max={checkOut}
+                  />
                 </div>
               </div>
               <div>
@@ -63,6 +85,7 @@ const BookingPage = () => {
                 </h1>
                 <div className="border rounded-sm mt-4 p-3">
                   <CheckInCheckOutDates
+                    min={checkIn}
                     value={checkOut}
                     onChange={setCheckOut}
                   />
@@ -116,10 +139,9 @@ const BookingPage = () => {
                   <p
                     className={`${paymentPortion === "partial" && "text-white"} font-medium text-xs`}
                   >
-                    Pay {accommodation.roomTypes[0].price * 0.5} now, and the
-                    rest ({accommodation.roomTypes[0].price * 0.5}) will be
-                    automatically charged to the same payment method on Nov 14,
-                    2022. No extra fees.
+                    Pay {priceToPay()} now, and the rest ({priceToPay()}) will
+                    be automatically charged to the same payment method on Nov
+                    14, 2022. No extra fees.
                   </p>
                   <button
                     className="text-sm underline mt-4"
@@ -134,8 +156,8 @@ const BookingPage = () => {
                     <p
                       className={`${paymentPortion === "partial" && "text-white"} font-medium text-xs mt-5`}
                     >
-                      Pay {accommodation.roomTypes[0].price * 0.5} now, and the
-                      rest ({accommodation.roomTypes[0].price * 0.5}) will be
+                      Pay {priceToPay()} now, and the rest (
+                      {accommodation.roomTypes[0].price * 0.5}) will be
                       automatically charged to the same payment method on Nov
                       14, 2022. No extra fees.
                     </p>
@@ -190,9 +212,7 @@ const BookingPage = () => {
               <h1 className="text-sm font-bold mb-2">Price Details</h1>
               <div className="w-full flex justify-between items-center mb-2">
                 <h1 className="text-sm font-medium">Base Fare</h1>
-                <p className="text-md font-bold">
-                  {accommodation.roomTypes[0].price}
-                </p>
+                <p className="text-md font-bold">{priceToPay()} </p>
               </div>
               <div className="w-full flex justify-between items-center mb-2">
                 <h1 className="text-sm font-medium">Discount</h1>
@@ -205,25 +225,19 @@ const BookingPage = () => {
               <hr className="hotel_divider mt-5 mb-3" />
               <div className="w-full flex justify-between items-center mb-2">
                 <h1 className="text-sm font-medium">Total</h1>
-                <p className="text-md font-bold">
-                  {accommodation.roomTypes[0].price}
-                </p>
+                <p className="text-md font-bold">{priceToPay()} </p>
               </div>
             </div>
           </div>
           <button
-            onClick={open}
+            onClick={handlePaymentCheckout}
             className="w-full py-3 mt-3 rounded-sm flex items-center font-extrabold justify-center bg-[#396FF9] text-white"
           >
-            Pay{" "}
-            {paymentPortion == "full"
-              ? accommodation.roomTypes[0].price
-              : accommodation.roomTypes[0].price * 0.5}{" "}
-            FRW
+            Pay {priceToPay()} FRW
           </button>
         </div>
       </div>
-      <LoginModal isPayment={isPayment} closePayment={close} />
+      {!token && <LoginModal isPayment={isPayment} closePayment={close} />}
     </div>
   );
 };
