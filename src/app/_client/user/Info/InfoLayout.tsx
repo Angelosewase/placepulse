@@ -46,20 +46,20 @@ const InfoLayout = ({ children }: { children: React.ReactElement }) => {
         {buttons.map((button, index) => {
           return (
             <div className="w-full flex justify-between info-buttons">
-                <NavLink
+              <NavLink
                 to={`/_client/info/${button}`}
                 key={index}
                 className="w-full flex justify-between"
-                >
+              >
                 <div
-                    className={`w-[98%] pb-4 pr-[20%] flex flex-col items-start gap-2 pt-1`}
+                  className={`w-[98%] pb-4 pr-[20%] flex flex-col items-start gap-2 pt-1`}
                 >
-                    <h1 className="font-extrabold text-medium">{button}</h1>
+                  <h1 className="font-extrabold text-medium">{button}</h1>
                 </div>
-                </NavLink>
-                {index !== buttons.length - 1 && (
-                  <hr className="tabs_divider border border-[#D7E2EE] ml-4" />
-                )}
+              </NavLink>
+              {index !== buttons.length - 1 && (
+                <hr className="tabs_divider border border-[#D7E2EE] ml-4" />
+              )}
             </div>
           );
         })}

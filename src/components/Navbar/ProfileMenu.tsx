@@ -45,23 +45,26 @@ const ProfileMenu = () => {
         <Menu.Item>
           <div
             onClick={() => navigate("/_client/info/Payment Methods")}
-           className="w-full flex justify-between items-center my-1">
+            className="w-full flex justify-between items-center my-1"
+          >
             <h6 className="text-sm font-bold">Payments</h6>
             <MdKeyboardArrowRight color="black" />
           </div>
         </Menu.Item>
         <Menu.Item>
           <div
-          onClick={() => navigate("/_client/info/Bookings")}
-           className="w-full flex justify-between items-center my-1">
+            onClick={() => navigate("/_client/info/Bookings")}
+            className="w-full flex justify-between items-center my-1"
+          >
             <h6 className="text-sm font-bold">Bookings</h6>
             <MdKeyboardArrowRight color="black" />
           </div>
         </Menu.Item>
         <Menu.Item>
-          <div 
-          onClick={() => navigate("/_client/info/Bookings")}
-          className="w-full flex justify-between items-center my-1">
+          <div
+            onClick={() => navigate("/_client/info/Bookings")}
+            className="w-full flex justify-between items-center my-1"
+          >
             <h6 className="text-sm font-bold">Tickets</h6>
             <MdKeyboardArrowRight color="black" />
           </div>

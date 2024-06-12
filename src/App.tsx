@@ -139,9 +139,7 @@ function App() {
             <Route
               path="/_client/info/Bookings"
               element={
-                <UserLayout
-                  children={<InfoLayout children={<History />} />}
-                />
+                <UserLayout children={<InfoLayout children={<History />} />} />
               }
             />
             <Route
