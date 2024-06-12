@@ -25,10 +25,10 @@ const AddCardModal = ({
     setLoading(true);
     event.preventDefault();
     if (!phone || !cardType) {
-      setError("Card Type and Phone are required!")
+      setError("Card Type and Phone are required!");
       setLoading(false);
       return;
-    }else{
+    } else {
       setError("");
     }
     // loginService({ email: email, password: password })
@@ -60,25 +60,25 @@ const AddCardModal = ({
         >
           <h1 className="text-2xl font-extrabold mb-[3vh]">Add a new card</h1>
 
-            {error && (
-              <div className="w-full rounded-br-lg rounded-tl-lg py-3 pl-3 bg-red-100 border-red-500">
-                <p className="text-red-500">{error}</p>
-              </div>
-            )}
+          {error && (
+            <div className="w-full rounded-br-lg rounded-tl-lg py-3 pl-3 bg-red-100 border-red-500">
+              <p className="text-red-500">{error}</p>
+            </div>
+          )}
           <div className="w-full flex flex-col items-start gap-6">
             <Select
               className="w-full"
               placeholder="Select Card Type"
               value={cardType}
-              onChange={(e: any)=> setCardType(e)}
+              onChange={(e: any) => setCardType(e)}
               data={[
                 {
                   label: "MTN",
-                  value: "MTN"
+                  value: "MTN",
                 },
                 {
                   label: "AIRTEL",
-                  value: "AIRTEL"
+                  value: "AIRTEL",
                 },
               ]}
               allowDeselect={false}
@@ -86,13 +86,13 @@ const AddCardModal = ({
             />
             {cardType && (
               <AnimatedInput
-              label="Phone Number"
-              type="text"
-              handleChange={handlePhoneChange}
-              value={phone}
-              category={"phone"}
-              maxLength={9}
-            />
+                label="Phone Number"
+                type="text"
+                handleChange={handlePhoneChange}
+                value={phone}
+                category={"phone"}
+                maxLength={9}
+              />
             )}
           </div>
           <button

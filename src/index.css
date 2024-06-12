@@ -51,3 +51,6 @@
 .userNav > .active {
   background: rgb(245 245 245 / 1);
 }
+.info-buttons > .active{
+  border-bottom: 4px solid #0075FF;
+}

@@ -1,7 +1,9 @@
 import { Menu } from "@mantine/core";
 import profileImg from "../../assets/images/person.png";
 import { MdKeyboardArrowRight } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 const ProfileMenu = () => {
+  const navigate = useNavigate();
   return (
     <Menu shadow="md" width={200}>
       <Menu.Target>
@@ -32,25 +34,34 @@ const ProfileMenu = () => {
         </Menu.Item>
         <Menu.Divider />
         <Menu.Item>
-          <div className="w-full flex justify-between items-center my-1">
+          <div
+            className="w-full flex justify-between items-center my-1"
+            onClick={() => navigate("/_client/info/account")}
+          >
             <h6 className="text-sm font-bold">My Account</h6>
             <MdKeyboardArrowRight color="black" />
           </div>
         </Menu.Item>
         <Menu.Item>
-          <div className="w-full flex justify-between items-center my-1">
+          <div
+            onClick={() => navigate("/_client/info/Payment Methods")}
+           className="w-full flex justify-between items-center my-1">
             <h6 className="text-sm font-bold">Payments</h6>
             <MdKeyboardArrowRight color="black" />
           </div>
         </Menu.Item>
         <Menu.Item>
-          <div className="w-full flex justify-between items-center my-1">
+          <div
+          onClick={() => navigate("/_client/info/Bookings")}
+           className="w-full flex justify-between items-center my-1">
             <h6 className="text-sm font-bold">Bookings</h6>
             <MdKeyboardArrowRight color="black" />
           </div>
         </Menu.Item>
         <Menu.Item>
-          <div className="w-full flex justify-between items-center my-1">
+          <div 
+          onClick={() => navigate("/_client/info/Bookings")}
+          className="w-full flex justify-between items-center my-1">
             <h6 className="text-sm font-bold">Tickets</h6>
             <MdKeyboardArrowRight color="black" />
           </div>

@@ -7,18 +7,27 @@ const UserNavbar = () => {
   return (
     <div className="w-full flex py-3 items-center justify-between px-10">
       <div className="flex gap-5">
-      <Link to={"/_client/home"} className="flex items-center gap-2">
-        {/* <img src={logo} alt="logo" className="w-7 h-7 " /> */}
-        <h4 className="font-bold text-lg">PlacePulse</h4>
-      </Link>
-      <input className="py-2 pl-4 pr-2 border rounded-lg outline-none md:w-[30vw]" placeholder="Search ..."/>
+        <Link to={"/_client/home"} className="flex items-center gap-2">
+          {/* <img src={logo} alt="logo" className="w-7 h-7 " /> */}
+          <h4 className="font-bold text-lg">PlacePulse</h4>
+        </Link>
+        <input
+          className="py-2 pl-4 pr-2 border rounded-lg outline-none md:w-[30vw]"
+          placeholder="Search ..."
+        />
       </div>
       <div className="flex gap-4 items-center userNav">
-        <NavLink to={"/_client/home"} className="p-3 hover:bg-neutral-100 rounded-full">
-          <GoHome color="black" size={23}/>
+        <NavLink
+          to={"/_client/home"}
+          className="p-3 hover:bg-neutral-100 rounded-full"
+        >
+          <GoHome color="black" size={23} />
         </NavLink>
-        <NavLink to={"/_client/notifications"} className="p-3 hover:bg-neutral-100 rounded-full">
-          <GoBell color="black" size={23}/>
+        <NavLink
+          to={"/_client/notifications"}
+          className="p-3 hover:bg-neutral-100 rounded-full"
+        >
+          <GoBell color="black" size={23} />
         </NavLink>
         <ProfileMenu />
       </div>

@@ -10,7 +10,7 @@ const AnimatedInput = ({
   className,
   showEye,
   category,
-  maxLength
+  maxLength,
 }: {
   type: string;
   label: string;
@@ -18,8 +18,8 @@ const AnimatedInput = ({
   value: string;
   className?: string;
   showEye?: boolean;
-  category?:string;
-  maxLength?: any
+  category?: string;
+  maxLength?: any;
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -58,7 +58,7 @@ const AnimatedInput = ({
         onBlur={handleBlur}
         onChange={handleChange}
         maxLength={maxLength}
-        className={`${className} ${(category === "phone" && isFocused) ? "pl-12" : ""} p-3 py-4 w-full border border-[#79747E] rounded-md text-sm text-[#1C1B1F] focus:outline-none focus:border-[#79747E]`}
+        className={`${className} ${category === "phone" && isFocused ? "pl-12" : ""} p-3 py-4 w-full border border-[#79747E] rounded-md text-sm text-[#1C1B1F] focus:outline-none focus:border-[#79747E]`}
       />
       {showEye && (
         <div className="absolute top-5 right-3 cursor-pointer">
@@ -75,7 +75,7 @@ const AnimatedInput = ({
           )}
         </div>
       )}
-      {(category === "phone" && isFocused) && (
+      {category === "phone" && isFocused && (
         <div className="absolute top-[1.05rem] left-3 cursor-pointer">
           <h1 className="text-sm">+250 </h1>
         </div>

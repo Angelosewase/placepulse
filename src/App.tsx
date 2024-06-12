@@ -19,14 +19,18 @@ const PlaceGallery = lazy(() => import("./components/website/PlaceGallery"));
 const ViewAccommodation = lazy(
   () => import("./components/website/ViewAccommodation"),
 );
+const NotFoundPage = lazy(() => import("./app/404"));
+const UserLayout = lazy(() => import("./app/_client/user/UserLayout"));
+const CheckoutPage = lazy(() => import("./app/website/CheckoutPage"));
+const NotificationsPage = lazy(() => import("./app/shared/Notifications"));
+const InfoLayout = lazy(() => import("./app/_client/user/Info/InfoLayout"));
+const UserLanding = lazy(() => import("./app/_client/user/Landing"));
 const BookingPage = lazy(() => import("./components/website/Booking"));
 import PageLoader from "./components/loaders/pageLoader";
 import WebLayout from "./app/website/layout";
-import NotFoundPage from "./app/404";
-import UserLayout from "./app/_client/user/UserLayout";
-import UserLanding from "./app/_client/user/Landing";
-import CheckoutPage from "./app/website/CheckoutPage";
-import NotificationsPage from "./app/shared/Notifications";
+import AccountInfo from "./app/_client/user/Info/Account";
+import PaymentMethods from "./app/_client/user/Info/PayMethods";
+import History from "./app/_client/user/Info/BookingsHistory";
 
 function App() {
   return (
@@ -120,9 +124,34 @@ function App() {
               path="/_client/home"
               element={<UserLayout children={<UserLanding />} />}
             />
-            <Route path="/_client/notifications" element={<UserLayout children={<NotificationsPage />} />} />
-
-
+            <Route
+              path="/_client/notifications"
+              element={<UserLayout children={<NotificationsPage />} />}
+            />
+            <Route
+              path="/_client/info/account"
+              element={
+                <UserLayout
+                  children={<InfoLayout children={<AccountInfo />} />}
+                />
+              }
+            />
+            <Route
+              path="/_client/info/Bookings"
+              element={
+                <UserLayout
+                  children={<InfoLayout children={<History />} />}
+                />
+              }
+            />
+            <Route
+              path="/_client/info/Payment Methods"
+              element={
+                <UserLayout
+                  children={<InfoLayout children={<PaymentMethods />} />}
+                />
+              }
+            />
 
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
