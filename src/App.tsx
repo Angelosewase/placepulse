@@ -31,6 +31,10 @@ import WebLayout from "./app/website/layout";
 import AccountInfo from "./app/_client/user/Info/Account";
 import PaymentMethods from "./app/_client/user/Info/PayMethods";
 import History from "./app/_client/user/Info/BookingsHistory";
+import OwnerLayout from "./app/_client/owner/OwnerLayout";
+import OwnerHome from "./app/_client/owner/Home";
+import OwnerAccommodations from "./app/_client/owner/Accommodations";
+import OwnerAddAccommodations from "./app/_client/owner/AddAccommodation";
 
 function App() {
   return (
@@ -119,7 +123,8 @@ function App() {
             <Route path="/auth/verify" element={<Verify />} />
             <Route path="/auth/reset" element={<Reset />} />
             <Route path="/auth/forgot" element={<Forgot />} />
-            {/* Auth Routes */}
+            {/* End Auth Routes */}
+            {/* User Routes */}
             <Route
               path="/_client/home"
               element={<UserLayout children={<UserLanding />} />}
@@ -150,6 +155,30 @@ function App() {
                 />
               }
             />
+            {/* End User Routes */}
+            {/* Owner Routes */}
+            <Route
+              path="/_owner/home"
+              element={<OwnerLayout children={<OwnerHome />} />}
+            />
+            <Route
+              path="/_owner/accommodations/view"
+              element={<OwnerLayout children={<OwnerAccommodations />} />}
+            />
+            <Route
+              path="/_owner/accommodations/add"
+              element={<OwnerLayout children={<OwnerAddAccommodations />} />}
+            />
+            <Route
+              path="/_owner/bookings"
+              element={<OwnerLayout children={<OwnerAccommodations />} />}
+            />
+            <Route
+              path="/_owner/account"
+              element={<OwnerLayout children={<OwnerAccommodations />} />}
+            />
+
+            {/* Owner Routes */}
 
             <Route path="*" element={<NotFoundPage />} />
           </Routes>

@@ -9,13 +9,13 @@ const PaymentMethodCard = ({
   phone,
   className,
   tag,
-  disableSelect
+  disableSelect,
 }: {
   name: string;
   phone: string;
   className?: string;
   tag: string;
-  disableSelect?:boolean
+  disableSelect?: boolean;
 }) => {
   const [selected, setSelected] = useState(false);
   return (

@@ -51,6 +51,17 @@ export default function Login() {
           });
           return navigate("/_client/home");
         }
+        if (res.data.data.user.role === "OWNER") { 
+          const expires = new Date();
+          expires.setDate(Date.now() + 1000 * 2);
+          cookie.save("auth_token", res.data.data.token, {
+            path: "/",
+          });
+          cookie.save("auth_USER", res.data.data.user.role, {
+            path: "/",
+          });
+          return navigate("/_owner/home");
+        }
       })
       .catch((err) => {
         notifications.show({

@@ -54,3 +54,13 @@
 .info-buttons > .active {
   border-bottom: 4px solid #0075ff;
 }
+
+.sidebar-owsadm > .active {
+  background-color: #0077ff6c;
+  color: #fff;
+}
+
+.cllps-prnt-sdbr-cont > .active{
+  background-color: #0077ff6c;
+  color: #fff;
+}

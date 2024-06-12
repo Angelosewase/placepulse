@@ -88,7 +88,7 @@ const AddCardModal = ({
               allowDeselect={false}
               required
             />
-            {(cardType && (cardType == "MTN" || cardType == "AIRTEL")) && (
+            {cardType && (cardType == "MTN" || cardType == "AIRTEL") && (
               <AnimatedInput
                 label="Phone Number"
                 type="text"
@@ -98,7 +98,7 @@ const AddCardModal = ({
                 maxLength={9}
               />
             )}
-            {(cardType && cardType === "CREDIT_CARD") && (
+            {cardType && cardType === "CREDIT_CARD" && (
               <div className="w-full flex flex-col gap-6">
                 <AnimatedInput
                   label="Card Number"

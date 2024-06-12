@@ -6,7 +6,8 @@ import LogoutModal from "../Modals/LogoutModal";
 import { useDisclosure } from "@mantine/hooks";
 const ProfileMenu = () => {
   const navigate = useNavigate();
-  const [isLogout, {open: openLogout, close: closeLogout}] = useDisclosure(false);
+  const [isLogout, { open: openLogout, close: closeLogout }] =
+    useDisclosure(false);
   return (
     <Menu shadow="md" width={200}>
       <Menu.Target>
@@ -86,7 +87,7 @@ const ProfileMenu = () => {
           </div>
         </Menu.Item>
       </Menu.Dropdown>
-      <LogoutModal isLogout={isLogout} closeLogout={closeLogout}/>
+      <LogoutModal isLogout={isLogout} closeLogout={closeLogout} />
     </Menu>
   );
 };

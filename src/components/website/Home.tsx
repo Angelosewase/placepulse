@@ -13,8 +13,17 @@ const Home = () => {
   const navigate = useNavigate();
   useEffect(() => {
     const token = cookie.load("auth_token");
+    const userRole = cookie.load("auth_USER");
     if (token) {
-      navigate("/_client/home");
+      if(userRole === "USER") {
+        navigate("/_client/home");
+      }
+      if( userRole === "OWNER"){
+        navigate("/_owner/home");
+      }
+      if( userRole === "ADMIN"){
+        navigate("/_admin/home");
+      }
     }
   }, [navigate]);
   return (
