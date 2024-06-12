@@ -91,6 +91,7 @@ const CheckoutPage = () => {
           >
             <PaymentMethodCard
               name="MTN"
+              tag="MOMO Pay"
               phone="+250788460119"
               className="flex-shrink-0"
             />

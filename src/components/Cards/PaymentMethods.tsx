@@ -8,16 +8,20 @@ const PaymentMethodCard = ({
   name,
   phone,
   className,
+  tag,
+  disableSelect
 }: {
   name: string;
   phone: string;
   className?: string;
+  tag: string;
+  disableSelect?:boolean
 }) => {
   const [selected, setSelected] = useState(false);
   return (
     <div
       className={`${className} w-[328px] h-[160px] flex flex-col justify-between rounded-xl p-3 cursor-pointer ${selected ? " bg-[#1976D2]" : "bg-[#FFC107]"}`}
-      onClick={() => setSelected(true)}
+      onClick={() => !disableSelect && setSelected(true)}
     >
       <div className="w-full flex justify-between items-center">
         <h1
@@ -43,7 +47,7 @@ const PaymentMethodCard = ({
           className="text-lg font-extrabold"
           style={{ fontFamily: "Montserrat" }}
         >
-          {"MOMO PAY"}
+          {tag}
         </h1>
       </div>
     </div>

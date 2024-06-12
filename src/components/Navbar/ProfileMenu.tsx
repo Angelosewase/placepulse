@@ -2,8 +2,11 @@ import { Menu } from "@mantine/core";
 import profileImg from "../../assets/images/person.png";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import LogoutModal from "../Modals/LogoutModal";
+import { useDisclosure } from "@mantine/hooks";
 const ProfileMenu = () => {
   const navigate = useNavigate();
+  const [isLogout, {open: openLogout, close: closeLogout}] = useDisclosure(false);
   return (
     <Menu shadow="md" width={200}>
       <Menu.Target>
@@ -77,8 +80,13 @@ const ProfileMenu = () => {
             <MdKeyboardArrowRight color="black" />
           </div>
         </Menu.Item>
-        <Menu.Item color="red">Logout</Menu.Item>
+        <Menu.Item color="red">
+          <div className="w-full" onClick={openLogout}>
+            <h6 className="w-full">Logout</h6>
+          </div>
+        </Menu.Item>
       </Menu.Dropdown>
+      <LogoutModal isLogout={isLogout} closeLogout={closeLogout}/>
     </Menu>
   );
 };

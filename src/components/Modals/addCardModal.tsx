@@ -58,7 +58,7 @@ const AddCardModal = ({
           onSubmit={handleSubmit}
           className="w-full flex flex-col items-start gap-4"
         >
-          <h1 className="text-2xl font-extrabold mb-[3vh]">Add a new card</h1>
+          <h1 className="text-2xl font-extrabold mb-[1vh]">Add a new card</h1>
 
           {error && (
             <div className="w-full rounded-br-lg rounded-tl-lg py-3 pl-3 bg-red-100 border-red-500">
@@ -80,11 +80,15 @@ const AddCardModal = ({
                   label: "AIRTEL",
                   value: "AIRTEL",
                 },
+                {
+                  label: "Credit card",
+                  value: "CREDIT_CARD",
+                },
               ]}
               allowDeselect={false}
               required
             />
-            {cardType && (
+            {(cardType && (cardType == "MTN" || cardType == "AIRTEL")) && (
               <AnimatedInput
                 label="Phone Number"
                 type="text"
@@ -93,6 +97,62 @@ const AddCardModal = ({
                 category={"phone"}
                 maxLength={9}
               />
+            )}
+            {(cardType && cardType === "CREDIT_CARD") && (
+              <div className="w-full flex flex-col gap-6">
+                <AnimatedInput
+                  label="Card Number"
+                  type="text"
+                  handleChange={handlePhoneChange}
+                  value={phone}
+                  maxLength={9}
+                />
+                <div className="w-full flex justify-between gap-2">
+                  <AnimatedInput
+                    label="Exp. Date"
+                    type="text"
+                    handleChange={handlePhoneChange}
+                    value={phone}
+                    maxLength={9}
+                  />
+                  <AnimatedInput
+                    label="CVC"
+                    type="text"
+                    handleChange={handlePhoneChange}
+                    value={phone}
+                    maxLength={9}
+                  />
+                </div>
+                <AnimatedInput
+                  label="Name on Card"
+                  type="text"
+                  handleChange={handlePhoneChange}
+                  value={phone}
+                  maxLength={9}
+                />
+                <Select
+                  className="w-full"
+                  placeholder="Pick country"
+                  value={cardType}
+                  onChange={(e: any) => setCardType(e)}
+                  data={[
+                    {
+                      label: "MTN",
+                      value: "MTN",
+                    },
+                    {
+                      label: "AIRTEL",
+                      value: "AIRTEL",
+                    },
+                    {
+                      label: "Credit card",
+                      value: "CREDIT_CARD",
+                    },
+                  ]}
+                  allowDeselect={false}
+                  required
+                />
+              </div>
             )}
           </div>
           <button

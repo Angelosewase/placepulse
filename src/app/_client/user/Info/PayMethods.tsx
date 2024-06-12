@@ -9,11 +9,20 @@ const PaymentMethods = () => {
   return (
     <div className="w-full">
       <h1 className="text-3xl font-extrabold">Payment Methods</h1>
-      <div className="w-full flex overflow-x-auto space-x-4 pay_meth_container mt-6">
+      <div className="w-full flex overflow-x-auto space-x-4 pay_meth_container mt-6 pb-4">
         <PaymentMethodCard
           name="MTN"
+          tag="MOMO Pay"
           phone="+250788460119"
           className="h-[170px] flex-shrink-0"
+          disableSelect={true}
+        />
+        <PaymentMethodCard
+          name="AIRTEL"
+          tag="AIRTEL Money"
+          phone="+250726632125"
+          className="h-[170px] flex-shrink-0 bg-[#FF0707]"
+          disableSelect={true}
         />
         <div
           onClick={openAddCard}
