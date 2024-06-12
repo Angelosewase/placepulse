@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Modal } from "@mantine/core";
-import { notifications } from "@mantine/notifications";
-import { loginService } from "../../services/auth.service";
+import { Modal, Select } from "@mantine/core";
+// import { notifications } from "@mantine/notifications";
 import { useState } from "react";
 import AnimatedInput from "../Inputs/AnimatedInput";
 import { ClipLoader } from "react-spinners";
+// import { notifications } from "@mantine/notifications";
 
 const AddCardModal = ({
   opened,
@@ -13,44 +13,43 @@ const AddCardModal = ({
   opened: boolean;
   close: () => void;
 }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [cardType, setCardType] = useState("");
+  const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
-  const handleEmailChange = (event: React.ChangeEvent<HTMLFormElement>) => {
+  const [error, setError] = useState("");
+  const handlePhoneChange = (event: React.ChangeEvent<HTMLFormElement>) => {
     console.log(event.target.value);
-    setEmail(event.target.value);
-  };
-  const handlePasswordChange = (event: React.ChangeEvent<HTMLFormElement>) => {
-    setPassword(event.target.value);
+    setPhone(event.target.value);
   };
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     setLoading(true);
     event.preventDefault();
-    if (!email || !password) {
-      notifications.show({
-        title: "Error",
-        message: "Email and password are required",
-        color: "red",
-      });
+    if (!phone || !cardType) {
+      setError("Card Type and Phone are required!")
       setLoading(false);
       return;
+    }else{
+      setError("");
     }
-    loginService({ email: email, password: password })
-      .then((res: any) => {
-        notifications.show({
-          title: "Success!",
-          message: res.data.message,
-          color: "green",
-        });
-      })
-      .catch((err: any) => {
-        notifications.show({
-          title: "",
-          message: err.response?.data?.message ?? err.message,
-          color: "red",
-        });
-      })
-      .finally(() => setLoading(false));
+    // loginService({ email: email, password: password })
+    //   .then((res: any) => {
+    //     notifications.show({
+    //       title: "Success!",
+    //       message: res.data.message,
+    //       color: "green",
+    //     });
+    //   })
+    //   .catch((err: any) => {
+    //     notifications.show({
+    //       title: "",
+    //       message: err.response?.data?.message ?? err.message,
+    //       color: "red",
+    //     });
+    //   })
+    //   .finally(() => setLoading(false));
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
   };
   return (
     <div>
@@ -59,23 +58,42 @@ const AddCardModal = ({
           onSubmit={handleSubmit}
           className="w-full flex flex-col items-start gap-4"
         >
-          <h1 className="text-2xl font-extrabold mb-[5vh]">Add a new card</h1>
+          <h1 className="text-2xl font-extrabold mb-[3vh]">Add a new card</h1>
 
+            {error && (
+              <div className="w-full rounded-br-lg rounded-tl-lg py-3 pl-3 bg-red-100 border-red-500">
+                <p className="text-red-500">{error}</p>
+              </div>
+            )}
           <div className="w-full flex flex-col items-start gap-6">
-            <AnimatedInput
+            <Select
+              className="w-full"
+              placeholder="Select Card Type"
+              value={cardType}
+              onChange={(e: any)=> setCardType(e)}
+              data={[
+                {
+                  label: "MTN",
+                  value: "MTN"
+                },
+                {
+                  label: "AIRTEL",
+                  value: "AIRTEL"
+                },
+              ]}
+              allowDeselect={false}
+              required
+            />
+            {cardType && (
+              <AnimatedInput
               label="Phone Number"
               type="text"
-              handleChange={handleEmailChange}
-              value={email}
+              handleChange={handlePhoneChange}
+              value={phone}
+              category={"phone"}
+              maxLength={9}
             />
-            <AnimatedInput
-              label="Password"
-              type="password"
-              showEye={true}
-              handleChange={handlePasswordChange}
-              value={password}
-              className=""
-            />
+            )}
           </div>
           <button
             type="submit"
@@ -87,7 +105,7 @@ const AddCardModal = ({
                 <ClipLoader size={23} color="black" />
               </div>
             ) : (
-              "Add"
+              "Save"
             )}
           </button>
         </form>

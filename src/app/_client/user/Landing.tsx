@@ -5,7 +5,9 @@ import hotelImg2 from "../../../assets/images/hotel4.png";
 import hotelImg3 from "../../../assets/images/hotel5.png";
 import hotelImg4 from "../../../assets/images/hotel6.png";
 import TripCard from "../../../components/Cards/TripCard";
+import { useNavigate } from "react-router-dom";
 const UserLanding = () => {
+  const navigate = useNavigate();
   const popularPlaces = [
     {
       type: "hotel",
@@ -144,7 +146,7 @@ const UserLanding = () => {
         <div className="w-full flex justify-end">
           <button
             onClick={() => {
-              // navigate(`/booking/place/${accommodation_id}`);
+              navigate(`/places`);
             }}
             className="px-6 py-3 rounded-sm flex text-sm items-center font-extrabold justify-center bg-[#396FF9] text-white"
           >

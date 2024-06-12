@@ -26,6 +26,7 @@ import NotFoundPage from "./app/404";
 import UserLayout from "./app/_client/user/UserLayout";
 import UserLanding from "./app/_client/user/Landing";
 import CheckoutPage from "./app/website/CheckoutPage";
+import NotificationsPage from "./app/shared/Notifications";
 
 function App() {
   return (
@@ -119,6 +120,9 @@ function App() {
               path="/_client/home"
               element={<UserLayout children={<UserLanding />} />}
             />
+            <Route path="/_client/notifications" element={<UserLayout children={<NotificationsPage />} />} />
+
+
 
             <Route path="*" element={<NotFoundPage />} />
           </Routes>

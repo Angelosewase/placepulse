@@ -88,6 +88,7 @@ const BookingPage = () => {
                     min={checkIn}
                     value={checkOut}
                     onChange={setCheckOut}
+                    
                   />
                 </div>
               </div>

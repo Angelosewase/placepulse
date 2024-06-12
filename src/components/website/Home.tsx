@@ -7,8 +7,16 @@ import { Link, useNavigate } from "react-router-dom";
 import { CiLocationOn } from "react-icons/ci";
 import { GrKey } from "react-icons/gr";
 import { IoTimeSharp } from "react-icons/io5";
+import { useEffect } from "react";
+import cookie from "react-cookies";
 const Home = () => {
   const navigate = useNavigate();
+  useEffect(()=>{
+    const token = cookie.load("auth_token");
+    if(token){
+      navigate("/_client/home");
+    }
+  },[navigate]);
   return (
     <div className=" pt-3 min-h-screen pb-20">
       <div className="w-full px-10 flex  flex-col md:flex-row items-center justify-between mt-3">
