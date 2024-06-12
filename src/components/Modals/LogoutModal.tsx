@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Modal } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
-import cookies from "react-cookies";
+import cookie from "react-cookies";
 import { useNavigate } from "react-router-dom";
 const LogoutModal = ({
   isLogout,
@@ -12,7 +12,9 @@ const LogoutModal = ({
 }) => {
   const navigate = useNavigate();
   const logout = () => {
-    cookies.remove("auth_token");
+    cookie.remove("auth_token", {
+      path: "/"
+    });
     navigate("/");
     notifications.show({
       title: "",

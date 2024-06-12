@@ -26,18 +26,18 @@ const SubRoutesTab = ({ tab }: { tab: any }) => {
       </div>
       <Collapse in={isExpanded}>
         <div className="w-full cllps-prnt-sdbr-cont">
-            {tab.subRoutes.map((tab: any, index: number) => {
+          {tab.subRoutes.map((tab: any, index: number) => {
             return (
-                <NavLink
+              <NavLink
                 className="w-full flex justify-start items-center gap-10 py-4 px-6 pl-12 font-bold"
                 key={index}
                 to={tab.path}
-                >
+              >
                 {tab.icon}
                 <h5>{tab.label}</h5>
-                </NavLink>
+              </NavLink>
             );
-            })}
+          })}
         </div>
       </Collapse>
     </>

@@ -15,13 +15,13 @@ const Home = () => {
     const token = cookie.load("auth_token");
     const userRole = cookie.load("auth_USER");
     if (token) {
-      if(userRole === "USER") {
+      if (userRole === "USER") {
         navigate("/_client/home");
       }
-      if( userRole === "OWNER"){
+      if (userRole === "OWNER") {
         navigate("/_owner/home");
       }
-      if( userRole === "ADMIN"){
+      if (userRole === "ADMIN") {
         navigate("/_admin/home");
       }
     }
