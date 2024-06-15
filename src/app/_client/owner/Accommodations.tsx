@@ -1,70 +1,55 @@
-import hotelImg1 from "../../../assets/images/hotel3.png";
-import hotelImg2 from "../../../assets/images/hotel4.png";
-import hotelImg3 from "../../../assets/images/hotel5.png";
-import hotelImg4 from "../../../assets/images/hotel6.png";
+import { useEffect, useState } from "react";
 import ViewAccomCard from "../../../components/Cards/ViewAccCard";
+import { AuthorizedAxiosAPI } from "../../../utils/AxiosInstance";
+import { ClipLoader } from "react-spinners";
+import { IoReloadSharp } from "react-icons/io5";
 const OwnerAccommodations = () => {
-  const popularPlaces = [
-    {
-      type: "hotel",
-      name: "Mariot Hotel",
-      images: [hotelImg1, hotelImg2, hotelImg3, hotelImg4],
-      location: {
-        lng: 134,
-        lat: 54,
-        text: "Kimihurura - Kigali - Rwanda",
-      },
-    },
-    {
-      type: "hotel",
-      name: "Holywood Hotel",
-      images: [hotelImg3, hotelImg2, hotelImg1, hotelImg4],
-      location: {
-        lng: 134,
-        lat: 54,
-        text: "Kimihurura - Kigali - Rwanda",
-      },
-    },
-    {
-      type: "hotel",
-      name: "City Pulse Hotel",
-      images: [hotelImg1, hotelImg2, hotelImg3, hotelImg4],
-      location: {
-        lng: 134,
-        lat: 54,
-        text: "Kimihurura - Kigali - Rwanda",
-      },
-    },
-    {
-      type: "hotel",
-      name: "Mariot Hotel",
-      images: [hotelImg4, hotelImg2, hotelImg3, hotelImg1],
-      location: {
-        lng: 134,
-        lat: 54,
-        text: "Kimihurura - Kigali - Rwanda",
-      },
-    },
-    {
-      type: "hotel",
-      name: "Greenpark Hotel",
-      images: [hotelImg2, hotelImg1, hotelImg3, hotelImg4],
-      location: {
-        lng: 134,
-        lat: 54,
-        text: "Kimihurura - Kigali - Rwanda",
-      },
-    },
-  ];
+  const fetch = () => {
+    setLoading(true);
+    AuthorizedAxiosAPI.get("/accommodation/getMine")
+      .then((res) => {
+        setAccommodations(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => setLoading(false));
+  };
+  const [accommodations, setAccommodations] = useState([]);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    fetch();
+  }, []);
   return (
     <div className="w-full">
       <h1 className="text-2xl font-extrabold">Accommodations Registered</h1>
       <p>All accommodations that you registered in the system</p>
 
-      <div className="w-full grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-7 my-10 ">
-        {popularPlaces.slice(0, 9).map((place, index) => {
-          return <ViewAccomCard data={place} key={index} />;
-        })}
+      <div className="w-full">
+        <div className="w-full flex justify-end mt-10">
+          <button
+            className="flex items-center gap-2 bg-blue-500 rounded-sm py-2 px-4"
+            onClick={fetch}
+          >
+            <h1 className="font-bold text-white">Reload</h1>
+            <IoReloadSharp color="white" size={23} />
+          </button>
+        </div>
+        {loading ? (
+          <div className="w-full flex justify-center my-10">
+            <ClipLoader size={20} color="black" />
+          </div>
+        ) : accommodations.length === 0 ? (
+          <div className="w-full mt-3 flex justify-center">
+            <h1 className="font-extrabold">No Accommodations Registered Yet</h1>
+          </div>
+        ) : (
+          <div className="w-full grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-7 my-3 ">
+            {accommodations.slice(0, 9).map((place, index) => {
+              return <ViewAccomCard data={place} key={index} />;
+            })}
+          </div>
+        )}
       </div>
     </div>
   );

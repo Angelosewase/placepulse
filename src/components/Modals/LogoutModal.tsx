@@ -13,7 +13,7 @@ const LogoutModal = ({
   const navigate = useNavigate();
   const logout = () => {
     cookie.remove("auth_token", {
-      path: "/"
+      path: "/",
     });
     navigate("/");
     notifications.show({

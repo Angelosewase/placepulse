@@ -9,20 +9,20 @@ import { Modal } from "@mantine/core";
 import cookie from "react-cookies";
 import { notifications } from "@mantine/notifications";
 const OwnerSidebar = () => {
-    const [isLogout, {open,close}] = useDisclosure();
-    const navigate = useNavigate();
-    const logout = ()=>{
-        cookie.remove("auth_token", {
-            path : "/"
-        });
-        cookie.remove("auth_USER", {
-            path : "/"
-        });
-        notifications.show({
-            message: "LoggedOut successfully!"
-        })
-        navigate("/");
-    }
+  const [isLogout, { open, close }] = useDisclosure();
+  const navigate = useNavigate();
+  const logout = () => {
+    cookie.remove("auth_token", {
+      path: "/",
+    });
+    cookie.remove("auth_USER", {
+      path: "/",
+    });
+    notifications.show({
+      message: "LoggedOut successfully!",
+    });
+    navigate("/");
+  };
   const tabs = [
     {
       label: "Home",
@@ -84,21 +84,33 @@ const OwnerSidebar = () => {
         })}
 
         <button
-            onClick={open}
-            className="w-full flex justify-start items-center gap-10 py-4 px-6 font-bold mt-10 hover:bg-red-500 hover:text-white"
+          onClick={open}
+          className="w-full flex justify-start items-center gap-10 py-4 px-6 font-bold mt-10 hover:bg-red-500 hover:text-white"
         >
-            <CiLogout size={23}/>
-            <h5>Logout</h5>
+          <CiLogout size={23} />
+          <h5>Logout</h5>
         </button>
       </div>
 
       <Modal opened={isLogout} onClose={close}>
         <div className="w-full">
-            <h1 className="font-extrabold w-full text-center">Are you sure you want to logout?</h1>
-            <div className="w-full flex text-center justify-between mt-6">
-                <button onClick={close} className="py-2 px-5 bg-[#699BFE] rounded-md font-bold">Cancel</button>
-                <button onClick={logout} className="py-2 px-5 rounded-md bg-red-500 font-bold text-white">Logout</button>
-        </div>
+          <h1 className="font-extrabold w-full text-center">
+            Are you sure you want to logout?
+          </h1>
+          <div className="w-full flex text-center justify-between mt-6">
+            <button
+              onClick={close}
+              className="py-2 px-5 bg-[#699BFE] rounded-md font-bold"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={logout}
+              className="py-2 px-5 rounded-md bg-red-500 font-bold text-white"
+            >
+              Logout
+            </button>
+          </div>
         </div>
       </Modal>
     </div>

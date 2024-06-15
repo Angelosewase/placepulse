@@ -35,6 +35,8 @@ import OwnerLayout from "./app/_client/owner/OwnerLayout";
 import OwnerHome from "./app/_client/owner/Home";
 import OwnerAccommodations from "./app/_client/owner/Accommodations";
 import OwnerAddAccommodations from "./app/_client/owner/AddAccommodation";
+import ViewOwnerAccommodation from "./app/_client/owner/ViewOwnerAccommodation";
+import OwnerAccountInfo from "./app/_client/owner/Info/Account";
 
 function App() {
   return (
@@ -166,6 +168,10 @@ function App() {
               element={<OwnerLayout children={<OwnerAccommodations />} />}
             />
             <Route
+              path="/_owner/accommodations/view/:id"
+              element={<OwnerLayout children={<ViewOwnerAccommodation />} />}
+            />
+            <Route
               path="/_owner/accommodations/add"
               element={<OwnerLayout children={<OwnerAddAccommodations />} />}
             />
@@ -175,7 +181,7 @@ function App() {
             />
             <Route
               path="/_owner/account"
-              element={<OwnerLayout children={<OwnerAccommodations />} />}
+              element={<OwnerLayout children={<OwnerAccountInfo />} />}
             />
 
             {/* Owner Routes */}
