@@ -68,7 +68,7 @@ const OwnerSidebar = () => {
           return (
             <>
               {tab.hasSubRoute ? (
-                <SubRoutesTab tab={tab} />
+                <SubRoutesTab key={index} tab={tab} />
               ) : (
                 <NavLink
                   className="w-full flex justify-start items-center gap-10 py-4 px-6 font-bold"

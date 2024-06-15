@@ -32,9 +32,9 @@
 .m_8fb7ebe7 {
   height: 0rem !important;
   min-height: 0rem !important;
-  padding-top: 1.5rem !important;
-  padding-bottom: 1.5rem !important;
-  border-color: #112211 !important;
+  padding-top: 1.3rem !important;
+  padding-bottom: 1.3rem !important;
+  border-color: rgb(163 163 163 / 1) !important;
   font-family: "Quicksand" !important;
 }
 .pay_meth_container::-webkit-scrollbar {
