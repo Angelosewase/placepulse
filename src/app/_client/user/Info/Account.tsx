@@ -18,12 +18,12 @@ const AccountInfo = () => {
       })
       .finally(() => setLoading(false));
   }, []);
-  const getNames = (data: any)=>{
-    if(!data){
+  const getNames = (data: any) => {
+    if (!data) {
       return "Not Set";
     }
     return data;
-  }
+  };
   return (
     <div className="w-full">
       <h1 className="text-3xl font-extrabold">Account</h1>
@@ -35,7 +35,9 @@ const AccountInfo = () => {
             legend="Name"
             className="w-full flex flex-col md:flex-row justify-between items-start md:items-center gap-3"
           >
-            <h1 className="text-xl font-extrabold">{getNames(profile.lastName)}</h1>
+            <h1 className="text-xl font-extrabold">
+              {getNames(profile.lastName)}
+            </h1>
             <button className="flex gap-3 items-center px-5 py-3 border border-[#8DD3BB] rounded-sm">
               <HiPencilSquare color="black" />
               <p className="text-sm font-bold">Change</p>

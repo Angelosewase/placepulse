@@ -86,7 +86,7 @@ const OwnerAddAccommodations = () => {
           freebies: [],
           discount: "",
           stock: 0,
-          rating: 1
+          rating: 1,
         });
         setImages([]);
       })

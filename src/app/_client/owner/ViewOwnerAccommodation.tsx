@@ -108,21 +108,23 @@ const ViewOwnerAccommodation = () => {
                   {Math.floor(Math.random() * 1000) + 1} Reviews
                 </h1>
               </div>
-              {accommodation.amenities[0][0].map((amenity: any, index: number) => {
-                return (
-                  <div
-                    key={index}
-                    className="w-[28vh] h-[25vh] border border-[#396FF9] rounded-lg relative flex flex-col justify-end p-3"
-                  >
-                    <button className="absolute top-2 left-2">
-                      <WiStars color="black" size={30} />
-                    </button>
-                    <h1 className="font-extrabold">
-                      {SnakeCaseToPascalCaseSpaced(amenity)}
-                    </h1>
-                  </div>
-                );
-              })}
+              {accommodation.amenities[0][0].map(
+                (amenity: any, index: number) => {
+                  return (
+                    <div
+                      key={index}
+                      className="w-[28vh] h-[25vh] border border-[#396FF9] rounded-lg relative flex flex-col justify-end p-3"
+                    >
+                      <button className="absolute top-2 left-2">
+                        <WiStars color="black" size={30} />
+                      </button>
+                      <h1 className="font-extrabold">
+                        {SnakeCaseToPascalCaseSpaced(amenity)}
+                      </h1>
+                    </div>
+                  );
+                },
+              )}
             </div>
           </div>
           <hr className="w-full hotel_divider my-[5vh]" />
