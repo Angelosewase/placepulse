@@ -2,24 +2,12 @@
 import { Fieldset } from "@mantine/core";
 import { HiPencilSquare } from "react-icons/hi2";
 import { separatePhoneNumber } from "../../../../utils/funcs/formatter";
-import { useEffect, useState } from "react";
-import { AuthorizedAxiosAPI } from "../../../../utils/AxiosInstance";
+import { useSelector } from "react-redux";
 
 const OwnerAccountInfo = () => {
-  const [profile, setProfile] = useState<any>({});
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    AuthorizedAxiosAPI.get("/users/me")
-      .then((res) => {
-        setProfile(res.data.user);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => setLoading(false));
-  }, []);
+  const {user } = useSelector((state:any) => state.auth);
+
   const getNames = (data: any) => {
-    console.log(data);
     if (!data) {
       return "Not Set";
     }
@@ -28,16 +16,13 @@ const OwnerAccountInfo = () => {
   return (
     <div className="w-full">
       <h1 className="text-3xl font-extrabold">Account</h1>
-      {loading ? (
-        <div></div>
-      ) : (
         <div className="flex flex-col gap-4 mt-6 shadow-sm shadow-[#c8c8c863] p-5 rounded-lg">
           <Fieldset
             legend="Name"
             className="w-full flex flex-col md:flex-row justify-between items-start md:items-center gap-3"
           >
             <h1 className="text-xl font-extrabold">
-              {getNames(profile.lastName)}
+              {getNames(user.lastName)}
             </h1>
             <button className="flex gap-3 items-center px-5 py-3 border border-[#8DD3BB] rounded-sm">
               <HiPencilSquare color="black" />
@@ -48,7 +33,7 @@ const OwnerAccountInfo = () => {
             legend="Email"
             className="w-full flex flex-col md:flex-row justify-between items-start md:items-center gap-3"
           >
-            <h1 className="text-xl font-extrabold">{profile.email}</h1>
+            <h1 className="text-xl font-extrabold">{user.email}</h1>
             <div className="flex flex-col md:flex-row items-start md:items-center mt-4 md:mt-auto gap-4 md:gap-2">
               <button className="flex gap-3 items-center px-5 py-3 border border-[#8DD3BB] rounded-sm">
                 <HiPencilSquare color="black" />
@@ -75,7 +60,7 @@ const OwnerAccountInfo = () => {
             className="w-full flex flex-col md:flex-row justify-between items-start md:items-center gap-3"
           >
             <h1 className="text-xl font-extrabold">
-              {separatePhoneNumber(`+${profile.phone}`)}
+              {separatePhoneNumber(`+${user.phone}`)}
             </h1>
             <button className="flex gap-3 items-center px-5 py-3 border border-[#8DD3BB] rounded-sm">
               <HiPencilSquare color="black" />
@@ -83,7 +68,6 @@ const OwnerAccountInfo = () => {
             </button>
           </Fieldset>
         </div>
-      )}
     </div>
   );
 };

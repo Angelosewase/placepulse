@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import loginImg from "../../../assets/images/loginImg1.png";
 import AnimatedInput from "../../../components/Inputs/AnimatedInput";
 import { Link, useNavigate } from "react-router-dom";
@@ -7,9 +7,12 @@ import { loginService } from "../../../services/auth.service";
 import { notifications } from "@mantine/notifications";
 import { ClipLoader } from "react-spinners";
 import cookie from "react-cookies";
-
+import { useDispatch, useSelector } from "react-redux";
+import { LOGIN_SUCCESS } from "../../../actions/AuthActions";
 export default function Login() {
   const [email, setEmail] = useState("");
+  const {isLoggedIn, user} = useSelector((state: any)=> state.auth);
+  const dispatch = useDispatch();
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -38,7 +41,13 @@ export default function Login() {
           message: res.data.message,
           color: "green",
         });
-        console.log(res.data.data.user.role);
+        dispatch({
+          type: LOGIN_SUCCESS,
+          payload: {
+            token: res.data.data.token,
+            user: res.data.data.user,
+          },
+        })
         if (res.data.data.user.role === "USER") {
           console.log(res.data.data);
           const expires = new Date();
@@ -72,6 +81,21 @@ export default function Login() {
       })
       .finally(() => setLoading(false));
   };
+
+  useEffect(()=>{
+    if(isLoggedIn || user){
+      if(user?.role === "USER"){
+        return navigate("/_client/home");
+      }
+      if(user?.role === "OWNER"){
+        return navigate("/_owner/home");
+      }
+      if(user?.role === "ADMIN"){
+        return navigate("/_admin/home");
+      }
+    }
+  },[isLoggedIn, navigate, user])
+
   return (
     <div className="w-full h-screen flex justify-between items-center md:px-[7vw] px-4">
       <div className="w-full md:w-[45%] h-[90%] flex flex-col">
