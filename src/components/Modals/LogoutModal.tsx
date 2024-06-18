@@ -24,7 +24,7 @@ const LogoutModal = ({
     cookie.remove("Otate", {
       path: "/",
     });
-    dispatch({type: LOGOUT_SUCCESS })
+    dispatch({ type: LOGOUT_SUCCESS });
     navigate("/");
     notifications.show({
       title: "",

@@ -38,6 +38,7 @@ import OwnerAccommodations from "./app/_client/owner/Accommodations";
 import OwnerAddAccommodations from "./app/_client/owner/AddAccommodation";
 import ViewOwnerAccommodation from "./app/_client/owner/ViewOwnerAccommodation";
 import OwnerAccountInfo from "./app/_client/owner/Info/Account";
+import OwnerBookings from "./app/_client/owner/OwnerBookings";
 function App() {
   return (
     <div className="h-screen">
@@ -177,7 +178,7 @@ function App() {
             />
             <Route
               path="/_owner/bookings"
-              element={<OwnerLayout children={<OwnerAccommodations />} />}
+              element={<OwnerLayout children={<OwnerBookings />} />}
             />
             <Route
               path="/_owner/account"

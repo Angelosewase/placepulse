@@ -10,7 +10,13 @@ import { ClipLoader } from "react-spinners";
 import { AuthorizedAxiosAPI } from "../../utils/AxiosInstance";
 import { useNavigate } from "react-router-dom";
 
-const ViewAccomCard = ({ data }: { data: any }) => {
+const ViewAccomCard = ({
+  data,
+  refetch,
+}: {
+  data: any;
+  refetch: () => void;
+}) => {
   const navigate = useNavigate();
   const [isDelete, setIsDelete] = useState<{
     open: boolean;
@@ -33,12 +39,12 @@ const ViewAccomCard = ({ data }: { data: any }) => {
 
   const deleteAccommodation = () => {
     setIsDelete({ open: true, data: data, loading: true });
-    AuthorizedAxiosAPI.get(`/accommodation/delete/${data.id}`)
+    AuthorizedAxiosAPI.delete(`/accommodation/delete/${data.id}`)
       .then((res) => {
-        console.log(res.data);
         notifications.show({
           message: res.data.message,
         });
+        refetch();
         setIsDelete({
           open: false,
           data: {},
@@ -48,7 +54,7 @@ const ViewAccomCard = ({ data }: { data: any }) => {
       .catch((err) => {
         console.log(err);
         notifications.show({
-          message: err,
+          message: err.message,
         });
         setIsDelete({
           open: true,

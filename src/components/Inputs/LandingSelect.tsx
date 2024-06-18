@@ -9,14 +9,14 @@ const LandingSelect = ({
   value,
   className,
   showEye,
-  data
+  data,
 }: {
   label: string;
   handleChange: (e: any) => void;
   value: string;
   className?: string;
   showEye?: boolean;
-  data: any[]
+  data: any[];
 }) => {
   const [showPassword, setShowPassword] = useState(false);
 

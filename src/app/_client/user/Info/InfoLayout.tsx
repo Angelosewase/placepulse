@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 
 const InfoLayout = ({ children }: { children: React.ReactElement }) => {
   const buttons = ["Account", "Bookings", "Payment Methods"];
-  const {user} = useSelector((state: any)=> state.auth);
+  const { user } = useSelector((state: any) => state.auth);
   return (
     <div className="w-full md:px-20 px-3 mt-20">
       <div className="relative w-full flex flex-col items-center">

@@ -1,21 +1,27 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
 import AnimatedInput from "../../components/Inputs/AnimatedInput";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { loginService } from "../../services/auth.service";
 import { notifications } from "@mantine/notifications";
 import { ClipLoader } from "react-spinners";
 import { Modal } from "@mantine/core";
+import { useDispatch } from "react-redux";
+import { LOGIN_SUCCESS } from "../../actions/AuthActions";
 const LoginModal = ({
   isPayment,
   closePayment,
+  id,
 }: {
   isPayment: boolean;
   closePayment: () => void;
+  id: string;
 }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleEmailChange = (event: React.ChangeEvent<HTMLFormElement>) => {
     console.log(event.target.value);
     setEmail(event.target.value);
@@ -42,6 +48,14 @@ const LoginModal = ({
           message: res.data.message,
           color: "green",
         });
+        dispatch({
+          type: LOGIN_SUCCESS,
+          payload: {
+            token: res.data.data.token,
+            user: res.data.data.user,
+          },
+        });
+        navigate(`/booking/place/${id}/checkout`);
       })
       .catch((err) => {
         notifications.show({

@@ -19,7 +19,9 @@ import {
 const UserLanding = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const accommodations = useSelector((state: any) => state.accommodations.accommodations);
+  const accommodations = useSelector(
+    (state: any) => state.accommodations.accommodations,
+  );
   const [, setLoading] = useState(true);
   const [selected, setSelected] = useState<any>({
     hotel: "",
@@ -53,10 +55,20 @@ const UserLanding = () => {
   return (
     <div className="w-full pb-[50vh]">
       <div className="w-full md:h-[90vh] relative">
-        <img src={mabBgImg} className="w-full h-[90vh] md:h-full object-cover" />
+        <img
+          src={mabBgImg}
+          className="w-full h-[90vh] md:h-full object-cover"
+        />
         <div className="absolute w-full h-[90vh] md:h-full bg-[#0000008a] z-10 top-0 flex flex-col gap-14">
           <div className="w-full md:w-[70%] hidden md:flex justify-between mt-5 px-3 md:px-20">
-            {["Hotel & Motels", "Open Parks", "Gardens", "Restaurants", "Conference Rooms", "More"].map((text) => (
+            {[
+              "Hotel & Motels",
+              "Open Parks",
+              "Gardens",
+              "Restaurants",
+              "Conference Rooms",
+              "More",
+            ].map((text) => (
               <button key={text} className="text-white text-md font-semibold">
                 {text}
               </button>
@@ -68,13 +80,19 @@ const UserLanding = () => {
           <div className="px-3 md:px-20">
             <h1 className="text-5xl md:text-6xl font-extrabold uppercase w-full md:w-[50%] text-start text-white">
               Make Your Choice Destination,{" "}
-              <span className="text-5xl md:text-6xl lowercase">We'll do the rest</span>
+              <span className="text-5xl md:text-6xl lowercase">
+                We'll do the rest
+              </span>
             </h1>
-            <h3 className="text-xl text-white font-medium ml-2">Special offers to suit your plan</h3>
+            <h3 className="text-xl text-white font-medium ml-2">
+              Special offers to suit your plan
+            </h3>
           </div>
           <div className="w-full md:absolute bottom-0 flex justify-center">
             <div className="w-full md:w-[85%] bg-white rounded-t-2xl p-6">
-              <h1 className="text-2xl font-extrabold text-[#112211]">Where are you Heading?</h1>
+              <h1 className="text-2xl font-extrabold text-[#112211]">
+                Where are you Heading?
+              </h1>
               <div className="w-full flex flex-col md:flex-row justify-between gap-4 mt-10">
                 {[
                   { label: "Hotels", key: "hotel" },
@@ -88,7 +106,8 @@ const UserLanding = () => {
                     label={item.label}
                     value={selected[item.key]}
                     data={
-                      accommodations.filter((acc: any) => acc.type === item.key).length > 0
+                      accommodations.filter((acc: any) => acc.type === item.key)
+                        .length > 0
                         ? accommodations
                             .filter((acc: any) => acc.type === item.key)
                             .map((accommodation: any) => ({
@@ -97,7 +116,9 @@ const UserLanding = () => {
                             }))
                         : [{ label: `No ${item.label} Found`, value: "" }]
                     }
-                    handleChange={(e: any) => setSelected({ ...selected, [item.key]: e })}
+                    handleChange={(e: any) =>
+                      setSelected({ ...selected, [item.key]: e })
+                    }
                   />
                 ))}
               </div>
@@ -118,9 +139,13 @@ const UserLanding = () => {
           <div className="w-full flex flex-col md:flex-row justify-between items-start gap-4 md:items-center">
             <div>
               <h1 className="text-3xl font-bold">Plan your perfect trip</h1>
-              <p className="text-[#454444]">Search Places Hire to our most popular places</p>
+              <p className="text-[#454444]">
+                Search Places Hire to our most popular places
+              </p>
             </div>
-            <button className="py-2 px-6 border border-[#8DD3BB] rounded-sm font-semibold">See more places</button>
+            <button className="py-2 px-6 border border-[#8DD3BB] rounded-sm font-semibold">
+              See more places
+            </button>
           </div>
           <div className="w-full grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-12 mt-10">
             {accommodations.slice(0, 9).map((place: any, index: number) => (
@@ -130,10 +155,18 @@ const UserLanding = () => {
           <div className="w-full mt-[10vh]">
             <div className="w-full flex flex-col md:flex-row justify-between items-start gap-4 md:items-center mt-[12vh]">
               <div className="w-[70%]">
-                <h1 className="text-3xl font-bold">Popular Places You May Like</h1>
-                <p className="text-[#454444]">Going somewhere to celebrate this season? Whether you’re going home or somewhere to roam, we’ve got the travel tools to get you to your destination.</p>
+                <h1 className="text-3xl font-bold">
+                  Popular Places You May Like
+                </h1>
+                <p className="text-[#454444]">
+                  Going somewhere to celebrate this season? Whether you’re going
+                  home or somewhere to roam, we’ve got the travel tools to get
+                  you to your destination.
+                </p>
               </div>
-              <button className="py-2 px-6 border border-[#8DD3BB] rounded-sm font-semibold">See All</button>
+              <button className="py-2 px-6 border border-[#8DD3BB] rounded-sm font-semibold">
+                See All
+              </button>
             </div>
             <div className="w-full h-[60vh] grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-3 mt-10">
               {accommodations.slice(0, 9).map((place: any, index: number) => (

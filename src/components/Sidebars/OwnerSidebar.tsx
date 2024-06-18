@@ -28,8 +28,8 @@ const OwnerSidebar = () => {
       message: "Loggedout successfully!",
     });
     dispatch({
-      type: LOGOUT_SUCCESS
-    })
+      type: LOGOUT_SUCCESS,
+    });
     navigate("/");
   };
   const tabs = [

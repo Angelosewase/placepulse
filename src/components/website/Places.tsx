@@ -24,11 +24,10 @@ const Places = () => {
   const { accommodations: accommodations_data } = useSelector(
     (state: any) => state.accommodations,
   );
-  console.log(accommodations_data);
   const fetch = () => {
     AuthorizedAxiosAPI.get("/accommodation/all")
-      .then((res) => {
-        dispatch({
+    .then((res) => {
+      dispatch({
           type: FETCH_ACCOMMODATIONS_SUCCESS,
           payload: {
             accommodations: res.data.data,
@@ -41,7 +40,8 @@ const Places = () => {
           payload: err.response,
         });
       });
-  };
+    };
+    console.log(accommodations_data.filter((acc: any)=> acc.type == accommodations[1].type.toLowerCase()).length)
   useEffect(() => {
     fetch();
   }, []);
@@ -129,7 +129,7 @@ const Places = () => {
                     {accommodation.type}
                   </h1>
                   <h6 className="font-medium text-sm text-[#112211b5]">
-                    {accommodation.number} Places
+                    {accommodations_data.filter((acc: any)=> acc.type == accommodation.type.toLowerCase()).length} Places
                   </h6>
                 </div>
                 {index !== accommodations.length - 1 && (

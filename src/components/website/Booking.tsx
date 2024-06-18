@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react';
+import React from "react";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { FaLocationDot } from "react-icons/fa6";
@@ -11,12 +11,13 @@ import { IoChevronBackCircleOutline } from "react-icons/io5";
 import LoginModal from "../Modals/LoginModal";
 import cookie from "react-cookies";
 import { AxiosAPI } from "../../utils/AxiosInstance";
+import { useSelector } from "react-redux";
 const BookingPage = () => {
   const params = useParams();
-  const accommodation_id = params.id ?? 0;
+  const accommodation_id = params.id ?? "";
   const [loading, setLoading] = useState(true);
   const [accommodation, setAccommodation] = useState<any>();
-
+  const { isLoggedIn } = useSelector((state: any) => state.auth);
   useEffect(() => {
     setLoading(true);
     AxiosAPI.get(`/accommodation/get/${accommodation_id}`)
@@ -34,6 +35,7 @@ const BookingPage = () => {
   const [openedInfo, { toggle }] = useDisclosure(false);
   const [isPayment, { open, close }] = useDisclosure(false);
   const token = cookie.load("auth_token");
+  console.log("auth token --> ", token);
   const navigate = useNavigate();
   const dateDifference =
     checkIn && checkOut ? differenceInDays(checkOut, checkIn) : 0;
@@ -50,7 +52,7 @@ const BookingPage = () => {
   };
 
   const handlePaymentCheckout = () => {
-    if (!token) {
+    if (!isLoggedIn) {
       open();
     } else {
       navigate(`/booking/place/${accommodation_id}/checkout`);
@@ -60,9 +62,7 @@ const BookingPage = () => {
   return (
     <div className="w-full md:px-12 pt-5 pb-[50vh]">
       {loading ? (
-        <div>
-
-        </div>
+        <div></div>
       ) : (
         <>
           <div className="w-full flex justify-start">
@@ -183,9 +183,8 @@ const BookingPage = () => {
                         >
                           Pay {priceToPay()} now, and the rest (
                           {/* {accommodation.roomTypes[0].price * 0.5}) will be */}
-                          {priceToPay()}) will be
-                          automatically charged to the same payment method on
-                          Nov 14, 2022. No extra fees.
+                          {priceToPay()}) will be automatically charged to the
+                          same payment method on Nov 14, 2022. No extra fees.
                         </p>
                       </Collapse>
                     </div>
@@ -265,7 +264,13 @@ const BookingPage = () => {
               </button>
             </div>
           </div>
-          {!token && <LoginModal isPayment={isPayment} closePayment={close} />}
+          {!isLoggedIn && (
+            <LoginModal
+              id={accommodation_id}
+              isPayment={isPayment}
+              closePayment={close}
+            />
+          )}
         </>
       )}
     </div>
