@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Suspense, lazy } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
@@ -37,7 +38,6 @@ import OwnerAccommodations from "./app/_client/owner/Accommodations";
 import OwnerAddAccommodations from "./app/_client/owner/AddAccommodation";
 import ViewOwnerAccommodation from "./app/_client/owner/ViewOwnerAccommodation";
 import OwnerAccountInfo from "./app/_client/owner/Info/Account";
-
 function App() {
   return (
     <div className="h-screen">

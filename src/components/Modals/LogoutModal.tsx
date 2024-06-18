@@ -2,7 +2,9 @@
 import { Modal } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import cookie from "react-cookies";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { LOGOUT_SUCCESS } from "../../actions/AuthActions";
 const LogoutModal = ({
   isLogout,
   closeLogout,
@@ -10,11 +12,19 @@ const LogoutModal = ({
   isLogout: boolean;
   closeLogout: any;
 }) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const logout = () => {
     cookie.remove("auth_token", {
       path: "/",
     });
+    cookie.remove("auth_USER", {
+      path: "/",
+    });
+    cookie.remove("Otate", {
+      path: "/",
+    });
+    dispatch({type: LOGOUT_SUCCESS })
     navigate("/");
     notifications.show({
       title: "",

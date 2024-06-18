@@ -1,21 +1,38 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import ViewAccomCard from "../../../components/Cards/ViewAccCard";
 import { AuthorizedAxiosAPI } from "../../../utils/AxiosInstance";
 import { ClipLoader } from "react-spinners";
 import { IoReloadSharp } from "react-icons/io5";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  FETCH_ACCOMMODATIONS_FAIL,
+  FETCH_ACCOMMODATIONS_SUCCESS,
+} from "../../../actions/AccommodationActions";
 const OwnerAccommodations = () => {
+  const dispatch = useDispatch();
+  const { accommodations } = useSelector((state: any) => state.accommodations);
+  console.log(accommodations);
   const fetch = () => {
     setLoading(true);
     AuthorizedAxiosAPI.get("/accommodation/getMine")
       .then((res) => {
-        setAccommodations(res.data.data);
+        dispatch({
+          type: FETCH_ACCOMMODATIONS_SUCCESS,
+          payload: {
+            accommodations: res.data.data,
+          },
+        });
       })
       .catch((err) => {
-        console.log(err);
+        dispatch({
+          type: FETCH_ACCOMMODATIONS_FAIL,
+          payload: err.response,
+        });
       })
       .finally(() => setLoading(false));
   };
-  const [accommodations, setAccommodations] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     fetch();
@@ -45,7 +62,7 @@ const OwnerAccommodations = () => {
           </div>
         ) : (
           <div className="w-full grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-7 my-3 ">
-            {accommodations.slice(0, 9).map((place, index) => {
+            {accommodations.slice(0, 9).map((place: any, index: any) => {
               return <ViewAccomCard data={place} key={index} />;
             })}
           </div>

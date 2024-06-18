@@ -65,7 +65,11 @@ const ViewAccomCard = ({ data }: { data: any }) => {
         className="w-[15vh] h-[15vh] rounded-sm"
       />
       <div className="h-full flex flex-col gap-1">
-        <h1 className="font-extrabold">{data.name}</h1>
+        <h1 className="font-extrabold">
+          {data.name.length < 17
+            ? data.name
+            : `${data.name.slice(0, 17)} . . .`}
+        </h1>
         <p className="text-sm w-full flex items-center gap-1">
           <VscTypeHierarchy />
           {data.type}

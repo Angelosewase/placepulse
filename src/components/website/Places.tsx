@@ -1,21 +1,50 @@
-import { useState } from "react";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useEffect, useState } from "react";
 import { FaHeart, FaLocationDot, FaRegHeart } from "react-icons/fa6";
 import { Rating } from "@mantine/core";
 import { FaCoffee } from "react-icons/fa";
-import {
-  accommodations,
-  accommodations_data,
-  amenities,
-  free_bies,
-} from "../../constants/dummy";
+import { accommodations, amenities, free_bies } from "../../constants/dummy";
 import FilterCollapsible from "../collapsibles/FilterCollapsible";
 import CheckBox from "../Checkbox";
 import { SnakeCaseToPascalCaseSpaced } from "../../utils/funcs/formatter";
 import SliderComponent from "../Inputs/Slider";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { AuthorizedAxiosAPI } from "../../utils/AxiosInstance";
+import {
+  FETCH_ACCOMMODATIONS_FAIL,
+  FETCH_ACCOMMODATIONS_SUCCESS,
+} from "../../actions/AccommodationActions";
 const Places = () => {
   const [activeAcc, setActiveAcc] = useState("hotel");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { accommodations: accommodations_data } = useSelector(
+    (state: any) => state.accommodations,
+  );
+  console.log(accommodations_data);
+  const fetch = () => {
+    AuthorizedAxiosAPI.get("/accommodation/all")
+      .then((res) => {
+        dispatch({
+          type: FETCH_ACCOMMODATIONS_SUCCESS,
+          payload: {
+            accommodations: res.data.data,
+          },
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: FETCH_ACCOMMODATIONS_FAIL,
+          payload: err.response,
+        });
+      });
+  };
+  useEffect(() => {
+    fetch();
+  }, []);
   return (
     <div className="w-full flex px-10 pt-[10vh] pb-[50vh]">
       <div className="md:w-[35%]">
@@ -86,7 +115,7 @@ const Places = () => {
       </div>
       <div className="w-full md:w-[65%] flex flex-col">
         <div className="w-full flex items-center mb-5 gap-4 places_tabs_cont">
-          {accommodations.map((accommodation, index) => {
+          {accommodations.map((accommodation: any, index: number) => {
             return (
               <div
                 onClick={() => setActiveAcc(accommodation.type.toLowerCase())}
@@ -112,13 +141,15 @@ const Places = () => {
         </div>
         <div className="">
           {accommodations_data.filter(
-            (accommodation) => accommodation.type === activeAcc,
+            (accommodation: any) => accommodation.type === activeAcc,
           ).length > 0 ? (
             <div className="flex flex-col gap-4">
               {accommodations_data
-                .filter((accommodation) => accommodation.type === activeAcc)
+                .filter(
+                  (accommodation: any) => accommodation.type === activeAcc,
+                )
                 .slice(0, 4)
-                .map((accommodation, index) => {
+                .map((accommodation: any, index: number) => {
                   return (
                     <div
                       key={index}
@@ -142,7 +173,7 @@ const Places = () => {
                         <div className="flex items-center gap-3">
                           <FaLocationDot color="black" />
                           <h6 className="text-[#112211] text-sm font-medium">
-                            {accommodation.location.text}
+                            {accommodation.location}
                           </h6>
                         </div>
                         <div className="flex items-center gap-3 mt-2">
@@ -177,7 +208,9 @@ const Places = () => {
                             )}
                           </button>
                           <button
-                            onClick={() => navigate(`/places/${index}`)}
+                            onClick={() =>
+                              navigate(`/places/${accommodation.id}`)
+                            }
                             className="w-full py-3 rounded-md flex items-center font-extrabold justify-center bg-[#699bfe52]"
                           >
                             View Place
@@ -197,9 +230,13 @@ const Places = () => {
                     </div>
                   );
                 })}
-              <button className="w-full py-3 mt-[8vh] rounded-sm text-white flex items-center font-extrabold justify-center bg-[#396FF9]">
-                Show More Places
-              </button>
+              {accommodations_data.filter(
+                (accommodation: any) => accommodation.type === activeAcc,
+              ).length > 5 && (
+                <button className="w-full py-3 mt-[8vh] rounded-sm text-white flex items-center font-extrabold justify-center bg-[#396FF9]">
+                  Show More Places
+                </button>
+              )}
             </div>
           ) : (
             <div className="w-full flex justify-center mt-7">

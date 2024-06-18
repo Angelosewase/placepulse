@@ -2,22 +2,10 @@
 import { Fieldset } from "@mantine/core";
 import { HiPencilSquare } from "react-icons/hi2";
 import { separatePhoneNumber } from "../../../../utils/funcs/formatter";
-import { useEffect, useState } from "react";
-import { AuthorizedAxiosAPI } from "../../../../utils/AxiosInstance";
+import { useSelector } from "react-redux";
 
 const AccountInfo = () => {
-  const [profile, setProfile] = useState<any>({});
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    AuthorizedAxiosAPI.get("/users/me")
-      .then((res) => {
-        setProfile(res.data.user);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => setLoading(false));
-  }, []);
+  const {user:profile} = useSelector((state: any)=> state.auth);
   const getNames = (data: any) => {
     if (!data) {
       return "Not Set";
@@ -27,9 +15,6 @@ const AccountInfo = () => {
   return (
     <div className="w-full">
       <h1 className="text-3xl font-extrabold">Account</h1>
-      {loading ? (
-        <div></div>
-      ) : (
         <div className="flex flex-col gap-4 mt-6 shadow-sm shadow-[#c8c8c863] p-5 rounded-lg">
           <Fieldset
             legend="Name"
@@ -82,7 +67,6 @@ const AccountInfo = () => {
             </button>
           </Fieldset>
         </div>
-      )}
     </div>
   );
 };

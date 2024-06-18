@@ -8,9 +8,12 @@ import { useDisclosure } from "@mantine/hooks";
 import { Modal } from "@mantine/core";
 import cookie from "react-cookies";
 import { notifications } from "@mantine/notifications";
+import { useDispatch } from "react-redux";
+import { LOGOUT_SUCCESS } from "../../actions/AuthActions";
 const OwnerSidebar = () => {
   const [isLogout, { open, close }] = useDisclosure();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const logout = () => {
     cookie.remove("auth_token", {
       path: "/",
@@ -18,9 +21,15 @@ const OwnerSidebar = () => {
     cookie.remove("auth_USER", {
       path: "/",
     });
-    notifications.show({
-      message: "LoggedOut successfully!",
+    cookie.remove("Otate", {
+      path: "/",
     });
+    notifications.show({
+      message: "Loggedout successfully!",
+    });
+    dispatch({
+      type: LOGOUT_SUCCESS
+    })
     navigate("/");
   };
   const tabs = [

@@ -19,7 +19,7 @@ export const accommodations = [
     number: 120,
   },
   {
-    type: "Park",
+    type: "Parking",
     number: 71,
   },
 ];
