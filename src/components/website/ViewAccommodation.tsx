@@ -9,7 +9,7 @@ import { SnakeCaseToPascalCaseSpaced } from "../../utils/funcs/formatter";
 import { AxiosAPI } from "../../utils/AxiosInstance";
 import { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
-
+import location_Img from "../../assets/images/map_location.png"
 const ViewAccommodation = () => {
   const params = useParams();
   const accommodation_id = params.id ?? 0;
@@ -179,7 +179,9 @@ const ViewAccommodation = () => {
                 View on google maps
               </Link>
             </div>
-            <div className="h-[60vh] border-2 my-3 rounded-md"></div>
+            <div className="w-full h-[60vh] my-3 rounded-md">
+              <img src={location_Img} className="w-full h-full rounded-sm" alt="" />
+            </div>
           </div>
           <hr className="w-full hotel_divider my-[9vh]" />
           <div className="w-full mt-5">

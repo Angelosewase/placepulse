@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import ViewAccomCard from "../../../components/Cards/ViewAccCard";
-import { AuthorizedAxiosAPI } from "../../../utils/AxiosInstance";
+import { AxiosAPI } from "../../../utils/AxiosInstance";
 import { ClipLoader } from "react-spinners";
 import { IoReloadSharp } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,10 +13,14 @@ import {
 const OwnerAccommodations = () => {
   const dispatch = useDispatch();
   const { accommodations } = useSelector((state: any) => state.accommodations);
-  console.log(accommodations);
+  const { token } = useSelector((state: any) => state.auth);
   const fetch = () => {
     setLoading(true);
-    AuthorizedAxiosAPI.get("/accommodation/getMine")
+    AxiosAPI.get("/accommodation/getMine" ,{
+      headers: {
+        Authorization : `Bearer ${token}`
+      }
+    })
       .then((res) => {
         dispatch({
           type: FETCH_ACCOMMODATIONS_SUCCESS,

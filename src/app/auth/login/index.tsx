@@ -83,7 +83,7 @@ export default function Login() {
   };
 
   useEffect(() => {
-    if (isLoggedIn || user) {
+    if (isLoggedIn && user) {
       if (user?.role === "USER") {
         return navigate("/_client/home");
       }

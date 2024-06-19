@@ -1,19 +1,19 @@
 import { Timeline } from "@mantine/core";
-import { notifications } from "../_client/owner/Home";
+import { notifications } from "./Home";
 import { FaCheckCircle } from "react-icons/fa";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-const NotificationsPage = ()=>{
+const OwnerNotificationsPage = ()=>{
     return(
-        <div className="w-full px-20 pb-20 flex flex-col gap-3">
-          <h1 className="text-3xl font-bold mb-4">Notifications</h1>
+        <div className="w-full pb-20 flex flex-col gap-3">
+          <h1 className="text-lg font-bold mb-4">Notifications</h1>
           <div className="w-full">
-            <Timeline color={"#0075FF"} className="pl-8 w-full" bulletSize={35}>
+            <Timeline color={"#000"} className="pl-8 w-full" bulletSize={35}>
                 {notifications.map((notif: any, index: number) => {
                 return (
                     <Timeline.Item
                     key={index}
-                    bullet={<FaCheckCircle color="#0075FF" size={30} />}
+                    bullet={<FaCheckCircle color="black" />}
                     title={notif.time}
                     className="w-full bg-blue-50 pt-4 pb-6"
                     >
@@ -29,4 +29,4 @@ const NotificationsPage = ()=>{
         </div>      
     )
 }
-export default NotificationsPage
+export default OwnerNotificationsPage

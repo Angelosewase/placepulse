@@ -4,21 +4,27 @@ import { Modal, Select } from "@mantine/core";
 import { useState } from "react";
 import AnimatedInput from "../Inputs/AnimatedInput";
 import { ClipLoader } from "react-spinners";
+import { AxiosAPI } from "../../utils/AxiosInstance";
+import { notifications } from "@mantine/notifications";
+import { useSelector } from "react-redux";
 // import { notifications } from "@mantine/notifications";
 
 const AddCardModal = ({
   opened,
   close,
+  refetch
 }: {
   opened: boolean;
   close: () => void;
+  refetch: () => void;
 }) => {
+  const {token} = useSelector((state: any) => state.auth);
   const [cardType, setCardType] = useState("");
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [country, setCountry] = useState("");
   const handlePhoneChange = (event: React.ChangeEvent<HTMLFormElement>) => {
-    console.log(event.target.value);
     setPhone(event.target.value);
   };
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -31,25 +37,31 @@ const AddCardModal = ({
     } else {
       setError("");
     }
-    // loginService({ email: email, password: password })
-    //   .then((res: any) => {
-    //     notifications.show({
-    //       title: "Success!",
-    //       message: res.data.message,
-    //       color: "green",
-    //     });
-    //   })
-    //   .catch((err: any) => {
-    //     notifications.show({
-    //       title: "",
-    //       message: err.response?.data?.message ?? err.message,
-    //       color: "red",
-    //     });
-    //   })
-    //   .finally(() => setLoading(false));
-    setTimeout(() => {
-      setLoading(false);
-    }, 3000);
+    AxiosAPI.post("/paymentmethods/create", {
+      type: cardType,
+      number: phone,
+    }, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    .then((res)=>{
+      notifications.show({
+        message: res.data.message,
+        color: "green"
+      })
+      setPhone("");
+      setCardType("");
+      close();
+      refetch();
+    })
+    .catch((err)=>{
+      notifications.show({
+        message: err.response.message ?? err.message,
+        color: "red"
+      })
+    })
+    .finally(()=> setLoading(false));
   };
   return (
     <div>
@@ -128,25 +140,25 @@ const AddCardModal = ({
                   type="text"
                   handleChange={handlePhoneChange}
                   value={phone}
-                  maxLength={9}
+                  // maxLength={9}
                 />
                 <Select
                   className="w-full"
                   placeholder="Pick country"
-                  value={cardType}
-                  onChange={(e: any) => setCardType(e)}
+                  value={country}
+                  onChange={(e: any) => setCountry(e)}
                   data={[
                     {
-                      label: "MTN",
-                      value: "MTN",
+                      label: "Rwanda",
+                      value: "RW",
                     },
                     {
-                      label: "AIRTEL",
-                      value: "AIRTEL",
+                      label: "Burundi",
+                      value: "BU",
                     },
                     {
-                      label: "Credit card",
-                      value: "CREDIT_CARD",
+                      label: "United States of America",
+                      value: "USA",
                     },
                   ]}
                   allowDeselect={false}

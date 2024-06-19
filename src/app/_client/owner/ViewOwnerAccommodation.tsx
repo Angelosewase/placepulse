@@ -8,7 +8,7 @@ import { WiStars } from "react-icons/wi";
 import { SnakeCaseToPascalCaseSpaced } from "../../../utils/funcs/formatter";
 import { useEffect, useState } from "react";
 import { AuthorizedAxiosAPI } from "../../../utils/AxiosInstance";
-
+import location_Img from "../../../assets/images/map_location.png"
 const ViewOwnerAccommodation = () => {
   const params = useParams();
   const accommodation_id = params.id ?? 0;
@@ -176,7 +176,9 @@ const ViewOwnerAccommodation = () => {
                 View on google maps
               </Link>
             </div>
-            <div className="h-[60vh] border-2 my-3 rounded-md"></div>
+            <div className="h-[60vh] border-2 my-3 rounded-md">
+              <img src={location_Img} className="w-full h-full rounded-md object-contain" alt="" />
+            </div>
           </div>
           <hr className="w-full hotel_divider my-[9vh]" />
           <div className="w-full mt-5">

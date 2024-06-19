@@ -6,21 +6,37 @@ import { FaCheckCircle } from "react-icons/fa";
 import { bookings } from "./OwnerBookings";
 import CompressedView from "../../../components/Cards/CompressedView";
 import { useNavigate } from "react-router-dom";
-
+export const notifications = [
+  {
+    time: "12:23 PM",
+    date: "18/06/2024",
+    description: "John Booked your Accommodation",
+  },
+  {
+    time: "12:23 PM",
+    date: "18/06/2024",
+    description: "John Booked your Accommodation",
+  },
+  {
+    time: "12:23 PM",
+    date: "18/06/2024",
+    description: "John Booked your Accommodation",
+  },
+];
 const OwnerHome = () => {
-  const data = useSelector((state: any) => state.auth);
+  const {accommodations} = useSelector((state: any) => state.accommodations);
   const navigate = useNavigate();
-  console.log("auth data --> ", data);
+  console.log("auth data --> ", accommodations);
   const dashboardStats = [
     {
       title: "Accommodations",
-      amount: "23",
-      color: "#E5ECF6",
+      amount: accommodations.length,
+      color: "#EBF6F2",
     },
     {
       title: "Bookings",
-      amount: "3",
-      color: "#E3F5FF",
+      amount: bookings.length,
+      color: "#EBF6F2",
     },
     {
       title: "Visits",
@@ -30,25 +46,7 @@ const OwnerHome = () => {
     {
       title: "Earnings",
       amount: "2309890 RWF",
-      color: "#E5ECF6",
-    },
-  ];
-
-  const notifications = [
-    {
-      time: "12:23 PM",
-      date: "18/06/2024",
-      description: "John Booked your Accommodation",
-    },
-    {
-      time: "12:23 PM",
-      date: "18/06/2024",
-      description: "John Booked your Accommodation",
-    },
-    {
-      time: "12:23 PM",
-      date: "18/06/2024",
-      description: "John Booked your Accommodation",
+      color: "#EBF6F2",
     },
   ];
   return (

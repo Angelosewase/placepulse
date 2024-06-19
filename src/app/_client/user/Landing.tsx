@@ -169,7 +169,7 @@ const UserLanding = () => {
               </button>
             </div>
             <div className="w-full h-[60vh] grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-3 mt-10">
-              {accommodations.slice(0, 9).map((place: any, index: number) => (
+              {accommodations.slice(0, 4).map((place: any, index: number) => (
                 <PopularCard data={place} key={index} />
               ))}
             </div>

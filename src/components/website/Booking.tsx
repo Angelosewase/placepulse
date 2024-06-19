@@ -9,12 +9,13 @@ import { Collapse, Radio } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IoChevronBackCircleOutline } from "react-icons/io5";
 import LoginModal from "../Modals/LoginModal";
-import cookie from "react-cookies";
 import { AxiosAPI } from "../../utils/AxiosInstance";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { ADD_BOOKING } from "../../actions/BookingActions";
 const BookingPage = () => {
   const params = useParams();
   const accommodation_id = params.id ?? "";
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const [accommodation, setAccommodation] = useState<any>();
   const { isLoggedIn } = useSelector((state: any) => state.auth);
@@ -34,8 +35,6 @@ const BookingPage = () => {
   const [paymentPortion, setPaymentPortion] = useState("full");
   const [openedInfo, { toggle }] = useDisclosure(false);
   const [isPayment, { open, close }] = useDisclosure(false);
-  const token = cookie.load("auth_token");
-  console.log("auth token --> ", token);
   const navigate = useNavigate();
   const dateDifference =
     checkIn && checkOut ? differenceInDays(checkOut, checkIn) : 0;
@@ -52,6 +51,17 @@ const BookingPage = () => {
   };
 
   const handlePaymentCheckout = () => {
+    const bookingDetails = {
+      accommodationId: accommodation_id,
+      checkIn: checkIn,
+      checkOut: checkOut,
+      paymentType: paymentPortion,
+      image: accommodation.images[0],
+      paymentMethod: null,
+      paymentTotal: priceToPay(),
+      name: accommodation.name
+    }
+    dispatch({type: ADD_BOOKING, payload: bookingDetails})
     if (!isLoggedIn) {
       open();
     } else {

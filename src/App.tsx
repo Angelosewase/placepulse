@@ -39,6 +39,7 @@ import OwnerAddAccommodations from "./app/_client/owner/AddAccommodation";
 import ViewOwnerAccommodation from "./app/_client/owner/ViewOwnerAccommodation";
 import OwnerAccountInfo from "./app/_client/owner/Info/Account";
 import OwnerBookings from "./app/_client/owner/OwnerBookings";
+import OwnerNotificationsPage from "./app/_client/owner/Notifications";
 function App() {
   return (
     <div className="h-screen">
@@ -179,6 +180,10 @@ function App() {
             <Route
               path="/_owner/bookings"
               element={<OwnerLayout children={<OwnerBookings />} />}
+            />
+            <Route
+              path="/_owner/notifications"
+              element={<OwnerLayout children={<OwnerNotificationsPage />} />}
             />
             <Route
               path="/_owner/account"

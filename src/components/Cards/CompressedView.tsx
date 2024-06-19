@@ -3,7 +3,7 @@ import { GoClockFill } from "react-icons/go";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const CompressedView = ({ data }: { data: any }) => {
   return (
-    <div className="w-full py-2 flex justify-between px-4 shadow shadow-gray-50">
+    <div className="w-full py-2 flex justify-between px-4 shadow-sm shadow-gray-200">
       <div className="w-full flex items-center justify-between">
         <img
           src={data.image}

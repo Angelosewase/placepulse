@@ -1,7 +1,7 @@
 /* eslint-disable no-case-declarations */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import cookie from "react-cookies";
-import { LOGIN_FAIL, LOGIN_SUCCESS } from "../actions/AuthActions";
+import { LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT_SUCCESS } from "../actions/AuthActions";
 import { decrypt, encrypt } from "../utils/crypto";
 type AuthAction = {
   type: string;
@@ -43,6 +43,13 @@ export const authReducer = (state = loadState(), action: AuthAction) => {
       });
       return newState;
     case LOGIN_FAIL:
+      return {
+        ...state,
+        isLoggedIn: false,
+        user: null,
+        token: null,
+      };
+    case LOGOUT_SUCCESS:
       return {
         ...state,
         isLoggedIn: false,

@@ -10,15 +10,59 @@ import AddCardModal from "../../components/Modals/addCardModal";
 import PaymentAuthorizationModal from "../../components/Modals/PaymentAuthorizationModal";
 import { useEffect, useState } from "react";
 import { AxiosAPI } from "../../utils/AxiosInstance";
+import { useSelector } from "react-redux";
+import { format } from "date-fns";
+import { ClipLoader } from "react-spinners";
+import { notifications } from "@mantine/notifications";
 
 const CheckoutPage = () => {
   const params = useParams();
   const accommodation_id = params.id ?? 0;
   const [accommodation, setAccommodation] = useState<any>();
   const [loading, setLoading] = useState(true);
-
+  const {booking, auth} = useSelector((state: any)=> state);
+  const [paymentMethods, setPaymentMethods] = useState([]);
+  const [loadingMethods, setLoadingMethods] = useState(true);
+  const [selectedCard, setSelectedCard] = useState<any>();
+  console.log(booking);
+  const formatDate = (date: Date | null, text?: string) => {
+    return date ? format(date, "MMMM dd") : `Select ${text}`;
+  };
+  const fetchCards = async ()=>{
+    AxiosAPI.get(`/paymentmethods/getMine`, {
+      headers: {
+        authorization: `Bearer ${auth.token}`
+      }
+    })
+      .then((res) => {
+        setPaymentMethods(res.data.data);
+        console.log(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => setLoadingMethods(false));
+  }
+  const deleteCard = async (id: string)=>{
+    AxiosAPI.delete(`/paymentmethods/delete/${id}`, {
+      headers: {
+        authorization: `Bearer ${auth.token}`
+      }
+    }).then(()=> {
+      notifications.show({
+        message: "Deleted Successfully"
+      })
+      fetchCards();
+    })
+    .catch((err)=>{
+      notifications.show({
+        message: err.response.message ?? err.message
+      })
+    })
+  }
   useEffect(() => {
     setLoading(true);
+    setLoadingMethods(true);
     AxiosAPI.get(`/accommodation/get/${accommodation_id}`)
       .then((res) => {
         setAccommodation(res.data.data[0]);
@@ -27,6 +71,7 @@ const CheckoutPage = () => {
         console.log(err);
       })
       .finally(() => setLoading(false));
+      fetchCards();
   }, []);
   const [isAddCardOpen, { open: openAddCard, close: closeAddCard }] =
     useDisclosure();
@@ -57,7 +102,7 @@ const CheckoutPage = () => {
                   className="rounded-lg"
                 />
                 <div className="w-[70%] flex flex-col">
-                  <h1 className="text-md font-semibold text-[#444343]">{`${accommodation.name.slice(0, 20)} ...`}</h1>
+                  <h1 className="text-md font-semibold text-[#444343]">{accommodation.name.length > 20 ? `${accommodation.name.slice(0, 20)} ...` : accommodation.name}</h1>
                   <h1 className="text-lg font-extrabold">
                     {/* {accommodation.roomTypes[0].type} */}
                     {accommodation.type}
@@ -76,7 +121,7 @@ const CheckoutPage = () => {
               <div className="w-full flex justify-between mt-4">
                 <div>
                   <h1 className="text-lg font-extrabold">
-                    {"Thursday, Dec 8"}
+                    {formatDate(booking.checkIn)}
                   </h1>
                   <p className="text-sm">Check In</p>
                 </div>
@@ -86,7 +131,7 @@ const CheckoutPage = () => {
                   className="object-fit select-none w-[14vw]"
                 />
                 <div>
-                  <h1 className="text-lg font-extrabold">{"Friday, Dec 9"}</h1>
+                  <h1 className="text-lg font-extrabold">{formatDate(booking.checkOut)}</h1>
                   <p className="text-sm">Check Out</p>
                 </div>
               </div>
@@ -94,7 +139,7 @@ const CheckoutPage = () => {
               <div className="w-full flex justify-between mt-5">
                 <h2 className="font-bold">Total Price</h2>
                 <h1 className="font-extrabold text-lg text-[#0075FF]">
-                  {16894000}/FRW
+                  {booking.paymentTotal}/FRW
                 </h1>
               </div>
             </div>
@@ -105,16 +150,30 @@ const CheckoutPage = () => {
           </div>
           <div className="w-full md:w-[40%] shadow shadow-[#dedede] p-3">
             <h1 className="mb-3">Payment Details</h1>
-            <Fieldset
+            {loadingMethods ? (
+              <div className="w-full flex items-center justify-center">
+                <ClipLoader color="black" size={21}/>
+              </div>
+            ) : (
+              <Fieldset
               legend="Payment Method"
               className="w-full flex overflow-x-auto space-x-4 pay_meth_container"
             >
-              <PaymentMethodCard
-                name="MTN"
-                tag="MOMO Pay"
-                phone="+250788460119"
-                className="flex-shrink-0"
-              />
+              {paymentMethods.map((method: any,index: number)=> {
+                return(
+                  <PaymentMethodCard
+                    key={index}
+                    name={method.type}
+                    tag="MOMO Pay"
+                    phone={`+250${method.number}`}
+                    className="flex-shrink-0"
+                    selected={selectedCard?.id === method?.id}
+                    setSelected={setSelectedCard}
+                    card={method}
+                    onDeleteCard={deleteCard}
+                  />
+                )
+              })}
               <div
                 onClick={openAddCard}
                 className="w-[328px] h-[160px] flex-shrink-0 flex items-center justify-center border-2 border-dashed divide-dashed border-[#396FF9] rounded-xl cursor-pointer"
@@ -125,18 +184,19 @@ const CheckoutPage = () => {
                 </div>
               </div>
             </Fieldset>
+            )}
             <button
               onClick={openPayment}
               className="w-full py-3 mt-3 rounded-sm flex items-center font-extrabold justify-center bg-[#396FF9] text-white"
             >
-              Pay {16894000} FRW
+              Pay {booking.paymentTotal} FRW
             </button>
           </div>
           <PaymentAuthorizationModal
             opened={isPaymentOpen}
             close={closePayment}
           />
-          <AddCardModal opened={isAddCardOpen} close={closeAddCard} />
+          <AddCardModal refetch={fetchCards} opened={isAddCardOpen} close={closeAddCard} />
         </div>
       )}
     </div>

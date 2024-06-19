@@ -4,8 +4,7 @@ const WebNavbar = () => {
   return (
     <div className="w-full flex py-4 items-center justify-between px-10">
       <Link to={"/"} className="flex items-center gap-2">
-        <img src={logo} alt="logo" className="w-7 h-7 " />
-        <h4 className="font-bold">PlacePulse</h4>
+        <img src={logo} alt="logo" className="w-30 h-7 " />
       </Link>
       <div className="flex gap-5">
         <Link to={"/"} className=" text-slate-500">
