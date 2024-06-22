@@ -9,7 +9,9 @@ import { SnakeCaseToPascalCaseSpaced } from "../../utils/funcs/formatter";
 import { AxiosAPI } from "../../utils/AxiosInstance";
 import { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
-import location_Img from "../../assets/images/map_location.png"
+import location_Img from "../../assets/images/map_location.png";
+import { Helmet } from "react-helmet";
+
 const ViewAccommodation = () => {
   const params = useParams();
   const accommodation_id = params.id ?? 0;
@@ -32,6 +34,9 @@ const ViewAccommodation = () => {
   const navigate = useNavigate();
   return (
     <div className="w-full flex flex-col md:px-10 pt-10 pb-[50vh]">
+      <Helmet>
+        <title>Accommodation - Place Pulse</title>
+      </Helmet>
       {loading ? (
         <div className="w-full flex items-center justify-center">
           <ClipLoader color="black" size={23} />
@@ -180,7 +185,11 @@ const ViewAccommodation = () => {
               </Link>
             </div>
             <div className="w-full h-[60vh] my-3 rounded-md">
-              <img src={location_Img} className="w-full h-full rounded-sm" alt="" />
+              <img
+                src={location_Img}
+                className="w-full h-full rounded-sm"
+                alt=""
+              />
             </div>
           </div>
           <hr className="w-full hotel_divider my-[9vh]" />

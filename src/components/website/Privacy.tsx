@@ -1,8 +1,12 @@
 import { BsArrowLeftCircle } from "react-icons/bs";
+import { Helmet } from "react-helmet";
 
 const PrivacyPolicy = () => {
   return (
     <div className="p-8 max-w-4xl mx-auto">
+      <Helmet>
+        <title>Privacy - Place Pulse</title>
+      </Helmet>
       <button className="absolute left-8 top-7" onClick={() => history.back()}>
         <BsArrowLeftCircle color="black" size={26} />
       </button>

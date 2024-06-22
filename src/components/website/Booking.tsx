@@ -12,6 +12,8 @@ import LoginModal from "../Modals/LoginModal";
 import { AxiosAPI } from "../../utils/AxiosInstance";
 import { useDispatch, useSelector } from "react-redux";
 import { ADD_BOOKING } from "../../actions/BookingActions";
+import { Helmet } from "react-helmet";
+
 const BookingPage = () => {
   const params = useParams();
   const accommodation_id = params.id ?? "";
@@ -59,9 +61,9 @@ const BookingPage = () => {
       image: accommodation.images[0],
       paymentMethod: null,
       paymentTotal: priceToPay(),
-      name: accommodation.name
-    }
-    dispatch({type: ADD_BOOKING, payload: bookingDetails})
+      name: accommodation.name,
+    };
+    dispatch({ type: ADD_BOOKING, payload: bookingDetails });
     if (!isLoggedIn) {
       open();
     } else {
@@ -71,6 +73,9 @@ const BookingPage = () => {
 
   return (
     <div className="w-full md:px-12 pt-5 pb-[50vh]">
+      <Helmet>
+        <title>Booking - Place Pulse</title>
+      </Helmet>
       {loading ? (
         <div></div>
       ) : (

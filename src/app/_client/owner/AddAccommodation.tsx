@@ -101,7 +101,7 @@ const OwnerAddAccommodations = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full pb-10"
+      className="w-full pb-10 h-[150vh]"
       encType="multipart/form-data"
     >
       <div className="w-full flex justify-between items-center">
@@ -136,7 +136,7 @@ const OwnerAddAccommodations = () => {
       </div>
       <div className="w-full flex justify-between mt-10">
         <div className="w-[60%] flex flex-col gap-3">
-          <div className="w-full bg-[#D9D9D924] rounded-lg p-3">
+          <div className="w-full rounded-lg p-3">
             <header className="font-extrabold">General Information</header>
 
             <div className="mt-3 flex flex-col gap-2 ">
@@ -238,7 +238,7 @@ const OwnerAddAccommodations = () => {
               </div>
             </div>
           </div>
-          <div className="w-full bg-[#D9D9D924] rounded-lg p-3">
+          <div className="w-full rounded-lg p-3">
             <header className="font-extrabold">Price And Stock</header>
             <div className="w-full flex justify-between gap-3 mt-3">
               <div className="w-full">
@@ -279,7 +279,7 @@ const OwnerAddAccommodations = () => {
                   className="w-full text-sm py-3 pl-4 pr-3 outline-none border border-neutral-400 rounded-md"
                 />
               </div>
-              <div className="w-full">
+              <div className="w-full h-11">
                 <label htmlFor="stock" className="text-sm font-medium">
                   Stock
                 </label>
@@ -300,7 +300,7 @@ const OwnerAddAccommodations = () => {
           </div>
         </div>
         <div className="w-[37%] flex flex-col gap-3">
-          <div className="w-full bg-[#D9D9D924] rounded-lg p-3">
+          <div className="w-full rounded-lg p-3">
             <header className="font-extrabold">Upload Place Images</header>
             <div className="w-full mt-4">
               <ImagesDropCard
@@ -332,7 +332,7 @@ const OwnerAddAccommodations = () => {
                 {/* <DropWithReturn setSelectedImage={handleAddImage}  minHeight={"20vh"}/> */}
               </div>
             </div>
-            <div className="w-full">
+            <div className="w-full h-11">
               <label htmlFor="type" className="text-sm font-medium">
                 Accommodation Category
               </label>

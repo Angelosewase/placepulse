@@ -1,7 +1,11 @@
 /* eslint-disable no-case-declarations */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import cookie from "react-cookies";
-import { LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT_SUCCESS } from "../actions/AuthActions";
+import {
+  LOGIN_FAIL,
+  LOGIN_SUCCESS,
+  LOGOUT_SUCCESS,
+} from "../actions/AuthActions";
 import { decrypt, encrypt } from "../utils/crypto";
 type AuthAction = {
   type: string;

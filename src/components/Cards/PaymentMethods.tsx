@@ -12,7 +12,7 @@ const PaymentMethodCard = ({
   setSelected,
   selected,
   card,
-  onDeleteCard
+  onDeleteCard,
 }: {
   name: string;
   phone: string;
@@ -20,15 +20,15 @@ const PaymentMethodCard = ({
   tag?: string;
   disableSelect?: boolean;
   selected: boolean;
-  setSelected: any,
+  setSelected: any;
   card: any;
   onDeleteCard: (id: string) => void;
 }) => {
-  const deleteCard = (e: any) =>{
+  const deleteCard = (e: any) => {
     e.preventDefault();
     e.stopPropagation();
-    onDeleteCard(card.id)
-  }
+    onDeleteCard(card.id);
+  };
   return (
     <div
       className={`${className} w-[328px] h-[160px] flex flex-col justify-between rounded-xl p-1 cursor-pointer ${selected ? " bg-[#1976D2] pt-2" : name?.trim() == "MTN" ? "bg-[#FFC107]" : "bg-[#d04c4c]"}`}
@@ -41,13 +41,16 @@ const PaymentMethodCard = ({
         >
           {separatePhoneNumber(phone)}
         </h1>
-          {selected ? (
-            <FaCheckCircle color="white" size={20} />
-          ) : (
-            <button className="hover:bg-[#2f2f2f7a] p-2 rounded-full" onClick={deleteCard}>
-              <MdDeleteForever color="white" size={20} />
-            </button>
-          )}
+        {selected ? (
+          <FaCheckCircle color="white" size={20} />
+        ) : (
+          <button
+            className="hover:bg-[#2f2f2f7a] p-2 rounded-full"
+            onClick={deleteCard}
+          >
+            <MdDeleteForever color="white" size={20} />
+          </button>
+        )}
       </div>
       <div className="w-full px-2 pb-2">
         <h6

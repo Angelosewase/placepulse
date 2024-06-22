@@ -40,6 +40,8 @@ import ViewOwnerAccommodation from "./app/_client/owner/ViewOwnerAccommodation";
 import OwnerAccountInfo from "./app/_client/owner/Info/Account";
 import OwnerBookings from "./app/_client/owner/OwnerBookings";
 import OwnerNotificationsPage from "./app/_client/owner/Notifications";
+import UserLandingLayout from "./app/_client/user/LandingLayout";
+import LandingPlaces from "./app/_client/user/LandingPlaces";
 function App() {
   return (
     <div className="h-screen">
@@ -132,6 +134,30 @@ function App() {
             <Route
               path="/_client/home"
               element={<UserLayout children={<UserLanding />} />}
+            />
+            <Route
+              path="/_client/home/find/:type/"
+              element={
+                <UserLayout
+                  children={
+                    <UserLandingLayout>
+                      <LandingPlaces />
+                    </UserLandingLayout>
+                  }
+                />
+              }
+            />
+            <Route
+              path="/_client/home/find/:type"
+              element={
+                <UserLayout
+                  children={
+                    <UserLandingLayout>
+                      <LandingPlaces />
+                    </UserLandingLayout>
+                  }
+                />
+              }
             />
             <Route
               path="/_client/notifications"

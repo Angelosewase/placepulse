@@ -10,6 +10,7 @@ const LandingSelect = ({
   className,
   showEye,
   data,
+  onClick,
 }: {
   label: string;
   handleChange: (e: any) => void;
@@ -17,11 +18,12 @@ const LandingSelect = ({
   className?: string;
   showEye?: boolean;
   data: any[];
+  onClick?: any;
 }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="w-full flex flex-col items-start gap-2 relative">
+    <div className="w-full h-full flex flex-col items-start gap-2 relative">
       <label
         htmlFor={label}
         className={
@@ -39,6 +41,7 @@ const LandingSelect = ({
         defaultValue="React"
         clearable
         className={className}
+        onClick={onClick}
       />
       {showEye && (
         <div className="absolute top-5 right-3 cursor-pointer">

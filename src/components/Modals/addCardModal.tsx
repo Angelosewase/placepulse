@@ -12,13 +12,13 @@ import { useSelector } from "react-redux";
 const AddCardModal = ({
   opened,
   close,
-  refetch
+  refetch,
 }: {
   opened: boolean;
   close: () => void;
   refetch: () => void;
 }) => {
-  const {token} = useSelector((state: any) => state.auth);
+  const { token } = useSelector((state: any) => state.auth);
   const [cardType, setCardType] = useState("");
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
@@ -37,31 +37,35 @@ const AddCardModal = ({
     } else {
       setError("");
     }
-    AxiosAPI.post("/paymentmethods/create", {
-      type: cardType,
-      number: phone,
-    }, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
-    .then((res)=>{
-      notifications.show({
-        message: res.data.message,
-        color: "green"
+    AxiosAPI.post(
+      "/paymentmethods/create",
+      {
+        type: cardType,
+        number: phone,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    )
+      .then((res) => {
+        notifications.show({
+          message: res.data.message,
+          color: "green",
+        });
+        setPhone("");
+        setCardType("");
+        close();
+        refetch();
       })
-      setPhone("");
-      setCardType("");
-      close();
-      refetch();
-    })
-    .catch((err)=>{
-      notifications.show({
-        message: err.response.message ?? err.message,
-        color: "red"
+      .catch((err) => {
+        notifications.show({
+          message: err.response.message ?? err.message,
+          color: "red",
+        });
       })
-    })
-    .finally(()=> setLoading(false));
+      .finally(() => setLoading(false));
   };
   return (
     <div>

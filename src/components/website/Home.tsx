@@ -8,6 +8,7 @@ import { CiLocationOn } from "react-icons/ci";
 import { GrKey } from "react-icons/gr";
 import { IoTimeSharp } from "react-icons/io5";
 import { useEffect } from "react";
+import { Helmet } from "react-helmet";
 import cookie from "react-cookies";
 const Home = () => {
   const navigate = useNavigate();
@@ -28,6 +29,9 @@ const Home = () => {
   }, [navigate]);
   return (
     <div className=" pt-3 min-h-screen pb-20">
+      <Helmet>
+        <title>Home - Place Pulse</title>
+      </Helmet>
       <div className="w-full px-10 flex  flex-col md:flex-row items-center justify-between mt-3">
         <div className="w-full md:w-2/5">
           <h1 className="w-full mb-5 text-5xl uppercase font-extrabold text-start">

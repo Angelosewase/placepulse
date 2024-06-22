@@ -16,10 +16,10 @@ const OwnerAccommodations = () => {
   const { token } = useSelector((state: any) => state.auth);
   const fetch = () => {
     setLoading(true);
-    AxiosAPI.get("/accommodation/getMine" ,{
+    AxiosAPI.get("/accommodation/getMine", {
       headers: {
-        Authorization : `Bearer ${token}`
-      }
+        Authorization: `Bearer ${token}`,
+      },
     })
       .then((res) => {
         dispatch({

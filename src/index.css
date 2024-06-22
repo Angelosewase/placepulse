@@ -29,11 +29,17 @@
 .mantine-Menu-dropdown {
   width: 22rem !important;
 }
+.m_6c018570,
+.m_46b77525 {
+  height: 100% !important;
+  width: 100% !important;
+}
 .m_8fb7ebe7 {
-  height: 0rem !important;
+  height: 100% !important;
+  width: 100% !important;
   min-height: 0rem !important;
-  padding-top: 1.3rem !important;
-  padding-bottom: 1.3rem !important;
+  /* padding-top: 1.3rem !important; */
+  /* padding-bottom: 1.3rem !important; */
   border-color: rgb(163 163 163 / 1) !important;
   font-family: "Quicksand" !important;
 }
@@ -64,3 +70,39 @@
   background-color: #0077ff6c;
   color: #fff;
 }
+
+.slider-wrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  justify-content: center;
+}
+
+.scroll-button {
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: #000;
+}
+
+.slider-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  width: calc(100%); /* Adjust based on your scroll button size */
+  overflow-x: hidden;
+}
+
+.category-tab {
+  flex-shrink: 0;
+  width: 15rem;
+  padding: 0.5rem 1rem;
+  margin: 0 0.5rem;
+  /* border-bottom: 3px solid transparent; */
+  cursor: pointer;
+}
+
+.border-b-3 {
+  border-bottom-width: 3px;
+}
+

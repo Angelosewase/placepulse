@@ -22,6 +22,18 @@ export const accommodations = [
     type: "Parking",
     number: 71,
   },
+  {
+    type: "Garden",
+    number: 71,
+  },
+  {
+    type: "Restaurant",
+    number: 71,
+  },
+  {
+    type: "Conference Room",
+    number: 71,
+  },
 ];
 export const accommodations_data = [
   {

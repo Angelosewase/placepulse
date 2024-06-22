@@ -22,6 +22,7 @@ const CheckInCheckOutDates = ({
       onChange={onChange}
       monthsListFormat="MM"
       yearsListFormat="YY"
+      autoFocus={true}
     />
   );
 };

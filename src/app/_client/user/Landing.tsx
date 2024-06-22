@@ -6,15 +6,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { MdPending } from "react-icons/md";
 import mabBgImg from "../../../assets/images/map.png";
-import AnimatedSelect from "../../../components/Inputs/AnimatedSelect";
 import TripCard from "../../../components/Cards/TripCard";
 import PopularCard from "../../../components/Cards/PopularAccCard";
-import LandingSelect from "../../../components/Inputs/LandingSelect";
 import { AxiosAPI } from "../../../utils/AxiosInstance";
 import {
   FETCH_ACCOMMODATIONS_FAIL,
   FETCH_ACCOMMODATIONS_SUCCESS,
 } from "../../../actions/AccommodationActions";
+import SelectComponent from "./SelectItems";
 
 const UserLanding = () => {
   const navigate = useNavigate();
@@ -94,33 +93,7 @@ const UserLanding = () => {
                 Where are you Heading?
               </h1>
               <div className="w-full flex flex-col md:flex-row justify-between gap-4 mt-10">
-                {[
-                  { label: "Hotels", key: "hotel" },
-                  { label: "Parks", key: "parking" },
-                  { label: "Gardens", key: "garden" },
-                  { label: "Restaurants", key: "restaurant" },
-                ].map((item) => (
-                  <LandingSelect
-                    key={item.key}
-                    className="w-full"
-                    label={item.label}
-                    value={selected[item.key]}
-                    data={
-                      accommodations.filter((acc: any) => acc.type === item.key)
-                        .length > 0
-                        ? accommodations
-                            .filter((acc: any) => acc.type === item.key)
-                            .map((accommodation: any) => ({
-                              label: accommodation.name,
-                              value: accommodation.name,
-                            }))
-                        : [{ label: `No ${item.label} Found`, value: "" }]
-                    }
-                    handleChange={(e: any) =>
-                      setSelected({ ...selected, [item.key]: e })
-                    }
-                  />
-                ))}
+                <SelectComponent />
               </div>
             </div>
           </div>

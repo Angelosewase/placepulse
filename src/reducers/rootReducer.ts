@@ -6,7 +6,7 @@ import { bookingReducer } from "./BookingReducers";
 const rootReducer = combineReducers({
   auth: authReducer,
   accommodations: accommodationReducers,
-  booking: bookingReducer
+  booking: bookingReducer,
 });
 
 export default rootReducer;

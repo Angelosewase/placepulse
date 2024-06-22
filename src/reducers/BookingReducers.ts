@@ -4,18 +4,18 @@ import cookie from "react-cookies";
 import { decrypt, encrypt } from "../utils/crypto";
 import { ADD_BOOKING, REMOVE_BOOKING } from "../actions/BookingActions";
 type BookingAction = {
-    type: string,
-    payload: BookingState
-}
+  type: string;
+  payload: BookingState;
+};
 type BookingState = {
-  accommodationId: null,
-  checkIn: null,
-  checkOut: null,
-  paymentType: null,
-  image: null,
-  paymentMethod: null,
-  paymentTotal: null,
-  name: null
+  accommodationId: null;
+  checkIn: null;
+  checkOut: null;
+  paymentType: null;
+  image: null;
+  paymentMethod: null;
+  paymentTotal: null;
+  name: null;
 };
 const initialState = {
   accommodationId: null,
@@ -25,14 +25,14 @@ const initialState = {
   paymentType: null,
   image: null,
   paymentMethod: null,
-  paymentTotal: null
+  paymentTotal: null,
 };
 
 const loadState = () => {
   try {
     const serializedState = decrypt(cookie.load("Btate"));
     console.log(serializedState);
-    if (serializedState === null || serializedState == '{}') {
+    if (serializedState === null || serializedState == "{}") {
       return initialState;
     }
     return JSON.parse(serializedState);
@@ -54,8 +54,7 @@ export const bookingReducer = (state = loadState(), action: BookingAction) => {
         image: action.payload.image,
         paymentMethod: action.payload.paymentMethod,
         paymentTotal: action.payload.paymentTotal,
-        name: action.payload.name
-        
+        name: action.payload.name,
       };
       cookie.save("Btate", encrypt(JSON.stringify(newState)), {
         path: "/",
@@ -71,7 +70,7 @@ export const bookingReducer = (state = loadState(), action: BookingAction) => {
         image: null,
         paymentMethod: null,
         paymentTotal: null,
-        name: null
+        name: null,
       };
     default:
       return state;

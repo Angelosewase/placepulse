@@ -20,7 +20,7 @@ const CheckoutPage = () => {
   const accommodation_id = params.id ?? 0;
   const [accommodation, setAccommodation] = useState<any>();
   const [loading, setLoading] = useState(true);
-  const {booking, auth} = useSelector((state: any)=> state);
+  const { booking, auth } = useSelector((state: any) => state);
   const [paymentMethods, setPaymentMethods] = useState([]);
   const [loadingMethods, setLoadingMethods] = useState(true);
   const [selectedCard, setSelectedCard] = useState<any>();
@@ -28,11 +28,11 @@ const CheckoutPage = () => {
   const formatDate = (date: Date | null, text?: string) => {
     return date ? format(date, "MMMM dd") : `Select ${text}`;
   };
-  const fetchCards = async ()=>{
+  const fetchCards = async () => {
     AxiosAPI.get(`/paymentmethods/getMine`, {
       headers: {
-        authorization: `Bearer ${auth.token}`
-      }
+        authorization: `Bearer ${auth.token}`,
+      },
     })
       .then((res) => {
         setPaymentMethods(res.data.data);
@@ -42,24 +42,25 @@ const CheckoutPage = () => {
         console.log(err);
       })
       .finally(() => setLoadingMethods(false));
-  }
-  const deleteCard = async (id: string)=>{
+  };
+  const deleteCard = async (id: string) => {
     AxiosAPI.delete(`/paymentmethods/delete/${id}`, {
       headers: {
-        authorization: `Bearer ${auth.token}`
-      }
-    }).then(()=> {
-      notifications.show({
-        message: "Deleted Successfully"
-      })
-      fetchCards();
+        authorization: `Bearer ${auth.token}`,
+      },
     })
-    .catch((err)=>{
-      notifications.show({
-        message: err.response.message ?? err.message
+      .then(() => {
+        notifications.show({
+          message: "Deleted Successfully",
+        });
+        fetchCards();
       })
-    })
-  }
+      .catch((err) => {
+        notifications.show({
+          message: err.response.message ?? err.message,
+        });
+      });
+  };
   useEffect(() => {
     setLoading(true);
     setLoadingMethods(true);
@@ -71,7 +72,7 @@ const CheckoutPage = () => {
         console.log(err);
       })
       .finally(() => setLoading(false));
-      fetchCards();
+    fetchCards();
   }, []);
   const [isAddCardOpen, { open: openAddCard, close: closeAddCard }] =
     useDisclosure();
@@ -102,7 +103,11 @@ const CheckoutPage = () => {
                   className="rounded-lg"
                 />
                 <div className="w-[70%] flex flex-col">
-                  <h1 className="text-md font-semibold text-[#444343]">{accommodation.name.length > 20 ? `${accommodation.name.slice(0, 20)} ...` : accommodation.name}</h1>
+                  <h1 className="text-md font-semibold text-[#444343]">
+                    {accommodation.name.length > 20
+                      ? `${accommodation.name.slice(0, 20)} ...`
+                      : accommodation.name}
+                  </h1>
                   <h1 className="text-lg font-extrabold">
                     {/* {accommodation.roomTypes[0].type} */}
                     {accommodation.type}
@@ -131,7 +136,9 @@ const CheckoutPage = () => {
                   className="object-fit select-none w-[14vw]"
                 />
                 <div>
-                  <h1 className="text-lg font-extrabold">{formatDate(booking.checkOut)}</h1>
+                  <h1 className="text-lg font-extrabold">
+                    {formatDate(booking.checkOut)}
+                  </h1>
                   <p className="text-sm">Check Out</p>
                 </div>
               </div>
@@ -152,38 +159,38 @@ const CheckoutPage = () => {
             <h1 className="mb-3">Payment Details</h1>
             {loadingMethods ? (
               <div className="w-full flex items-center justify-center">
-                <ClipLoader color="black" size={21}/>
+                <ClipLoader color="black" size={21} />
               </div>
             ) : (
               <Fieldset
-              legend="Payment Method"
-              className="w-full flex overflow-x-auto space-x-4 pay_meth_container"
-            >
-              {paymentMethods.map((method: any,index: number)=> {
-                return(
-                  <PaymentMethodCard
-                    key={index}
-                    name={method.type}
-                    tag="MOMO Pay"
-                    phone={`+250${method.number}`}
-                    className="flex-shrink-0"
-                    selected={selectedCard?.id === method?.id}
-                    setSelected={setSelectedCard}
-                    card={method}
-                    onDeleteCard={deleteCard}
-                  />
-                )
-              })}
-              <div
-                onClick={openAddCard}
-                className="w-[328px] h-[160px] flex-shrink-0 flex items-center justify-center border-2 border-dashed divide-dashed border-[#396FF9] rounded-xl cursor-pointer"
+                legend="Payment Method"
+                className="w-full flex overflow-x-auto space-x-4 pay_meth_container"
               >
-                <div className="flex flex-col gap-2 items-center justify-center">
-                  <IoIosAddCircleOutline color="#396FF9" size={39} />
-                  <h6 className="text-sm">Add a new card</h6>
+                {paymentMethods.map((method: any, index: number) => {
+                  return (
+                    <PaymentMethodCard
+                      key={index}
+                      name={method.type}
+                      tag="MOMO Pay"
+                      phone={`+250${method.number}`}
+                      className="flex-shrink-0"
+                      selected={selectedCard?.id === method?.id}
+                      setSelected={setSelectedCard}
+                      card={method}
+                      onDeleteCard={deleteCard}
+                    />
+                  );
+                })}
+                <div
+                  onClick={openAddCard}
+                  className="w-[328px] h-[160px] flex-shrink-0 flex items-center justify-center border-2 border-dashed divide-dashed border-[#396FF9] rounded-xl cursor-pointer"
+                >
+                  <div className="flex flex-col gap-2 items-center justify-center">
+                    <IoIosAddCircleOutline color="#396FF9" size={39} />
+                    <h6 className="text-sm">Add a new card</h6>
+                  </div>
                 </div>
-              </div>
-            </Fieldset>
+              </Fieldset>
             )}
             <button
               onClick={openPayment}
@@ -196,7 +203,11 @@ const CheckoutPage = () => {
             opened={isPaymentOpen}
             close={closePayment}
           />
-          <AddCardModal refetch={fetchCards} opened={isAddCardOpen} close={closeAddCard} />
+          <AddCardModal
+            refetch={fetchCards}
+            opened={isAddCardOpen}
+            close={closeAddCard}
+          />
         </div>
       )}
     </div>

@@ -10,10 +10,16 @@ const OwnerNavbar = () => {
         <button className="p-3 hover:bg-neutral-100 rounded-full">
           <GoSearch color="black" size={19} />
         </button>
-        <button onClick={() => navigate("/_owner/notifications")} className="p-3 hover:bg-neutral-100 rounded-full">
+        <button
+          onClick={() => navigate("/_owner/notifications")}
+          className="p-3 hover:bg-neutral-100 rounded-full"
+        >
           <GoBell color="black" size={19} />
         </button>
-        <button onClick={() => navigate("/_owner/account")} className="p-3 bg-blue-50 rounded-full">
+        <button
+          onClick={() => navigate("/_owner/account")}
+          className="p-3 bg-blue-50 rounded-full"
+        >
           <IoPersonOutline color="black" size={19} />
         </button>
       </div>

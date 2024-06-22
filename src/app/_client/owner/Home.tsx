@@ -6,6 +6,8 @@ import { FaCheckCircle } from "react-icons/fa";
 import { bookings } from "./OwnerBookings";
 import CompressedView from "../../../components/Cards/CompressedView";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { AxiosAPI } from "../../../utils/AxiosInstance";
 export const notifications = [
   {
     time: "12:23 PM",
@@ -24,7 +26,21 @@ export const notifications = [
   },
 ];
 const OwnerHome = () => {
-  const {accommodations} = useSelector((state: any) => state.accommodations);
+  const [accommodations, setAccommodations] = useState([]);
+  const { token } = useSelector((state: any) => state.auth);
+  useEffect(() => {
+    AxiosAPI.get("/accommodation/getMine", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        setAccommodations(res.data.data);
+      })
+      .catch((err) => {
+        console.log("get Accommodations error -> ", err.messsage);
+      });
+  }, []);
   const navigate = useNavigate();
   console.log("auth data --> ", accommodations);
   const dashboardStats = [
@@ -61,7 +77,10 @@ const OwnerHome = () => {
         <div className="w-[64%]">
           <div className="w-full flex items-center justify-between">
             <h1 className="text-lg font-bold pl-4">Bookings</h1>
-            <button onClick={()=> navigate} className="text-sm pl-4 text-[#112211]">
+            <button
+              onClick={() => navigate}
+              className="text-sm pl-4 text-[#112211]"
+            >
               More
             </button>
           </div>

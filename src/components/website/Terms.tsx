@@ -1,8 +1,12 @@
 import { BsArrowLeftCircle } from "react-icons/bs";
+import { Helmet } from "react-helmet";
 
 const TermsAndConditions = () => {
   return (
     <div className="w-screen  p-8 max-w-4xl mx-auto">
+      <Helmet>
+        <title>Terms - Place Pulse</title>
+      </Helmet>
       <div className="flex gap-7 items-center py-9">
         <button
           className="absolute top-7 left-8"

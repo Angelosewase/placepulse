@@ -3,26 +3,31 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import { FaHeart, FaLocationDot, FaRegHeart } from "react-icons/fa6";
-import { Rating } from "@mantine/core";
+import { Collapse, Rating } from "@mantine/core";
 import { FaCoffee } from "react-icons/fa";
-import { accommodations, amenities, free_bies } from "../../constants/dummy";
-import FilterCollapsible from "../collapsibles/FilterCollapsible";
-import CheckBox from "../Checkbox";
-import { SnakeCaseToPascalCaseSpaced } from "../../utils/funcs/formatter";
-import SliderComponent from "../Inputs/Slider";
-import { useNavigate } from "react-router-dom";
+import { accommodations, amenities, free_bies } from "../../../constants/dummy";
+import FilterCollapsible from "../../../components/collapsibles/FilterCollapsible";
+import CheckBox from "../../../components/Checkbox";
+import { SnakeCaseToPascalCaseSpaced } from "../../../utils/funcs/formatter";
+import SliderComponent from "../../../components/Inputs/Slider";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { AuthorizedAxiosAPI } from "../../utils/AxiosInstance";
+import { AuthorizedAxiosAPI } from "../../../utils/AxiosInstance";
+import { RiListSettingsLine } from "react-icons/ri";
+
 import {
   FETCH_ACCOMMODATIONS_FAIL,
   FETCH_ACCOMMODATIONS_SUCCESS,
-} from "../../actions/AccommodationActions";
-import { Helmet } from "react-helmet";
+} from "../../../actions/AccommodationActions";
+import { useDisclosure } from "@mantine/hooks";
+import ButtonSliderComponent from "./SliderComponent";
 
-const Places = () => {
-  const [activeAcc, setActiveAcc] = useState("hotel");
+const LandingPlaces = () => {
+  const {type} = useParams();
+  const [activeAcc, setActiveAcc] = useState(type?.toLowerCase());
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [isShowFilters, { toggle }] = useDisclosure(false);
   const { accommodations: accommodations_data } = useSelector(
     (state: any) => state.accommodations,
   );
@@ -52,108 +57,85 @@ const Places = () => {
     fetch();
   }, []);
   return (
-    <div className="w-full flex px-10 pt-[10vh] pb-[50vh]">
-      <Helmet>
-        <title>Places - Place Pulse</title>
-      </Helmet>
-      <div className="md:w-[35%]">
-        <h1 className="text-2xl font-extrabold">Filters</h1>
-        <div className="w-[80%] flex flex-col gap-10 mt-6">
-          <FilterCollapsible
-            label="Price"
-            children={
-              <div className="w-full flex flex-col items-start pl-4 gap-4 mt-3">
-                <SliderComponent />
-              </div>
-            }
-          />
-          <FilterCollapsible
-            label="Rating"
-            children={
-              <div className="w-full flex items-center justify-between mt-3">
-                <button className="px-4 py-2 text-sm rounded-sm border border-[#8DD3BB] mt-3 font-bold">
-                  0+
-                </button>
-                <button className="px-4 py-2 text-sm rounded-sm border border-[#8DD3BB] mt-3 font-bold">
-                  1+
-                </button>
-                <button className="px-4 py-2 text-sm rounded-sm border border-[#8DD3BB] mt-3 font-bold">
-                  2+
-                </button>
-                <button className="px-4 py-2 text-sm rounded-sm border border-[#8DD3BB] mt-3 font-bold">
-                  3+
-                </button>
-                <button className="px-4 py-2 text-sm rounded-sm border border-[#8DD3BB] mt-3 font-bold">
-                  4+
-                </button>
-              </div>
-            }
-          />
-          <FilterCollapsible
-            label="Freebies"
-            children={
-              <div className="w-full flex flex-col items-start pl-4 gap-4 mt-3">
-                {free_bies.map((free_by, index) => {
-                  return (
-                    <CheckBox
-                      key={index}
-                      label={SnakeCaseToPascalCaseSpaced(free_by)}
-                    />
-                  );
-                })}
-              </div>
-            }
-          />
-
-          <FilterCollapsible
-            label="Amenities"
-            children={
-              <div className="w-full flex flex-col items-start pl-4 gap-4 mt-3">
-                {amenities.map((amenity, index) => {
-                  return (
-                    <CheckBox
-                      key={index}
-                      label={SnakeCaseToPascalCaseSpaced(amenity)}
-                    />
-                  );
-                })}
-              </div>
-            }
-          />
-        </div>
-      </div>
-      <div className="w-full md:w-[65%] flex flex-col">
-        <div className="w-full flex items-center mb-5 gap-4 places_tabs_cont">
-          {accommodations.map((accommodation: any, index: number) => {
-            return (
-              <div
-                onClick={() => setActiveAcc(accommodation.type.toLowerCase())}
-                key={index}
-                className="w-full flex justify-between"
-              >
-                <div
-                  className={`w-[98%] pb-4 pr-[20%] flex flex-col items-start gap-2 pt-1 ${accommodation.type.toLowerCase() === activeAcc ? "border-b-3 border-b-[#396FF9]" : ""}`}
-                >
-                  <h1 className="font-extrabold text-medium">
-                    {accommodation.type}
-                  </h1>
-                  <h6 className="font-medium text-sm text-[#112211b5]">
-                    {
-                      accommodations_data.filter(
-                        (acc: any) =>
-                          acc.type == accommodation.type.toLowerCase(),
-                      ).length
-                    }{" "}
-                    Places
-                  </h6>
+    <div className="w-full flex px-10">
+      <div className={`${isShowFilters ? "md:w-[35%]" : "md:w-[15%]"}`}>
+        <button
+          className="text-lg border border-black rounded-md py-2 px-4 flex items-center gap-3 font-extrabold "
+          onClick={toggle}
+        >
+          <RiListSettingsLine color="black" />
+          Filters
+        </button>
+        <Collapse in={isShowFilters}>
+          <div className="w-[80%] flex flex-col gap-10 mt-6">
+            <FilterCollapsible
+              label="Price"
+              children={
+                <div className="w-full flex flex-col items-start pl-4 gap-4 mt-3">
+                  <SliderComponent />
                 </div>
-                {index !== accommodations.length - 1 && (
-                  <hr className="tabs_divider border border-[#D7E2EE] ml-4" />
-                )}
-              </div>
-            );
-          })}
-        </div>
+              }
+            />
+            <FilterCollapsible
+              label="Rating"
+              children={
+                <div className="w-full flex items-center justify-between mt-3">
+                  <button className="px-4 py-2 text-sm rounded-sm border border-[#8DD3BB] mt-3 font-bold">
+                    0+
+                  </button>
+                  <button className="px-4 py-2 text-sm rounded-sm border border-[#8DD3BB] mt-3 font-bold">
+                    1+
+                  </button>
+                  <button className="px-4 py-2 text-sm rounded-sm border border-[#8DD3BB] mt-3 font-bold">
+                    2+
+                  </button>
+                  <button className="px-4 py-2 text-sm rounded-sm border border-[#8DD3BB] mt-3 font-bold">
+                    3+
+                  </button>
+                  <button className="px-4 py-2 text-sm rounded-sm border border-[#8DD3BB] mt-3 font-bold">
+                    4+
+                  </button>
+                </div>
+              }
+            />
+            <FilterCollapsible
+              label="Freebies"
+              children={
+                <div className="w-full flex flex-col items-start pl-4 gap-4 mt-3">
+                  {free_bies.map((free_by, index) => {
+                    return (
+                      <CheckBox
+                        key={index}
+                        label={SnakeCaseToPascalCaseSpaced(free_by)}
+                      />
+                    );
+                  })}
+                </div>
+              }
+            />
+
+            <FilterCollapsible
+              label="Amenities"
+              children={
+                <div className="w-full flex flex-col items-start pl-4 gap-4 mt-3">
+                  {amenities.map((amenity, index) => {
+                    return (
+                      <CheckBox
+                        key={index}
+                        label={SnakeCaseToPascalCaseSpaced(amenity)}
+                      />
+                    );
+                  })}
+                </div>
+              }
+            />
+          </div>
+        </Collapse>
+      </div>
+      <div
+        className={`w-full ${isShowFilters ? "md:w-[65%]" : "md:w-[85%]"} flex flex-col`}
+      >
+        <ButtonSliderComponent activeAcc={activeAcc} setActiveAcc={setActiveAcc} accommodations_data={accommodations_data}/>
         <div className="">
           {accommodations_data.filter(
             (accommodation: any) => accommodation.type === activeAcc,
@@ -264,4 +246,4 @@ const Places = () => {
   );
 };
 
-export default Places;
+export default LandingPlaces;
