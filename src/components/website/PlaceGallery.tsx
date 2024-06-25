@@ -16,14 +16,26 @@ const PlaceGallery = () => {
     AxiosAPI.get(`/accommodation/get/${accommodation_id}`)
       .then((res) => {
         setAccommodation(res.data.data[0]);
-        setNewImages([accommodation.images[0], accommodation.images[0], accommodation.images[0], accommodation.images[0], accommodation.images[0], accommodation.images[0], accommodation.images[0], accommodation.images[0], accommodation.images[0], accommodation.images[0], accommodation.images[0]])
+        setNewImages([
+          accommodation.images[0],
+          accommodation.images[0],
+          accommodation.images[0],
+          accommodation.images[0],
+          accommodation.images[0],
+          accommodation.images[0],
+          accommodation.images[0],
+          accommodation.images[0],
+          accommodation.images[0],
+          accommodation.images[0],
+          accommodation.images[0],
+        ]);
       })
       .catch((err) => {
         console.log(err);
       })
       .finally(() => setLoading(false));
   }, []);
-  const [newImages, setNewImages] = useState<any>([])
+  const [newImages, setNewImages] = useState<any>([]);
   return (
     <div className="w-full md:px-10 pb-[50vh] pt-[8vh]">
       {loading ? (

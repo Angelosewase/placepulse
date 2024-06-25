@@ -10,6 +10,8 @@ import { IoTimeSharp } from "react-icons/io5";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import cookie from "react-cookies";
+import Carousel from "../carousels";
+import { accommodations_popular as accommodations } from "../../constants/dummy";
 const Home = () => {
   const navigate = useNavigate();
   useEffect(() => {
@@ -156,6 +158,12 @@ const Home = () => {
           </h6>
         </div>
       </div>
+      <section className="pb-[10vh] px-10 flex flex-col justify-center">
+        <h1 className="text-3xl font-extrabold my-[5vh] w-full text-center">
+          Popular Accommodations
+        </h1>
+        <Carousel accommodations={accommodations} />
+      </section>
     </div>
   );
 };

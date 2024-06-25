@@ -18,6 +18,7 @@ import {
   FETCH_ACCOMMODATIONS_SUCCESS,
 } from "../../actions/AccommodationActions";
 import { Helmet } from "react-helmet";
+import ButtonSliderComponent from "../../app/_client/user/SliderComponent";
 
 const Places = () => {
   const [activeAcc, setActiveAcc] = useState("hotel");
@@ -124,7 +125,7 @@ const Places = () => {
       </div>
       <div className="w-full md:w-[65%] flex flex-col">
         <div className="w-full flex items-center mb-5 gap-4 places_tabs_cont">
-          {accommodations.map((accommodation: any, index: number) => {
+          {/* {accommodations.map((accommodation: any, index: number) => {
             return (
               <div
                 onClick={() => setActiveAcc(accommodation.type.toLowerCase())}
@@ -152,7 +153,12 @@ const Places = () => {
                 )}
               </div>
             );
-          })}
+          })} */}
+          <ButtonSliderComponent
+            activeAcc={activeAcc}
+            setActiveAcc={setActiveAcc}
+            accommodations_data={accommodations_data}
+          />
         </div>
         <div className="">
           {accommodations_data.filter(

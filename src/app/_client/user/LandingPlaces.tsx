@@ -23,7 +23,7 @@ import { useDisclosure } from "@mantine/hooks";
 import ButtonSliderComponent from "./SliderComponent";
 
 const LandingPlaces = () => {
-  const {type} = useParams();
+  const { type } = useParams();
   const [activeAcc, setActiveAcc] = useState(type?.toLowerCase() ?? "");
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -135,7 +135,11 @@ const LandingPlaces = () => {
       <div
         className={`w-full ${isShowFilters ? "md:w-[65%]" : "md:w-[85%]"} flex flex-col`}
       >
-        <ButtonSliderComponent activeAcc={activeAcc} setActiveAcc={setActiveAcc} accommodations_data={accommodations_data}/>
+        <ButtonSliderComponent
+          activeAcc={activeAcc}
+          setActiveAcc={setActiveAcc}
+          accommodations_data={accommodations_data}
+        />
         <div className="">
           {accommodations_data.filter(
             (accommodation: any) => accommodation.type === activeAcc,

@@ -128,10 +128,12 @@ const ViewOwnerAccommodation = () => {
             </div>
           </div>
           <hr className="w-full hotel_divider my-[5vh]" />
-          <div className="w-full mt-5">
-            <h1 className="text-xl font-extrabold mb-4">Available Rooms</h1>
-            <div className="w-full flex flex-col gap-4">
-              {/* {accommodation?.roomTypes.map((roomType: any, index: number) => {
+          {accommodation.type === "hotel" && (
+            <>
+              <div className="w-full mt-5">
+                <h1 className="text-xl font-extrabold mb-4">Available Rooms</h1>
+                <div className="w-full flex flex-col gap-4">
+                  {/* {accommodation?.roomTypes.map((roomType: any, index: number) => {
                 return (
                   <div
                     key={index}
@@ -162,9 +164,11 @@ const ViewOwnerAccommodation = () => {
                   </div>
                 );
               })} */}
-            </div>
-          </div>
-          <hr className="w-full hotel_divider my-[9vh]" />
+                </div>
+              </div>
+              <hr className="w-full hotel_divider my-[9vh]" />
+            </>
+          )}
           <div className="w-full mt-5">
             <div className="w-full flex justify-between items-center">
               <h1 className="text-xl font-extrabold mb-4">Location/Map</h1>

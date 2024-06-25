@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const HotelImageLayout = ({ images, id }: any) => {
   const navigate = useNavigate();
-  const newImages = [images[0],images[0],images[0],images[0],images[0]]
+  const newImages = [images[0], images[0], images[0], images[0], images[0]];
   return (
     <div
       className={`w-full grid ${newImages.length > 1 && "md:grid-cols-2"} grid-cols-1 gap-3`}
@@ -26,13 +26,13 @@ const HotelImageLayout = ({ images, id }: any) => {
           </div>
         ))}
         <div className="aspect-w-1 aspect-h-1 flex items-center justify-center rounded-md">
-        <button
-          onClick={() => navigate(`/places/${id}/photos`)}
-          className="bg-blue-700 font-semibold text-sm absolute bottom-4 right-3 py-3 px-6 text-white"
-        >
-          View all photos
-        </button>
-        </div>    
+          <button
+            onClick={() => navigate(`/places/${id}/photos`)}
+            className="bg-blue-700 font-semibold text-sm absolute bottom-4 right-3 py-3 px-6 text-white"
+          >
+            View all photos
+          </button>
+        </div>
       </div>
     </div>
   );
