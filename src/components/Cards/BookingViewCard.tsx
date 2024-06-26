@@ -4,7 +4,6 @@ import { formatDate } from "../../utils/funcs/formatter";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const BookingViewCard = ({ data }: { data: any }) => {
-  
   return (
     <div className="w-full pt-3 pb-5 flex justify-between px-4 shadow-md shadow-gray-200">
       <div className="w-[50%] flex items-center justify-between">
@@ -16,7 +15,12 @@ const BookingViewCard = ({ data }: { data: any }) => {
         />
         <div>
           <h1 className="text-lg font-extrabold">{data.name}</h1>
-          <h1 className={`text-sm font-extrabold mt-3 ${data.status === "PENDING" ? "text-red-600" : "text-green-600"}`} style={{fontFamily: "Montserrat"}}>{data.status}</h1>
+          <h1
+            className={`text-sm font-extrabold mt-3 ${data.status === "PENDING" ? "text-red-600" : "text-green-600"}`}
+            style={{ fontFamily: "Montserrat" }}
+          >
+            {data.status}
+          </h1>
         </div>
         <div className="flex gap-2 items-center">
           <hr className="border border-[#D7E2EE] h-[4rem]" />
@@ -29,7 +33,9 @@ const BookingViewCard = ({ data }: { data: any }) => {
                 <h1 className="text-xs font-bold text-[#00000083]">
                   Check-In Time
                 </h1>
-                <h1 className="text-sm font-medium">{formatDate(data.check_in)}</h1>
+                <h1 className="text-sm font-medium">
+                  {formatDate(data.check_in)}
+                </h1>
               </div>
             </div>
             <div className="w-full flex items-center gap-2">
@@ -40,7 +46,9 @@ const BookingViewCard = ({ data }: { data: any }) => {
                 <h1 className="text-xs font-bold text-[#00000083]">
                   Check-Out Time
                 </h1>
-                <h1 className="text-sm font-medium">{formatDate(data.check_out)}</h1>
+                <h1 className="text-sm font-medium">
+                  {formatDate(data.check_out)}
+                </h1>
               </div>
             </div>
           </div>

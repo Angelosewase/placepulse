@@ -78,12 +78,12 @@ const CheckoutPage = () => {
   const [isPaymentOpen, { open: openPayment, close: closePayment }] =
     useDisclosure();
 
-  const createBooking = async ()=>{
-    if(!selectedCard){
+  const createBooking = async () => {
+    if (!selectedCard) {
       return notifications.show({
         message: "Please select a payment method",
-        color: "red"
-      })
+        color: "red",
+      });
     }
     setLoadingPay(true);
     const data = {
@@ -97,26 +97,26 @@ const CheckoutPage = () => {
       totalPrice: accommodation.price,
       image: booking.image,
       name: booking.name,
-      status: "PENDING"
-    }
+      status: "PENDING",
+    };
     console.log("data --> ", data);
     AxiosAPI.post(`/booking/create`, data, {
       headers: {
         authorization: `Bearer ${auth.token}`,
       },
     })
-      .then(()=>{
+      .then(() => {
         openPayment();
       })
-      .catch((err)=>{
+      .catch((err) => {
         console.log(err.message);
         notifications.show({
-          message: err.response.message?? err.message,
-          color: "red"
-        })
+          message: err.response.message ?? err.message,
+          color: "red",
+        });
       })
-      .finally(()=> setLoadingPay(false));
-  }
+      .finally(() => setLoadingPay(false));
+  };
   return (
     <div className="pb-[50vh] px-4 md:px-20">
       <div className="w-full flex justify-start items-center mt-5">

@@ -9,41 +9,43 @@ import { ClipLoader } from "react-spinners";
 const BookingHistory = () => {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(false);
-  const {token} = useSelector((state: any)=> state.auth);
-  const getAllBookings = async ()=>{
+  const { token } = useSelector((state: any) => state.auth);
+  const getAllBookings = async () => {
     setLoading(true);
     AxiosAPI.get("/booking/getMine", {
-      headers:{
-        Authorization: `Bearer ${token}`
-      }
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     })
-      .then((res)=>{
+      .then((res) => {
         setBookings(res.data.data);
       })
-      .catch(err=>{
+      .catch((err) => {
         notifications.show({
-          message: err.response ?? err.message
-        })
+          message: err.response ?? err.message,
+        });
       })
-      .finally(()=> setLoading(false));
-  }
+      .finally(() => setLoading(false));
+  };
 
-  useEffect(()=>{
+  useEffect(() => {
     getAllBookings();
-  }, [])
+  }, []);
   return (
     <div className="w-full mb-20">
       <h1 className="text-3xl font-extrabold">Reservations/Bookings</h1>
       <div className="w-full flex flex-col gap-3 mt-10 ">
         {loading ? (
           <div className="w-full flex justify-center items-center">
-            <ClipLoader size={23} color="black"/>
+            <ClipLoader size={23} color="black" />
           </div>
-        ) : bookings.length > 0 ? bookings.map((booking: any, index: any) => {
-          return <BookingViewCard data={booking} key={index} />;
-        }) : (
+        ) : bookings.length > 0 ? (
+          bookings.map((booking: any, index: any) => {
+            return <BookingViewCard data={booking} key={index} />;
+          })
+        ) : (
           <div className="w-full flex justify-center items-center mt-[10vh]">
-              <h1 className="font-bold">No Bookings Found!</h1>
+            <h1 className="font-bold">No Bookings Found!</h1>
           </div>
         )}
       </div>

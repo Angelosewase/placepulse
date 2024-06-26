@@ -14,7 +14,7 @@ const PaymentMethods = () => {
     useDisclosure();
   const [methods, setMethods] = useState([]);
   const [loading, setLoading] = useState(false);
-  const {token} = useSelector((state: any)=> state.auth);
+  const { token } = useSelector((state: any) => state.auth);
   const fetchCards = async () => {
     setLoading(true);
     AxiosAPI.get(`/paymentmethods/getMine`, {
@@ -48,45 +48,49 @@ const PaymentMethods = () => {
         });
       });
   };
-  useEffect(()=>{
+  useEffect(() => {
     fetchCards();
-  },[])
+  }, []);
   return (
     <div className="w-full">
       <h1 className="text-3xl font-extrabold">Payment Methods</h1>
       {loading ? (
         <div className="mt-6 pb-4 w-full flex items-center justify-center">
-            <ClipLoader size={23} color="black"/>
-        </div> 
+          <ClipLoader size={23} color="black" />
+        </div>
       ) : (
         <div className="w-full grid grid-cols-3 gap-y-8 mt-6 pb-4">
-        {methods.map((method: any, index: number) => {
-          return (
-            <PaymentMethodCard
-              key={index}
-              name={method.type}
-              tag="MOMO Pay"
-              phone={`+250${method.number}`}
-              className="flex-shrink-0"
-              selected={false}
-              setSelected={()=> {}}
-              card={method}
-              onDeleteCard={deleteCard}
-            />
-          );
-        })}
-        <div
-          onClick={openAddCard}
-          className="w-[328px] h-[170px] flex-shrink-0 flex items-center justify-center border-2 border-dashed divide-dashed border-[#396FF9] rounded-xl cursor-pointer"
-        >
-          <div className="flex flex-col gap-2 items-center justify-center">
-            <IoIosAddCircleOutline color="#396FF9" size={39} />
-            <h6 className="text-sm">Add a new card</h6>
+          {methods.map((method: any, index: number) => {
+            return (
+              <PaymentMethodCard
+                key={index}
+                name={method.type}
+                tag="MOMO Pay"
+                phone={`+250${method.number}`}
+                className="flex-shrink-0"
+                selected={false}
+                setSelected={() => {}}
+                card={method}
+                onDeleteCard={deleteCard}
+              />
+            );
+          })}
+          <div
+            onClick={openAddCard}
+            className="w-[328px] h-[170px] flex-shrink-0 flex items-center justify-center border-2 border-dashed divide-dashed border-[#396FF9] rounded-xl cursor-pointer"
+          >
+            <div className="flex flex-col gap-2 items-center justify-center">
+              <IoIosAddCircleOutline color="#396FF9" size={39} />
+              <h6 className="text-sm">Add a new card</h6>
+            </div>
           </div>
         </div>
-      </div>
       )}
-      <AddCardModal opened={isAddCardOpen} close={closeAddCard} refetch={fetchCards}/>
+      <AddCardModal
+        opened={isAddCardOpen}
+        close={closeAddCard}
+        refetch={fetchCards}
+      />
     </div>
   );
 };

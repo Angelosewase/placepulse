@@ -15,8 +15,8 @@ const ShareButton = ({ accommodation }: { accommodation: any }) => {
   });
   const createLink = () => {
     setLink({
-        text: `http://localhost:5000/places/${accommodation.id}`,
-        copied: false
+      text: `http://localhost:5000/places/${accommodation.id}`,
+      copied: false,
     });
   };
   useEffect(() => {
@@ -40,18 +40,24 @@ const ShareButton = ({ accommodation }: { accommodation: any }) => {
             {link.text}
           </p>
           <CopyToClipboard text={link.text}>
-            <button onClick={()=> {setLink({text: link.text, copied: true}); close()}} className={`py-3 w-full rounded-md border mt-4 flex items-center justify-center gap-3 ${link.copied ? "border-green-400 bg-green-300 font-bold text-white" : ""}`}>
-               {link.copied ? (
+            <button
+              onClick={() => {
+                setLink({ text: link.text, copied: true });
+                close();
+              }}
+              className={`py-3 w-full rounded-md border mt-4 flex items-center justify-center gap-3 ${link.copied ? "border-green-400 bg-green-300 font-bold text-white" : ""}`}
+            >
+              {link.copied ? (
                 <>
-                    <BsCheckCircle size={20}/>
-                    Link Copied
+                  <BsCheckCircle size={20} />
+                  Link Copied
                 </>
-               ) : (
+              ) : (
                 <>
-                    <GoCopy />
-                    Copy Link
+                  <GoCopy />
+                  Copy Link
                 </>
-               ) }
+              )}
             </button>
           </CopyToClipboard>
         </div>
