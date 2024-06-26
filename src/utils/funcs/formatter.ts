@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+
 export const SnakeCaseToPascalCaseSpaced = (text: string) => {
   return text
     .split("_")
@@ -20,4 +22,8 @@ export const separatePhoneNumber = (phoneNumber: string) => {
     " " +
     phoneNumber.toString().slice(10, 13)
   );
+};
+
+export const formatDate = (date: Date | null, text?: string) => {
+  return date ? format(date, "MMMM dd") : `Select ${text}`;
 };

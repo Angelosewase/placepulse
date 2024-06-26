@@ -24,7 +24,7 @@ import ButtonSliderComponent from "./SliderComponent";
 
 const LandingPlaces = () => {
   const { type } = useParams();
-  const [activeAcc, setActiveAcc] = useState(type?.toLowerCase() ?? "");
+  const [activeAcc, setActiveAcc] = useState(type?.toLowerCase() ?? "hotel");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isShowFilters, { toggle }] = useDisclosure(false);

@@ -136,7 +136,7 @@ function App() {
               element={<UserLayout children={<UserLanding />} />}
             />
             <Route
-              path="/_client/home/find/:type/"
+              path="/_client/home/find/"
               element={
                 <UserLayout
                   children={

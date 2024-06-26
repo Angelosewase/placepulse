@@ -83,7 +83,7 @@ const ViewAccommodation = () => {
                     <FaRegHeart color="black" />
                   )}
                 </button>
-                <ShareButton accommodation={accommodation}/>
+                <ShareButton accommodation={accommodation} />
                 <button
                   onClick={() => {
                     navigate(`/booking/place/${accommodation_id}`);
@@ -109,8 +109,8 @@ const ViewAccommodation = () => {
             <div className="w-full flex justify-start gap-8 mt-5">
               <div className="w-[30vh] h-[25vh] bg-[#0075FF] rounded-lg relative flex flex-col justify-end p-3 px-4">
                 <button className="absolute font-extrabold text-2xl top-2 left-4 text-white flex items-center gap-2">
-                  {accommodation.rating} 
-                  <Rating value={accommodation.rating} readOnly/>
+                  {accommodation.rating}
+                  <Rating value={accommodation.rating} readOnly />
                 </button>
                 <h1 className="font-extrabold text-white">Very Good</h1>
                 <h1 className="font-extralight text-white text-xs">

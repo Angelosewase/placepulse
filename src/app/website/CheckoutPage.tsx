@@ -24,7 +24,7 @@ const CheckoutPage = () => {
   const [paymentMethods, setPaymentMethods] = useState([]);
   const [loadingMethods, setLoadingMethods] = useState(true);
   const [selectedCard, setSelectedCard] = useState<any>();
-  console.log(booking);
+  const [loadingPay, setLoadingPay] = useState(false);
   const formatDate = (date: Date | null, text?: string) => {
     return date ? format(date, "MMMM dd") : `Select ${text}`;
   };
@@ -36,7 +36,6 @@ const CheckoutPage = () => {
     })
       .then((res) => {
         setPaymentMethods(res.data.data);
-        console.log(res.data.data);
       })
       .catch((err) => {
         console.log(err);
@@ -78,6 +77,46 @@ const CheckoutPage = () => {
     useDisclosure();
   const [isPaymentOpen, { open: openPayment, close: closePayment }] =
     useDisclosure();
+
+  const createBooking = async ()=>{
+    if(!selectedCard){
+      return notifications.show({
+        message: "Please select a payment method",
+        color: "red"
+      })
+    }
+    setLoadingPay(true);
+    const data = {
+      checkIn: booking.checkIn,
+      checkOut: booking.checkOut,
+      accommodationId: accommodation_id,
+      paymentType: booking.paymentType,
+      paymentMethodId: selectedCard.id,
+      paymentTotal: booking.paymentTotal,
+      accommodationOwnerId: accommodation.owner_id,
+      totalPrice: accommodation.price,
+      image: booking.image,
+      name: booking.name,
+      status: "PENDING"
+    }
+    console.log("data --> ", data);
+    AxiosAPI.post(`/booking/create`, data, {
+      headers: {
+        authorization: `Bearer ${auth.token}`,
+      },
+    })
+      .then(()=>{
+        openPayment();
+      })
+      .catch((err)=>{
+        console.log(err.message);
+        notifications.show({
+          message: err.response.message?? err.message,
+          color: "red"
+        })
+      })
+      .finally(()=> setLoadingPay(false));
+  }
   return (
     <div className="pb-[50vh] px-4 md:px-20">
       <div className="w-full flex justify-start items-center mt-5">
@@ -193,7 +232,8 @@ const CheckoutPage = () => {
               </Fieldset>
             )}
             <button
-              onClick={openPayment}
+              onClick={createBooking}
+              disabled={loadingPay}
               className="w-full py-3 mt-3 rounded-sm flex items-center font-extrabold justify-center bg-[#396FF9] text-white"
             >
               Pay {booking.paymentTotal} FRW
