@@ -2,7 +2,6 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Rating } from "@mantine/core";
 import { FaHeart, FaLocationDot, FaRegHeart } from "react-icons/fa6";
-import { HiShare } from "react-icons/hi";
 import HotelImageLayout from "../Images/HotelImagesLayout";
 import { WiStars } from "react-icons/wi";
 import { SnakeCaseToPascalCaseSpaced } from "../../utils/funcs/formatter";
@@ -11,6 +10,7 @@ import { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import location_Img from "../../assets/images/map_location.png";
 import { Helmet } from "react-helmet";
+import ShareButton from "../buttons/ShareButton";
 
 const ViewAccommodation = () => {
   const params = useParams();
@@ -57,7 +57,7 @@ const ViewAccommodation = () => {
               <div className="flex items-center gap-3 ml-3">
                 <FaLocationDot color="#112211d1" />
                 <h6 className="text-[#112211d1] text-sm font-medium">
-                  {accommodation.text}
+                  {accommodation.location}
                 </h6>
               </div>
               <div className="h-[2.5rem] flex items-center gap-3 mt-3 ml-3">
@@ -83,9 +83,7 @@ const ViewAccommodation = () => {
                     <FaRegHeart color="black" />
                   )}
                 </button>
-                <button className="w-[4rem] h-[3rem] flex items-center justify-center rounded-sm border border-[#8DD3BB] font-bold">
-                  <HiShare color="black" size={20} />
-                </button>
+                <ShareButton accommodation={accommodation}/>
                 <button
                   onClick={() => {
                     navigate(`/booking/place/${accommodation_id}`);
@@ -110,8 +108,9 @@ const ViewAccommodation = () => {
 
             <div className="w-full flex justify-start gap-8 mt-5">
               <div className="w-[30vh] h-[25vh] bg-[#0075FF] rounded-lg relative flex flex-col justify-end p-3 px-4">
-                <button className="absolute font-extrabold text-2xl top-2 left-4 text-white">
-                  {accommodation.rating}
+                <button className="absolute font-extrabold text-2xl top-2 left-4 text-white flex items-center gap-2">
+                  {accommodation.rating} 
+                  <Rating value={accommodation.rating} readOnly/>
                 </button>
                 <h1 className="font-extrabold text-white">Very Good</h1>
                 <h1 className="font-extralight text-white text-xs">
