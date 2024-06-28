@@ -22,7 +22,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Provider store={store}>
       <NextUIProvider>
-        <MantineProvider>
+        <MantineProvider classNamesPrefix="plc-pls">
           <Notifications position="top-right" />
           <App />
         </MantineProvider>

@@ -9,6 +9,40 @@ export const free_bies = [
   "free_parking",
   "free_cancellation",
 ];
+export const reviews = [
+  {
+    name: "David NYIRINGABO",
+    review:
+      "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently",
+    date: "2024-07-01",
+    rating: 4.1,
+    image: "",
+  },
+  {
+    name: "Mugabo Bosco",
+    review:
+      "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently",
+    date: "2024-07-01",
+    rating: 4.1,
+    image: "",
+  },
+  {
+    name: "Kalisa Benjamin",
+    review:
+      "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently",
+    date: "2024-07-01",
+    rating: 4.1,
+    image: "",
+  },
+  {
+    name: "Gatera Jean",
+    review:
+      "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently",
+    date: "2024-07-01",
+    rating: 4.1,
+    image: "",
+  },
+];
 export const accommodations_popular = [
   {
     image: hotelImg1,

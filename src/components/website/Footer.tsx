@@ -23,7 +23,7 @@ const WebFooter = () => {
         <Link to={"/about"}>Work With Us</Link>
       </div>
 
-      <div className="w-full md:w-[80%] h-[45vh] rounded-[1rem] p-5 absolute top-[-20vh] bg-[#5984f1a0]">
+      <div className="w-full md:w-[80%] h-[45vh] rounded-[1rem] p-5 absolute top-[-20vh] bg-[#97B2F6]">
         <h1 className="md:w-1/5 w-full text-4xl font-extrabold">
           Subscribe Newsletter
         </h1>
@@ -53,6 +53,18 @@ const WebFooter = () => {
             alt=""
           />
         </div>
+      </div>
+      <div className="absolute bottom-4 right-5">
+        <h1>
+          Powered By{" "}
+          <a
+            href="https://www.linkedin.com/in/nyiringabo-david-455990259"
+            target="_blank"
+            className="text-[#0075FF] font-extrabold"
+          >
+            David NYIRINGABO
+          </a>
+        </h1>
       </div>
     </div>
   );

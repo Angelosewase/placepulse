@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
-import logo from "/logo.png";
+import { MenuSquareIcon } from "lucide-react";
+import Brand from "../ui/brand";
 const WebNavbar = () => {
   return (
-    <div className="w-full flex py-4 items-center justify-between px-10">
+    <div className="w-full flex py-6 items-center justify-between px-10 backdrop-blur-xl sticky top-0 z-50">
       <Link to={"/"} className="flex items-center gap-2">
-        <img src={logo} alt="logo" className="w-30 h-7 " />
+        <Brand/>
       </Link>
-      <div className="flex gap-5">
+      <div className="hidden md:flex gap-5">
         <Link to={"/"} className=" text-slate-500">
           Home
         </Link>
@@ -23,7 +24,7 @@ const WebNavbar = () => {
           Contact
         </Link>
       </div>
-      <div className="flex gap-2 items-center">
+      <div className="hidden md:flex gap-2 items-center">
         <Link to={"/auth/login"}>Login</Link> |
         <Link
           to={"/auth/register"}
@@ -31,6 +32,10 @@ const WebNavbar = () => {
         >
           Signup
         </Link>
+      </div>
+
+      <div className="flex md:hidden">
+        <MenuSquareIcon color="black" />
       </div>
     </div>
   );

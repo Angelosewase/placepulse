@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // import { useNavigate } from "react-router-dom";
+import ScrollButton from "@/components/buttons/ScrollButton";
 import UserNavbar from "../../components/Navbar/UserNavbar";
 import WebFooter from "../../components/website/Footer";
 import WebNavbar from "../../components/website/Navbar";
@@ -13,10 +14,11 @@ const WebLayout = ({ children }: { children: React.ReactElement }) => {
   //   navigate(`/_${cookie.load("auth_USER").toLowerCase()}/home`);
   // }
   return (
-    <div className="flex flex-col bg-[#FFF]">
+    <div className="flex flex-col bg-[#FFF] relative">
       {isLoggedIn ? <UserNavbar /> : <WebNavbar />}
       {children}
       <WebFooter />
+      <ScrollButton />
     </div>
   );
 };

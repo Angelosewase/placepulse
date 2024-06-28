@@ -12,6 +12,8 @@ import { Helmet } from "react-helmet";
 import cookie from "react-cookies";
 import Carousel from "../carousels";
 import { accommodations_popular as accommodations } from "../../constants/dummy";
+import FAQPage from "./FAQs";
+// import ReviewsCarousel from "./Reviews";
 const Home = () => {
   const navigate = useNavigate();
   useEffect(() => {
@@ -35,7 +37,7 @@ const Home = () => {
         <title>Home - Place Pulse</title>
       </Helmet>
       <div className="w-full px-10 flex  flex-col md:flex-row items-center justify-between mt-3">
-        <div className="w-full md:w-2/5">
+        <div className="w-full md:w-2/5 mb-10 md:mb-auto">
           <h1 className="w-full mb-5 text-5xl uppercase font-extrabold text-start">
             the adventure begins here
           </h1>
@@ -86,10 +88,10 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="mt-[20vh] px-10 flex md:flex-row flex-col justify-between items-start ">
-        <div className="flex flex-col md:flex-row gap-8">
-          <div className="relative flex justify-center">
-            <img src={hotel1} alt="Weekly Hotel 1" />
+      <div className="mt-[20vh] px-10 flex md:flex-row flex-col-reverse justify-between items-start ">
+        <div className="w-full md:w-[50%] flex flex-col md:flex-row gap-8">
+          <div className="relative flex justify-center w-full">
+            <img src={hotel1} alt="Weekly Hotel 1" className="w-full" />
             <div className="bg-white w-[80%] absolute bottom-[-2.3rem] rounded-lg px-3 pt-2 py-3">
               <h2 className="font-extrabold">Marriot Hotel</h2>
               <Link
@@ -100,8 +102,8 @@ const Home = () => {
               </Link>
             </div>
           </div>
-          <div className="relative flex justify-center">
-            <img src={hotel2} alt="Weekly Hotel 1" />
+          <div className="relative flex justify-center w-full">
+            <img src={hotel2} alt="Weekly Hotel 1" className="w-full" />
             <div className="bg-white w-[80%] absolute bottom-[-2.3rem] rounded-lg px-3 pt-2 py-3">
               <h2 className="font-extrabold">Game Park Hotel</h2>
               <Link
@@ -113,7 +115,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col justify-start">
+        <div className="flex flex-col justify-start mb-20 md:mb-auto">
           <h1 className="text-2xl uppercase font-extrabold mt-5">
             THIS WEEK’S TOP PICKS
           </h1>
@@ -129,8 +131,8 @@ const Home = () => {
           </button>
         </div>
       </div>
-      <div className="w-full flex justify-center my-20 bg-[#396ff911] py-[10vh] gap-4">
-        <div className="w-[25%] h-auto flex flex-col gap-5 items-center justify-center bg-white py-10 rounded-lg">
+      <div className="w-full flex flex-col md:flex-row items-center justify-center my-20 bg-[#396ff911] py-[10vh] gap-4">
+        <div className="w-[90%] md:w-[25%] h-auto flex flex-col gap-5 items-center justify-center bg-white py-10 rounded-lg">
           <button className="p-4 bg-[#396FF9]">
             <GrKey color="white" />
           </button>
@@ -139,7 +141,7 @@ const Home = () => {
             Esse voluptas cumque vel exercitationem.Reiciendis est hic accusamus
           </h6>
         </div>
-        <div className="w-[25%] h-auto flex flex-col gap-5 items-center justify-center bg-white py-10 rounded-lg">
+        <div className="w-[90%] md:w-[25%] h-auto flex flex-col gap-5 items-center justify-center bg-white py-10 rounded-lg">
           <button className="p-4 bg-[#396FF9]">
             <IoTimeSharp color="white" size={17} />
           </button>
@@ -148,7 +150,7 @@ const Home = () => {
             Esse voluptas cumque vel exercitationem.Reiciendis est hic accusamus
           </h6>
         </div>
-        <div className="w-[25%] h-auto flex flex-col gap-5 items-center justify-center bg-white py-10 rounded-lg">
+        <div className="w-[90%] md:w-[25%] h-auto flex flex-col gap-5 items-center justify-center bg-white py-10 rounded-lg">
           <button className="p-4 bg-[#396FF9]">
             <GrKey color="white" />
           </button>
@@ -163,6 +165,15 @@ const Home = () => {
           Popular Accommodations
         </h1>
         <Carousel accommodations={accommodations} />
+      </section>
+      <section className="w-full my-20 bg-[#396ff911] pt-[5vh] pb-[10vh] gap-4">
+        <h1 className="text-3xl font-extrabold w-full text-center mb-[10vh]">
+          Clients Reviews
+        </h1>
+        {/* <ReviewsCarousel/> */}
+      </section>
+      <section className="w-full bg-[#F7F7F7] px-20 mb-[17vh]">
+        <FAQPage />
       </section>
     </div>
   );
