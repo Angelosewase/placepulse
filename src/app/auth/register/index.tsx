@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { notifications } from "@mantine/notifications";
 import { registerService } from "../../../services/auth.service";
 import { ClipLoader } from "react-spinners";
+import Brand from "@/components/ui/brand";
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -60,7 +61,7 @@ export default function Register() {
         <img src={loginImg} alt="Hotel Image 1" className="w-full h-full" />
       </div>
       <div className="w-full md:w-[50%] h-[90%] flex flex-col">
-        <h1 className="font-extrabold text-lg">Place Pulse</h1>
+        <Brand/>
 
         <form
           onSubmit={handleSubmit}

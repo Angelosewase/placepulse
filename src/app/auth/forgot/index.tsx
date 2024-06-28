@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { notifications } from "@mantine/notifications";
 import { forgotPasswordService } from "../../../services/auth.service";
 import { ClipLoader } from "react-spinners";
+import Brand from "@/components/ui/brand";
 
 export default function Forgot() {
   const [email, setEmail] = useState("");
@@ -51,7 +52,7 @@ export default function Forgot() {
   return (
     <div className="w-full h-screen flex justify-between items-center md:px-[7vw] px-4">
       <div className="w-full md:w-[45%] h-[90%] flex flex-col">
-        <h1 className="font-extrabold text-lg">Place Pulse</h1>
+        <Brand/>
 
         <form
           onSubmit={handleSubmit}

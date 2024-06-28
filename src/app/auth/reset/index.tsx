@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { resetPasswordService } from "../../../services/auth.service";
 import { notifications } from "@mantine/notifications";
 import { ClipLoader } from "react-spinners";
+import Brand from "@/components/ui/brand";
 
 export default function Login() {
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -70,7 +71,7 @@ export default function Login() {
     <div className="w-full h-screen flex justify-between items-center md:px-[7vw] px-4">
       <div className="w-full md:w-[45%] h-[90%] flex flex-col">
         <Link to={"/"} className="font-extrabold text-lg">
-          Place Pulse
+          <Brand/>
         </Link>
 
         <form

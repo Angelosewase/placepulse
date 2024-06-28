@@ -8,6 +8,7 @@ import {
   verifyCodeService,
 } from "../../../services/auth.service";
 import { ClipLoader } from "react-spinners";
+import Brand from "@/components/ui/brand";
 
 export default function VerifyCode() {
   const [code, setCode] = useState("");
@@ -88,8 +89,7 @@ export default function VerifyCode() {
     <>
       <div className="w-full h-screen flex justify-between items-center md:px-[7vw] px-4 relative">
         <div className="w-full md:w-[45%] h-[90%] flex flex-col">
-          <h1 className="font-extrabold text-lg">Place Pulse</h1>
-
+          <Brand/>
           <form
             onSubmit={handleSubmit}
             className="w-full md:w-[90%] flex flex-col items-start gap-4 mt-[10vh]"

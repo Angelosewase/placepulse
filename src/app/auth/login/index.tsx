@@ -9,6 +9,7 @@ import { ClipLoader } from "react-spinners";
 import cookie from "react-cookies";
 import { useDispatch, useSelector } from "react-redux";
 import { LOGIN_SUCCESS } from "../../../actions/AuthActions";
+import Brand from "@/components/ui/brand";
 export default function Login() {
   const [email, setEmail] = useState("");
   const { isLoggedIn, user } = useSelector((state: any) => state.auth);
@@ -100,7 +101,7 @@ export default function Login() {
     <div className="w-full h-screen flex justify-between items-center md:px-[7vw] px-4">
       <div className="w-full md:w-[45%] h-[90%] flex flex-col">
         <Link to={"/"} className="font-extrabold text-lg">
-          Place Pulse
+          <Brand/>
         </Link>
 
         <form
