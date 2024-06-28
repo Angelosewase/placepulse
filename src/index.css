@@ -11,8 +11,13 @@ html {
   scroll-behavior: smooth;
 }
 ::-webkit-scrollbar {
-  width: 0px;
+  width: 5px;
   background: #49494900;
+}
+
+::-webkit-scrollbar-thumb{
+  width: 5px;
+  background-color: #5984F1;
 }
 
 .places_tabs_cont {

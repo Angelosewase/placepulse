@@ -14,6 +14,9 @@ const WebNavbar = () => {
         <Link to={"/about"} className=" text-slate-500">
           About
         </Link>
+        <a href={"#reviews"} className=" text-slate-500">
+          Reviews
+        </a>
         <Link to={"/services"} className=" text-slate-500">
           Services
         </Link>

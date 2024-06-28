@@ -10,6 +10,7 @@ import cookie from "react-cookies";
 import { notifications } from "@mantine/notifications";
 import { useDispatch } from "react-redux";
 import { LOGOUT_SUCCESS } from "../../actions/AuthActions";
+import Brand from "../ui/brand";
 const OwnerSidebar = () => {
   const [isLogout, { open, close }] = useDisclosure();
   const navigate = useNavigate();
@@ -70,7 +71,7 @@ const OwnerSidebar = () => {
   return (
     <div className="w-full flex flex-col pt-[5vh] h-screen bg-[#F8F8FC]">
       <h1 className="text-2xl font-extrabold w-full text-center">
-        Place Pulse
+        <Brand/>
       </h1>
       <div className="w-full flex flex-col mt-10 sidebar-owsadm gap-4">
         {tabs.map((tab, index) => {

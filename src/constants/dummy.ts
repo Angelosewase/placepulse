@@ -2,6 +2,7 @@ import hotelImg1 from "../assets/images/hotel3.png";
 import hotelImg2 from "../assets/images/hotel4.png";
 import hotelImg3 from "../assets/images/hotel5.png";
 import hotelImg4 from "../assets/images/hotel6.png";
+import test_image from "@/assets/images/testi_image.png"
 export const amenities = ["air_conditioned", "fitnes", "pool"];
 export const free_bies = [
   "free_internet",
@@ -16,7 +17,7 @@ export const reviews = [
       "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently",
     date: "2024-07-01",
     rating: 4.1,
-    image: "",
+    image: test_image,
   },
   {
     name: "Mugabo Bosco",
@@ -24,7 +25,7 @@ export const reviews = [
       "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently",
     date: "2024-07-01",
     rating: 4.1,
-    image: "",
+    image: test_image,
   },
   {
     name: "Kalisa Benjamin",
@@ -32,7 +33,7 @@ export const reviews = [
       "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently",
     date: "2024-07-01",
     rating: 4.1,
-    image: "",
+    image: test_image,
   },
   {
     name: "Gatera Jean",
@@ -40,7 +41,7 @@ export const reviews = [
       "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently",
     date: "2024-07-01",
     rating: 4.1,
-    image: "",
+    image: test_image,
   },
 ];
 export const accommodations_popular = [

@@ -1,20 +1,25 @@
 import { Link, NavLink } from "react-router-dom";
-import logo from "/logo.png";
 import ProfileMenu from "./ProfileMenu";
 import { GoBell, GoHome } from "react-icons/go";
+import Brand from "../ui/brand";
+import { CiSearch } from "react-icons/ci";
 
 const UserNavbar = () => {
   return (
     <div className="w-full flex py-3 items-center justify-between px-3 md:px-10">
       <div className="flex gap-5">
         <Link to={"/_client/home"} className="flex items-center gap-2">
-          <img src={logo} alt="logo" className="w-30 h-7 " />
-          {/* <h4 className="font-bold text-lg">PlacePulse</h4> */}
+          <Brand/>
         </Link>
-        <input
-          className="py-2 pl-4 pr-2 border rounded-lg outline-none hidden md:flex md:w-[30vw]"
-          placeholder="Search ..."
-        />
+        <div className="relative ml-10 hidden md:flex md:w-[20vw]">
+          <input
+            className="py-4 pl-12 pr-2 border rounded-3xl outline-none w-full"
+            placeholder="Search ..."
+          />
+          <button className="absolute top-4 left-3">
+            <CiSearch size={25} color="#00000050"/>
+          </button>
+        </div>
       </div>
       <div className="flex gap-4 items-center userNav">
         <NavLink

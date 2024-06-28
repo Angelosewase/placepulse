@@ -13,7 +13,7 @@ import cookie from "react-cookies";
 import Carousel from "../carousels";
 import { accommodations_popular as accommodations } from "../../constants/dummy";
 import FAQPage from "./FAQs";
-// import ReviewsCarousel from "./Reviews";
+import ReviewsCarousel from "./Reviews";
 const Home = () => {
   const navigate = useNavigate();
   useEffect(() => {
@@ -36,7 +36,7 @@ const Home = () => {
       <Helmet>
         <title>Home - Place Pulse</title>
       </Helmet>
-      <div className="w-full px-10 flex  flex-col md:flex-row items-center justify-between mt-3">
+      <div className="w-full px-10 flex  flex-col md:flex-row items-center justify-between mt-[10vh]">
         <div className="w-full md:w-2/5 mb-10 md:mb-auto">
           <h1 className="w-full mb-5 text-5xl uppercase font-extrabold text-start">
             the adventure begins here
@@ -166,11 +166,13 @@ const Home = () => {
         </h1>
         <Carousel accommodations={accommodations} />
       </section>
-      <section className="w-full my-20 bg-[#396ff911] pt-[5vh] pb-[10vh] gap-4">
-        <h1 className="text-3xl font-extrabold w-full text-center mb-[10vh]">
-          Clients Reviews
-        </h1>
-        {/* <ReviewsCarousel/> */}
+      <section id="reviews" className="pb-8">
+        <section className="w-full my-20 bg-[#396ff911] pt-[5vh] pb-[10vh] gap-4">
+          <h1 className="text-3xl font-extrabold w-full text-center mb-[10vh]">
+            Clients Reviews
+          </h1>
+          <ReviewsCarousel/>
+        </section>
       </section>
       <section className="w-full bg-[#F7F7F7] px-20 mb-[17vh]">
         <FAQPage />
