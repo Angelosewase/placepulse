@@ -52,7 +52,7 @@ export default function Forgot() {
   return (
     <div className="w-full h-screen flex justify-between items-center md:px-[7vw] px-4">
       <div className="w-full md:w-[45%] h-[90%] flex flex-col">
-        <Brand/>
+        <Brand />
 
         <form
           onSubmit={handleSubmit}

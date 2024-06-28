@@ -61,7 +61,7 @@ export default function Register() {
         <img src={loginImg} alt="Hotel Image 1" className="w-full h-full" />
       </div>
       <div className="w-full md:w-[50%] h-[90%] flex flex-col">
-        <Brand/>
+        <Brand />
 
         <form
           onSubmit={handleSubmit}

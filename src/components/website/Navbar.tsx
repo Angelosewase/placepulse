@@ -5,7 +5,7 @@ const WebNavbar = () => {
   return (
     <div className="w-full flex py-6 items-center justify-between px-10 backdrop-blur-xl sticky top-0 z-50">
       <Link to={"/"} className="flex items-center gap-2">
-        <Brand/>
+        <Brand />
       </Link>
       <div className="hidden md:flex gap-5">
         <Link to={"/"} className=" text-slate-500">

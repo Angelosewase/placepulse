@@ -42,11 +42,11 @@ const ReviewsCarousel = () => {
         {reviews.map((review: Review, index: number) => {
           return (
             <div key={index} className="relative">
-                <img src={testimonialVector} className="w-[350px] h-[280px]"/>
+              <img src={testimonialVector} className="w-[350px] h-[280px]" />
               <div className="absolute top-[30%] left-[20%]">
                 <img src={review.image} className="" />
                 <div>
-                    <h1>{review.name}</h1>
+                  <h1>{review.name}</h1>
                 </div>
               </div>
             </div>
