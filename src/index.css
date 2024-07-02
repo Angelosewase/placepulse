@@ -3,8 +3,9 @@
 @tailwind utilities;
 
 * {
-  font-family: "Quicksand", "Poppins";
-  font-size: 14px;
+  font-family: "Quicksand", "Poppins", "Gill Sans", "Gill Sans MT", Calibri,
+    "Trebuchet MS", sans-serif;
+  font-size: 15px;
   user-select: none;
 }
 html {
@@ -15,9 +16,9 @@ html {
   background: #49494900;
 }
 
-::-webkit-scrollbar-thumb{
+::-webkit-scrollbar-thumb {
   width: 5px;
-  background-color: #5984F1;
+  background-color: #5984f1;
 }
 
 .places_tabs_cont {

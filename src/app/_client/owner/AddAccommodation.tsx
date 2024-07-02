@@ -7,6 +7,9 @@ import { useState } from "react";
 import { AuthorizedAxiosAPI } from "../../../utils/AxiosInstance";
 import { ClipLoader } from "react-spinners";
 import { notifications } from "@mantine/notifications";
+import { useDisclosure } from "@mantine/hooks";
+import AddRoomTypeModal from "./AddRoomTypeModal";
+
 interface Accommodation {
   name: string;
   description: string;
@@ -20,11 +23,22 @@ interface Accommodation {
   stock: number | string;
   rating: number;
 }
+
+interface RoomType {
+  image: File | null;
+  name: string;
+  price: number;
+}
+
 const OwnerAddAccommodations = () => {
-  const [images, setImages] = useState<any>([]);
+  const [images, setImages] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
+  const [roomTypes, setRoomTypes] = useState<RoomType[]>([]);
+  const [selectedRoomTypes, setSelectedRoomTypes] = useState<string[]>([]);
+  const [isAddType, { open: openAddType, close: closeAddType }] = useDisclosure(false);
+
   const handleAddImage = (image: any) => {
-    setImages((prevImages: any) => [...prevImages, image]);
+    setImages((prevImages: any[]) => [...prevImages, image]);
     console.log(images);
   };
 
@@ -59,11 +73,12 @@ const OwnerAddAccommodations = () => {
     AccommodationData.append("type", formData.type);
     AccommodationData.append("price", formData.price);
     AccommodationData.append("images", images[0]);
-    AccommodationData.append("amenities", JSON.stringify([formData.amenities]));
+    AccommodationData.append("amenities", JSON.stringify(formData.amenities));
     AccommodationData.append("freebies", JSON.stringify(formData.freebies));
     AccommodationData.append("discount", formData.discount);
     AccommodationData.append("rating", String(formData.rating));
     AccommodationData.append("stock", String(formData.stock ?? "0"));
+    
     AuthorizedAxiosAPI.post("/accommodation/create", AccommodationData, {
       headers: {
         "Content-Type": "multipart/form-data",
@@ -98,10 +113,11 @@ const OwnerAddAccommodations = () => {
       })
       .finally(() => setLoading(false));
   };
+
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full pb-10 h-[150vh]"
+      className="w-full pb-10 min-h-[150vh]"
       encType="multipart/form-data"
     >
       <div className="w-full flex justify-between items-center">
@@ -258,7 +274,7 @@ const OwnerAddAccommodations = () => {
                   Stock
                 </label>
                 <input
-                  id="stock"
+                  id="stock"                  
                   name="stock"
                   value={formData.stock}
                   onChange={handleChange}
@@ -280,14 +296,17 @@ const OwnerAddAccommodations = () => {
                 />
               </div>
               <div className="w-full h-11">
-                <label htmlFor="stock" className="text-sm font-medium">
-                  Stock
+                <label htmlFor="discountType" className="text-sm font-medium">
+                  Discount Type
                 </label>
                 <Select
+                  id="discountType"
+                  value={formData.type}
+                  onChange={(e: any) => setFormData({ ...formData, type: e })}
                   data={[
                     {
                       label: "Percentage",
-                      value: "Percentage",
+                      value: "percentage",
                     },
                     {
                       label: "FRW",
@@ -298,6 +317,25 @@ const OwnerAddAccommodations = () => {
               </div>
             </div>
           </div>
+          {formData.type === "hotel" && (
+            <div className="w-full">
+            <h1 className="text-sm font-bold">Rooms Available</h1>
+            <div className="w-full flex items-center gap-4 justify-between h-11">
+              <MultiSelect
+                className="mt-2"
+                value={selectedRoomTypes}
+                onChange={(e: string[]) => setSelectedRoomTypes(e)}
+                data={roomTypes?.map((room) => ({
+                  label: room.name,
+                  value: room.name,
+                }))}
+              />
+              <button onClick={openAddType} type="button" className="mt-2 px-4 border rounded-lg h-full">
+                Add
+              </button>
+            </div>
+          </div>
+          )}
         </div>
         <div className="w-[37%] flex flex-col gap-3">
           <div className="w-full rounded-lg p-3">
@@ -309,27 +347,26 @@ const OwnerAddAccommodations = () => {
                 minHeight={"38vh"}
               />
               <div className="w-full grid grid-cols-2 gap-6 mt-4">
-                <ImagesDropCard
-                  selectedImage={images[1]}
-                  setSelectedImage={handleAddImage}
-                  minHeight={"20vh"}
-                />
-                <ImagesDropCard
-                  selectedImage={images[2]}
-                  setSelectedImage={handleAddImage}
-                  minHeight={"20vh"}
-                />
-                <ImagesDropCard
-                  selectedImage={images[3]}
-                  setSelectedImage={handleAddImage}
-                  minHeight={"20vh"}
-                />
-                <ImagesDropCard
-                  selectedImage={images[4]}
-                  setSelectedImage={handleAddImage}
-                  minHeight={"20vh"}
-                />
-                {/* <DropWithReturn setSelectedImage={handleAddImage}  minHeight={"20vh"}/> */}
+                  <ImagesDropCard
+                    selectedImage={images[1]}
+                    setSelectedImage={handleAddImage}
+                    minHeight={"20vh"}
+                  />
+                  <ImagesDropCard
+                    selectedImage={images[2]}
+                    setSelectedImage={handleAddImage}
+                    minHeight={"20vh"}
+                  />
+                  {/* <ImagesDropCard
+                    selectedImage={images[3]}
+                    setSelectedImage={handleAddImage}
+                    minHeight={"20vh"}
+                  />
+                  <ImagesDropCard
+                    selectedImage={images[4]}
+                    setSelectedImage={handleAddImage}
+                    minHeight={"20vh"}
+                  /> */}
               </div>
             </div>
             <div className="w-full h-11">
@@ -362,7 +399,7 @@ const OwnerAddAccommodations = () => {
                   },
                 ]}
               />
-              <div className="mt-3 flex flex-col gap-2 ">
+              <div className="mt-3 flex flex-col gap-2">
                 <label htmlFor="rating" className="text-sm font-medium">
                   Rating
                 </label>
@@ -381,6 +418,7 @@ const OwnerAddAccommodations = () => {
           <div></div>
         </div>
       </div>
+      <AddRoomTypeModal isAddType={isAddType} closeAddType={closeAddType} setRoomTypes={setRoomTypes} />
     </form>
   );
 };

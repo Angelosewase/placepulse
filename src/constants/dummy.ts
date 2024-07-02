@@ -2,7 +2,7 @@ import hotelImg1 from "../assets/images/hotel3.png";
 import hotelImg2 from "../assets/images/hotel4.png";
 import hotelImg3 from "../assets/images/hotel5.png";
 import hotelImg4 from "../assets/images/hotel6.png";
-import test_image from "@/assets/images/testi_image.png"
+import test_image from "@/assets/images/testi_image.png";
 export const amenities = ["air_conditioned", "fitnes", "pool"];
 export const free_bies = [
   "free_internet",

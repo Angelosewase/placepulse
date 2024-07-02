@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const OwnerNavbar = () => {
   const navigate = useNavigate();
   return (
-    <div className="w-full flex py-2 border-b border-b-gray-300 items-center justify-end pr-9">
+    <div className="w-full flex h-[10vh] border-b border-b-gray-300 items-center justify-end pr-9">
       <div className="flex gap-4 items-center userNav">
         <button className="p-3 hover:bg-neutral-100 rounded-full">
           <GoSearch color="black" size={19} />

@@ -3,12 +3,13 @@ import { useSelector } from "react-redux";
 import DashboardCard from "../../../components/Cards/DashboardCard";
 import { Timeline } from "@mantine/core";
 import { FaCheckCircle } from "react-icons/fa";
-import { bookings } from "./OwnerBookings";
 import CompressedView from "../../../components/Cards/CompressedView";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { AxiosAPI } from "../../../utils/AxiosInstance";
-export const notifications = [
+import { notifications } from "@mantine/notifications";
+import { ClipLoader } from "react-spinners";
+export const notificationsData = [
   {
     time: "12:23 PM",
     date: "18/06/2024",
@@ -27,7 +28,31 @@ export const notifications = [
 ];
 const OwnerHome = () => {
   const [accommodations, setAccommodations] = useState([]);
+  const [bookings, setBookings] = useState([]);
+  const [loading, setLoading] = useState(false);
   const { token } = useSelector((state: any) => state.auth);
+  const getAllBookings = async () => {
+    setLoading(true);
+    AxiosAPI.get("/booking/owner/getAll", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        console.log(res.data);
+        setBookings(res.data.data);
+      })
+      .catch((err) => {
+        notifications.show({
+          message: err.response ?? err.message,
+        });
+      })
+      .finally(() => setLoading(false));
+  };
+
+  useEffect(() => {
+    getAllBookings();
+  }, []);
   useEffect(() => {
     AxiosAPI.get("/accommodation/getMine", {
       headers: {
@@ -85,15 +110,21 @@ const OwnerHome = () => {
             </button>
           </div>
           <div className="w-full flex flex-col gap-3 mt-3 ">
-            {bookings.slice(0, 3).map((booking: any, index: any) => {
-              return <CompressedView data={booking} key={index} />;
-            })}
+            {loading ? (
+              <div className="w-full flex justify-center">
+                <ClipLoader size={20} color="black" />
+              </div>
+            ) : (
+              bookings.slice(0, 3).map((booking: any, index: any) => {
+                return <CompressedView data={booking} key={index} />;
+              })
+            )}
           </div>
         </div>
         <div className="w-[33%] pb-20 flex flex-col gap-3">
           <h1 className="text-lg font-bold pl-4">Notifications</h1>
           <Timeline color={"teal"}>
-            {notifications.map((notif: any, index: number) => {
+            {notificationsData.map((notif: any, index: number) => {
               return (
                 <Timeline.Item
                   key={index}

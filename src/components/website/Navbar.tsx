@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { MenuSquareIcon } from "lucide-react";
 import Brand from "../ui/brand";
 const WebNavbar = () => {
+  const isShow = useLocation().pathname === "/";
   return (
     <div className="w-full flex py-6 items-center justify-between px-10 backdrop-blur-xl sticky top-0 z-50">
       <Link to={"/"} className="flex items-center gap-2">
@@ -14,9 +15,11 @@ const WebNavbar = () => {
         <Link to={"/about"} className=" text-slate-500">
           About
         </Link>
-        <a href={"#reviews"} className=" text-slate-500">
-          Reviews
-        </a>
+        {isShow && (
+          <a href={"#reviews"} className=" text-slate-500">
+            Reviews
+          </a>
+        )}
         <Link to={"/services"} className=" text-slate-500">
           Services
         </Link>

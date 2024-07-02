@@ -9,7 +9,7 @@ const UserNavbar = () => {
     <div className="w-full flex py-3 items-center justify-between px-3 md:px-10">
       <div className="flex gap-5">
         <Link to={"/_client/home"} className="flex items-center gap-2">
-          <Brand/>
+          <Brand />
         </Link>
         <div className="relative ml-10 hidden md:flex md:w-[20vw]">
           <input
@@ -17,7 +17,7 @@ const UserNavbar = () => {
             placeholder="Search ..."
           />
           <button className="absolute top-4 left-3">
-            <CiSearch size={25} color="#00000050"/>
+            <CiSearch size={25} color="#00000050" />
           </button>
         </div>
       </div>

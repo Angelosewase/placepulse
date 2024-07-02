@@ -6,7 +6,6 @@ import testimonialVector from "@/assets/images/test_vector.png";
 import testimonialActiveVector from "@/assets/images/test_vector_actice.png";
 
 const ReviewsCarousel = () => {
-
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextSlide = () => {
@@ -14,7 +13,9 @@ const ReviewsCarousel = () => {
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + reviews.length) % reviews.length);
+    setCurrentIndex(
+      (prevIndex) => (prevIndex - 1 + reviews.length) % reviews.length,
+    );
   };
 
   return (
@@ -25,24 +26,29 @@ const ReviewsCarousel = () => {
       >
         <TiArrowLeftThick size={24} />
       </button>
-      <div className="flex transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${currentIndex * 33.33}%)` }}>
+      <div
+        className="flex transition-transform duration-500 ease-in-out"
+        style={{ transform: `translateX(-${currentIndex * 33.33}%)` }}
+      >
         {reviews.map((review, index) => (
           <div
             key={index}
             className={`relative flex-shrink-0 w-1/3 flex flex-col items-center p-4 transition-opacity duration-500 ease-in-out`}
             style={{ minWidth: "33.33%" }}
           >
-            {currentIndex === index - 1 ? <img
-              src={testimonialActiveVector}
-              className="w-[390px] h-[320px]"
-              alt="Background"
-            /> :
-            <img
-              src={testimonialVector}
-              className="w-[390px] h-[320px]"
-              alt="Background"
-            />
-            }
+            {currentIndex === index - 1 ? (
+              <img
+                src={testimonialActiveVector}
+                className="w-[390px] h-[320px]"
+                alt="Background"
+              />
+            ) : (
+              <img
+                src={testimonialVector}
+                className="w-[390px] h-[320px]"
+                alt="Background"
+              />
+            )}
             <div className="w-[70%] absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 text-center">
               <img
                 src={review.image}

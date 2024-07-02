@@ -70,10 +70,10 @@ const OwnerSidebar = () => {
   ];
   return (
     <div className="w-full flex flex-col pt-[5vh] h-screen bg-[#F8F8FC]">
-      <h1 className="text-2xl font-extrabold w-full text-center">
-        <Brand/>
+      <h1 className="text-2xl font-extrabold w-full text-center pl-8">
+        <Brand />
       </h1>
-      <div className="w-full flex flex-col mt-10 sidebar-owsadm gap-4">
+      <div className="w-full flex flex-col mt-7 sidebar-owsadm gap-3">
         {tabs.map((tab, index) => {
           return (
             <>

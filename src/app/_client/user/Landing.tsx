@@ -68,7 +68,18 @@ const UserLanding = () => {
               "Conference Rooms",
               "More",
             ].map((text) => (
-              <button key={text} className="text-white text-md font-semibold">
+              <button
+                onClick={() =>
+                  navigate(
+                    `/_client/home/find/${text
+                      .toString()
+                      .toLowerCase()
+                      .slice(0, text.length - 1)}`,
+                  )
+                }
+                key={text}
+                className="text-white text-md font-semibold"
+              >
                 {text}
               </button>
             ))}

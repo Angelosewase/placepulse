@@ -11,7 +11,7 @@ const CompressedView = ({ data }: { data: any }) => {
           height={80}
           className="rounded-lg object-contain"
         />
-        <h1 className="text-md font-extrabold">{data.owner.email}</h1>
+        <h1 className="text-md font-extrabold">{data.owner?.email}</h1>
         <div className="flex gap-2 items-center">
           <hr className="border border-[#D7E2EE] h-[4rem]" />
           <div className=" pl-4 grid grid-cols-2 gap-5">

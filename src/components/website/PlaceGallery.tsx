@@ -10,24 +10,26 @@ const PlaceGallery = () => {
   // const accommodation = accommodations_data[Number(accommodation_id)];
   const [loading, setLoading] = useState(true);
   const [accommodation, setAccommodation] = useState<any>();
+  const [newImages, setNewImages] = useState<any>([]);
 
   useEffect(() => {
     setLoading(true);
     AxiosAPI.get(`/accommodation/get/${accommodation_id}`)
       .then((res) => {
         setAccommodation(res.data.data[0]);
+        console.log(accommodation.images[0]);
         setNewImages([
-          accommodation.images[0],
-          accommodation.images[0],
-          accommodation.images[0],
-          accommodation.images[0],
-          accommodation.images[0],
-          accommodation.images[0],
-          accommodation.images[0],
-          accommodation.images[0],
-          accommodation.images[0],
-          accommodation.images[0],
-          accommodation.images[0],
+          res.data.data[0].images[0],
+          res.data.data[0].images[0],
+          res.data.data[0].images[0],
+          res.data.data[0].images[0],
+          res.data.data[0].images[0],
+          res.data.data[0].images[0],
+          res.data.data[0].images[0],
+          res.data.data[0].images[0],
+          res.data.data[0].images[0],
+          res.data.data[0].images[0],
+          res.data.data[0].images[0],
         ]);
       })
       .catch((err) => {
@@ -35,7 +37,6 @@ const PlaceGallery = () => {
       })
       .finally(() => setLoading(false));
   }, []);
-  const [newImages, setNewImages] = useState<any>([]);
   return (
     <div className="w-full md:px-10 pb-[50vh] pt-[8vh]">
       {loading ? (

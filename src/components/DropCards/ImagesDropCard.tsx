@@ -17,7 +17,6 @@ const ImagesDropCard = ({
   setSelectedImage: any;
 }) => {
   const handleDrop = (files: File[]) => {
-    // Assuming only one file is being selected
     setSelectedImage(files[0]);
   };
 
@@ -43,6 +42,7 @@ const ImagesDropCard = ({
             />
             {/* close image */}
             <button
+              type="button"
               className="absolute top-3 right-3 bg-neutral-200 rounded-full p-2"
               onClick={handleDeselect}
             >
@@ -54,6 +54,7 @@ const ImagesDropCard = ({
             <div className="border w-full h-full border-dashed rounded-lg border-[#0075FF] flex flex-col gap-2 items-center justify-center">
               {/* <CiCirclePlus color='#0075FF' size={30}/> */}
               <button
+                type="button"
                 className={`border border-dashed border-[#0075FF] p-[${buttonPadding}] rounded-full`}
               >
                 <HiOutlinePlusSm color="#0075FF" size={20} />

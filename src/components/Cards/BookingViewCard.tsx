@@ -7,20 +7,26 @@ const BookingViewCard = ({ data }: { data: any }) => {
   return (
     <div className="w-full pt-3 pb-5 flex justify-between px-4 shadow-md shadow-gray-200">
       <div className="w-[50%] flex items-center justify-between">
-        <img
-          src={data.image}
-          width={80}
-          height={80}
-          className="rounded-lg object-contain"
-        />
-        <div>
-          <h1 className="text-lg font-extrabold">{data.name}</h1>
-          <h1
-            className={`text-sm font-extrabold mt-3 ${data.status === "PENDING" ? "text-red-600" : "text-green-600"}`}
-            style={{ fontFamily: "Montserrat" }}
-          >
-            {data.status}
-          </h1>
+        <div className="flex justify-between items-center gap-4">
+          <img
+            src={data.image}
+            width={80}
+            height={80}
+            className="rounded-lg object-contain"
+          />
+          <div>
+            <h1 className="text-lg font-extrabold">
+              {data.name.length > 18
+                ? `${data.name.slice(0, 18)} . . .`
+                : data.name}
+            </h1>
+            <h1
+              className={`text-xs font-extrabold mt-3 ${data.status === "PENDING" ? "text-red-600" : "text-green-600"}`}
+              style={{ fontFamily: "Montserrat" }}
+            >
+              {data.status}
+            </h1>
+          </div>
         </div>
         <div className="flex gap-2 items-center">
           <hr className="border border-[#D7E2EE] h-[4rem]" />

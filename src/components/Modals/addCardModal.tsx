@@ -83,7 +83,7 @@ const AddCardModal = ({
           )}
           <div className="w-full flex flex-col items-start gap-6">
             <Select
-              className="w-full"
+              className="w-full h-16"
               placeholder="Select Card Type"
               value={cardType}
               onChange={(e: any) => setCardType(e)}

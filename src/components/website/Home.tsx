@@ -171,7 +171,7 @@ const Home = () => {
           <h1 className="text-3xl font-extrabold w-full text-center mb-[10vh]">
             Clients Reviews
           </h1>
-          <ReviewsCarousel/>
+          <ReviewsCarousel />
         </section>
       </section>
       <section className="w-full bg-[#F7F7F7] px-20 mb-[17vh]">
