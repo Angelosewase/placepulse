@@ -14,6 +14,7 @@ import { useSelector } from "react-redux";
 import { format } from "date-fns";
 import { ClipLoader } from "react-spinners";
 import { notifications } from "@mantine/notifications";
+import FlutterwavePayButton from "@/components/Payment/PaymentButton";
 
 const CheckoutPage = () => {
   const params = useParams();
@@ -238,6 +239,7 @@ const CheckoutPage = () => {
             >
               Pay {booking.paymentTotal} FRW
             </button>
+            <FlutterwavePayButton/>
           </div>
           <PaymentAuthorizationModal
             opened={isPaymentOpen}
