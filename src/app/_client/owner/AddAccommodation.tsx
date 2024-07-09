@@ -35,7 +35,8 @@ const OwnerAddAccommodations = () => {
   const [loading, setLoading] = useState(false);
   const [roomTypes, setRoomTypes] = useState<RoomType[]>([]);
   const [selectedRoomTypes, setSelectedRoomTypes] = useState<string[]>([]);
-  const [isAddType, { open: openAddType, close: closeAddType }] = useDisclosure(false);
+  const [isAddType, { open: openAddType, close: closeAddType }] =
+    useDisclosure(false);
 
   const handleAddImage = (image: any) => {
     setImages((prevImages: any[]) => [...prevImages, image]);
@@ -78,7 +79,7 @@ const OwnerAddAccommodations = () => {
     AccommodationData.append("discount", formData.discount);
     AccommodationData.append("rating", String(formData.rating));
     AccommodationData.append("stock", String(formData.stock ?? "0"));
-    
+
     AuthorizedAxiosAPI.post("/accommodation/create", AccommodationData, {
       headers: {
         "Content-Type": "multipart/form-data",
@@ -274,7 +275,7 @@ const OwnerAddAccommodations = () => {
                   Stock
                 </label>
                 <input
-                  id="stock"                  
+                  id="stock"
                   name="stock"
                   value={formData.stock}
                   onChange={handleChange}
@@ -319,22 +320,26 @@ const OwnerAddAccommodations = () => {
           </div>
           {formData.type === "hotel" && (
             <div className="w-full">
-            <h1 className="text-sm font-bold">Rooms Available</h1>
-            <div className="w-full flex items-center gap-4 justify-between h-11">
-              <MultiSelect
-                className="mt-2"
-                value={selectedRoomTypes}
-                onChange={(e: string[]) => setSelectedRoomTypes(e)}
-                data={roomTypes?.map((room) => ({
-                  label: room.name,
-                  value: room.name,
-                }))}
-              />
-              <button onClick={openAddType} type="button" className="mt-2 px-4 border rounded-lg h-full">
-                Add
-              </button>
+              <h1 className="text-sm font-bold">Rooms Available</h1>
+              <div className="w-full flex items-center gap-4 justify-between h-11">
+                <MultiSelect
+                  className="mt-2"
+                  value={selectedRoomTypes}
+                  onChange={(e: string[]) => setSelectedRoomTypes(e)}
+                  data={roomTypes?.map((room) => ({
+                    label: room.name,
+                    value: room.name,
+                  }))}
+                />
+                <button
+                  onClick={openAddType}
+                  type="button"
+                  className="mt-2 px-4 border rounded-lg h-full"
+                >
+                  Add
+                </button>
+              </div>
             </div>
-          </div>
           )}
         </div>
         <div className="w-[37%] flex flex-col gap-3">
@@ -347,17 +352,17 @@ const OwnerAddAccommodations = () => {
                 minHeight={"38vh"}
               />
               <div className="w-full grid grid-cols-2 gap-6 mt-4">
-                  <ImagesDropCard
-                    selectedImage={images[1]}
-                    setSelectedImage={handleAddImage}
-                    minHeight={"20vh"}
-                  />
-                  <ImagesDropCard
-                    selectedImage={images[2]}
-                    setSelectedImage={handleAddImage}
-                    minHeight={"20vh"}
-                  />
-                  {/* <ImagesDropCard
+                <ImagesDropCard
+                  selectedImage={images[1]}
+                  setSelectedImage={handleAddImage}
+                  minHeight={"20vh"}
+                />
+                <ImagesDropCard
+                  selectedImage={images[2]}
+                  setSelectedImage={handleAddImage}
+                  minHeight={"20vh"}
+                />
+                {/* <ImagesDropCard
                     selectedImage={images[3]}
                     setSelectedImage={handleAddImage}
                     minHeight={"20vh"}
@@ -418,7 +423,11 @@ const OwnerAddAccommodations = () => {
           <div></div>
         </div>
       </div>
-      <AddRoomTypeModal isAddType={isAddType} closeAddType={closeAddType} setRoomTypes={setRoomTypes} />
+      <AddRoomTypeModal
+        isAddType={isAddType}
+        closeAddType={closeAddType}
+        setRoomTypes={setRoomTypes}
+      />
     </form>
   );
 };

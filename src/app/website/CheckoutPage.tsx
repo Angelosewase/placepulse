@@ -239,7 +239,7 @@ const CheckoutPage = () => {
             >
               Pay {booking.paymentTotal} FRW
             </button>
-            <FlutterwavePayButton/>
+            <FlutterwavePayButton />
           </div>
           <PaymentAuthorizationModal
             opened={isPaymentOpen}
