@@ -25,7 +25,8 @@ const CheckoutPage = () => {
   const [paymentMethods, setPaymentMethods] = useState([]);
   const [loadingMethods, setLoadingMethods] = useState(true);
   const [selectedCard, setSelectedCard] = useState<any>();
-  const [loadingPay, setLoadingPay] = useState(false);
+  const [, setLoadingPay] = useState(false);
+  console.log(auth);
   const formatDate = (date: Date | null, text?: string) => {
     return date ? format(date, "MMMM dd") : `Select ${text}`;
   };
@@ -232,14 +233,27 @@ const CheckoutPage = () => {
                 </div>
               </Fieldset>
             )}
-            <button
+            {/* <button
               onClick={createBooking}
               disabled={loadingPay}
               className="w-full py-3 mt-3 rounded-sm flex items-center font-extrabold justify-center bg-[#396FF9] text-white"
             >
               Pay {booking.paymentTotal} FRW
-            </button>
-            <FlutterwavePayButton />
+            </button> */}
+            <FlutterwavePayButton
+              initFunction={createBooking}
+              className="w-full py-3 mt-3 rounded-sm flex items-center font-extrabold justify-center bg-[#396FF9] text-white"
+            label={`Pay ${booking.paymentTotal} FRW`} data={{
+              amount: booking.paymentTotal,
+              currency: "FRW",
+              title: `${accommodation.name ?? ""}`,
+              image: booking.image,
+              customer: {
+                email: auth.user.email,
+                phoneNumber: auth.user.phone,
+                name: auth.user.firstname + " " + auth.user.lastname,
+              }
+            }}/>
           </div>
           <PaymentAuthorizationModal
             opened={isPaymentOpen}

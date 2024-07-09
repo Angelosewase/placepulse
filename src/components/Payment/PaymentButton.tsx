@@ -1,21 +1,41 @@
 import { useFlutterwave, closePaymentModal } from "flutterwave-react-v3";
-
-export default function FlutterwavePayButton() {
+type PaymentData = {
+  amount: number;
+  currency: string;
+  title: string;
+  image: string;
+  customer: {
+    email: string;
+    phoneNumber: string | undefined;
+    name: string | undefined;
+  }
+}
+export default function FlutterwavePayButton({
+  className,
+  label,
+  data,
+  // initFunction
+}:{
+  className?: string;
+  label: string;
+  data: PaymentData;
+  initFunction: ()=> void;
+}) {
   const config = {
     public_key: "FLWPUBK-**************************-X",
     tx_ref: String(Date.now()),
-    amount: 100,
-    currency: "NGN",
+    amount: data.amount,
+    currency: "RWF",
     payment_options: "card,mobilemoney,ussd",
     customer: {
-      email: "user@gmail.com",
-      phone_number: "070********",
-      name: "john doe",
+      email: data.customer.email ?? "",
+      phone_number: data.customer.phoneNumber ?? "",
+      name: "John Doe",
     },
     customizations: {
-      title: "my Payment Title",
-      description: "Payment for items in cart",
-      logo: "https://st2.depositphotos.com/4403291/7418/v/450/depositphotos_74189661-stock-illustration-online-shop-log.jpg",
+      title: data.title,
+      description: `Payment For ${data.title}`,
+      logo: data.image,
     },
   };
 
@@ -23,7 +43,10 @@ export default function FlutterwavePayButton() {
 
   return (
     <button
+      className={className}
       onClick={() => {
+        // initFunction()
+        console.log(config)
         handleFlutterPayment({
           callback: (response) => {
             console.log(response);
@@ -33,7 +56,7 @@ export default function FlutterwavePayButton() {
         });
       }}
     >
-      Pay With Flutterwave
+      {label}
     </button>
   );
 }
