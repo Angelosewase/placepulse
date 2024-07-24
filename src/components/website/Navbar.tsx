@@ -12,17 +12,11 @@ const WebNavbar = () => {
         <Link to={"/"} className=" text-slate-500">
           Home
         </Link>
-        <Link to={"/about"} className=" text-slate-500">
-          About
-        </Link>
         {isShow && (
           <a href={"#reviews"} className=" text-slate-500">
             Reviews
           </a>
         )}
-        <Link to={"/services"} className=" text-slate-500">
-          Services
-        </Link>
         <Link to={"/places"} className=" text-slate-500">
           Places
         </Link>

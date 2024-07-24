@@ -81,9 +81,10 @@ const AddCardModal = ({
               <p className="text-red-500">{error}</p>
             </div>
           )}
-          <div className="w-full flex flex-col items-start gap-6">
+          <div className="w-full  flex flex-col items-start gap-6">
+            <div className="w-full h-12">
             <Select
-              className="w-full h-16"
+              className="w-full"
               placeholder="Select Card Type"
               value={cardType}
               onChange={(e: any) => setCardType(e)}
@@ -104,6 +105,7 @@ const AddCardModal = ({
               allowDeselect={false}
               required
             />
+            </div>
             {cardType && (cardType == "MTN" || cardType == "AIRTEL") && (
               <AnimatedInput
                 label="Phone Number"
@@ -146,6 +148,7 @@ const AddCardModal = ({
                   value={phone}
                   // maxLength={9}
                 />
+                <div className="w-full h-12">
                 <Select
                   className="w-full"
                   placeholder="Pick country"
@@ -168,6 +171,7 @@ const AddCardModal = ({
                   allowDeselect={false}
                   required
                 />
+                </div>
               </div>
             )}
           </div>

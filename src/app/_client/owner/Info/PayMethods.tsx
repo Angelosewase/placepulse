@@ -1,21 +1,22 @@
-import PaymentMethodCard from "../../../../components/Cards/PaymentMethods";
-import { IoIosAddCircleOutline } from "react-icons/io";
-import AddCardModal from "../../../../components/Modals/addCardModal";
-import { useDisclosure } from "@mantine/hooks";
+// import PaymentMethodCard from "../../../../components/Cards/PaymentMethods";
+// import { IoIosAddCircleOutline } from "react-icons/io";
+// import AddCardModal from "../../../../components/Modals/addCardModal";
+// import { useDisclosure } from "@mantine/hooks";
 
 const PaymentMethods = () => {
-  const [isAddCardOpen, { open: openAddCard, close: closeAddCard }] =
-    useDisclosure();
+  // const [isAddCardOpen, { open: openAddCard, close: closeAddCard }] =
+  //   useDisclosure();
   return (
     <div className="w-full">
-      <h1 className="text-3xl font-extrabold">Payment Methods</h1>
-      <div className="w-full flex overflow-x-auto space-x-4 pay_meth_container mt-6 pb-4">
+      {/* <h1 className="text-3xl font-extrabold">Payment Methods</h1> */}
+      {/* <div className="w-full flex overflow-x-auto space-x-4 pay_meth_container mt-6 pb-4">
         <PaymentMethodCard
           name="MTN"
           tag="MOMO Pay"
           phone="+250788460119"
           className="h-[170px] flex-shrink-0"
           disableSelect={true}
+          onDeleteCard={()=> {}}
         />
         <PaymentMethodCard
           name="AIRTEL"
@@ -23,6 +24,7 @@ const PaymentMethods = () => {
           phone="+250726632125"
           className="h-[170px] flex-shrink-0 bg-[#FF0707]"
           disableSelect={true}
+          onDeleteCard={()=> {}}
         />
         <div
           onClick={openAddCard}
@@ -34,7 +36,7 @@ const PaymentMethods = () => {
           </div>
         </div>
       </div>
-      <AddCardModal opened={isAddCardOpen} close={closeAddCard} />
+      <AddCardModal opened={isAddCardOpen} close={closeAddCard} /> */}
     </div>
   );
 };

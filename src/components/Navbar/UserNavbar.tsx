@@ -13,11 +13,11 @@ const UserNavbar = () => {
         </Link>
         <div className="relative ml-10 hidden md:flex md:w-[20vw]">
           <input
-            className="py-4 pl-12 pr-2 border rounded-3xl outline-none w-full"
+            className="py-3 pl-12 pr-2 border rounded-3xl outline-none w-full text-sm"
             placeholder="Search ..."
           />
-          <button className="absolute top-4 left-3">
-            <CiSearch size={25} color="#00000050" />
+          <button className="absolute top-3 left-3">
+            <CiSearch size={20} color="#00000050" />
           </button>
         </div>
       </div>

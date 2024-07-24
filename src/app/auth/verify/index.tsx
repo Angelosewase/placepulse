@@ -10,10 +10,10 @@ import {
 import { ClipLoader } from "react-spinners";
 import Brand from "@/components/ui/brand";
 
-export default function VerifyCode() {
+export default function VerifyCode({route}: {route: string}) {
   const [code, setCode] = useState("");
   const [loadingPage, setLoadingPage] = useState(false);
-  const email = localStorage.getItem("user_mail") ?? "";
+  const email = localStorage.getItem("reset_email") ?? "";
   console.log(email);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -73,7 +73,7 @@ export default function VerifyCode() {
           message: res.data.message,
           color: "green",
         });
-        navigate("/auth/reset");
+        navigate(`/auth/${route}`);
       })
       .catch((err) => {
         console.log(err);

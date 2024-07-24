@@ -1,5 +1,5 @@
 import { Timeline } from "@mantine/core";
-import { notifications } from "../_client/owner/Home";
+import { notificationsData as notifications } from "../_client/owner/Home";
 import { FaCheckCircle } from "react-icons/fa";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */

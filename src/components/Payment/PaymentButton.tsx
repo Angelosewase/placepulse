@@ -1,3 +1,5 @@
+import { notifications } from "@mantine/notifications";
+import {FLUTTERWAVE_PAYMENT_TEST_KEY} from "../../../env"
 import { useFlutterwave, closePaymentModal } from "flutterwave-react-v3";
 type PaymentData = {
   amount: number;
@@ -22,15 +24,15 @@ export default function FlutterwavePayButton({
   initFunction: ()=> void;
 }) {
   const config = {
-    public_key: "FLWPUBK-**************************-X",
+    public_key: FLUTTERWAVE_PAYMENT_TEST_KEY,
     tx_ref: String(Date.now()),
     amount: data.amount,
     currency: "RWF",
-    payment_options: "card,mobilemoney,ussd",
+    payment_options: "card,mobilemoney",
     customer: {
       email: data.customer.email ?? "",
       phone_number: data.customer.phoneNumber ?? "",
-      name: "John Doe",
+      name: data.customer.name ?? "No name set",
     },
     customizations: {
       title: data.title,
@@ -41,6 +43,14 @@ export default function FlutterwavePayButton({
 
   const handleFlutterPayment = useFlutterwave(config);
 
+  const onPaymentSuccess = ()=>{
+    notifications.show({
+      message: `Successfully payed for ${data.title}`,
+      color: "green",
+      duration: 10000,
+    })
+    // call your backend API to save the payment transaction
+  }
   return (
     <button
       className={className}
@@ -50,6 +60,15 @@ export default function FlutterwavePayButton({
         handleFlutterPayment({
           callback: (response) => {
             console.log(response);
+            if(response.status === "successful"){
+              onPaymentSuccess()
+            }else{
+              notifications.show({
+                message: "Payment Failed",
+                color: "red",
+                duration: 10000,
+              })
+            }
             closePaymentModal();
           },
           onClose: () => {},

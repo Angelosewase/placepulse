@@ -36,7 +36,7 @@ export default function Forgot() {
           color: "green",
         });
         localStorage.setItem("user_mail", email);
-        navigate("/auth/verify");
+        navigate("/auth/forgot/verify");
       })
       .catch((err) => {
         console.log(err);

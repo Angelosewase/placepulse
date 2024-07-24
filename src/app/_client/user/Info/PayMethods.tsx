@@ -77,7 +77,7 @@ const PaymentMethods = () => {
           })}
           <div
             onClick={openAddCard}
-            className="w-[328px] h-[170px] flex-shrink-0 flex items-center justify-center border-2 border-dashed divide-dashed border-[#396FF9] rounded-xl cursor-pointer"
+            className="w-[328px] h-[160px] flex-shrink-0 flex items-center justify-center border-2 border-dashed divide-dashed border-[#396FF9] rounded-xl cursor-pointer"
           >
             <div className="flex flex-col gap-2 items-center justify-center">
               <IoIosAddCircleOutline color="#396FF9" size={39} />

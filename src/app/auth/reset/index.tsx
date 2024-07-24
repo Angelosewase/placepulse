@@ -13,7 +13,7 @@ export default function Login() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const email = localStorage.getItem("user_mail") ?? "";
+  const email = localStorage.getItem("reset_email") ?? "";
   const navigate = useNavigate();
   const handleConfirmPChange = (event: React.ChangeEvent<HTMLFormElement>) => {
     console.log(event.target.value);
@@ -55,7 +55,7 @@ export default function Login() {
           message: res.data.message,
           color: "green",
         });
-        localStorage.removeItem("user_mail");
+        localStorage.removeItem("reset_email");
         navigate("/");
       })
       .catch((err) => {

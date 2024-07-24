@@ -43,7 +43,8 @@ export default function Register() {
           message: res.data.message,
           color: "green",
         });
-        navigate("/auth/verify");
+        localStorage.setItem("reset_email", email);
+        navigate("/auth/register/verify");
       })
       .catch((err) => {
         console.log(err.response);
