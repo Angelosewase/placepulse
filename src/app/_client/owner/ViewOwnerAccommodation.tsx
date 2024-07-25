@@ -15,20 +15,20 @@ const ViewOwnerAccommodation = () => {
   const [accommodation, setAccommodation] = useState<any>();
   const [loading, setLoading] = useState(true);
   const [rooms, SetRooms] = useState([]);
-  const getHotel = async (id: string)=>{
+  const getHotel = async (id: string) => {
     AuthorizedAxiosAPI.get(`/accommodation/hotel/get/${id}`)
-     .then((res) => {
+      .then((res) => {
         SetRooms(res.data.data);
       })
-     .catch((err) => {
+      .catch((err) => {
         console.log(err);
       });
-  }
+  };
   useEffect(() => {
     AuthorizedAxiosAPI.get(`/accommodation/get/${accommodation_id}`)
       .then((res) => {
         setAccommodation(res.data.data[0]);
-        if(res.data.data[0].type === "hotel"){
+        if (res.data.data[0].type === "hotel") {
           getHotel(res.data.data[0].id);
         }
       })
@@ -119,23 +119,21 @@ const ViewOwnerAccommodation = () => {
                   {Math.floor(Math.random() * 1000) + 1} Reviews
                 </h1>
               </div>
-              {accommodation.amenities[0].map(
-                (amenity: any, index: number) => {
-                  return (
-                    <div
-                      key={index}
-                      className="w-[28vh] h-[25vh] border border-[#396FF9] rounded-lg relative flex flex-col justify-end p-3"
-                    >
-                      <button className="absolute top-2 left-2">
-                        <WiStars color="black" size={30} />
-                      </button>
-                      <h1 className="font-extrabold">
-                        {SnakeCaseToPascalCaseSpaced(amenity)}
-                      </h1>
-                    </div>
-                  );
-                },
-              )}
+              {accommodation.amenities[0].map((amenity: any, index: number) => {
+                return (
+                  <div
+                    key={index}
+                    className="w-[28vh] h-[25vh] border border-[#396FF9] rounded-lg relative flex flex-col justify-end p-3"
+                  >
+                    <button className="absolute top-2 left-2">
+                      <WiStars color="black" size={30} />
+                    </button>
+                    <h1 className="font-extrabold">
+                      {SnakeCaseToPascalCaseSpaced(amenity)}
+                    </h1>
+                  </div>
+                );
+              })}
             </div>
           </div>
           <hr className="w-full hotel_divider my-[5vh]" />
@@ -145,36 +143,37 @@ const ViewOwnerAccommodation = () => {
                 <h1 className="text-xl font-extrabold mb-4">Available Rooms</h1>
                 <div className="w-full flex flex-col gap-4">
                   {rooms.map((roomType: any, index: number) => {
-                return (
-                  <div
-                    key={index}
-                    className={`w-full flex justify-between ${index !== rooms.length - 1 && "border-b border-b-[#ccc]"} pb-2`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <img
-                        src={roomType.images[0]}
-                        width={90}
-                        height={90}
-                        className="rounded-sm"
-                      />
-                      <h1 className="font-extrabold">{roomType.name}</h1>
-                    </div>
-                    <div className="flex items-center gap-4">
-                      <h1 className="font-extrabold">
-                        {roomType.price} <span className="text-sm">/night</span>
-                      </h1>
-                      <button
-                        onClick={() => {
-                          navigate(`/booking/place/${accommodation_id}`);
-                        }}
-                        className="px-6 py-3 rounded-sm flex items-center font-extrabold justify-center bg-[#396FF9] text-white text-sm"
+                    return (
+                      <div
+                        key={index}
+                        className={`w-full flex justify-between ${index !== rooms.length - 1 && "border-b border-b-[#ccc]"} pb-2`}
                       >
-                        Book Now
-                      </button>
-                    </div>
-                  </div>
-                );
-              })}
+                        <div className="flex items-center gap-3">
+                          <img
+                            src={roomType.images[0]}
+                            width={90}
+                            height={90}
+                            className="rounded-sm"
+                          />
+                          <h1 className="font-extrabold">{roomType.name}</h1>
+                        </div>
+                        <div className="flex items-center gap-4">
+                          <h1 className="font-extrabold">
+                            {roomType.price}{" "}
+                            <span className="text-sm">/night</span>
+                          </h1>
+                          <button
+                            onClick={() => {
+                              navigate(`/booking/place/${accommodation_id}`);
+                            }}
+                            className="px-6 py-3 rounded-sm flex items-center font-extrabold justify-center bg-[#396FF9] text-white text-sm"
+                          >
+                            Book Now
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
               <hr className="w-full hotel_divider my-[9vh]" />
@@ -199,7 +198,7 @@ const ViewOwnerAccommodation = () => {
               />
             </div>
           </div>
-          <hr className="w-full hotel_divider my-[9vh]"/>
+          <hr className="w-full hotel_divider my-[9vh]" />
           <div className="w-full mt-5">
             <h1 className="text-xl font-extrabold mb-4">Freebies</h1>
             <div className="w-full grid md:grid-cols-3 gap-3 mt-4">

@@ -28,7 +28,7 @@ const AddRoomTypeModal = ({
     image: null,
     name: "",
     price: 0,
-    stock: ""
+    stock: "",
   });
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -45,13 +45,20 @@ const AddRoomTypeModal = ({
     if (formData.image) {
       AccommodationData.append("images", formData.image);
     }
-    AuthorizedAxiosAPI.post("/accommodation/roomtype/create", AccommodationData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
+    AuthorizedAxiosAPI.post(
+      "/accommodation/roomtype/create",
+      AccommodationData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       },
-    })
+    )
       .then((res) => {
-        setRoomTypes((prevRoomTypes: RoomType[]) => [...prevRoomTypes, res.data.data]);
+        setRoomTypes((prevRoomTypes: RoomType[]) => [
+          ...prevRoomTypes,
+          res.data.data,
+        ]);
         closeAddType();
       })
       .catch((err: any) => {
@@ -62,7 +69,7 @@ const AddRoomTypeModal = ({
         });
       });
   };
-  
+
   return (
     <Modal size={"lg"} opened={isAddType} onClose={closeAddType}>
       <div className="w-full flex flex-col gap-2">

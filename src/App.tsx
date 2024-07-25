@@ -126,10 +126,16 @@ function App() {
             {/* Auth Routes */}
             <Route path="/auth/login" element={<Login />} />
             <Route path="/auth/register" element={<Signup />} />
-            <Route path="/auth/register/verify" element={<Verify route="login" />} />
+            <Route
+              path="/auth/register/verify"
+              element={<Verify route="login" />}
+            />
             <Route path="/auth/reset" element={<Reset />} />
             <Route path="/auth/forgot" element={<Forgot />} />
-            <Route path="/auth/forgot/verify" element={<Verify route="reset" />} />
+            <Route
+              path="/auth/forgot/verify"
+              element={<Verify route="reset" />}
+            />
             {/* End Auth Routes */}
             {/* User Routes */}
             <Route

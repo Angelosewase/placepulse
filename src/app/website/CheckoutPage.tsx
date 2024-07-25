@@ -71,23 +71,23 @@ const CheckoutPage = () => {
   }, []);
   const [isAddCardOpen, { open: openAddCard, close: closeAddCard }] =
     useDisclosure();
-    const config = {
-      public_key: FLUTTERWAVE_PAYMENT_TEST_KEY,
-      tx_ref: String(Date.now()),
-      amount: booking.paymentTotal,
-      currency: "RWF",
-      payment_options: "card,mobilemoney",
-      customer: {
-        email: auth.user.email ?? "",
-        phone_number: `250${selectedCard?.number}`,
-        name: auth.user.firstname + " " + auth.user.lastname,
-      },
-      customizations: {
-        title: `${accommodation?.name ?? ""}`,
-        description: `Payment For ${accommodation?.name}`,
-        logo: booking.image,
-      },
-    };
+  const config = {
+    public_key: FLUTTERWAVE_PAYMENT_TEST_KEY,
+    tx_ref: String(Date.now()),
+    amount: booking.paymentTotal,
+    currency: "RWF",
+    payment_options: "card,mobilemoney",
+    customer: {
+      email: auth.user.email ?? "",
+      phone_number: `250${selectedCard?.number}`,
+      name: auth.user.firstname + " " + auth.user.lastname,
+    },
+    customizations: {
+      title: `${accommodation?.name ?? ""}`,
+      description: `Payment For ${accommodation?.name}`,
+      logo: booking.image,
+    },
+  };
 
   const handleFlutterPayment = useFlutterwave(config);
   const createBooking = async () => {
@@ -97,7 +97,7 @@ const CheckoutPage = () => {
         color: "red",
       });
 
-      return Promise.reject(new Error("Please select a payment method"))
+      return Promise.reject(new Error("Please select a payment method"));
     }
     setLoadingPay(true);
     const data = {
@@ -145,19 +145,20 @@ const CheckoutPage = () => {
       })
       .finally(() => setLoadingPay(false));
   };
-  const onPaymentSuccess = ()=>{
+  const onPaymentSuccess = () => {
     notifications.show({
       message: `Successfully payed for ${booking.name}`,
       color: "green",
       duration: 10000,
-    })
-    AuthorizedAxiosAPI.get(`/booking/payment/complete/${bookingId}`)
-      .catch((err) => {
+    });
+    AuthorizedAxiosAPI.get(`/booking/payment/complete/${bookingId}`).catch(
+      (err) => {
         notifications.show({
-          message: err.response.message?? err.message,
+          message: err.response.message ?? err.message,
         });
-      });
-  }
+      },
+    );
+  };
 
   return (
     <div className="pb-[50vh] px-4 md:px-20">
@@ -272,7 +273,9 @@ const CheckoutPage = () => {
               </Fieldset>
             )}
             <button
-              className={"w-full py-3 mt-3 rounded-sm flex items-center font-extrabold justify-center bg-[#396FF9] text-white"}
+              className={
+                "w-full py-3 mt-3 rounded-sm flex items-center font-extrabold justify-center bg-[#396FF9] text-white"
+              }
               onClick={() => {
                 createBooking();
               }}

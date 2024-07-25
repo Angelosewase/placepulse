@@ -6,15 +6,14 @@ const CheckInCheckOutDates = ({
   onChange,
   min,
   max,
-  bookedDays
+  bookedDays,
 }: {
   value: Date | null;
   onChange: (value: Date | null) => void;
   min?: Date | any;
   max?: Date | any;
-  bookedDays?: any[]
+  bookedDays?: any[];
 }) => {
-
   const isDateBooked = (date: Date): any => {
     return bookedDays?.some((booked) => {
       const checkIn = new Date(booked.check_in);

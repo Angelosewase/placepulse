@@ -6,7 +6,7 @@ const CompressedView = ({ data }: { data: any }) => {
   return (
     <div className="w-full py-2 flex justify-between px-4 shadow-sm shadow-gray-200">
       <div className="w-full flex items-center justify-between">
-      <div className="flex justify-between items-center gap-4">
+        <div className="flex justify-between items-center gap-4">
           <img
             src={data.image}
             width={80}
@@ -36,31 +36,37 @@ const CompressedView = ({ data }: { data: any }) => {
         <div className="flex gap-2 items-center">
           <hr className="border border-[#D7E2EE] h-[4rem]" />
           <div className="flex flex-col gap-3">
-          <div className=" pl-4 grid grid-cols-2 gap-5">
-            <div className="w-full flex items-center gap-2">
-              <span className="p-2 rounded-md bg-[#EBF6F2]">
-                <GoClockFill color="#0075FF" />
-              </span>
-              <div>
-                <h1 className="text-xs font-bold text-[#00000083]">
-                  Check-In Time
-                </h1>
-                <h1 className="text-sm font-medium">{format(data.check_in, "dd MMMM")}</h1>
+            <div className=" pl-4 grid grid-cols-2 gap-5">
+              <div className="w-full flex items-center gap-2">
+                <span className="p-2 rounded-md bg-[#EBF6F2]">
+                  <GoClockFill color="#0075FF" />
+                </span>
+                <div>
+                  <h1 className="text-xs font-bold text-[#00000083]">
+                    Check-In Time
+                  </h1>
+                  <h1 className="text-sm font-medium">
+                    {format(data.check_in, "dd MMMM")}
+                  </h1>
+                </div>
+              </div>
+              <div className="w-full flex items-center gap-2">
+                <span className="p-2 rounded-md bg-[#EBF6F2]">
+                  <GoClockFill color="#0075FF" />
+                </span>
+                <div>
+                  <h1 className="text-xs font-bold text-[#00000083]">
+                    Check-Out Time
+                  </h1>
+                  <h1 className="text-sm font-medium">
+                    {format(data.check_out, "dd MMMM")}
+                  </h1>
+                </div>
               </div>
             </div>
-            <div className="w-full flex items-center gap-2">
-              <span className="p-2 rounded-md bg-[#EBF6F2]">
-                <GoClockFill color="#0075FF" />
-              </span>
-              <div>
-                <h1 className="text-xs font-bold text-[#00000083]">
-                  Check-Out Time
-                </h1>
-                <h1 className="text-sm font-medium">{format(data.check_out, "dd MMMM")}</h1>
-              </div>
-            </div>
-          </div>
-          <h1 className="pl-4 text-sm font-medium text-black">Booked By: <span className="font-bold">{data.phone}</span></h1>
+            <h1 className="pl-4 text-sm font-medium text-black">
+              Booked By: <span className="font-bold">{data.phone}</span>
+            </h1>
           </div>
         </div>
       </div>

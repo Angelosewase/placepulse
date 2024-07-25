@@ -42,8 +42,6 @@ const BookingPage = () => {
         console.log(err);
       })
       .finally(() => setLoading(false));
-
-
   }, []);
   const [checkIn, setCheckIn] = useState<Date | null>(null);
   const [checkOut, setCheckOut] = useState<Date | null>(null);
@@ -67,7 +65,7 @@ const BookingPage = () => {
   };
 
   const handlePaymentCheckout = () => {
-    if(!checkIn || !checkOut){
+    if (!checkIn || !checkOut) {
       setError("Please Select Check and Checkout Dates");
       return;
     }
@@ -133,7 +131,7 @@ const BookingPage = () => {
                         onChange={setCheckIn}
                         min={new Date()}
                         max={checkOut}
-                        bookedDays= {bookedDays}
+                        bookedDays={bookedDays}
                       />
                     </div>
                   </div>
@@ -147,7 +145,7 @@ const BookingPage = () => {
                         min={checkIn}
                         value={checkOut}
                         onChange={setCheckOut}
-                        bookedDays= {bookedDays}
+                        bookedDays={bookedDays}
                       />
                     </div>
                   </div>

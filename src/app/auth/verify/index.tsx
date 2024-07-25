@@ -10,7 +10,7 @@ import {
 import { ClipLoader } from "react-spinners";
 import Brand from "@/components/ui/brand";
 
-export default function VerifyCode({route}: {route: string}) {
+export default function VerifyCode({ route }: { route: string }) {
   const [code, setCode] = useState("");
   const [loadingPage, setLoadingPage] = useState(false);
   const email = localStorage.getItem("reset_email") ?? "";

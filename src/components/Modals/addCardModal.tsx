@@ -83,28 +83,28 @@ const AddCardModal = ({
           )}
           <div className="w-full  flex flex-col items-start gap-6">
             <div className="w-full h-12">
-            <Select
-              className="w-full"
-              placeholder="Select Card Type"
-              value={cardType}
-              onChange={(e: any) => setCardType(e)}
-              data={[
-                {
-                  label: "MTN",
-                  value: "MTN",
-                },
-                {
-                  label: "AIRTEL",
-                  value: "AIRTEL",
-                },
-                {
-                  label: "Credit card",
-                  value: "CREDIT_CARD",
-                },
-              ]}
-              allowDeselect={false}
-              required
-            />
+              <Select
+                className="w-full"
+                placeholder="Select Card Type"
+                value={cardType}
+                onChange={(e: any) => setCardType(e)}
+                data={[
+                  {
+                    label: "MTN",
+                    value: "MTN",
+                  },
+                  {
+                    label: "AIRTEL",
+                    value: "AIRTEL",
+                  },
+                  {
+                    label: "Credit card",
+                    value: "CREDIT_CARD",
+                  },
+                ]}
+                allowDeselect={false}
+                required
+              />
             </div>
             {cardType && (cardType == "MTN" || cardType == "AIRTEL") && (
               <AnimatedInput
@@ -149,28 +149,28 @@ const AddCardModal = ({
                   // maxLength={9}
                 />
                 <div className="w-full h-12">
-                <Select
-                  className="w-full"
-                  placeholder="Pick country"
-                  value={country}
-                  onChange={(e: any) => setCountry(e)}
-                  data={[
-                    {
-                      label: "Rwanda",
-                      value: "RW",
-                    },
-                    {
-                      label: "Burundi",
-                      value: "BU",
-                    },
-                    {
-                      label: "United States of America",
-                      value: "USA",
-                    },
-                  ]}
-                  allowDeselect={false}
-                  required
-                />
+                  <Select
+                    className="w-full"
+                    placeholder="Pick country"
+                    value={country}
+                    onChange={(e: any) => setCountry(e)}
+                    data={[
+                      {
+                        label: "Rwanda",
+                        value: "RW",
+                      },
+                      {
+                        label: "Burundi",
+                        value: "BU",
+                      },
+                      {
+                        label: "United States of America",
+                        value: "USA",
+                      },
+                    ]}
+                    allowDeselect={false}
+                    required
+                  />
                 </div>
               </div>
             )}

@@ -9,11 +9,7 @@ const HotelImageLayout = ({ images, id }: any) => {
       className={`w-full grid ${newImages.length > 1 && "md:grid-cols-2"} grid-cols-1 gap-3`}
     >
       <div className="w-full h-full aspect-w-16 aspect-h-9">
-        <img
-          src={images[0]}
-          alt=""
-          className="w-full object-fill rounded-md"
-        />
+        <img src={images[0]} alt="" className="w-full object-fill rounded-md" />
       </div>
       <div className="w-full grid md:grid-cols-2 grid-cols-1 md:grid-rows-2 grid-rows-1 gap-3 relative">
         {newImages.slice(1, 5).map((image: any, index: number) => (

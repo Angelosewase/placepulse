@@ -115,9 +115,12 @@ const OwnerHome = () => {
                 <ClipLoader size={20} color="black" />
               </div>
             ) : (
-              bookings.filter((booking: any)=> booking.status === "COMPLETED").slice(0, 3).map((booking: any, index: any) => {
-                return <CompressedView data={booking} key={index} />;
-              })
+              bookings
+                .filter((booking: any) => booking.status === "COMPLETED")
+                .slice(0, 3)
+                .map((booking: any, index: any) => {
+                  return <CompressedView data={booking} key={index} />;
+                })
             )}
           </div>
         </div>
