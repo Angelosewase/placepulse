@@ -1,11 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import ImagesDropCard from "@/components/DropCards/ImagesDropCard";
+import { AuthorizedAxiosAPI } from "@/utils/AxiosInstance";
 import { Modal } from "@mantine/core";
+import { notifications } from "@mantine/notifications";
 import { useState } from "react";
 interface RoomType {
   image: File | null;
   name: string;
   price: number;
+  stock: string;
 }
 const AddRoomTypeModal = ({
   isAddType,
@@ -20,10 +23,12 @@ const AddRoomTypeModal = ({
     image: File | null;
     name: string;
     price: number;
+    stock: string;
   }>({
     image: null,
     name: "",
     price: 0,
+    stock: ""
   });
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -33,9 +38,31 @@ const AddRoomTypeModal = ({
     setFormData({ ...formData, image: image });
   };
   const handleAddType = () => {
-    setRoomTypes((prevRoomTypes: RoomType[]) => [...prevRoomTypes, formData]);
-    closeAddType();
+    const AccommodationData = new FormData();
+    AccommodationData.append("name", formData.name);
+    AccommodationData.append("price", String(formData.price));
+    AccommodationData.append("stock", String(formData.stock));
+    if (formData.image) {
+      AccommodationData.append("images", formData.image);
+    }
+    AuthorizedAxiosAPI.post("/accommodation/roomtype/create", AccommodationData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
+      .then((res) => {
+        setRoomTypes((prevRoomTypes: RoomType[]) => [...prevRoomTypes, res.data.data]);
+        closeAddType();
+      })
+      .catch((err: any) => {
+        console.error(err);
+        notifications.show({
+          message: "Error",
+          color: "red",
+        });
+      });
   };
+  
   return (
     <Modal size={"lg"} opened={isAddType} onClose={closeAddType}>
       <div className="w-full flex flex-col gap-2">
@@ -66,6 +93,19 @@ const AddRoomTypeModal = ({
             id="price"
             name="price"
             value={formData.price}
+            onChange={handleChange}
+            placeholder="Enter Room Price"
+            className="w-full text-sm py-3 pl-4 pr-3 outline-none border border-neutral-400 rounded-md"
+          />
+        </div>
+        <div className="mt-3 flex flex-col gap-2 ">
+          <label htmlFor="stock" className="text-sm font-medium">
+            Stock
+          </label>
+          <input
+            id="stock"
+            name="stock"
+            value={formData.stock}
             onChange={handleChange}
             placeholder="Enter Room Price"
             className="w-full text-sm py-3 pl-4 pr-3 outline-none border border-neutral-400 rounded-md"

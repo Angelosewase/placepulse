@@ -28,6 +28,8 @@ interface RoomType {
   image: File | null;
   name: string;
   price: number;
+  stock: string;
+  id: string;
 }
 
 const OwnerAddAccommodations = () => {
@@ -79,6 +81,8 @@ const OwnerAddAccommodations = () => {
     AccommodationData.append("discount", formData.discount);
     AccommodationData.append("rating", String(formData.rating));
     AccommodationData.append("stock", String(formData.stock ?? "0"));
+    console.log("room types ", roomTypes);
+    AccommodationData.append("roomTypes", JSON.stringify(roomTypes));
 
     AuthorizedAxiosAPI.post("/accommodation/create", AccommodationData, {
       headers: {

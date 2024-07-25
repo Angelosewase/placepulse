@@ -101,12 +101,12 @@ const OwnerHome = () => {
       <div className="w-full flex justify-between mt-[10vh]">
         <div className="w-[64%]">
           <div className="w-full flex items-center justify-between">
-            <h1 className="text-lg font-bold pl-4">Bookings</h1>
+            <h1 className="text-lg font-bold pl-4">Payed Bookings</h1>
             <button
-              onClick={() => navigate}
-              className="text-sm pl-4 text-[#112211]"
+              onClick={() => navigate("/_owner/bookings")}
+              className="text-sm pl-4 text-[#0075FF]"
             >
-              More
+              All Bookings
             </button>
           </div>
           <div className="w-full flex flex-col gap-3 mt-3 ">
@@ -115,7 +115,7 @@ const OwnerHome = () => {
                 <ClipLoader size={20} color="black" />
               </div>
             ) : (
-              bookings.slice(0, 3).map((booking: any, index: any) => {
+              bookings.filter((booking: any)=> booking.status === "COMPLETED").slice(0, 3).map((booking: any, index: any) => {
                 return <CompressedView data={booking} key={index} />;
               })
             )}

@@ -14,18 +14,29 @@ const ViewOwnerAccommodation = () => {
   const accommodation_id = params.id ?? 0;
   const [accommodation, setAccommodation] = useState<any>();
   const [loading, setLoading] = useState(true);
+  const [rooms, SetRooms] = useState([]);
+  const getHotel = async (id: string)=>{
+    AuthorizedAxiosAPI.get(`/accommodation/hotel/get/${id}`)
+     .then((res) => {
+        SetRooms(res.data.data);
+      })
+     .catch((err) => {
+        console.log(err);
+      });
+  }
   useEffect(() => {
     AuthorizedAxiosAPI.get(`/accommodation/get/${accommodation_id}`)
       .then((res) => {
-        console.log(res.data);
         setAccommodation(res.data.data[0]);
+        if(res.data.data[0].type === "hotel"){
+          getHotel(res.data.data[0].id);
+        }
       })
       .catch((err) => {
         console.log(err);
       })
       .finally(() => setLoading(false));
   }, []);
-  console.log(accommodation?.amenities);
   const navigate = useNavigate();
   return (
     <div className="w-full flex flex-col md:px-10 pt-10 pb-[50vh]">
@@ -108,7 +119,7 @@ const ViewOwnerAccommodation = () => {
                   {Math.floor(Math.random() * 1000) + 1} Reviews
                 </h1>
               </div>
-              {accommodation.amenities[0][0].map(
+              {accommodation.amenities[0].map(
                 (amenity: any, index: number) => {
                   return (
                     <div
@@ -133,20 +144,20 @@ const ViewOwnerAccommodation = () => {
               <div className="w-full mt-5">
                 <h1 className="text-xl font-extrabold mb-4">Available Rooms</h1>
                 <div className="w-full flex flex-col gap-4">
-                  {/* {accommodation?.roomTypes.map((roomType: any, index: number) => {
+                  {rooms.map((roomType: any, index: number) => {
                 return (
                   <div
                     key={index}
-                    className={`w-full flex justify-between ${index !== accommodation.roomTypes.length - 1 && "border-b border-b-[#ccc]"} pb-2`}
+                    className={`w-full flex justify-between ${index !== rooms.length - 1 && "border-b border-b-[#ccc]"} pb-2`}
                   >
                     <div className="flex items-center gap-3">
                       <img
                         src={roomType.images[0]}
-                        width={50}
-                        height={50}
+                        width={90}
+                        height={90}
                         className="rounded-sm"
                       />
-                      <h1 className="font-extrabold">{roomType.type}</h1>
+                      <h1 className="font-extrabold">{roomType.name}</h1>
                     </div>
                     <div className="flex items-center gap-4">
                       <h1 className="font-extrabold">
@@ -163,7 +174,7 @@ const ViewOwnerAccommodation = () => {
                     </div>
                   </div>
                 );
-              })} */}
+              })}
                 </div>
               </div>
               <hr className="w-full hotel_divider my-[9vh]" />
@@ -188,7 +199,7 @@ const ViewOwnerAccommodation = () => {
               />
             </div>
           </div>
-          <hr className="w-full hotel_divider my-[9vh]" />
+          <hr className="w-full hotel_divider my-[9vh]"/>
           <div className="w-full mt-5">
             <h1 className="text-xl font-extrabold mb-4">Freebies</h1>
             <div className="w-full grid md:grid-cols-3 gap-3 mt-4">

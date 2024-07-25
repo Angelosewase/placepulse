@@ -7,14 +7,14 @@ import PaymentMethodCard from "../../components/Cards/PaymentMethods";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { useDisclosure } from "@mantine/hooks";
 import AddCardModal from "../../components/Modals/addCardModal";
-import PaymentAuthorizationModal from "../../components/Modals/PaymentAuthorizationModal";
 import { useEffect, useState } from "react";
-import { AxiosAPI } from "../../utils/AxiosInstance";
+import { AuthorizedAxiosAPI, AxiosAPI } from "../../utils/AxiosInstance";
 import { useSelector } from "react-redux";
 import { format } from "date-fns";
 import { ClipLoader } from "react-spinners";
 import { notifications } from "@mantine/notifications";
-import FlutterwavePayButton from "@/components/Payment/PaymentButton";
+import { useFlutterwave, closePaymentModal } from "flutterwave-react-v3";
+import { FLUTTERWAVE_PAYMENT_TEST_KEY } from "../../../env";
 
 const CheckoutPage = () => {
   const params = useParams();
@@ -24,9 +24,9 @@ const CheckoutPage = () => {
   const { booking, auth } = useSelector((state: any) => state);
   const [paymentMethods, setPaymentMethods] = useState([]);
   const [loadingMethods, setLoadingMethods] = useState(true);
+  const [bookingId, setBookingsId] = useState("");
   const [selectedCard, setSelectedCard] = useState<any>();
   const [, setLoadingPay] = useState(false);
-  console.log(auth);
   const formatDate = (date: Date | null, text?: string) => {
     return date ? format(date, "MMMM dd") : `Select ${text}`;
   };
@@ -38,9 +38,6 @@ const CheckoutPage = () => {
     })
       .then((res) => {
         setPaymentMethods(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
       })
       .finally(() => setLoadingMethods(false));
   };
@@ -69,23 +66,38 @@ const CheckoutPage = () => {
       .then((res) => {
         setAccommodation(res.data.data[0]);
       })
-      .catch((err) => {
-        console.log(err);
-      })
       .finally(() => setLoading(false));
     fetchCards();
   }, []);
   const [isAddCardOpen, { open: openAddCard, close: closeAddCard }] =
     useDisclosure();
-  const [isPaymentOpen, { open: openPayment, close: closePayment }] =
-    useDisclosure();
+    const config = {
+      public_key: FLUTTERWAVE_PAYMENT_TEST_KEY,
+      tx_ref: String(Date.now()),
+      amount: booking.paymentTotal,
+      currency: "RWF",
+      payment_options: "card,mobilemoney",
+      customer: {
+        email: auth.user.email ?? "",
+        phone_number: `250${selectedCard?.number}`,
+        name: auth.user.firstname + " " + auth.user.lastname,
+      },
+      customizations: {
+        title: `${accommodation?.name ?? ""}`,
+        description: `Payment For ${accommodation?.name}`,
+        logo: booking.image,
+      },
+    };
 
+  const handleFlutterPayment = useFlutterwave(config);
   const createBooking = async () => {
     if (!selectedCard) {
-      return notifications.show({
+      notifications.show({
         message: "Please select a payment method",
         color: "red",
       });
+
+      return Promise.reject(new Error("Please select a payment method"))
     }
     setLoadingPay(true);
     const data = {
@@ -101,17 +113,31 @@ const CheckoutPage = () => {
       name: booking.name,
       status: "PENDING",
     };
-    console.log("data --> ", data);
     AxiosAPI.post(`/booking/create`, data, {
       headers: {
         authorization: `Bearer ${auth.token}`,
       },
     })
-      .then(() => {
-        openPayment();
+      .then((res) => {
+        setBookingsId(res.data.data);
+        handleFlutterPayment({
+          callback: (response) => {
+            console.log(response);
+            if (response.status === "successful") {
+              onPaymentSuccess();
+            } else {
+              notifications.show({
+                message: "Payment Failed",
+                color: "red",
+                duration: 10000,
+              });
+            }
+            closePaymentModal();
+          },
+          onClose: () => {},
+        });
       })
       .catch((err) => {
-        console.log(err.message);
         notifications.show({
           message: err.response.message ?? err.message,
           color: "red",
@@ -119,6 +145,20 @@ const CheckoutPage = () => {
       })
       .finally(() => setLoadingPay(false));
   };
+  const onPaymentSuccess = ()=>{
+    notifications.show({
+      message: `Successfully payed for ${booking.name}`,
+      color: "green",
+      duration: 10000,
+    })
+    AuthorizedAxiosAPI.get(`/booking/payment/complete/${bookingId}`)
+      .catch((err) => {
+        notifications.show({
+          message: err.response.message?? err.message,
+        });
+      });
+  }
+
   return (
     <div className="pb-[50vh] px-4 md:px-20">
       <div className="w-full flex justify-start items-center mt-5">
@@ -128,7 +168,7 @@ const CheckoutPage = () => {
         <h1 className="text-2xl font-extrabold">Proceed to payment </h1>
       </div>
       {loading ? (
-        <div></div>
+        <div className="w-screen h-screen flex flex-col"></div>
       ) : (
         <div className="w-full flex flex-col justify-between md:flex-row gap-10 mt-4">
           <div className="w-full md:w-[50%]">
@@ -136,7 +176,6 @@ const CheckoutPage = () => {
               <h1>Booking Details</h1>
               <div className="w-full flex justify-between gap-5 mt-6">
                 <img
-                  // src={accommodation.roomTypes[0].images[0]}
                   src={accommodation.images[0]}
                   alt=""
                   width={130}
@@ -150,7 +189,6 @@ const CheckoutPage = () => {
                       : accommodation.name}
                   </h1>
                   <h1 className="text-lg font-extrabold">
-                    {/* {accommodation.roomTypes[0].type} */}
                     {accommodation.type}
                   </h1>
                   <div className="h-[2.5rem] flex items-center gap-3 mt-2">
@@ -233,32 +271,15 @@ const CheckoutPage = () => {
                 </div>
               </Fieldset>
             )}
-            {/* <button
-              onClick={createBooking}
-              disabled={loadingPay}
-              className="w-full py-3 mt-3 rounded-sm flex items-center font-extrabold justify-center bg-[#396FF9] text-white"
+            <button
+              className={"w-full py-3 mt-3 rounded-sm flex items-center font-extrabold justify-center bg-[#396FF9] text-white"}
+              onClick={() => {
+                createBooking();
+              }}
             >
-              Pay {booking.paymentTotal} FRW
-            </button> */}
-            <FlutterwavePayButton
-              initFunction={createBooking}
-              className="w-full py-3 mt-3 rounded-sm flex items-center font-extrabold justify-center bg-[#396FF9] text-white"
-            label={`Pay ${booking.paymentTotal} FRW`} data={{
-              amount: booking.paymentTotal,
-              currency: "FRW",
-              title: `${accommodation.name ?? ""}`,
-              image: booking.image,
-              customer: {
-                email: auth.user.email,
-                phoneNumber: auth.user.phone,
-                name: auth.user.firstname + " " + auth.user.lastname,
-              }
-            }}/>
+              {`Pay ${booking.paymentTotal} FRW`}
+            </button>
           </div>
-          <PaymentAuthorizationModal
-            opened={isPaymentOpen}
-            close={closePayment}
-          />
           <AddCardModal
             refetch={fetchCards}
             opened={isAddCardOpen}

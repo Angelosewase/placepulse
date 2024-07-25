@@ -12,7 +12,7 @@ const HotelImageLayout = ({ images, id }: any) => {
         <img
           src={images[0]}
           alt=""
-          className="w-full h-[70vh] object-fill rounded-md"
+          className="w-full object-fill rounded-md"
         />
       </div>
       <div className="w-full grid md:grid-cols-2 grid-cols-1 md:grid-rows-2 grid-rows-1 gap-3 relative">

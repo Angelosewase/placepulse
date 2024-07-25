@@ -66,7 +66,7 @@ const OwnerAccommodations = () => {
           </div>
         ) : (
           <div className="w-full grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-7 my-3 ">
-            {accommodations.slice(0, 9).map((place: any, index: any) => {
+            {accommodations.map((place: any, index: any) => {
               return <ViewAccomCard data={place} key={index} refetch={fetch} />;
             })}
           </div>

@@ -5,6 +5,7 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 const categories = [
   { type: "Hotel" },
   { type: "Motel" },
+  { type: "Parking" },
   { type: "Garden" },
   { type: "Conference Room" },
   { type: "Restaurant" },

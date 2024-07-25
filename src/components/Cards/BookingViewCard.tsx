@@ -21,6 +21,12 @@ const BookingViewCard = ({ data }: { data: any }) => {
                 : data.name}
             </h1>
             <h1
+              className={`text-xs font-extrabold mt-3 mb-[-0.71rem]`}
+              style={{ fontFamily: "Montserrat" }}
+            >
+              FRW {data.payment_total}
+            </h1>
+            <h1
               className={`text-xs font-extrabold mt-3 ${data.status === "PENDING" ? "text-red-600" : "text-green-600"}`}
               style={{ fontFamily: "Montserrat" }}
             >

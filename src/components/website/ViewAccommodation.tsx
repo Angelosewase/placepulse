@@ -117,7 +117,7 @@ const ViewAccommodation = () => {
                   {Math.floor(Math.random() * 1000) + 1} Reviews
                 </h1>
               </div>
-              {accommodation.amenities[0][0].map((amenity: any, index: any) => {
+              {accommodation.amenities[0].map((amenity: any, index: any) => {
                 return (
                   <div
                     key={index}

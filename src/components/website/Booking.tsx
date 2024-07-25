@@ -21,6 +21,7 @@ const BookingPage = () => {
   const [loading, setLoading] = useState(true);
   const [accommodation, setAccommodation] = useState<any>();
   const { isLoggedIn } = useSelector((state: any) => state.auth);
+  const [bookedDays, setBookedDays] = useState([]);
   useEffect(() => {
     setLoading(true);
     AxiosAPI.get(`/accommodation/get/${accommodation_id}`)
@@ -31,12 +32,25 @@ const BookingPage = () => {
         console.log(err);
       })
       .finally(() => setLoading(false));
+
+    AxiosAPI.get(`/booking/booked_days/${accommodation_id}`)
+      .then((res) => {
+        console.log(res.data);
+        setBookedDays(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => setLoading(false));
+
+
   }, []);
   const [checkIn, setCheckIn] = useState<Date | null>(null);
   const [checkOut, setCheckOut] = useState<Date | null>(null);
   const [paymentPortion, setPaymentPortion] = useState("full");
   const [openedInfo, { toggle }] = useDisclosure(false);
   const [isPayment, { open, close }] = useDisclosure(false);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
   const dateDifference =
     checkIn && checkOut ? differenceInDays(checkOut, checkIn) : 0;
@@ -53,6 +67,10 @@ const BookingPage = () => {
   };
 
   const handlePaymentCheckout = () => {
+    if(!checkIn || !checkOut){
+      setError("Please Select Check and Checkout Dates");
+      return;
+    }
     const bookingDetails = {
       accommodationId: accommodation_id,
       checkIn: checkIn,
@@ -115,6 +133,7 @@ const BookingPage = () => {
                         onChange={setCheckIn}
                         min={new Date()}
                         max={checkOut}
+                        bookedDays= {bookedDays}
                       />
                     </div>
                   </div>
@@ -128,6 +147,7 @@ const BookingPage = () => {
                         min={checkIn}
                         value={checkOut}
                         onChange={setCheckOut}
+                        bookedDays= {bookedDays}
                       />
                     </div>
                   </div>
@@ -277,6 +297,7 @@ const BookingPage = () => {
               >
                 Pay {priceToPay()} FRW
               </button>
+              <p className="text-red-500 font-bold text-sm mt-2">{error}</p>
             </div>
           </div>
           {!isLoggedIn && (

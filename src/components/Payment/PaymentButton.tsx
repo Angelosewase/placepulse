@@ -1,7 +1,8 @@
 import { notifications } from "@mantine/notifications";
-import {FLUTTERWAVE_PAYMENT_TEST_KEY} from "../../../env"
+import { FLUTTERWAVE_PAYMENT_TEST_KEY } from "../../../env";
 import { useFlutterwave, closePaymentModal } from "flutterwave-react-v3";
 type PaymentData = {
+  id: string;
   amount: number;
   currency: string;
   title: string;
@@ -10,18 +11,20 @@ type PaymentData = {
     email: string;
     phoneNumber: string | undefined;
     name: string | undefined;
-  }
-}
+  };
+};
 export default function FlutterwavePayButton({
   className,
   label,
   data,
-  // initFunction
-}:{
+  initFunction,
+  onPaymentSuccess,
+}: {
   className?: string;
   label: string;
   data: PaymentData;
-  initFunction: ()=> void;
+  initFunction: () => Promise<void>;
+  onPaymentSuccess: () => void;
 }) {
   const config = {
     public_key: FLUTTERWAVE_PAYMENT_TEST_KEY,
@@ -42,36 +45,27 @@ export default function FlutterwavePayButton({
   };
 
   const handleFlutterPayment = useFlutterwave(config);
-
-  const onPaymentSuccess = ()=>{
-    notifications.show({
-      message: `Successfully payed for ${data.title}`,
-      color: "green",
-      duration: 10000,
-    })
-    // call your backend API to save the payment transaction
-  }
   return (
     <button
       className={className}
       onClick={() => {
-        // initFunction()
-        console.log(config)
-        handleFlutterPayment({
-          callback: (response) => {
-            console.log(response);
-            if(response.status === "successful"){
-              onPaymentSuccess()
-            }else{
-              notifications.show({
-                message: "Payment Failed",
-                color: "red",
-                duration: 10000,
-              })
-            }
-            closePaymentModal();
-          },
-          onClose: () => {},
+        initFunction().then(() => {
+          handleFlutterPayment({
+            callback: (response) => {
+              console.log(response);
+              if (response.status === "successful") {
+                onPaymentSuccess();
+              } else {
+                notifications.show({
+                  message: "Payment Failed",
+                  color: "red",
+                  duration: 10000,
+                });
+              }
+              closePaymentModal();
+            },
+            onClose: () => {},
+          });
         });
       }}
     >
