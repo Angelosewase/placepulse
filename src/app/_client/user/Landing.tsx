@@ -22,13 +22,6 @@ const UserLanding = () => {
     (state: any) => state.accommodations.accommodations,
   );
   const [, setLoading] = useState(true);
-  const [selected, setSelected] = useState<any>({
-    hotel: "",
-    parking: "",
-    garden: "",
-    restaurant: "",
-  });
-
   const fetchAccommodations = () => {
     setLoading(true);
     AxiosAPI.get("/accommodation/all")

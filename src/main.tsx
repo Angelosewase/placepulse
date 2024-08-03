@@ -10,15 +10,11 @@ import "@mantine/notifications/styles.css";
 import { Notifications } from "@mantine/notifications";
 import { NextUIProvider } from "@nextui-org/react";
 import { Provider } from "react-redux";
-import { legacy_createStore as createStore } from "redux";
+import { configureStore } from "@reduxjs/toolkit";
 import rootReducer from "./reducers/rootReducer.ts";
-import { applyMiddleware } from "redux";
-import { thunk } from "redux-thunk";
-import { composeWithDevTools } from "redux-devtools-extension";
-const store = createStore(
-  rootReducer,
-  composeWithDevTools(applyMiddleware(thunk)),
-);
+const store = configureStore({
+  reducer: rootReducer
+});
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Provider store={store}>

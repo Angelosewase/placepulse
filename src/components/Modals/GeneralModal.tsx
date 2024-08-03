@@ -3,7 +3,7 @@ import { Modal } from "@mantine/core";
 import React from "react";
 const LogoutModal = ({
   isOpen,
-  closeModal,
+  closeLogout,
   children,
 }: {
   isOpen: boolean;
@@ -13,7 +13,7 @@ const LogoutModal = ({
   return (
     <Modal
       opened={isOpen}
-      onClose={closeModal}
+      onClose={closeLogout}
       closeOnClickOutside
       className="w-full"
     >

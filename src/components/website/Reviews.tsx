@@ -1,5 +1,5 @@
 // src/components/ReviewsCarousel.js
-import React, { useState } from "react";
+import { useState } from "react";
 import { TiArrowLeftThick, TiArrowRightThick } from "react-icons/ti";
 import { reviews } from "@/constants/dummy";
 import testimonialVector from "@/assets/images/test_vector.png";
