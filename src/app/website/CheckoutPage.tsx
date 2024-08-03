@@ -14,7 +14,7 @@ import { format } from "date-fns";
 import { ClipLoader } from "react-spinners";
 import { notifications } from "@mantine/notifications";
 import { useFlutterwave, closePaymentModal } from "flutterwave-react-v3";
-import { FLUTTERWAVE_PAYMENT_TEST_KEY } from "../../../env";
+import { FLUTTERWAVE_PAYMENT_TEST_KEY } from "../../../env.ts";
 
 const CheckoutPage = () => {
   const params = useParams();

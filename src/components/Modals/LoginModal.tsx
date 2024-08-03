@@ -22,7 +22,7 @@ const LoginModal = ({
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const handleEmailChange = (event: React.ChangeEvent<HTMLFormElement>) => {
+  const handleEmailChange = (event: React.ChangeEvent<HTMLFormElement>): any => {
     console.log(event.target.value);
     setEmail(event.target.value);
   };

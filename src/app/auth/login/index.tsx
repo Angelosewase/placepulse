@@ -49,7 +49,7 @@ export default function Login() {
             user: res.data.data.user,
           },
         });
-        if (res.data.data.user.role === "USER") {
+        if (res.data.data.user.role.includes("USER")) {
           console.log(res.data.data);
           const expires = new Date();
           expires.setDate(Date.now() + 1000 * 2);
@@ -61,7 +61,7 @@ export default function Login() {
           });
           return navigate("/_client/home");
         }
-        if (res.data.data.user.role === "OWNER") {
+        if (res.data.data.user.role.includes("OWNER")) {
           const expires = new Date();
           expires.setDate(Date.now() + 1000 * 2);
           cookie.save("auth_token", res.data.data.token, {
@@ -85,13 +85,13 @@ export default function Login() {
 
   useEffect(() => {
     if (isLoggedIn && user) {
-      if (user?.role === "USER") {
+      if (user?.role.includes("USER")) {
         return navigate("/_client/home");
       }
-      if (user?.role === "OWNER") {
+      if (user?.role.includes("OWNER")) {
         return navigate("/_owner/home");
       }
-      if (user?.role === "ADMIN") {
+      if (user?.role.included("ADMIN")) {
         return navigate("/_admin/home");
       }
     }
