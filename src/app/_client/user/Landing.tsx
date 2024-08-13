@@ -14,7 +14,6 @@ import {
   FETCH_ACCOMMODATIONS_SUCCESS,
 } from "../../../actions/AccommodationActions";
 import SelectComponent from "./SelectItems";
-
 const UserLanding = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -25,25 +24,59 @@ const UserLanding = () => {
   const fetchAccommodations = () => {
     setLoading(true);
     AxiosAPI.get("/accommodation/all")
-      .then((res) => {
-        dispatch({
-          type: FETCH_ACCOMMODATIONS_SUCCESS,
-          payload: { accommodations: res.data.data },
-        });
-      })
-      .catch((err) => {
-        dispatch({
-          type: FETCH_ACCOMMODATIONS_FAIL,
-          payload: err.response,
-        });
-      })
-      .finally(() => setLoading(false));
+    .then((res) => {
+      dispatch({
+        type: FETCH_ACCOMMODATIONS_SUCCESS,
+        payload: { accommodations: res.data.data },
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: FETCH_ACCOMMODATIONS_FAIL,
+        payload: err.response,
+      });
+    })
+    .finally(() => setLoading(false));
   };
-
+  
   useEffect(() => {
     fetchAccommodations();
   }, []);
-
+  
+  const tabs = [
+    {
+      name: "Hotel & Motels",
+      slug: "hotel"
+    },
+    {
+      name: "Open Parks",
+      slug: "parking"
+    },
+    {
+      name: "Gardens",
+      slug: "garden"
+    },
+    {
+      name: "Restaurants",
+      slug: "restaurant"
+    },
+    {
+      name: "Conference Rooms",
+      slug: "conference room"
+    },
+    {
+      name: "Gardens",
+      slug: "garden"
+    },
+    {
+      name: "Gardens",
+      slug: "garden"
+    },
+    {
+      name: "Gardens",
+      slug: "garden"
+    },
+  ]
   return (
     <div className="w-full pb-[50vh]">
       <div className="w-full md:h-[90vh] relative">
@@ -53,27 +86,17 @@ const UserLanding = () => {
         />
         <div className="absolute w-full h-[90vh] md:h-full bg-[#0000008a] z-10 top-0 flex flex-col gap-14">
           <div className="w-full md:w-[70%] hidden md:flex justify-between mt-5 px-3 md:px-20">
-            {[
-              "Hotel & Motels",
-              "Open Parks",
-              "Gardens",
-              "Restaurants",
-              "Conference Rooms",
-              "More",
-            ].map((text) => (
+            {tabs.map((tab) => (
               <button
                 onClick={() =>
                   navigate(
-                    `/_client/home/find/${text
-                      .toString()
-                      .toLowerCase()
-                      .slice(0, text.length - 1)}`,
+                    `/_client/home/find/${tab.slug}`,
                   )
                 }
-                key={text}
+                key={tab.name}
                 className="text-white text-md font-semibold"
               >
-                {text}
+                {tab.name}
               </button>
             ))}
           </div>

@@ -9,11 +9,11 @@ const ImageWithHoverEffect = ({ image }: any) => {
   const [opened, { open, close }] = useDisclosure(false);
   return (
     <div
-      className="w-full relative m-2 my-4 cursor-pointer"
+      className="w-full relative m-2 my-4 cursor-pointer rounded-lg"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <img src={image} className="w-full  rounded-lg cursor-pointer" />
+      <img src={image} className="w-full cursor-pointer rounded-lg" />
       {hovered && (
         <div className="w-full h-full absolute flex items-center justify-center bg-[#cccccc3a] z-50 top-0 rounded-lg">
           <button onClick={open}>

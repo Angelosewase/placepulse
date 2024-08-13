@@ -39,7 +39,6 @@ const OwnerHome = () => {
       },
     })
       .then((res) => {
-        console.log(res.data);
         setBookings(res.data.data);
       })
       .catch((err) => {
@@ -117,10 +116,20 @@ const OwnerHome = () => {
             ) : (
               bookings
                 .filter((booking: any) => booking.status === "COMPLETED")
+                .length > 0 ? 
+                bookings
+                .filter((booking: any) => booking.status === "COMPLETED")
                 .slice(0, 3)
                 .map((booking: any, index: any) => {
                   return <CompressedView data={booking} key={index} />;
                 })
+                : (
+                  <div>
+                    <div className="w-full flex justify-center items-center mt-[10vh]">
+                      <h1 className="font-bold">No Payed Bookings Found!</h1>
+                    </div>
+                  </div>
+                )
             )}
           </div>
         </div>

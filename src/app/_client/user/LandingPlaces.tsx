@@ -51,8 +51,9 @@ const LandingPlaces = () => {
   };
 
   useEffect(() => {
+    setActiveAcc(type?.toLowerCase() ?? "hotel")
     fetch();
-  }, [activeAcc, type]);
+  }, [type]);
 
   const filteredAccommodations = accommodations_data.filter(
     (accommodation: any) => accommodation.type === activeAcc,

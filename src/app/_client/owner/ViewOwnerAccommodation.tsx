@@ -9,6 +9,7 @@ import { SnakeCaseToPascalCaseSpaced } from "../../../utils/funcs/formatter";
 import { useEffect, useState } from "react";
 import { AuthorizedAxiosAPI } from "../../../utils/AxiosInstance";
 import location_Img from "../../../assets/images/map_location.png";
+import { ClipLoader } from "react-spinners";
 const ViewOwnerAccommodation = () => {
   const params = useParams();
   const accommodation_id = params.id ?? 0;
@@ -41,7 +42,9 @@ const ViewOwnerAccommodation = () => {
   return (
     <div className="w-full flex flex-col md:px-10 pt-10 pb-[50vh]">
       {loading ? (
-        <div></div>
+        <div className="w-full flex items-center justify-center">
+          <ClipLoader color="black" size={23} />
+        </div>
       ) : (
         <>
           <div className="w-full flex justify-between relative">
@@ -86,14 +89,6 @@ const ViewOwnerAccommodation = () => {
                 </button>
                 <button className="w-[4rem] h-[3rem] flex items-center justify-center rounded-sm border border-[#8DD3BB] font-bold">
                   <HiShare color="black" size={20} />
-                </button>
-                <button
-                  onClick={() => {
-                    navigate(`/booking/place/${accommodation_id}`);
-                  }}
-                  className="px-6 py-3 rounded-sm flex items-center font-extrabold justify-center bg-[#396FF9] text-white"
-                >
-                  Book Now
                 </button>
               </div>
             </div>

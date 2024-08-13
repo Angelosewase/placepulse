@@ -12,6 +12,7 @@ import { AxiosAPI } from "../../utils/AxiosInstance";
 import { useDispatch, useSelector } from "react-redux";
 import { ADD_BOOKING } from "../../actions/BookingActions";
 import { Helmet } from "react-helmet";
+import { ClipLoader } from "react-spinners";
 
 const BookingPage = () => {
   const params = useParams();
@@ -34,7 +35,6 @@ const BookingPage = () => {
 
     AxiosAPI.get(`/booking/booked_days/${accommodation_id}`)
       .then((res) => {
-        console.log(res.data);
         setBookedDays(res.data.data);
       })
       .catch((err) => {
@@ -92,7 +92,9 @@ const BookingPage = () => {
         <title>Booking - Place Pulse</title>
       </Helmet>
       {loading ? (
-        <div></div>
+        <div className="w-full flex items-center justify-center mt-20">
+          <ClipLoader color="black" size={23} />
+        </div>
       ) : (
         <>
           <div className="w-full flex justify-start">

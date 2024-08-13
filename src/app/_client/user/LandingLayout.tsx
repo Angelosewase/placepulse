@@ -6,7 +6,32 @@ import { MdPending } from "react-icons/md";
 import mabBgImg from "../../../assets/images/map.png";
 import SelectComponent from "./SelectItems";
 import React from "react";
-
+const tabs = [
+  {
+    name: "Hotels",
+    slug: "hotel"
+  },
+  {
+    name: "Motels",
+    slug: "motel"
+  },
+  {
+    name: "Open Parks",
+    slug: "parking"
+  },
+  {
+    name: "Gardens",
+    slug: "garden"
+  },
+  {
+    name: "Restaurants",
+    slug: "restaurant"
+  },
+  {
+    name: "Conference Rooms",
+    slug: "conference room"
+  },
+]
 const UserLandingLayout = ({ children }: { children: React.ReactElement }) => {
   const navigate = useNavigate();
 
@@ -19,29 +44,22 @@ const UserLandingLayout = ({ children }: { children: React.ReactElement }) => {
         />
         <div className="absolute w-full h-[90vh] md:h-full bg-[#0000008a] z-10 top-0 flex flex-col gap-14">
           <div className="w-full md:w-[70%] hidden md:flex justify-between mt-5 px-3 md:px-20">
-            {[
-              "Hotel & Motels",
-              "Open Parks",
-              "Gardens",
-              "Restaurants",
-              "Conference Rooms",
-              "More",
-            ].map((text) => (
+          {tabs.map((tab) => (
               <button
                 onClick={() =>
                   navigate(
-                    `/_client/home/find/${text
-                      .toString()
-                      .toLowerCase()
-                      .slice(0, text.length - 1)}`,
+                    `/_client/home/find/${tab.slug}`,
                   )
                 }
-                key={text}
+                key={tab.name}
                 className="text-white text-md font-semibold"
               >
-                {text}
+                {tab.name}
               </button>
             ))}
+            <button className="text-white text-md font-semibold">
+              More
+            </button>
           </div>
           <div className="flex md:hidden mt-5 justify-end px-3">
             <MdPending size={23} color="white" />

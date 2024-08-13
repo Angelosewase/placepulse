@@ -4,12 +4,13 @@ import { AxiosAPI } from "../../utils/AxiosInstance";
 import ImageWithHoverEffect from "../Images/ImageHoverEffect";
 import { IoChevronBackCircleOutline } from "react-icons/io5";
 import { useState, useEffect } from "react";
+import { ClipLoader } from "react-spinners";
 const PlaceGallery = () => {
   const params = useParams();
   const accommodation_id = params.id ?? 0;
   // const accommodation = accommodations_data[Number(accommodation_id)];
   const [loading, setLoading] = useState(true);
-  const [accommodation, setAccommodation] = useState<any>();
+  const [, setAccommodation] = useState<any>();
   const [newImages, setNewImages] = useState<any>([]);
 
   useEffect(() => {
@@ -17,7 +18,7 @@ const PlaceGallery = () => {
     AxiosAPI.get(`/accommodation/get/${accommodation_id}`)
       .then((res) => {
         setAccommodation(res.data.data[0]);
-        console.log(accommodation.images[0]);
+        console.log(res.data.data[0]);
         setNewImages([
           res.data.data[0].images[0],
           res.data.data[0].images[0],
@@ -40,7 +41,9 @@ const PlaceGallery = () => {
   return (
     <div className="w-full md:px-10 pb-[50vh] pt-[8vh]">
       {loading ? (
-        <div></div>
+        <div className="w-full h-full flex items-center justify-center">
+          <ClipLoader color="black" size={23} />
+        </div>
       ) : (
         <>
           <div className="w-full flex justify-start">
@@ -48,7 +51,7 @@ const PlaceGallery = () => {
               <IoChevronBackCircleOutline color="black" size={23} />
             </button>
           </div>
-          <div className="w-full columns-[200px] mt-3">
+          <div className="w-full columns-[300px] mt-3">
             {newImages.map((image: any, index: number) => {
               return <ImageWithHoverEffect image={image} key={index} />;
             })}
