@@ -8,6 +8,7 @@ import { ClipLoader } from "react-spinners";
 import { Modal } from "@mantine/core";
 import { useDispatch } from "react-redux";
 import { LOGIN_SUCCESS } from "../../actions/AuthActions";
+import cookie from "react-cookies";
 const LoginModal = ({
   isPayment,
   closePayment,
@@ -55,6 +56,27 @@ const LoginModal = ({
             user: res.data.data.user,
           },
         });
+        if (res.data.data.user.role.includes("USER")) {
+          console.log(res.data.data);
+          const expires = new Date();
+          expires.setDate(Date.now() + 1000 * 2);
+          cookie.save("auth_token", res.data.data.token, {
+            path: "/",
+          });
+          cookie.save("auth_USER", res.data.data.user.role, {
+            path: "/",
+          });
+        }
+        if (res.data.data.user.role.includes("OWNER")) {
+          const expires = new Date();
+          expires.setDate(Date.now() + 1000 * 2);
+          cookie.save("auth_token", res.data.data.token, {
+            path: "/",
+          });
+          cookie.save("auth_USER", res.data.data.user.role, {
+            path: "/",
+          });
+        }
         navigate(`/booking/place/${id}/checkout`);
       })
       .catch((err) => {

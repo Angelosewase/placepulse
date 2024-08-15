@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useParams } from "react-router-dom";
 import checkInOut from "../../assets/images/checkInOut.png";
-import { Divider, Fieldset } from "@mantine/core";
+import { Divider, Fieldset, Modal } from "@mantine/core";
 import { IoChevronBackCircleOutline } from "react-icons/io5";
 import PaymentMethodCard from "../../components/Cards/PaymentMethods";
 import { IoIosAddCircleOutline } from "react-icons/io";
@@ -15,9 +15,12 @@ import { ClipLoader } from "react-spinners";
 import { notifications } from "@mantine/notifications";
 import { useFlutterwave, closePaymentModal } from "flutterwave-react-v3";
 import { FLUTTERWAVE_PAYMENT_TEST_KEY } from "../../../env.ts";
+import BookingSuccess from "@/components/website/BookingSuccess.tsx";
 
 const CheckoutPage = () => {
   const params = useParams();
+  const [isOpenSuccessBooking, {open: openSuccess, close: closeSuccess}] = useDisclosure();
+  // const navigate = useNavigate();
   const accommodation_id = params.id ?? 0;
   const [accommodation, setAccommodation] = useState<any>();
   const [loading, setLoading] = useState(true);
@@ -26,7 +29,7 @@ const CheckoutPage = () => {
   const [loadingMethods, setLoadingMethods] = useState(true);
   const [bookingId, setBookingsId] = useState("");
   const [selectedCard, setSelectedCard] = useState<any>();
-  const [, setLoadingPay] = useState(false);
+  const [loadingPay, setLoadingPay] = useState(false);
   const formatDate = (date: Date | null, text?: string) => {
     return date ? format(date, "MMMM dd") : `Select ${text}`;
   };
@@ -91,7 +94,9 @@ const CheckoutPage = () => {
 
   const handleFlutterPayment = useFlutterwave(config);
   const createBooking = async () => {
+    setLoadingPay(true);
     if (!selectedCard) {
+      setLoadingPay(false);
       notifications.show({
         message: "Please select a payment method",
         color: "red",
@@ -99,7 +104,6 @@ const CheckoutPage = () => {
 
       return Promise.reject(new Error("Please select a payment method"));
     }
-    setLoadingPay(true);
     const data = {
       checkIn: booking.checkIn,
       checkOut: booking.checkOut,
@@ -119,13 +123,21 @@ const CheckoutPage = () => {
       },
     })
       .then((res) => {
+        console.log(bookingId)
+        console.log(res.data.data)
+        localStorage.setItem("bd", res.data.data);
         setBookingsId(res.data.data);
+        setLoadingPay(false);
+        console.log("local storage",localStorage.getItem("bd"));
         handleFlutterPayment({
           callback: (response) => {
+            console.log(bookingId)
             console.log(response);
             if (response.status === "successful") {
+            console.log(bookingId)
               onPaymentSuccess();
             } else {
+              console.log(bookingId)
               notifications.show({
                 message: "Payment Failed",
                 color: "red",
@@ -146,13 +158,21 @@ const CheckoutPage = () => {
       .finally(() => setLoadingPay(false));
   };
   const onPaymentSuccess = () => {
-    notifications.show({
-      message: `Successfully payed for ${booking.name}`,
-      color: "green",
-      duration: 10000,
-    });
-    AuthorizedAxiosAPI.get(`/booking/payment/complete/${bookingId}`).catch(
+    console.log(bookingId)
+    const bookId = localStorage.getItem("bd");
+    AuthorizedAxiosAPI.get(`/booking/payment/complete/${bookId}`)
+    .then(()=>{
+       console.log(bookingId)
+       notifications.show({
+         message: "Payment Successful",
+         color: "green",
+         duration: 10000,
+       });
+       openSuccess();
+    })
+    .catch(
       (err) => {
+        console.log(bookingId)
         notifications.show({
           message: err.response.message ?? err.message,
         });
@@ -177,7 +197,7 @@ const CheckoutPage = () => {
               <h1>Booking Details</h1>
               <div className="w-full flex justify-between gap-5 mt-6">
                 <img
-                  src={accommodation.images[0]}
+                  src={accommodation?.images[0]}
                   alt=""
                   width={130}
                   height={130}
@@ -280,7 +300,7 @@ const CheckoutPage = () => {
                 createBooking();
               }}
             >
-              {`Pay ${booking.paymentTotal} FRW`}
+              {loadingPay ? <ClipLoader size={20} color="white"/> : `Pay ${booking.paymentTotal} FRW`}
             </button>
           </div>
           <AddCardModal
@@ -288,6 +308,9 @@ const CheckoutPage = () => {
             opened={isAddCardOpen}
             close={closeAddCard}
           />
+          <Modal className="bg-gray-100 shadow-lg" size={"auto"} opened={isOpenSuccessBooking} onClose={closeSuccess} withCloseButton={false} closeOnClickOutside={false}>
+              <BookingSuccess/>
+          </Modal>
         </div>
       )}
     </div>

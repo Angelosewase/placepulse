@@ -42,6 +42,7 @@ import OwnerBookings from "./app/_client/owner/OwnerBookings";
 import OwnerNotificationsPage from "./app/_client/owner/Notifications";
 import UserLandingLayout from "./app/_client/user/LandingLayout";
 import LandingPlaces from "./app/_client/user/LandingPlaces";
+import BookingSuccess from "./components/website/BookingSuccess";
 function App() {
   return (
     <div className="h-screen">
@@ -110,6 +111,14 @@ function App() {
               element={
                 <WebLayout>
                   <CheckoutPage />
+                </WebLayout>
+              }
+            />
+            <Route
+              path="/booking/place/success"
+              element={
+                <WebLayout>
+                  <BookingSuccess />
                 </WebLayout>
               }
             />

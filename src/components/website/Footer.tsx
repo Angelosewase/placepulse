@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import landingVector from "../../assets/images/landingVector.png";
 const WebFooter = () => {
   return (
-    <div className="w-full h-[60vh] relative flex items-start justify-between md:px-[10%] pt-44 bg-[#396ff965]">
+    <div className="w-full h-[60vh] relative flex items-start justify-between md:px-[10%] pt-[30vh] bg-[#396ff965]">
       <div className="flex flex-col gap-2 px-3 ">
         <h3 className="font-extrabold ">Quick Links</h3>
         <Link to={"/"}>Home</Link>

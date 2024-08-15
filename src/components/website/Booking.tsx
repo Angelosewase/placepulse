@@ -60,7 +60,7 @@ const BookingPage = () => {
     const multiplier = paymentPortion == "full" ? 1 : 0.5;
     const dateDiff = dateDifference === 0 ? 1 : dateDifference;
     // return dateDiff * multiplier * accommodation.roomTypes[0].price;
-    return dateDiff * multiplier * accommodation.price;
+    return dateDiff * multiplier * accommodation?.price;
   };
 
   const handlePaymentCheckout = () => {
@@ -73,10 +73,10 @@ const BookingPage = () => {
       checkIn: checkIn,
       checkOut: checkOut,
       paymentType: paymentPortion,
-      image: accommodation.images[0],
+      image: accommodation?.images[0],
       paymentMethod: null,
       paymentTotal: priceToPay(),
-      name: accommodation.name,
+      name: accommodation?.name,
     };
     dispatch({ type: ADD_BOOKING, payload: bookingDetails });
     if (!isLoggedIn) {
@@ -107,16 +107,16 @@ const BookingPage = () => {
               <div className="w-full">
                 <h1 className="w-[70%] text-xl text-start font-extrabold">
                   {/* {accommodation.roomTypes[0].type} */}
-                  {accommodation.name}
+                  {accommodation?.name}
                 </h1>
                 <div className="md:w-[80%] border border-[#699BFE] py-3 rounded-lg pl-3 mt-5">
                   <h1 className="text-xl font-extrabold">
-                    {accommodation.name}
+                    {accommodation?.name}
                   </h1>
                   <div className="flex items-center gap-3">
                     <FaLocationDot color="#112211d1" />
                     <h6 className="text-[#112211d1] text-sm font-medium">
-                      {accommodation.location}
+                      {accommodation?.location}
                     </h6>
                   </div>
                 </div>
@@ -216,7 +216,6 @@ const BookingPage = () => {
                           className={`${paymentPortion === "partial" && "text-white"} font-medium text-xs mt-5`}
                         >
                           Pay {priceToPay()} now, and the rest (
-                          {/* {accommodation.roomTypes[0].price * 0.5}) will be */}
                           {priceToPay()}) will be automatically charged to the
                           same payment method on Nov 14, 2022. No extra fees.
                         </p>
@@ -239,25 +238,25 @@ const BookingPage = () => {
                 <div className="w-full flex justify-between gap-5">
                   <img
                     // src={accommodation.roomTypes[0].images[0]}
-                    src={accommodation.images[0]}
+                    src={accommodation?.images[0]}
                     alt=""
                     width={100}
                     height={100}
                     className="rounded-lg"
                   />
                   <div className="flex flex-col">
-                    <h1 className="text-md font-semibold text-[#444343]">{`${accommodation.name.slice(0, 20)} ...`}</h1>
+                    <h1 className="text-md font-semibold text-[#444343]">{`${accommodation?.name?.slice(0, 20)} ...`}</h1>
                     <h1 className="text-lg font-extrabold">
                       {/* {accommodation.roomTypes[0].type} */}
-                      {accommodation.type}
+                      {accommodation?.type}
                     </h1>
                     <div className="h-[2.5rem] flex items-center gap-3 mt-2">
                       <button className="w-[3rem] h-full rounded-sm border border-[#8DD3BB] font-bold">
-                        {accommodation.rating}
+                        {accommodation?.rating}
                       </button>
                       <h5 className="text-xs font-extrabold">Very Good</h5>
                       <p className="text-xs font-semibold">
-                        {Math.floor(Math.random() * 1000) + 1} Reviews
+                        {Math?.floor(Math.random() * 1000) + 1} Reviews
                       </p>
                     </div>
                   </div>
