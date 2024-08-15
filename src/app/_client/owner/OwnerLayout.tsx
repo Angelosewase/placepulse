@@ -12,14 +12,14 @@ const OwnerLayout = ({ children }: { children: React.ReactElement }) => {
   }
 
   return (
-    <div className="w-full h-screen flex justify-between">
-      <div className="w-[24vw]">
+    <div className="w-full h-screen flex justify-between bg-white">
+      <div className="w-[24vw] p-4 rounded-lg" style={{height: `calc(100vh - 4px)`}}>
         <OwnerSidebar />
       </div>
       <div className="w-[76vw] h-screen">
         <OwnerNavbar />
         <div className="w-full overflow-y-auto h-[90vh]">
-          <div className=" min-h-[80vh] pt-[5vh] px-6">{children}</div>
+          <div className="min-h-[80vh] pt-[5vh] px-6">{children}</div>
           <OwnerFooter />
         </div>
       </div>

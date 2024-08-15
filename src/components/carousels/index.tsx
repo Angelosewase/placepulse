@@ -31,17 +31,17 @@ const Carousel = ({ accommodations }: { accommodations: any }) => {
         className="carousel-content"
         style={{ transform: `translateX(-${currentIndex * 92}%)` }}
       >
-        {accommodations.map((accommodation: any, index: any) => (
+        {accommodations?.map((accommodation: any, index: any) => (
           <div key={index} className="carousel-item">
             <img
-              src={accommodation.image}
-              alt={accommodation.title}
+              src={accommodation?.images[0]}
+              alt={accommodation?.name}
               className="accommodation-image"
             />
             <div className="accommodation-info">
-              <h3>{accommodation.title}</h3>
+              <h3>{accommodation.name}</h3>
               <p>
-                Category: <strong>{accommodation.category}</strong>
+                Category: <strong>{accommodation.type}</strong>
               </p>
               <p>{accommodation.location}</p>
               <p>⭐ {accommodation.rating}</p>

@@ -30,7 +30,6 @@ const ViewAccommodation = () => {
       .finally(() => setLoading(false));
   }, []);
 
-  console.log(accommodation);
   const navigate = useNavigate();
   return (
     <div className="w-full flex flex-col md:px-10 pt-10 pb-[50vh]">
@@ -73,7 +72,7 @@ const ViewAccommodation = () => {
 
             <div className="absolute right-0 top-0">
               <h1 className="text-xl text-[#396FF9] font-extrabold text-right">
-                {accommodation.price} <span className="text-sm">/night</span>
+                {accommodation.price} <span className="text-sm">{(accommodation?.type === "hotel" || accommodation?.type === "motel" || accommodation?.type === "lodge" || accommodation?.type === "guest house") ? "/night" : "/accommodation"}</span>
               </h1>
               <div className="flex w-full justify-between items-center gap-3 mt-4">
                 <button className="w-[4rem] h-[3rem] flex items-center justify-center rounded-sm border border-[#8DD3BB] font-bold">

@@ -8,7 +8,10 @@ const categories = [
   { type: "Parking" },
   { type: "Garden" },
   { type: "Conference Room" },
-  { type: "Restaurant" },
+  { type: "Apartment" },
+  { type: "Guest House" },
+  { type: "Lodge" },
+  { type: "Resort" },
 ];
 
 const ButtonSliderComponent = ({

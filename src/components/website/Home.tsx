@@ -1,8 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import landingImage1 from "../../assets/images/landing1.png";
 import landingImage2 from "../../assets/images/landing2.png";
 import landingImage3 from "../../assets/images/landing3.png";
-import hotel1 from "../../assets/images/hotel1.png";
-import hotel2 from "../../assets/images/hotel2.png";
 import { Link, useNavigate } from "react-router-dom";
 import { CiLocationOn } from "react-icons/ci";
 import { GrKey } from "react-icons/gr";
@@ -11,11 +10,32 @@ import { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import cookie from "react-cookies";
 import Carousel from "../carousels";
-import { accommodations_popular as accommodations } from "../../constants/dummy";
 import FAQPage from "./FAQs";
 import ReviewsCarousel from "./Reviews";
+import { useDispatch, useSelector } from "react-redux";
+import { AuthorizedAxiosAPI } from "@/utils/AxiosInstance";
+import { FETCH_ACCOMMODATIONS_FAIL, FETCH_ACCOMMODATIONS_SUCCESS } from "@/actions/AccommodationActions";
 const Home = () => {
   const navigate = useNavigate();
+  const {accommodations} = useSelector((state: any)=> state.accommodations);
+  const dispatch = useDispatch();
+  useEffect(()=>{
+    AuthorizedAxiosAPI.get("/accommodation/all")
+      .then((res) => {
+        dispatch({
+          type: FETCH_ACCOMMODATIONS_SUCCESS,
+          payload: {
+            accommodations: res.data.data,
+          },
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: FETCH_ACCOMMODATIONS_FAIL,
+          payload: err.response,
+        });
+      });
+  },[dispatch])
   useEffect(() => {
     const token = cookie.load("auth_token");
     const userRole = cookie.load("auth_USER");
@@ -91,11 +111,11 @@ const Home = () => {
       <div className="mt-[20vh] px-10 flex md:flex-row flex-col-reverse justify-between items-start ">
         <div className="w-full md:w-[50%] flex flex-col md:flex-row gap-8">
           <div className="relative flex justify-center w-full">
-            <img src={hotel1} alt="Weekly Hotel 1" className="w-full" />
+            <img src={accommodations[0]?.images[0]} alt="Weekly Hotel 1" className="w-full" />
             <div className="bg-white w-[80%] absolute bottom-[-2.3rem] rounded-lg px-3 pt-2 py-3">
-              <h2 className="font-extrabold">Marriot Hotel</h2>
+              <h2 className="font-extrabold">{accommodations[0]?.name}</h2>
               <Link
-                to={"/services"}
+                to={"/places"}
                 className="font-extrabold text-[#396FF9] flex items-center gap-2"
               >
                 Get Reservation <CiLocationOn size={15} color="#396FF9" />
@@ -103,11 +123,11 @@ const Home = () => {
             </div>
           </div>
           <div className="relative flex justify-center w-full">
-            <img src={hotel2} alt="Weekly Hotel 1" className="w-full" />
+            <img src={accommodations[1]?.images[0]} alt="Weekly Hotel 1" className="w-full" />
             <div className="bg-white w-[80%] absolute bottom-[-2.3rem] rounded-lg px-3 pt-2 py-3">
-              <h2 className="font-extrabold">Game Park Hotel</h2>
+              <h2 className="font-extrabold">{accommodations[1]?.name}</h2>
               <Link
-                to={"/services"}
+                to={"/places"}
                 className="font-extrabold text-[#396FF9] flex items-center gap-2"
               >
                 Get Reservation <CiLocationOn size={15} color="#396FF9" />

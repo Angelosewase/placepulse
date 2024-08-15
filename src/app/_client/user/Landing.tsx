@@ -8,15 +8,17 @@ import { MdPending } from "react-icons/md";
 import mabBgImg from "../../../assets/images/map.png";
 import TripCard from "../../../components/Cards/TripCard";
 import PopularCard from "../../../components/Cards/PopularAccCard";
-import { AxiosAPI } from "../../../utils/AxiosInstance";
+import { AuthorizedAxiosAPI, AxiosAPI } from "../../../utils/AxiosInstance";
 import {
   FETCH_ACCOMMODATIONS_FAIL,
   FETCH_ACCOMMODATIONS_SUCCESS,
 } from "../../../actions/AccommodationActions";
 import SelectComponent from "./SelectItems";
+import BookingLandCard from "@/components/Cards/BookingLandCard";
 const UserLanding = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [bookings, setBookings] = useState([]);
   const accommodations = useSelector(
     (state: any) => state.accommodations.accommodations,
   );
@@ -38,9 +40,22 @@ const UserLanding = () => {
     })
     .finally(() => setLoading(false));
   };
+  const fetchBookings = () => {
+    setLoading(true);
+    AuthorizedAxiosAPI.get("/booking/getMine")
+    .then((res) => {
+      setBookings(res.data.data);
+      console.log(res.data.data);
+    })
+    .catch((err) => {
+      console.log(err.response);
+    })
+    .finally(() => setLoading(false));
+  };
   
   useEffect(() => {
     fetchAccommodations();
+    fetchBookings();
   }, []);
   
   const tabs = [
@@ -57,28 +72,28 @@ const UserLanding = () => {
       slug: "garden"
     },
     {
-      name: "Restaurants",
-      slug: "restaurant"
-    },
-    {
       name: "Conference Rooms",
       slug: "conference room"
     },
     {
-      name: "Gardens",
-      slug: "garden"
+      name: "Apartments",
+      slug: "apartment"
     },
     {
-      name: "Gardens",
-      slug: "garden"
+      name: "Guest House",
+      slug: "guest house"
     },
     {
-      name: "Gardens",
-      slug: "garden"
+      name: "Resorts",
+      slug: "resort"
+    },
+    {
+      name: "Lodge",
+      slug: "lodge"
     },
   ]
   return (
-    <div className="w-full pb-[50vh]">
+    <div className="w-full">
       <div className="w-full md:h-[90vh] relative">
         <img
           src={mabBgImg}
@@ -135,12 +150,32 @@ const UserLanding = () => {
             Show Places
           </button>
         </div>
-        <div className="mt-8">
-          <div className="w-full flex flex-col md:flex-row justify-between items-start gap-4 md:items-center">
+        <div className="w-full mt-8">
+        <div className="w-full mt-[10vh]">
+            <div className="w-full flex flex-col md:flex-row justify-between items-start gap-4 md:items-center mt-[12vh]">
+              <div className="w-[70%]">
+                <h1 className="text-3xl font-bold">
+                  Your Recent Bookings
+                </h1>
+                <p className="text-[#454444]">
+                  Accommodations that caught your attention
+                </p>
+              </div>
+              <button className="py-2 px-6 border border-[#8DD3BB] rounded-sm font-semibold">
+                See All
+              </button>
+            </div>
+            <div className="w-full h-[60vh] grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-x-10 gap-y-3 mt-10">
+              {bookings.slice(0, 3).map((place: any, index: number) => (
+                <BookingLandCard data={place} key={index} />
+              ))}
+            </div>
+          </div>
+          <div className="w-full flex flex-col md:flex-row justify-between items-start gap-4 md:items-center mt-[10vh]">
             <div>
               <h1 className="text-3xl font-bold">Plan your perfect trip</h1>
               <p className="text-[#454444]">
-                Search Places Hire to our most popular places
+                Search Places Here from our most popular places
               </p>
             </div>
             <button className="py-2 px-6 border border-[#8DD3BB] rounded-sm font-semibold">

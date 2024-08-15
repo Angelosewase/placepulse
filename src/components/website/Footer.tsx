@@ -44,7 +44,6 @@ const WebFooter = () => {
             </button>
           </div>
         </div>
-
         <div className="absolute z-50 top-5 right-10 bg-black w-1/3 rounded-tl-[3.4rem] rounded-tr-[3rem]">
           <div className=" border-8 border-b-0 border-[#396FF9] bg-[#546869] rounded-t-[3rem] w-[15vw] h-[30vh]"></div>
           <img

@@ -69,7 +69,7 @@ const OwnerSidebar = () => {
     },
   ];
   return (
-    <div className="w-full flex flex-col pt-[5vh] h-screen bg-[#F8F8FC]">
+    <div className="w-full flex flex-col pt-[5vh] h-full bg-[#F8F8FC]">
       <h1 className="text-2xl font-extrabold w-full text-center pl-8">
         <Brand />
       </h1>

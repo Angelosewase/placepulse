@@ -39,13 +39,13 @@ const ReviewsCarousel = () => {
             {currentIndex === index - 1 ? (
               <img
                 src={testimonialActiveVector}
-                className="w-[390px] h-[320px]"
+                className="w-[430px] h-[320px]"
                 alt="Background"
               />
             ) : (
               <img
                 src={testimonialVector}
-                className="w-[390px] h-[320px]"
+                className="w-[430px] h-[320px]"
                 alt="Background"
               />
             )}

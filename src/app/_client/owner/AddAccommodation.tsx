@@ -403,8 +403,24 @@ const OwnerAddAccommodations = () => {
                     value: "garden",
                   },
                   {
-                    label: "Restaurant",
-                    value: "restaurant",
+                    label: "Guest House",
+                    value: "guest house",
+                  },
+                  {
+                    label: "Apartment",
+                    value: "apartment",
+                  },
+                  {
+                    label: "Conference Room",
+                    value: "conference room",
+                  },
+                  {
+                    label: "Resort",
+                    value: "resort",
+                  },
+                  {
+                    label: "Lodge",
+                    value: "lodge",
                   },
                 ]}
               />
