@@ -11,47 +11,21 @@ import CheckBox from "../Checkbox";
 import { SnakeCaseToPascalCaseSpaced } from "../../utils/funcs/formatter";
 import SliderComponent from "../Inputs/Slider";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { AuthorizedAxiosAPI } from "../../utils/AxiosInstance";
-import {
-  FETCH_ACCOMMODATIONS_FAIL,
-  FETCH_ACCOMMODATIONS_SUCCESS,
-} from "../../actions/AccommodationActions";
+import { useSelector } from "react-redux";
 import { Helmet } from "react-helmet";
 import ButtonSliderComponent from "../../app/_client/user/SliderComponent";
 
 const Places = () => {
   const [activeAcc, setActiveAcc] = useState("hotel");
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const { accommodations: accommodations_data } = useSelector(
     (state: any) => state.accommodations,
   );
-  const fetch = () => {
-    AuthorizedAxiosAPI.get("/accommodation/all")
-      .then((res) => {
-        dispatch({
-          type: FETCH_ACCOMMODATIONS_SUCCESS,
-          payload: {
-            accommodations: res.data.data,
-          },
-        });
-      })
-      .catch((err) => {
-        dispatch({
-          type: FETCH_ACCOMMODATIONS_FAIL,
-          payload: err.response,
-        });
-      });
-  };
   console.log(
     accommodations_data.filter(
       (acc: any) => acc.type == accommodations[1].type.toLowerCase(),
     ).length,
   );
-  useEffect(() => {
-    fetch();
-  }, []);
   return (
     <div className="w-full flex px-10 pt-[10vh] pb-[50vh]">
       <Helmet>

@@ -8,7 +8,7 @@ import { IoIosAddCircleOutline } from "react-icons/io";
 import { useDisclosure } from "@mantine/hooks";
 import AddCardModal from "../../components/Modals/addCardModal";
 import { useEffect, useState } from "react";
-import { AuthorizedAxiosAPI, AxiosAPI } from "../../utils/AxiosInstance";
+import { AxiosAPI } from "../../utils/AxiosInstance";
 import { useSelector } from "react-redux";
 import { format } from "date-fns";
 import { ClipLoader } from "react-spinners";
@@ -19,7 +19,8 @@ import BookingSuccess from "@/components/website/BookingSuccess.tsx";
 
 const CheckoutPage = () => {
   const params = useParams();
-  const [isOpenSuccessBooking, {open: openSuccess, close: closeSuccess}] = useDisclosure();
+  const [isOpenSuccessBooking, { open: openSuccess, close: closeSuccess }] =
+    useDisclosure();
   // const navigate = useNavigate();
   const accommodation_id = params.id ?? 0;
   const [accommodation, setAccommodation] = useState<any>();
@@ -123,21 +124,21 @@ const CheckoutPage = () => {
       },
     })
       .then((res) => {
-        console.log(bookingId)
-        console.log(res.data.data)
+        console.log(bookingId);
+        console.log(res.data.data);
         localStorage.setItem("bd", res.data.data);
         setBookingsId(res.data.data);
         setLoadingPay(false);
-        console.log("local storage",localStorage.getItem("bd"));
+        console.log("local storage", localStorage.getItem("bd"));
         handleFlutterPayment({
           callback: (response) => {
-            console.log(bookingId)
+            console.log(bookingId);
             console.log(response);
             if (response.status === "successful") {
-            console.log(bookingId)
+              console.log(bookingId);
               onPaymentSuccess();
             } else {
-              console.log(bookingId)
+              console.log(bookingId);
               notifications.show({
                 message: "Payment Failed",
                 color: "red",
@@ -157,27 +158,24 @@ const CheckoutPage = () => {
       })
       .finally(() => setLoadingPay(false));
   };
+  const { token } = useSelector((state: any) => state.auth);
   const onPaymentSuccess = () => {
-    console.log(bookingId)
+    console.log(bookingId);
     const bookId = localStorage.getItem("bd");
-    AuthorizedAxiosAPI.get(`/booking/payment/complete/${bookId}`)
-    .then(()=>{
-       console.log(bookingId)
-       notifications.show({
-         message: "Payment Successful",
-         color: "green",
-         duration: 10000,
-       });
-       openSuccess();
+    AxiosAPI.get(`/booking/payment/complete/${bookId}`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
     })
-    .catch(
-      (err) => {
-        console.log(bookingId)
+      .then(() => {
+        openSuccess();
+      })
+      .catch((err) => {
+        console.log(bookingId);
         notifications.show({
           message: err.response.message ?? err.message,
         });
-      },
-    );
+      });
   };
 
   return (
@@ -300,7 +298,11 @@ const CheckoutPage = () => {
                 createBooking();
               }}
             >
-              {loadingPay ? <ClipLoader size={20} color="white"/> : `Pay ${booking.paymentTotal} FRW`}
+              {loadingPay ? (
+                <ClipLoader size={20} color="white" />
+              ) : (
+                `Pay ${booking.paymentTotal} FRW`
+              )}
             </button>
           </div>
           <AddCardModal
@@ -308,8 +310,15 @@ const CheckoutPage = () => {
             opened={isAddCardOpen}
             close={closeAddCard}
           />
-          <Modal className="bg-gray-100 shadow-lg" size={"auto"} opened={isOpenSuccessBooking} onClose={closeSuccess} withCloseButton={false} closeOnClickOutside={false}>
-              <BookingSuccess/>
+          <Modal
+            className="bg-gray-100 shadow-lg"
+            size={"auto"}
+            opened={isOpenSuccessBooking}
+            onClose={closeSuccess}
+            withCloseButton={false}
+            closeOnClickOutside={false}
+          >
+            <BookingSuccess />
           </Modal>
         </div>
       )}

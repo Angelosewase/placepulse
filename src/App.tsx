@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 
@@ -43,7 +43,14 @@ import OwnerNotificationsPage from "./app/_client/owner/Notifications";
 import UserLandingLayout from "./app/_client/user/LandingLayout";
 import LandingPlaces from "./app/_client/user/LandingPlaces";
 import BookingSuccess from "./components/website/BookingSuccess";
+import { getAccommodations, getUserBookings } from "./utils/funcs";
+import { useDispatch } from "react-redux";
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    getAccommodations({ dispatch });
+    getUserBookings({ dispatch });
+  }, [dispatch]);
   return (
     <div className="h-screen">
       <BrowserRouter>

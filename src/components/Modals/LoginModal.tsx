@@ -9,6 +9,7 @@ import { Modal } from "@mantine/core";
 import { useDispatch } from "react-redux";
 import { LOGIN_SUCCESS } from "../../actions/AuthActions";
 import cookie from "react-cookies";
+import Register from "../ui/RegisterComponent";
 const LoginModal = ({
   isPayment,
   closePayment,
@@ -23,7 +24,9 @@ const LoginModal = ({
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const handleEmailChange = (event: React.ChangeEvent<HTMLFormElement>): any => {
+  const handleEmailChange = (
+    event: React.ChangeEvent<HTMLFormElement>,
+  ): any => {
     console.log(event.target.value);
     setEmail(event.target.value);
   };
@@ -88,6 +91,7 @@ const LoginModal = ({
       })
       .finally(() => setLoading(false));
   };
+  const [activePage, setActivePage] = useState("login");
   return (
     <>
       {isPayment && (
@@ -97,61 +101,66 @@ const LoginModal = ({
             onClose={closePayment}
             title="Login to continue"
           >
-            <form
-              onSubmit={handleSubmit}
-              className="w-full flex flex-col items-start gap-4 my-[3vh]"
-            >
-              <div className="w-full flex flex-col items-start gap-6">
-                <AnimatedInput
-                  label="Email"
-                  type="email"
-                  handleChange={handleEmailChange}
-                  value={email}
-                />
-                <AnimatedInput
-                  label="Password"
-                  type="password"
-                  showEye={true}
-                  handleChange={handlePasswordChange}
-                  value={password}
-                  className=""
-                />
-              </div>
-
-              <div className="w-full flex justify-end">
-                <Link
-                  to={"/auth/forgot"}
-                  className="text-[#FF8682] font-extrabold text-sm"
-                >
-                  Forgot Password ?{" "}
-                </Link>
-              </div>
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full mt-4 py-3 text-center font-bold rounded-md text-white bg-[#699BFE]"
+            {activePage === "login" ? (
+              <form
+                onSubmit={handleSubmit}
+                className="w-full flex flex-col items-start gap-4 my-[3vh]"
               >
-                {loading ? (
-                  <div className="w-full h-full flex items-center justify-center">
-                    <ClipLoader size={23} color="black" />
-                  </div>
-                ) : (
-                  "Login"
-                )}
-              </button>
-              <div className="w-full flex items-center gap-2 justify-end">
-                <h1 className="text-sm font-extrabold">
-                  Don't have an account?
-                </h1>
-                <Link
-                  to={"/auth/register"}
-                  className="text-[#FF8682] font-extrabold text-sm"
+                <div className="w-full flex flex-col items-start gap-6">
+                  <AnimatedInput
+                    label="Email"
+                    type="email"
+                    handleChange={handleEmailChange}
+                    value={email}
+                  />
+                  <AnimatedInput
+                    label="Password"
+                    type="password"
+                    showEye={true}
+                    handleChange={handlePasswordChange}
+                    value={password}
+                    className=""
+                  />
+                </div>
+
+                <div className="w-full flex justify-end">
+                  <Link
+                    to={"/auth/forgot"}
+                    className="text-[#FF8682] font-extrabold text-sm"
+                  >
+                    Forgot Password ?{" "}
+                  </Link>
+                </div>
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full mt-4 py-3 text-center font-bold rounded-md text-white bg-[#699BFE]"
                 >
-                  {" "}
-                  Register
-                </Link>
-              </div>
-            </form>
+                  {loading ? (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <ClipLoader size={23} color="black" />
+                    </div>
+                  ) : (
+                    "Login"
+                  )}
+                </button>
+                <div className="w-full flex items-center gap-2 justify-end">
+                  <h1 className="text-sm font-extrabold">
+                    Don't have an account?
+                  </h1>
+                  <h1
+                    // to={"/auth/register"}
+                    onClick={() => setActivePage("register")}
+                    className="text-[#FF8682] font-extrabold text-sm cursor-pointer"
+                  >
+                    {" "}
+                    Register
+                  </h1>
+                </div>
+              </form>
+            ) : (
+              <Register setActivePage={setActivePage} />
+            )}
           </Modal>
         </div>
       )}

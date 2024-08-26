@@ -42,6 +42,7 @@ export const authReducer = (state = loadState(), action: AuthAction) => {
         user: action.payload.user,
         token: action.payload.token,
       };
+      cookie.save("auth_token", action.payload.token);
       cookie.save("Otate", encrypt(JSON.stringify(newState)), {
         path: "/",
       });

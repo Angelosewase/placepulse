@@ -12,30 +12,16 @@ import cookie from "react-cookies";
 import Carousel from "../carousels";
 import FAQPage from "./FAQs";
 import ReviewsCarousel from "./Reviews";
-import { useDispatch, useSelector } from "react-redux";
-import { AuthorizedAxiosAPI } from "@/utils/AxiosInstance";
-import { FETCH_ACCOMMODATIONS_FAIL, FETCH_ACCOMMODATIONS_SUCCESS } from "@/actions/AccommodationActions";
+import { Skeleton } from "@mantine/core";
+import { useSelector } from "react-redux";
+
 const Home = () => {
   const navigate = useNavigate();
-  const {accommodations} = useSelector((state: any)=> state.accommodations);
-  const dispatch = useDispatch();
-  useEffect(()=>{
-    AuthorizedAxiosAPI.get("/accommodation/all")
-      .then((res) => {
-        dispatch({
-          type: FETCH_ACCOMMODATIONS_SUCCESS,
-          payload: {
-            accommodations: res.data.data,
-          },
-        });
-      })
-      .catch((err) => {
-        dispatch({
-          type: FETCH_ACCOMMODATIONS_FAIL,
-          payload: err.response,
-        });
-      });
-  },[dispatch])
+  const { accommodations, loading } = useSelector(
+    (state: any) => state.accommodations,
+  );
+  console.log(accommodations, loading);
+
   useEffect(() => {
     const token = cookie.load("auth_token");
     const userRole = cookie.load("auth_USER");
@@ -51,12 +37,13 @@ const Home = () => {
       }
     }
   }, [navigate]);
+
   return (
-    <div className=" pt-3 min-h-screen pb-20">
+    <div className="pt-3 min-h-screen pb-20">
       <Helmet>
         <title>Home - Place Pulse</title>
       </Helmet>
-      <div className="w-full px-10 flex  flex-col md:flex-row items-center justify-between mt-[10vh]">
+      <div className="w-full px-10 flex flex-col md:flex-row items-center justify-between mt-[10vh]">
         <div className="w-full md:w-2/5 mb-10 md:mb-auto">
           <h1 className="w-full mb-5 text-5xl uppercase font-extrabold text-start">
             the adventure begins here
@@ -93,47 +80,64 @@ const Home = () => {
           <img
             src={landingImage1}
             alt="Landing Image 1"
-            className=" absolute left-0 mt-[15%] z-20"
+            className="absolute left-0 mt-[15%] z-20"
           />
           <img
             src={landingImage2}
             alt="Landing Image 2"
-            className=" absolute left-[30%] z-10"
+            className="absolute left-[30%] z-10"
           />
           <img
             src={landingImage3}
             alt="Landing Image 3"
-            className=" absolute right-0 mt-[15%]"
+            className="absolute right-0 mt-[15%]"
           />
         </div>
       </div>
 
       <div className="mt-[20vh] px-10 flex md:flex-row flex-col-reverse justify-between items-start ">
         <div className="w-full md:w-[50%] flex flex-col md:flex-row gap-8">
-          <div className="relative flex justify-center w-full">
-            <img src={accommodations[0]?.images[0]} alt="Weekly Hotel 1" className="w-full" />
-            <div className="bg-white w-[80%] absolute bottom-[-2.3rem] rounded-lg px-3 pt-2 py-3">
-              <h2 className="font-extrabold">{accommodations[0]?.name}</h2>
-              <Link
-                to={"/places"}
-                className="font-extrabold text-[#396FF9] flex items-center gap-2"
-              >
-                Get Reservation <CiLocationOn size={15} color="#396FF9" />
-              </Link>
-            </div>
-          </div>
-          <div className="relative flex justify-center w-full">
-            <img src={accommodations[1]?.images[0]} alt="Weekly Hotel 1" className="w-full" />
-            <div className="bg-white w-[80%] absolute bottom-[-2.3rem] rounded-lg px-3 pt-2 py-3">
-              <h2 className="font-extrabold">{accommodations[1]?.name}</h2>
-              <Link
-                to={"/places"}
-                className="font-extrabold text-[#396FF9] flex items-center gap-2"
-              >
-                Get Reservation <CiLocationOn size={15} color="#396FF9" />
-              </Link>
-            </div>
-          </div>
+          {loading ? (
+            <>
+              <Skeleton height={250} width="100%" />
+              <Skeleton height={250} width="100%" />
+            </>
+          ) : (
+            <>
+              <div className="relative flex justify-center w-full">
+                <img
+                  src={accommodations[0]?.images[0]}
+                  alt="Weekly Hotel 1"
+                  className="w-full"
+                />
+                <div className="bg-white w-[80%] absolute bottom-[-2.3rem] rounded-lg px-3 pt-2 py-3">
+                  <h2 className="font-extrabold">{accommodations[0]?.name}</h2>
+                  <Link
+                    to={"/places"}
+                    className="font-extrabold text-[#396FF9] flex items-center gap-2"
+                  >
+                    Get Reservation <CiLocationOn size={15} color="#396FF9" />
+                  </Link>
+                </div>
+              </div>
+              <div className="relative flex justify-center w-full">
+                <img
+                  src={accommodations[1]?.images[0]}
+                  alt="Weekly Hotel 2"
+                  className="w-full"
+                />
+                <div className="bg-white w-[80%] absolute bottom-[-2.3rem] rounded-lg px-3 pt-2 py-3">
+                  <h2 className="font-extrabold">{accommodations[1]?.name}</h2>
+                  <Link
+                    to={"/places"}
+                    className="font-extrabold text-[#396FF9] flex items-center gap-2"
+                  >
+                    Get Reservation <CiLocationOn size={15} color="#396FF9" />
+                  </Link>
+                </div>
+              </div>
+            </>
+          )}
         </div>
         <div className="flex flex-col justify-start mb-20 md:mb-auto">
           <h1 className="text-2xl uppercase font-extrabold mt-5">
@@ -151,6 +155,7 @@ const Home = () => {
           </button>
         </div>
       </div>
+
       <div className="w-full flex flex-col md:flex-row items-center justify-center my-20 bg-[#396ff911] py-[10vh] gap-4">
         <div className="w-[90%] md:w-[25%] h-auto flex flex-col gap-5 items-center justify-center bg-white py-10 rounded-lg">
           <button className="p-4 bg-[#396FF9]">
@@ -180,12 +185,18 @@ const Home = () => {
           </h6>
         </div>
       </div>
+
       <section className="pb-[10vh] px-10 flex flex-col justify-center">
         <h1 className="text-3xl font-extrabold my-[5vh] w-full text-center">
           Popular Accommodations
         </h1>
-        <Carousel accommodations={accommodations} />
+        {loading ? (
+          <Skeleton height={300} width="100%" />
+        ) : (
+          <Carousel accommodations={accommodations} />
+        )}
       </section>
+
       <section id="reviews" className="pb-8">
         <section className="w-full my-20 bg-[#396ff911] pt-[5vh] pb-[10vh] gap-4">
           <h1 className="text-3xl font-extrabold w-full text-center mb-[10vh]">
@@ -194,6 +205,7 @@ const Home = () => {
           <ReviewsCarousel />
         </section>
       </section>
+
       <section className="w-full bg-[#F7F7F7] px-20 mb-[17vh]">
         <FAQPage />
       </section>

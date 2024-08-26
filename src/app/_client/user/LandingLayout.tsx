@@ -9,29 +9,29 @@ import React from "react";
 const tabs = [
   {
     name: "Hotels",
-    slug: "hotel"
+    slug: "hotel",
   },
   {
     name: "Motels",
-    slug: "motel"
+    slug: "motel",
   },
   {
     name: "Open Parks",
-    slug: "parking"
+    slug: "parking",
   },
   {
     name: "Gardens",
-    slug: "garden"
+    slug: "garden",
   },
   {
     name: "Restaurants",
-    slug: "restaurant"
+    slug: "restaurant",
   },
   {
     name: "Conference Rooms",
-    slug: "conference room"
+    slug: "conference room",
   },
-]
+];
 const UserLandingLayout = ({ children }: { children: React.ReactElement }) => {
   const navigate = useNavigate();
 
@@ -44,22 +44,16 @@ const UserLandingLayout = ({ children }: { children: React.ReactElement }) => {
         />
         <div className="absolute w-full h-[90vh] md:h-full bg-[#0000008a] z-10 top-0 flex flex-col gap-14">
           <div className="w-full md:w-[70%] hidden md:flex justify-between mt-5 px-3 md:px-20">
-          {tabs.map((tab) => (
+            {tabs.map((tab) => (
               <button
-                onClick={() =>
-                  navigate(
-                    `/_client/home/find/${tab.slug}`,
-                  )
-                }
+                onClick={() => navigate(`/_client/home/find/${tab.slug}`)}
                 key={tab.name}
                 className="text-white text-md font-semibold"
               >
                 {tab.name}
               </button>
             ))}
-            <button className="text-white text-md font-semibold">
-              More
-            </button>
+            <button className="text-white text-md font-semibold">More</button>
           </div>
           <div className="flex md:hidden mt-5 justify-end px-3">
             <MdPending size={23} color="white" />

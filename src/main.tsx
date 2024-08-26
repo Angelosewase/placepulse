@@ -12,11 +12,13 @@ import { NextUIProvider } from "@nextui-org/react";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import rootReducer from "./reducers/rootReducer.ts";
+// import ErrorBoundary from "./components/error/ErrorBoundary.tsx";
 const store = configureStore({
-  reducer: rootReducer
+  reducer: rootReducer,
 });
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
+    {/* <ErrorBoundary> */}
     <Provider store={store}>
       <NextUIProvider>
         <MantineProvider classNamesPrefix="plc-pls">
@@ -25,5 +27,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         </MantineProvider>
       </NextUIProvider>
     </Provider>
+    {/* </ErrorBoundary> */}
   </React.StrictMode>,
 );

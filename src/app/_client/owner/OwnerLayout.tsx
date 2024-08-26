@@ -13,7 +13,10 @@ const OwnerLayout = ({ children }: { children: React.ReactElement }) => {
 
   return (
     <div className="w-full h-screen flex justify-between bg-white">
-      <div className="w-[24vw] p-4 rounded-lg" style={{height: `calc(100vh - 4px)`}}>
+      <div
+        className="w-[24vw] p-4 rounded-lg"
+        style={{ height: `calc(100vh - 4px)` }}
+      >
         <OwnerSidebar />
       </div>
       <div className="w-[76vw] h-screen">

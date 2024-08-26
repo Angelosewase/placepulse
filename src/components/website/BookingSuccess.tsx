@@ -1,5 +1,5 @@
-import { CheckCircleIcon } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { CheckCircleIcon } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const BookingSuccess = () => {
   return (
@@ -8,7 +8,8 @@ const BookingSuccess = () => {
         <CheckCircleIcon className="h-16 w-16 text-green-500 mx-auto" />
         <h2 className="text-2xl font-semibold mt-4">Booking Confirmed!</h2>
         <p className="mt-2 text-gray-600">
-          Your booking has been successfully confirmed. A confirmation email has been sent to you.
+          Your booking has been successfully confirmed. A confirmation email has
+          been sent to you.
         </p>
 
         <div className="mt-6">

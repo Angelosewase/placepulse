@@ -1,34 +1,34 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import * as actions from "../actions/AccommodationActions";
+import * as actions from "../actions/BookingsActions";
 
-type AccommodationActionAction = {
+type bookingActionAction = {
   type: string;
   payload: any;
 };
 const initialState = {
-  accommodations: [],
+  bookings: [],
   loading: false,
   isError: false,
   error: "",
 };
-const accommodationReducers = (
+const bookingsReducers = (
   state = initialState,
-  action: AccommodationActionAction,
+  action: bookingActionAction,
 ) => {
   switch (action.type) {
-    case actions.FETCH_ACCOMMODATIONS:
+    case actions.FETCH_BOOKINGS:
       return {
         ...state,
         loading: true,
       };
-    case actions.FETCH_ACCOMMODATIONS_SUCCESS:
+    case actions.FETCH_BOOKINGS_SUCCESS:
       return {
         loading: false,
-        accommodations: action.payload.accommodations,
+        bookings: action.payload.bookings,
         isError: false,
         error: "",
       };
-    case actions.FETCH_ACCOMMODATIONS_FAIL:
+    case actions.FETCH_BOOKINGS_FAIL:
       return {
         ...state,
         isError: true,
@@ -39,4 +39,4 @@ const accommodationReducers = (
   }
 };
 
-export default accommodationReducers;
+export default bookingsReducers;

@@ -51,7 +51,7 @@ const LandingPlaces = () => {
   };
 
   useEffect(() => {
-    setActiveAcc(type?.toLowerCase() ?? "hotel")
+    setActiveAcc(type?.toLowerCase() ?? "hotel");
     fetch();
   }, [type]);
 

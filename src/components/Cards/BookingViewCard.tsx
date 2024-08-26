@@ -1,9 +1,13 @@
 import { GoClockFill } from "react-icons/go";
 import { IoIosArrowForward } from "react-icons/io";
 import { formatDate } from "../../utils/funcs/formatter";
+import TicketViewer from "../PDF/TicketViewer";
+import { useState } from "react";
+import { Modal } from "@mantine/core";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const BookingViewCard = ({ data }: { data: any }) => {
+  const [viewTicket, setViewTicket] = useState(false);
   return (
     <div className="w-full pt-3 pb-5 flex justify-between px-4 shadow-md shadow-gray-200">
       <div className="w-[50%] flex items-center justify-between">
@@ -19,6 +23,9 @@ const BookingViewCard = ({ data }: { data: any }) => {
               {data.name.length > 18
                 ? `${data.name.slice(0, 18)} . . .`
                 : data.name}
+            </h1>
+            <h1 className="text-base font-extrabold">
+              {data?.payment_type} Payment
             </h1>
             <h1
               className={`text-xs font-extrabold mt-3 mb-[-0.71rem]`}
@@ -67,13 +74,24 @@ const BookingViewCard = ({ data }: { data: any }) => {
         </div>
       </div>
       <div className="flex gap-4 items-center">
-        <button className="px-6 py-3 rounded-sm flex items-center font-light justify-center bg-[#699BFE] text-white">
-          Download Info
+        <button
+          onClick={() => setViewTicket(!viewTicket)}
+          className="px-6 py-3 rounded-sm flex items-center font-light justify-center bg-[#699BFE] text-white"
+        >
+          View Info
         </button>
         <button className="px-4 py-4 rounded-sm flex items-center font-extrabold justify-center border border-[#699BFE] text-white">
           <IoIosArrowForward color="black" />
         </button>
       </div>
+      <Modal
+        withCloseButton={false}
+        size={"lg"}
+        onClose={() => setViewTicket(false)}
+        opened={viewTicket}
+      >
+        <TicketViewer accommodation={data} />
+      </Modal>
     </div>
   );
 };

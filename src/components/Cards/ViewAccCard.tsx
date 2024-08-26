@@ -64,7 +64,10 @@ const ViewAccomCard = ({
       });
   };
   return (
-    <div className="w-full pl-4 py-2 shadow-sm shadow-[#ccccccba] flex justify-start gap-4 cursor-pointer relative" onClick={()=> navigate(`/_owner/accommodations/view/${data.id}`)}>
+    <div
+      className="w-full pl-4 py-2 shadow-sm shadow-[#ccccccba] flex justify-start gap-4 cursor-pointer relative"
+      onClick={() => navigate(`/_owner/accommodations/view/${data.id}`)}
+    >
       <img
         src={data.images[0]}
         alt=""

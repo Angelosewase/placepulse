@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { FaLocationDot } from "react-icons/fa6";
 import CheckInCheckOutDates from "../Calendar/CheckInOut";
 import { differenceInDays, format } from "date-fns";
-import { Collapse, Radio } from "@mantine/core";
+import { Collapse, Radio, Skeleton } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IoChevronBackCircleOutline } from "react-icons/io5";
 import LoginModal from "../Modals/LoginModal";
@@ -12,8 +12,6 @@ import { AxiosAPI } from "../../utils/AxiosInstance";
 import { useDispatch, useSelector } from "react-redux";
 import { ADD_BOOKING } from "../../actions/BookingActions";
 import { Helmet } from "react-helmet";
-import { ClipLoader } from "react-spinners";
-
 const BookingPage = () => {
   const params = useParams();
   const accommodation_id = params.id ?? "";
@@ -92,8 +90,26 @@ const BookingPage = () => {
         <title>Booking - Place Pulse</title>
       </Helmet>
       {loading ? (
-        <div className="w-full flex items-center justify-center mt-20">
-          <ClipLoader color="black" size={23} />
+        <div className="w-full">
+          <div className="w-full flex justify-start mb-5">
+            <Skeleton height={30} width={30} />
+          </div>
+          <div className="w-full flex justify-between md:px-8">
+            <div className="w-[63%]">
+              <Skeleton height={30} width="70%" mb="md" />
+              <Skeleton height={100} mb="md" />
+              <div className="w-full flex items-center justify-between mt-5">
+                <Skeleton height={30} width="45%" mb="md" />
+                <Skeleton height={30} width="45%" mb="md" />
+              </div>
+              <Skeleton height={80} mb="md" />
+              <Skeleton height={80} mb="md" />
+            </div>
+            <div className="w-[30%]">
+              <Skeleton height={300} mb="md" />
+              <Skeleton height={40} mb="md" />
+            </div>
+          </div>
         </div>
       ) : (
         <>
@@ -215,9 +231,9 @@ const BookingPage = () => {
                         <p
                           className={`${paymentPortion === "partial" && "text-white"} font-medium text-xs mt-5`}
                         >
-                          Pay {priceToPay()} now, and the rest (
-                          {priceToPay()}) will be automatically charged to the
-                          same payment method on Nov 14, 2022. No extra fees.
+                          Pay {priceToPay()} now, and the rest ({priceToPay()})
+                          will be automatically charged to the same payment
+                          method on Nov 14, 2022. No extra fees.
                         </p>
                       </Collapse>
                     </div>
