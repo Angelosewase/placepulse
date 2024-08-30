@@ -4,8 +4,8 @@ import OwnerNavbar from "../../../components/Navbar/OwnerNavbar";
 import OwnerFooter from "../../../components/Footer/OwnerFooter";
 import { useNavigate } from "react-router-dom";
 import cookie from "react-cookies";
-import { tabs } from "@/components/Sidebars/routes/owner.routes";
-const OwnerLayout = ({ children }: { children: React.ReactElement }) => {
+import { adminTabs } from "@/components/Sidebars/routes/admin.routes";
+const AdminLayout = ({ children }: { children: React.ReactElement }) => {
   const navigate = useNavigate();
   const authToken = cookie.load("auth_token");
   if (!authToken || !cookie.load("Otate") || !cookie.load("auth_USER")) {
@@ -18,7 +18,7 @@ const OwnerLayout = ({ children }: { children: React.ReactElement }) => {
         className="w-[24vw] p-4 rounded-lg"
         style={{ height: `calc(100vh - 4px)` }}
       >
-        <OwnerSidebar tabs={tabs}/>
+        <OwnerSidebar tabs={adminTabs}/>
       </div>
       <div className="w-[76vw] h-screen">
         <OwnerNavbar />
@@ -31,4 +31,5 @@ const OwnerLayout = ({ children }: { children: React.ReactElement }) => {
   );
 };
 
-export default OwnerLayout;
+export default AdminLayout;
+ 

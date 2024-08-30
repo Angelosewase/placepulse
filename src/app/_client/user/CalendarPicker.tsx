@@ -23,7 +23,9 @@ const CalendarPicker = ({
         <LandingSelect
           label={label}
           data={[]}
-          handleChange={(e: any) => setSelectedDate(e)}
+          handleChange={(e: any) => {
+            setSelectedDate(e);
+          }}
           value={"selectedDate"}
           onClick={() => setShowCalendar(!showCalendar)}
         />

@@ -49,10 +49,9 @@ export default function Login() {
             user: res.data.data.user,
           },
         });
+        console.log(res.data.data);
         if (res.data.data.user.role.includes("USER")) {
           console.log(res.data.data);
-          const expires = new Date();
-          expires.setDate(Date.now() + 1000 * 2);
           cookie.save("auth_token", res.data.data.token, {
             path: "/",
           });
@@ -62,8 +61,6 @@ export default function Login() {
           return navigate("/_client/home");
         }
         if (res.data.data.user.role.includes("OWNER")) {
-          const expires = new Date();
-          expires.setDate(Date.now() + 1000 * 2);
           cookie.save("auth_token", res.data.data.token, {
             path: "/",
           });
@@ -71,6 +68,15 @@ export default function Login() {
             path: "/",
           });
           return navigate("/_owner/home");
+        }
+        if (res.data.data.user.role.includes("ADMIN")) {
+          cookie.save("auth_token", res.data.data.token, {
+            path: "/",
+          });
+          cookie.save("auth_USER", res.data.data.user.role, {
+            path: "/",
+          });
+          return navigate("/_admin/home");
         }
       })
       .catch((err) => {

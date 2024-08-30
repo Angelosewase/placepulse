@@ -21,7 +21,7 @@ const UserLanding = () => {
   const { bookings, loading: loadingBookings } = useSelector(
     (state: any) => state.bookings,
   );
-
+  console.log(bookings);
   const tabs = [
     { name: "Hotel & Motels", slug: "hotel" },
     { name: "Open Parks", slug: "parking" },
@@ -104,19 +104,23 @@ const UserLanding = () => {
                 See All
               </button>
             </div>
-            <div className="w-full h-[60vh] grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-x-10 gap-y-3 mt-10">
-              {loading
-                ? Array(3)
-                    .fill(0)
-                    .map((_, index) => (
-                      <Skeleton key={index} height={200} radius="md" />
-                    ))
-                : bookings
-                    .slice(0, 3)
-                    .map((place: any, index: number) => (
-                      <BookingLandCard data={place} key={index} />
-                    ))}
-            </div>
+            {loadingBookings ? (
+              Array(3)
+                .fill(0)
+                .map((_, index) => (
+                  <Skeleton key={index} height={400} radius="md" />
+                ))
+            ) : bookings.length === 0 ? (
+              <div className="w-full flex flex-col gap-4 items-center">
+                <h1 className="font-extrabold">No Bookings Found!</h1>
+              </div>
+            ) : (
+              <div className="w-full h-[60vh] grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-x-10 gap-y-3 mt-10">
+                {bookings.slice(0, 3).map((place: any, index: number) => (
+                  <BookingLandCard data={place} key={index} />
+                ))}
+              </div>
+            )}
           </div>
           <div className="w-full flex flex-col md:flex-row justify-between items-start gap-4 md:items-center mt-[10vh]">
             <div>

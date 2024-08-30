@@ -45,6 +45,13 @@ import LandingPlaces from "./app/_client/user/LandingPlaces";
 import BookingSuccess from "./components/website/BookingSuccess";
 import { getAccommodations, getUserBookings } from "./utils/funcs";
 import { useDispatch } from "react-redux";
+import AdminLayout from "./app/_client/admin/OwnerLayout";
+import AdminHome from "./app/_client/admin/Home";
+import AdminAccommodations from "./app/_client/admin/Accommodations";
+import ViewAdminAccommodation from "./app/_client/admin/ViewOwnerAccommodation";
+import AdminBookings from "./app/_client/admin/OwnerBookings";
+import AdminNotificationsPage from "./app/_client/admin/Notifications";
+import AdminAccountInfo from "./app/_client/admin/Info/Account";
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -209,6 +216,7 @@ function App() {
               }
             />
             {/* End User Routes */}
+
             {/* Owner Routes */}
             <Route
               path="/_owner/home"
@@ -240,6 +248,38 @@ function App() {
             />
 
             {/* Owner Routes */}
+          
+            {/* Admin Routes */}
+            <Route
+              path="/_admin/home"
+              element={<AdminLayout children={<AdminHome />} />}
+            />
+            <Route
+              path="/_admin/accommodations/view"
+              element={<AdminLayout children={<AdminAccommodations />} />}
+            />
+            <Route
+              path="/_admin/accommodations/view/:id"
+              element={<AdminLayout children={<ViewAdminAccommodation />} />}
+            />
+            <Route
+              path="/_admin/accommodations/add"
+              element={<AdminLayout children={<OwnerAddAccommodations />} />}
+            />
+            <Route
+              path="/_admin/bookings"
+              element={<AdminLayout children={<AdminBookings />} />}
+            />
+            <Route
+              path="/_admin/notifications"
+              element={<AdminLayout children={<AdminNotificationsPage />} />}
+            />
+            <Route
+              path="/_admin/account"
+              element={<AdminLayout children={<AdminAccountInfo />} />}
+            />
+
+            {/* Admin Routes */}
 
             <Route path="*" element={<NotFoundPage />} />
           </Routes>

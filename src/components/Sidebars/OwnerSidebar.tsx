@@ -1,6 +1,5 @@
-import { BsFillHouseCheckFill } from "react-icons/bs";
-import { FaBookOpenReader, FaHouse } from "react-icons/fa6";
-import { MdAccountCircle } from "react-icons/md";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { NavLink, useNavigate } from "react-router-dom";
 import SubRoutesTab from "./SubRoutesTab";
 import { CiLogout } from "react-icons/ci";
@@ -11,7 +10,7 @@ import { notifications } from "@mantine/notifications";
 import { useDispatch } from "react-redux";
 import { LOGOUT_SUCCESS } from "../../actions/AuthActions";
 import Brand from "../ui/brand";
-const OwnerSidebar = () => {
+const OwnerSidebar = ({tabs}: {tabs: any[]}) => {
   const [isLogout, { open, close }] = useDisclosure();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -33,41 +32,7 @@ const OwnerSidebar = () => {
     });
     navigate("/");
   };
-  const tabs = [
-    {
-      label: "Home",
-      path: "/_owner/home",
-      icon: <FaHouse size={20} />,
-    },
-    {
-      label: "Accommodations",
-      path: "/_owner/accommodations",
-      icon: <BsFillHouseCheckFill size={20} />,
-      hasSubRoute: true,
-      subRoutes: [
-        {
-          label: "View Accommodations",
-          path: "/_owner/accommodations/view",
-          icon: <BsFillHouseCheckFill size={20} />,
-        },
-        {
-          label: "Add Accommodation",
-          path: "/_owner/accommodations/add",
-          icon: <BsFillHouseCheckFill size={20} />,
-        },
-      ],
-    },
-    {
-      label: "Bookings",
-      path: "/_owner/bookings",
-      icon: <FaBookOpenReader size={20} />,
-    },
-    {
-      label: "Account",
-      path: "/_owner/account",
-      icon: <MdAccountCircle size={25} />,
-    },
-  ];
+
   return (
     <div className="w-full flex flex-col pt-[5vh] h-full bg-[#F8F8FC]">
       <h1 className="text-2xl font-extrabold w-full text-center pl-8">

@@ -146,6 +146,7 @@ const CheckoutPage = () => {
               });
             }
             closePaymentModal();
+            setLoadingPay(false);
           },
           onClose: () => {},
         });
@@ -155,8 +156,7 @@ const CheckoutPage = () => {
           message: err.response.message ?? err.message,
           color: "red",
         });
-      })
-      .finally(() => setLoadingPay(false));
+      });
   };
   const { token } = useSelector((state: any) => state.auth);
   const onPaymentSuccess = () => {
