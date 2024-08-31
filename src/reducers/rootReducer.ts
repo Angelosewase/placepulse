@@ -5,6 +5,7 @@ import { bookingReducer } from "./BookingReducers";
 import bookingsReducers from "./BookingsReducers";
 import usersReducers from "./UsersReducers";
 import EarningsReducers from "./EarningsReducers";
+import notificationsReducers from "./NotificationsReducers";
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   bookings: bookingsReducers,
   owners: usersReducers,
   earnings: EarningsReducers,
+  notifications: notificationsReducers,
 });
 
 export default rootReducer;

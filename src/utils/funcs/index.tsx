@@ -19,6 +19,11 @@ import {
   FETCH_EARNINGS_FAIL,
   FETCH_EARNINGS_SUCCESS,
 } from "@/actions/EarningsActions";
+import {
+  FETCH_NOTIFICATIONS,
+  FETCH_NOTIFICATIONS_FAIL,
+  FETCH_NOTIFICATIONS_SUCCESS,
+} from "@/actions/NotificationsActions";
 
 export const getAccommodations = async ({
   dispatch,
@@ -38,6 +43,28 @@ export const getAccommodations = async ({
     .catch((err) => {
       dispatch({
         type: FETCH_ACCOMMODATIONS_FAIL,
+        payload: err.response,
+      });
+    });
+};
+export const getNotifications = async ({
+  dispatch,
+}: {
+  dispatch: Dispatch;
+}) => {
+  dispatch({ type: FETCH_NOTIFICATIONS });
+  AuthorizedAxiosAPI.get("/notifications/mine")
+    .then((res) => {
+      dispatch({
+        type: FETCH_NOTIFICATIONS_SUCCESS,
+        payload: {
+          notifications: res.data.data,
+        },
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: FETCH_NOTIFICATIONS_FAIL,
         payload: err.response,
       });
     });

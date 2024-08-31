@@ -46,6 +46,7 @@ import BookingSuccess from "./components/website/BookingSuccess";
 import {
   getAccommodations,
   getAllOwners,
+  getNotifications,
   getUserBookings,
 } from "./utils/funcs";
 import { useDispatch } from "react-redux";
@@ -58,12 +59,16 @@ import AdminNotificationsPage from "./app/_client/admin/Notifications";
 import AdminAccountInfo from "./app/_client/admin/Info/Account";
 import AccommodationOwnersPage from "./app/_client/admin/Owners";
 import AdminAddAccommodations from "./app/_client/admin/AddAccommodation";
+// import socketIO from "socket.io-client";
+// const socket = socketIO.connect("http://localhost:5454");
 function App() {
+  // socket.on
   const dispatch = useDispatch();
   useEffect(() => {
     getAccommodations({ dispatch });
     getUserBookings({ dispatch });
     getAllOwners({ dispatch });
+    getNotifications({ dispatch });
   }, [dispatch]);
   return (
     <div className="h-screen">
