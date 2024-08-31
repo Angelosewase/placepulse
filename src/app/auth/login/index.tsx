@@ -49,7 +49,6 @@ export default function Login() {
             user: res.data.data.user,
           },
         });
-        console.log(res.data.data);
         if (res.data.data.user.role.includes("USER")) {
           console.log(res.data.data);
           cookie.save("auth_token", res.data.data.token, {

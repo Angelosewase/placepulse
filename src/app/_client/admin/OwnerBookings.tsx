@@ -2,36 +2,9 @@
 import { IoReloadSharp } from "react-icons/io5";
 import BookingViewCard from "../../../components/Cards/BookingViewCard";
 import { useSelector } from "react-redux";
-import { AxiosAPI } from "@/utils/AxiosInstance";
-import { notifications } from "@mantine/notifications";
-import { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 const AdminBookings = () => {
-  const [bookings, setBookings] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const { token } = useSelector((state: any) => state.auth);
-  const getAllBookings = async () => {
-    setLoading(true);
-    AxiosAPI.get("/booking/owner/getAll", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((res) => {
-        console.log(res.data);
-        setBookings(res.data.data);
-      })
-      .catch((err) => {
-        notifications.show({
-          message: err.response ?? err.message,
-        });
-      })
-      .finally(() => setLoading(false));
-  };
-
-  useEffect(() => {
-    getAllBookings();
-  }, []);
+  const { bookings, loading } = useSelector((state: any) => state.bookings);
   return (
     <div className="w-full mb-20">
       <div className="w-full flex justify-between items-center">

@@ -13,9 +13,11 @@ import { useNavigate } from "react-router-dom";
 const ViewAccomCard = ({
   data,
   refetch,
+  type,
 }: {
   data: any;
   refetch: () => void;
+  type: string;
 }) => {
   const navigate = useNavigate();
   const [isDelete, setIsDelete] = useState<{
@@ -64,10 +66,7 @@ const ViewAccomCard = ({
       });
   };
   return (
-    <div
-      className="w-full pl-4 py-2 shadow-sm shadow-[#ccccccba] flex justify-start gap-4 cursor-pointer relative"
-      onClick={() => navigate(`/_owner/accommodations/view/${data.id}`)}
-    >
+    <div className="w-full pl-4 py-2 shadow-sm shadow-[#ccccccba] flex justify-start gap-4 cursor-pointer relative">
       <img
         src={data.images[0]}
         alt=""
@@ -91,15 +90,17 @@ const ViewAccomCard = ({
       <div className="absolute right-4 top-3">
         <Menu shadow="md" width={200}>
           <Menu.Target>
-            <button>
+            <button onClick={(e: any) => e.stopPropagation()}>
               <HiOutlineDotsVertical />
             </button>
           </Menu.Target>
 
-          <Menu.Dropdown>
+          <Menu.Dropdown onClick={(e: any) => e.stopPropagation()}>
             <Menu.Label>Actions</Menu.Label>
             <Menu.Item
-              onClick={() => navigate(`/_owner/accommodations/view/${data.id}`)}
+              onClick={() =>
+                navigate(`/${type}/accommodations/view/${data.id}`)
+              }
             >
               View
             </Menu.Item>

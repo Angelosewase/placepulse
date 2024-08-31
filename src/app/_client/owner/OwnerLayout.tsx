@@ -18,10 +18,10 @@ const OwnerLayout = ({ children }: { children: React.ReactElement }) => {
         className="w-[24vw] p-4 rounded-lg"
         style={{ height: `calc(100vh - 4px)` }}
       >
-        <OwnerSidebar tabs={tabs}/>
+        <OwnerSidebar tabs={tabs} />
       </div>
       <div className="w-[76vw] h-screen">
-        <OwnerNavbar />
+        <OwnerNavbar type="_owner" />
         <div className="w-full overflow-y-auto h-[90vh]">
           <div className="min-h-[80vh] pt-[5vh] px-6">{children}</div>
           <OwnerFooter />

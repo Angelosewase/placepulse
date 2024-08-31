@@ -43,7 +43,11 @@ import OwnerNotificationsPage from "./app/_client/owner/Notifications";
 import UserLandingLayout from "./app/_client/user/LandingLayout";
 import LandingPlaces from "./app/_client/user/LandingPlaces";
 import BookingSuccess from "./components/website/BookingSuccess";
-import { getAccommodations, getUserBookings } from "./utils/funcs";
+import {
+  getAccommodations,
+  getAllOwners,
+  getUserBookings,
+} from "./utils/funcs";
 import { useDispatch } from "react-redux";
 import AdminLayout from "./app/_client/admin/OwnerLayout";
 import AdminHome from "./app/_client/admin/Home";
@@ -52,11 +56,14 @@ import ViewAdminAccommodation from "./app/_client/admin/ViewOwnerAccommodation";
 import AdminBookings from "./app/_client/admin/OwnerBookings";
 import AdminNotificationsPage from "./app/_client/admin/Notifications";
 import AdminAccountInfo from "./app/_client/admin/Info/Account";
+import AccommodationOwnersPage from "./app/_client/admin/Owners";
+import AdminAddAccommodations from "./app/_client/admin/AddAccommodation";
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     getAccommodations({ dispatch });
     getUserBookings({ dispatch });
+    getAllOwners({ dispatch });
   }, [dispatch]);
   return (
     <div className="h-screen">
@@ -248,11 +255,15 @@ function App() {
             />
 
             {/* Owner Routes */}
-          
+
             {/* Admin Routes */}
             <Route
               path="/_admin/home"
               element={<AdminLayout children={<AdminHome />} />}
+            />
+            <Route
+              path="/_admin/owners"
+              element={<AdminLayout children={<AccommodationOwnersPage />} />}
             />
             <Route
               path="/_admin/accommodations/view"
@@ -264,7 +275,7 @@ function App() {
             />
             <Route
               path="/_admin/accommodations/add"
-              element={<AdminLayout children={<OwnerAddAccommodations />} />}
+              element={<AdminLayout children={<AdminAddAccommodations />} />}
             />
             <Route
               path="/_admin/bookings"

@@ -3,12 +3,16 @@ import { authReducer } from "./AuthReducers";
 import accommodationReducers from "./AccommodationReducers";
 import { bookingReducer } from "./BookingReducers";
 import bookingsReducers from "./BookingsReducers";
+import usersReducers from "./UsersReducers";
+import EarningsReducers from "./EarningsReducers";
 
 const rootReducer = combineReducers({
   auth: authReducer,
   accommodations: accommodationReducers,
   booking: bookingReducer,
   bookings: bookingsReducers,
+  owners: usersReducers,
+  earnings: EarningsReducers,
 });
 
 export default rootReducer;

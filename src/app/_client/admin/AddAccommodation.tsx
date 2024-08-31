@@ -9,20 +9,7 @@ import { ClipLoader } from "react-spinners";
 import { notifications } from "@mantine/notifications";
 import { useDisclosure } from "@mantine/hooks";
 import AddRoomTypeModal from "./AddRoomTypeModal";
-
-interface Accommodation {
-  name: string;
-  description: string;
-  type: string;
-  price: string;
-  location: string;
-  images: any[];
-  amenities: any;
-  freebies: any;
-  discount: string;
-  stock: number | string;
-  rating: number;
-}
+import { useSelector } from "react-redux";
 
 interface RoomType {
   image: File | null;
@@ -32,10 +19,11 @@ interface RoomType {
   id: string;
 }
 
-const OwnerAddAccommodations = () => {
+const AdminAddAccommodations = () => {
   const [images, setImages] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [roomTypes, setRoomTypes] = useState<RoomType[]>([]);
+  const { owners } = useSelector((state: any) => state.owners);
   const [selectedRoomTypes, setSelectedRoomTypes] = useState<string[]>([]);
   const [isAddType, { open: openAddType, close: closeAddType }] =
     useDisclosure(false);
@@ -45,7 +33,7 @@ const OwnerAddAccommodations = () => {
     console.log(images);
   };
 
-  const [formData, setFormData] = useState<Accommodation>({
+  const [formData, setFormData] = useState<any>({
     name: "",
     description: "",
     type: "",
@@ -57,6 +45,7 @@ const OwnerAddAccommodations = () => {
     discount: "",
     stock: 0,
     rating: 1,
+    owner: null,
   });
 
   const handleChange = (e: any) => {
@@ -81,14 +70,19 @@ const OwnerAddAccommodations = () => {
     AccommodationData.append("discount", formData.discount);
     AccommodationData.append("rating", String(formData.rating));
     AccommodationData.append("stock", String(formData.stock ?? "0"));
+    AccommodationData.append("owner", formData.owner);
     console.log("room types ", roomTypes);
     AccommodationData.append("roomTypes", JSON.stringify(roomTypes));
 
-    AuthorizedAxiosAPI.post("/accommodation/create", AccommodationData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
+    AuthorizedAxiosAPI.post(
+      "/accommodation/create/byadmin",
+      AccommodationData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       },
-    })
+    )
       .then((res) => {
         console.log("response --> ", res.data);
         notifications.show({
@@ -107,6 +101,7 @@ const OwnerAddAccommodations = () => {
           discount: "",
           stock: 0,
           rating: 1,
+          owner: null,
         });
         setImages([]);
       })
@@ -438,6 +433,22 @@ const OwnerAddAccommodations = () => {
                   className="w-full text-sm py-3 pl-4 pr-3 outline-none border border-neutral-400 rounded-md"
                 />
               </div>
+              <div className="mt-3 flex flex-col gap-2">
+                <label htmlFor="type" className="text-sm font-medium">
+                  Accommodation Owner
+                </label>
+                <div className="h-11">
+                  <Select
+                    value={formData.owner}
+                    onChange={(e: any) =>
+                      setFormData({ ...formData, owner: e })
+                    }
+                    data={owners?.map((owner: any) => {
+                      return { label: owner.email, value: owner.id };
+                    })}
+                  />
+                </div>
+              </div>
             </div>
           </div>
           <div></div>
@@ -452,4 +463,4 @@ const OwnerAddAccommodations = () => {
   );
 };
 
-export default OwnerAddAccommodations;
+export default AdminAddAccommodations;

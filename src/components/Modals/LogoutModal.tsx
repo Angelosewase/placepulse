@@ -5,6 +5,7 @@ import cookie from "react-cookies";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { LOGOUT_SUCCESS } from "../../actions/AuthActions";
+import logoutGIF from "@/assets/images/logout.gif";
 const LogoutModal = ({
   isLogout,
   closeLogout,
@@ -38,8 +39,11 @@ const LogoutModal = ({
       closeOnClickOutside
       className="w-full"
     >
-      <div className="w-full">
-        <h1 className="font-extrabold">Are you sure you want to logout ?</h1>
+      <div className="w-full flex flex-col items-center gap-3">
+        <img src={logoutGIF} className="w-auto h-auto rotate-180" />
+        <h1 className="font-extrabold mt-3">
+          Are you sure you want to logout ?
+        </h1>
         <div className="w-full flex text-center justify-between mt-6">
           <button
             onClick={closeLogout}

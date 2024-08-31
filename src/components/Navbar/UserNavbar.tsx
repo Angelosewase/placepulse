@@ -3,8 +3,15 @@ import ProfileMenu from "./ProfileMenu";
 import { GoBell, GoHome } from "react-icons/go";
 import Brand from "../ui/brand";
 import { CiSearch } from "react-icons/ci";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { getUserBookings } from "@/utils/funcs";
 
 const UserNavbar = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    getUserBookings({ dispatch });
+  }, []);
   return (
     <div className="w-full flex py-3 items-center justify-between px-3 md:px-10">
       <div className="flex gap-5">

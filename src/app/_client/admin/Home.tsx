@@ -5,9 +5,7 @@ import { Timeline } from "@mantine/core";
 import { FaCheckCircle } from "react-icons/fa";
 import CompressedView from "../../../components/Cards/CompressedView";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { AxiosAPI } from "../../../utils/AxiosInstance";
-import { notifications } from "@mantine/notifications";
+import { useState } from "react";
 import { ClipLoader } from "react-spinners";
 export const notificationsData = [
   {
@@ -27,47 +25,19 @@ export const notificationsData = [
   },
 ];
 const AdminHome = () => {
-  const [accommodations, setAccommodations] = useState([]);
-  const [bookings, setBookings] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const { token } = useSelector((state: any) => state.auth);
-  const getAllBookings = async () => {
-    setLoading(true);
-    AxiosAPI.get("/booking/owner/getAll", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((res) => {
-        setBookings(res.data.data);
-      })
-      .catch((err) => {
-        notifications.show({
-          message: err.response ?? err.message,
-        });
-      })
-      .finally(() => setLoading(false));
-  };
-
-  useEffect(() => {
-    getAllBookings();
-  }, []);
-  useEffect(() => {
-    AxiosAPI.get("/accommodation/getMine", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((res) => {
-        setAccommodations(res.data.data);
-      })
-      .catch((err) => {
-        console.log("get Accommodations error -> ", err.messsage);
-      });
-  }, []);
+  const [loading] = useState(false);
+  const { owners } = useSelector((state: any) => state.owners);
+  const { accommodations } = useSelector((state: any) => state.accommodations);
+  const { earnings } = useSelector((state: any) => state.earnings);
+  const { bookings } = useSelector((state: any) => state.bookings);
   const navigate = useNavigate();
-  console.log("auth data --> ", accommodations);
+  console.log("earnings --> ", earnings);
   const dashboardStats = [
+    {
+      title: "Owners",
+      amount: owners.length,
+      color: "#EBF6F2",
+    },
     {
       title: "Accommodations",
       amount: accommodations.length,
@@ -79,13 +49,8 @@ const AdminHome = () => {
       color: "#EBF6F2",
     },
     {
-      title: "Visits",
-      amount: "29",
-      color: "#EBF6F2",
-    },
-    {
       title: "Earnings",
-      amount: "2309890 RWF",
+      amount: earnings,
       color: "#EBF6F2",
     },
   ];
