@@ -6,7 +6,7 @@ import { CiSearch } from "react-icons/ci";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getUserBookings } from "@/utils/funcs";
-
+import {spotlight} from "@mantine/spotlight"
 const UserNavbar = () => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -20,6 +20,7 @@ const UserNavbar = () => {
         </Link>
         <div className="relative ml-10 hidden md:flex md:w-[20vw]">
           <input
+            onClick={spotlight.open}
             className="py-3 pl-12 pr-2 border rounded-3xl outline-none w-full text-sm"
             placeholder="Search ..."
           />

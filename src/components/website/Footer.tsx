@@ -1,6 +1,44 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Link } from "react-router-dom";
 import landingVector from "../../assets/images/landingVector.png";
+import { useState } from "react";
+import { AxiosAPI } from "@/utils/AxiosInstance";
+import { notifications } from "@mantine/notifications";
 const WebFooter = () => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [email, setEmail] = useState("");
+  const handleSubmit = (e: any)=>{
+    e.preventDefault();
+    if(!email){
+      setError("Please enter your email");
+      return;
+    } 
+    else{
+      setError("");
+    }
+    setLoading(true);
+    AxiosAPI.post("/notifications/subscribe", {
+      email
+    })
+      .then((res)=>{
+        console.log(res.data);
+        notifications.show({
+          message: res.data.message,
+          color: "green",
+        })
+        setEmail("");
+      })
+      .catch((err)=>{
+        console.log(err);
+        notifications.show({
+          message: err.message ?? err.response.message,
+          color: "red",
+          pos: "fixed"
+        })
+      })
+      .finally(()=> setLoading(false));
+  }
   return (
     <div className="w-full h-[60vh] relative flex items-start justify-between md:px-[10%] pt-[30vh] bg-[#396ff965]">
       <div className="flex flex-col gap-2 px-3 ">
@@ -33,16 +71,20 @@ const WebFooter = () => {
             Get inspired! Receive tour discounts, tips and good place to get
             reservation.
           </p>
-          <div className="w-full flex mt-2">
+          {error && <p className="text-red-500 font-bold mt-2">{error}</p>}
+          <form onSubmit={handleSubmit} className="w-full flex mt-2">
             <input
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               type="email"
               placeholder="Enter your email address"
               className="w-[60%] px-3 py-3 rounded-sm outline-none font-semibold"
             />
-            <button className="bg-blue-500 text-white px-4 py-3 rounded-sm mx-2 font-semibold">
-              Subscribe
+            <button disabled={loading} type="submit" className={`${loading ? "bg-blue-400":"bg-blue-500"} text-white px-4 py-3 rounded-sm mx-2 font-semibold`}>
+              {loading ? "Subscribing ...": "Subscribe"}
             </button>
-          </div>
+          </form>
         </div>
         <div className="absolute z-50 top-5 right-10 bg-black w-1/3 rounded-tl-[3.4rem] rounded-tr-[3rem]">
           <div className=" border-8 border-b-0 border-[#396FF9] bg-[#546869] rounded-t-[3rem] w-[15vw] h-[30vh]"></div>

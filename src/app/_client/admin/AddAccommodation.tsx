@@ -10,7 +10,6 @@ import { notifications } from "@mantine/notifications";
 import { useDisclosure } from "@mantine/hooks";
 import AddRoomTypeModal from "./AddRoomTypeModal";
 import { useSelector } from "react-redux";
-
 interface RoomType {
   image: File | null;
   name: string;
@@ -293,26 +292,6 @@ const AdminAddAccommodations = () => {
                   value={formData.discount}
                   onChange={handleChange}
                   className="w-full text-sm py-3 pl-4 pr-3 outline-none border border-neutral-400 rounded-md"
-                />
-              </div>
-              <div className="w-full h-11">
-                <label htmlFor="discountType" className="text-sm font-medium">
-                  Discount Type
-                </label>
-                <Select
-                  id="discountType"
-                  value={formData.type}
-                  onChange={(e: any) => setFormData({ ...formData, type: e })}
-                  data={[
-                    {
-                      label: "Percentage",
-                      value: "percentage",
-                    },
-                    {
-                      label: "FRW",
-                      value: "FRW",
-                    },
-                  ]}
                 />
               </div>
             </div>

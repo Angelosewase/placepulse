@@ -5,6 +5,7 @@ import OwnerFooter from "../../../components/Footer/OwnerFooter";
 import { useNavigate } from "react-router-dom";
 import cookie from "react-cookies";
 import { adminTabs } from "@/components/Sidebars/routes/admin.routes";
+import SportLight from "@/components/ui/SpotLight";
 const AdminLayout = ({ children }: { children: React.ReactElement }) => {
   const navigate = useNavigate();
   const authToken = cookie.load("auth_token");
@@ -27,6 +28,7 @@ const AdminLayout = ({ children }: { children: React.ReactElement }) => {
           <OwnerFooter />
         </div>
       </div>
+      <SportLight/>
     </div>
   );
 };

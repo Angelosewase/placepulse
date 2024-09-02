@@ -11,6 +11,7 @@ import location_Img from "../../assets/images/map_location.png";
 import { Helmet } from "react-helmet";
 import ShareButton from "../buttons/ShareButton";
 import { useSelector } from "react-redux";
+import { FaPhone } from "react-icons/fa6";
 
 const ViewAccommodation = () => {
   const params = useParams();
@@ -132,6 +133,9 @@ const ViewAccommodation = () => {
                   {Math.floor(Math.random() * 1000) + 1} Reviews
                 </p>
               </div>
+              <h6 className="ml-3 text-base font-semibold text-[#112211d1] flex gap-2 items-center mt-3">
+                <FaPhone/>  Owner's Contacts: <span className="font-extrabold">{"+250 793 245 434"}</span>
+              </h6>
             </div>
 
             <div className="absolute right-0 top-0">

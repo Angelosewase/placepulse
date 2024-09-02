@@ -19,6 +19,7 @@ const AddRoomTypeModal = ({
   closeAddType: () => void;
   setRoomTypes: any;
 }) => {
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState<{
     image: File | null;
     name: string;
@@ -38,6 +39,7 @@ const AddRoomTypeModal = ({
     setFormData({ ...formData, image: image });
   };
   const handleAddType = () => {
+    setLoading(true);
     const AccommodationData = new FormData();
     AccommodationData.append("name", formData.name);
     AccommodationData.append("price", String(formData.price));
@@ -67,7 +69,8 @@ const AddRoomTypeModal = ({
           message: "Error",
           color: "red",
         });
-      });
+      })
+      .finally(() => setLoading(false));
   };
 
   return (
@@ -120,10 +123,11 @@ const AddRoomTypeModal = ({
         </div>
 
         <button
-          className="py-3 w-full flex items-center justify-center bg-blue-600 text-white"
+          disabled={loading}
+          className={`py-3 w-full flex items-center justify-center ${loading ? "bg-blue-500":"bg-blue-600"} text-white`}
           onClick={handleAddType}
         >
-          Add Room
+          {loading ? "Adding Room ...": "Add Room"}
         </button>
       </div>
     </Modal>

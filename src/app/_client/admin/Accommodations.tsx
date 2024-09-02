@@ -6,6 +6,8 @@ import { IoReloadSharp } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { getAccommodations } from "@/utils/funcs";
 import { Link } from "react-router-dom";
+import { IoMdAdd } from "react-icons/io";
+
 const AdminAccommodations = () => {
   const dispatch = useDispatch();
   const { accommodations, loading } = useSelector(
@@ -23,7 +25,7 @@ const AdminAccommodations = () => {
             className="flex items-center gap-2 bg-blue-500 rounded-sm py-2 px-4"
           >
             <h1 className="font-bold text-white">New</h1>
-            <IoReloadSharp color="white" size={23} />
+            <IoMdAdd color="white" size={23} />
           </Link>
           <button
             className="flex items-center gap-2 bg-blue-500 rounded-sm py-2 px-4"
