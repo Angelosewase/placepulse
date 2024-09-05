@@ -9,7 +9,7 @@ const AdminBookings = () => {
     <div className="w-full mb-20">
       <div className="w-full flex justify-between items-center">
         <div className="w-full">
-          <h1 className="text-2xl font-extrabold">Bookings/Tickets</h1>
+          <h1 className="text-2xl font-extrabold">Bookings/Invoices</h1>
           <p>All customer bookings</p>
         </div>
         <div className="w-full flex justify-end gap-2 mt-10">

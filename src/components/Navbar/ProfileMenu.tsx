@@ -69,7 +69,7 @@ const ProfileMenu = () => {
             onClick={() => navigate("/_client/info/Bookings")}
             className="w-full flex justify-between items-center my-1"
           >
-            <h6 className="text-sm font-bold">Tickets</h6>
+            <h6 className="text-sm font-bold">Invoices</h6>
             <MdKeyboardArrowRight color="black" />
           </div>
         </Menu.Item>

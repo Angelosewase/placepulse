@@ -110,7 +110,7 @@ const TicketComponent = ({ accommodation }: { accommodation: any }) => (
         CLIENT: KIGALI BUSINESS LTD{"\n"}
         CLIENT TIN: 10105255
       </Text>
-      <Text style={styles.header}>Reservation Booking Ticket</Text>
+      <Text style={styles.header}>Reservation Booking Invoice</Text>
 
       <View style={styles.section}>
         <Text style={styles.label}>Reservation Type:</Text>

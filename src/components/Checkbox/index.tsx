@@ -1,13 +1,21 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { Checkbox } from "@mantine/core";
 
-const CheckBox = ({ label }: { label: string }) => {
-  const [checked, setChecked] = useState(false);
+const CheckBox = ({
+  label,
+  checked,
+  onChange,
+}: {
+  label: string;
+  checked: boolean;
+  onChange: () => void;
+}) => {
+  // const [checked, setChecked] = useState(false);
   return (
     <Checkbox
       label={label}
       checked={checked}
-      onChange={(event) => setChecked(event.currentTarget.checked)}
+      onChange={onChange}
       className="font-extrabold text-sm"
     />
   );

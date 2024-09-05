@@ -6,7 +6,7 @@ import { CiSearch } from "react-icons/ci";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getUserBookings } from "@/utils/funcs";
-import {spotlight} from "@mantine/spotlight"
+import { spotlight } from "@mantine/spotlight";
 const UserNavbar = () => {
   const dispatch = useDispatch();
   useEffect(() => {

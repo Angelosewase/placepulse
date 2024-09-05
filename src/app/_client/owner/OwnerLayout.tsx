@@ -28,7 +28,7 @@ const OwnerLayout = ({ children }: { children: React.ReactElement }) => {
           <OwnerFooter />
         </div>
       </div>
-      <SportLight/>
+      <SportLight />
     </div>
   );
 };

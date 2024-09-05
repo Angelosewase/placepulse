@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { MdPending } from "react-icons/md";
 import mabBgImg from "../../../assets/images/map.png";
@@ -14,7 +13,6 @@ import PopularCard from "../../../components/Cards/PopularAccCard";
 
 const UserLanding = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const { accommodations, loading } = useSelector(
     (state: any) => state.accommodations,
   );
@@ -85,7 +83,7 @@ const UserLanding = () => {
       <section className="w-full px-3 md:px-20 mt-[30vh] md:mt-6">
         <div className="w-full flex justify-end">
           <button
-            onClick={() => navigate("/places")}
+            onClick={() => navigate(`/_client/home/find`)}
             className="px-6 py-3 rounded-sm flex text-sm items-center font-extrabold justify-center bg-[#396FF9] text-white"
           >
             Show Places
@@ -100,16 +98,26 @@ const UserLanding = () => {
                   Accommodations that caught your attention
                 </p>
               </div>
-              <button className="py-2 px-6 border border-[#8DD3BB] rounded-sm font-semibold">
+              <button
+                onClick={() => navigate(`/_client/info/Bookings`)}
+                className="py-2 px-6 border border-[#8DD3BB] rounded-sm font-semibold"
+              >
                 See All
               </button>
             </div>
             {loadingBookings ? (
-              Array(3)
-                .fill(0)
-                .map((_, index) => (
-                  <Skeleton key={index} height={400} radius="md" />
-                ))
+              <div className="w-full flex justify-between gap-4">
+                {Array(3)
+                  .fill(0)
+                  .map((_, index) => (
+                    <Skeleton
+                      key={index}
+                      height={430}
+                      width={"100%"}
+                      radius="md"
+                    />
+                  ))}
+              </div>
             ) : bookings.length === 0 ? (
               <div className="w-full flex flex-col gap-4 items-center">
                 <h1 className="font-extrabold">No Bookings Found!</h1>

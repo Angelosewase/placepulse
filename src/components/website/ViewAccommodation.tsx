@@ -7,11 +7,11 @@ import { WiStars } from "react-icons/wi";
 import { SnakeCaseToPascalCaseSpaced } from "../../utils/funcs/formatter";
 import { AxiosAPI } from "../../utils/AxiosInstance";
 import { useEffect, useState } from "react";
-import location_Img from "../../assets/images/map_location.png";
 import { Helmet } from "react-helmet";
 import ShareButton from "../buttons/ShareButton";
 import { useSelector } from "react-redux";
 import { FaPhone } from "react-icons/fa6";
+import MapComponent from "./MapComponent";
 
 const ViewAccommodation = () => {
   const params = useParams();
@@ -134,7 +134,8 @@ const ViewAccommodation = () => {
                 </p>
               </div>
               <h6 className="ml-3 text-base font-semibold text-[#112211d1] flex gap-2 items-center mt-3">
-                <FaPhone/>  Owner's Contacts: <span className="font-extrabold">{"+250 793 245 434"}</span>
+                <FaPhone /> Owner's Contacts:{" "}
+                <span className="font-extrabold">{"+250 793 245 434"}</span>
               </h6>
             </div>
 
@@ -267,11 +268,12 @@ const ViewAccommodation = () => {
               </Link>
             </div>
             <div className="w-full h-[60vh] my-3 rounded-md">
-              <img
+              {/* <img
                 src={location_Img}
                 className="w-full h-full rounded-sm"
                 alt=""
-              />
+              /> */}
+              <MapComponent name={accommodation?.name}/>
             </div>
           </div>
           <hr className="w-full hotel_divider my-[9vh]" />

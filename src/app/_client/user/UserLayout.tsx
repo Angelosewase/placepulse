@@ -17,7 +17,7 @@ const UserLayout = ({ children }: { children: React.ReactElement }) => {
       <UserNavbar />
       <div className="w-full pb-[50vh]">{children}</div>
       <WebFooter />
-      <SportLight/>
+      <SportLight />
     </div>
   );
 };

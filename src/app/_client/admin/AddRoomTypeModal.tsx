@@ -124,10 +124,10 @@ const AddRoomTypeModal = ({
 
         <button
           disabled={loading}
-          className={`py-3 w-full flex items-center justify-center ${loading ? "bg-blue-500":"bg-blue-600"} text-white`}
+          className={`py-3 w-full flex items-center justify-center ${loading ? "bg-blue-500" : "bg-blue-600"} text-white`}
           onClick={handleAddType}
         >
-          {loading ? "Adding Room ...": "Add Room"}
+          {loading ? "Adding Room ..." : "Add Room"}
         </button>
       </div>
     </Modal>

@@ -8,37 +8,36 @@ const WebFooter = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [email, setEmail] = useState("");
-  const handleSubmit = (e: any)=>{
+  const handleSubmit = (e: any) => {
     e.preventDefault();
-    if(!email){
+    if (!email) {
       setError("Please enter your email");
       return;
-    } 
-    else{
+    } else {
       setError("");
     }
     setLoading(true);
     AxiosAPI.post("/notifications/subscribe", {
-      email
+      email,
     })
-      .then((res)=>{
+      .then((res) => {
         console.log(res.data);
         notifications.show({
           message: res.data.message,
           color: "green",
-        })
+        });
         setEmail("");
       })
-      .catch((err)=>{
+      .catch((err) => {
         console.log(err);
         notifications.show({
           message: err.message ?? err.response.message,
           color: "red",
-          pos: "fixed"
-        })
+          pos: "fixed",
+        });
       })
-      .finally(()=> setLoading(false));
-  }
+      .finally(() => setLoading(false));
+  };
   return (
     <div className="w-full h-[60vh] relative flex items-start justify-between md:px-[10%] pt-[30vh] bg-[#396ff965]">
       <div className="flex flex-col gap-2 px-3 ">
@@ -81,8 +80,12 @@ const WebFooter = () => {
               placeholder="Enter your email address"
               className="w-[60%] px-3 py-3 rounded-sm outline-none font-semibold"
             />
-            <button disabled={loading} type="submit" className={`${loading ? "bg-blue-400":"bg-blue-500"} text-white px-4 py-3 rounded-sm mx-2 font-semibold`}>
-              {loading ? "Subscribing ...": "Subscribe"}
+            <button
+              disabled={loading}
+              type="submit"
+              className={`${loading ? "bg-blue-400" : "bg-blue-500"} text-white px-4 py-3 rounded-sm mx-2 font-semibold`}
+            >
+              {loading ? "Subscribing ..." : "Subscribe"}
             </button>
           </form>
         </div>
