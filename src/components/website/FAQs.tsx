@@ -33,18 +33,18 @@ const FAQPage = () => {
     <Accordion.Item
       key={index}
       value={faq.title}
-      className="py-[16px] text-2xl text-black"
+      className="py-1 text- text-black"
     >
       <Accordion.Control>{faq.title}</Accordion.Control>
       <Accordion.Panel>{faq.content}</Accordion.Panel>
     </Accordion.Item>
   ));
   return (
-    <div className="w-full mt-10 flex flex-col md:flex-row justify-between py-[48px]">
-      <h1 className="text-4xl font-extrabold md:w-[30%] w-full mb-4 md:mb-auto">
+    <div className="w-full mt-10 flex flex-col md:flex-row justify-between  px-10 lg:px-6 py-10">
+      <h1 className="text-4xl font-extrabold md:w-[30%] w-full mb-4 md:mb-auto text-center">
         Your Questions, Answered
       </h1>
-      <Accordion className="w-full md:w-[60%] flex flex-col">
+      <Accordion className="w-full md:w-[50%] flex flex-col ">
         {FaqItems}
       </Accordion>
     </div>

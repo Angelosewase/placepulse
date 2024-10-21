@@ -4,7 +4,7 @@ import Brand from "../ui/brand";
 const WebNavbar = () => {
   const isShow = useLocation().pathname === "/";
   return (
-    <div className="w-full flex py-6 items-center justify-between px-10 backdrop-blur-xl sticky top-0 z-50">
+    <div className="w-full flex py-6 items-center justify-between px-10 lg:px-24 backdrop-blur-xl sticky top-0 z-50">
       <Link to={"/"} className="flex items-center gap-2">
         <Brand />
       </Link>
@@ -28,7 +28,7 @@ const WebNavbar = () => {
         <Link to={"/auth/login"}>Login</Link> |
         <Link
           to={"/auth/register"}
-          className="p-1 px-2 bg-[#5984F1] rounded-md text-white"
+          className="p-1 px-2 bg-[#5984F1]  rounded hover:scale-110 transition-all text-white"
         >
           Signup
         </Link>

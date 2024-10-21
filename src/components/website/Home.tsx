@@ -18,7 +18,7 @@ import { useSelector } from "react-redux";
 const Home = () => {
   const navigate = useNavigate();
   const { accommodations, loading } = useSelector(
-    (state: any) => state.accommodations,
+    (state: any) => state.accommodations
   );
   console.log(accommodations, loading);
 
@@ -43,21 +43,21 @@ const Home = () => {
       <Helmet>
         <title>Home - Place Pulse</title>
       </Helmet>
-      <div className="w-full px-10 flex flex-col md:flex-row items-center justify-between mt-[10vh]">
-        <div className="w-full md:w-2/5 mb-10 md:mb-auto">
-          <h1 className="w-full mb-5 text-5xl uppercase font-extrabold text-start">
+      <div className="w-full px-10 lg:px-28 flex flex-col md:flex-row items-center justify-between mt-[10vh]">
+        <div className="w-full md:w-2/5 mb-10 md:mb-auto mt-16">
+          <h1 className="w-full mb-5 text-6xl uppercase font-extrabold text-start">
             the adventure begins here
           </h1>
-          <h6>
+          <h6 className="text-lg">
             Esse voluptas cumque vel exercitationem. Reiciendis est hic
             accusamus. Non ipsam et sed minima temporibus laudantium.
           </h6>
           <div className="flex gap-3 mt-5">
             <input
               placeholder="Which Place is On Your Mind ?"
-              className="border-2 border-black py-2 px-3 text-slate-600 rounded-lg w-2/3 bg-transparent"
+              className="border-2 border-black py-2 px-3 text-slate-600 rounded w-2/3 bg-transparent "
             />
-            <button className="py-2 px-5 rounded-md bg-[#396FF9] text-white text-sm">
+            <button className="py-2 px-5 rounded bg-[#396FF9] text-white text-sm ">
               Search
             </button>
           </div>
@@ -80,23 +80,23 @@ const Home = () => {
           <img
             src={landingImage1}
             alt="Landing Image 1"
-            className="absolute left-0 mt-[15%] z-20"
+            className="absolute left-0 mt-[15%] z-20 lg:scale-125"
           />
           <img
             src={landingImage2}
             alt="Landing Image 2"
-            className="absolute left-[30%] z-10"
+            className="absolute left-[30%] z-10 lg:scale-125"
           />
           <img
             src={landingImage3}
             alt="Landing Image 3"
-            className="absolute right-0 mt-[15%]"
+            className="absolute right-0 mt-[15%] lg:scale-125"
           />
         </div>
       </div>
 
-      <div className="mt-[20vh] px-10 flex md:flex-row flex-col-reverse justify-between items-start ">
-        <div className="w-full md:w-[50%] flex flex-col md:flex-row gap-8">
+      <div className="mt-[20vh] px-10 lg:px-28 flex md:flex-row flex-col-reverse justify-between items-start ">
+        <div className="w-full md:w-[100%] flex flex-col md:flex-row gap-8">
           {loading ? (
             <>
               <Skeleton height={250} width="100%" />
@@ -104,7 +104,7 @@ const Home = () => {
             </>
           ) : (
             <>
-              <div className="relative flex justify-center w-full">
+              <div className="relative flex justify-center w-full shadow-xl shadow-gray-400">
                 <img
                   src={accommodations[0]?.images[0]}
                   alt="Weekly Hotel 1"
@@ -120,6 +120,7 @@ const Home = () => {
                   </Link>
                 </div>
               </div>
+
               <div className="relative flex justify-center w-full">
                 <img
                   src={accommodations[1]?.images[0]}
@@ -136,10 +137,27 @@ const Home = () => {
                   </Link>
                 </div>
               </div>
+
+              <div className="relative flex justify-center w-full">
+                <img
+                  src={accommodations[2]?.images[0]}
+                  alt="Weekly Hotel 2"
+                  className="w-full"
+                />
+                <div className="bg-white w-[80%] absolute bottom-[-2.3rem] rounded-lg px-3 pt-2 py-3">
+                  <h2 className="font-extrabold">{accommodations[1]?.name}</h2>
+                  <Link
+                    to={"/places"}
+                    className="font-extrabold text-[#396FF9] flex items-center gap-2"
+                  >
+                    Get Reservation <CiLocationOn size={15} color="#396FF9" />
+                  </Link>
+                </div>
+              </div>
             </>
           )}
         </div>
-        <div className="flex flex-col justify-start mb-20 md:mb-auto">
+        {/* <div className="flex flex-col justify-start mb-20 md:mb-auto">
           <h1 className="text-2xl uppercase font-extrabold mt-5">
             THIS WEEK’S TOP PICKS
           </h1>
@@ -153,7 +171,7 @@ const Home = () => {
           >
             Find Place
           </button>
-        </div>
+        </div> */}
       </div>
 
       <div className="w-full flex flex-col md:flex-row items-center justify-center my-20 bg-[#396ff911] py-[10vh] gap-4">
@@ -197,16 +215,14 @@ const Home = () => {
         )}
       </section>
 
-      <section id="reviews" className="pb-8">
-        <section className="w-full my-20 bg-[#396ff911] pt-[5vh] pb-[10vh] gap-4">
-          <h1 className="text-3xl font-extrabold w-full text-center mb-[10vh]">
-            Clients Reviews
-          </h1>
+
+      <section id="reviews" className="mb-20">
+        <section className="w-full  ">
           <ReviewsCarousel />
         </section>
       </section>
 
-      <section className="w-full bg-[#F7F7F7] px-20 mb-[17vh]">
+      <section className="w-full  px-20 mb-[20vh]">
         <FAQPage />
       </section>
     </div>
