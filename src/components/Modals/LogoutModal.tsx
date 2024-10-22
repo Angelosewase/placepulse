@@ -39,21 +39,21 @@ const LogoutModal = ({
       closeOnClickOutside
       className="w-full"
     >
-      <div className="w-full flex flex-col items-center gap-3">
+      <div className="w-full flex flex-col items-center gap-3 rounded-lg">
         <img src={logoutGIF} className="w-auto h-auto rotate-180" />
-        <h1 className="font-extrabold mt-3">
+        <h1 className="font-extrabold mt-3 text-lg">
           Are you sure you want to logout ?
         </h1>
-        <div className="w-full flex text-center justify-between mt-6">
+        <div className="w-full flex text-center justify-center gap-10 mt-6">
           <button
             onClick={closeLogout}
-            className="py-2 px-5 bg-[#699BFE] rounded-md font-bold"
+            className="py-2 px-5 bg-[#699BFE] rounded font-bold"
           >
             Cancel
           </button>
           <button
             onClick={logout}
-            className="py-2 px-5 rounded-md bg-red-500 font-bold text-white"
+            className="py-2 px-5 rounded bg-red-500 font-bold text-white"
           >
             Logout
           </button>

@@ -13,7 +13,7 @@ const UserNavbar = () => {
     getUserBookings({ dispatch });
   }, []);
   return (
-    <div className="w-full flex py-3 items-center justify-between px-3 md:px-10">
+    <div className="w-full flex py-3 items-center justify-between px-3 md:px-10 shadow-md fixed top-0 z-50 bg-white">
       <div className="flex gap-5">
         <Link to={"/_client/home"} className="flex items-center gap-2">
           <Brand />
@@ -29,18 +29,19 @@ const UserNavbar = () => {
           </button>
         </div>
       </div>
-      <div className="flex gap-4 items-center userNav">
+      <div className="flex gap-1 items-center userNav">
         <NavLink
           to={"/_client/home"}
-          className="p-3 hover:bg-neutral-100 rounded-full"
+          className="p-2 hover:bg-neutral-100 rounded-full"
         >
-          <GoHome color="black" size={23} />
+          <GoHome color="black" size={20} />
         </NavLink>
+        <hr className="border border-black h-5"/>
         <NavLink
           to={"/_client/notifications"}
-          className="p-3 hover:bg-neutral-100 rounded-full"
+          className="p-2 hover:bg-neutral-100 rounded-full"
         >
-          <GoBell color="black" size={23} />
+          <GoBell color="black" size={20} />
         </NavLink>
         <ProfileMenu />
       </div>

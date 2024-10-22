@@ -40,6 +40,7 @@ const actions: SpotlightActionData[] = [
 export default function SportLight() {
   return (
     <Spotlight
+     padding={200}
       actions={actions}
       nothingFound="Nothing found..."
       highlightQuery

@@ -18,50 +18,75 @@ const AccountInfo = () => {
       <div className="flex flex-col gap-4 mt-6 shadow-sm shadow-[#c8c8c863] p-5 rounded-lg">
         <Fieldset
           legend="Name"
-          className="w-full flex flex-col md:flex-row justify-between items-start md:items-center gap-3"
+          style={{
+            paddingInlineEnd: 20,
+            paddingBlock: 10,
+            display: "flex",
+            alignItems: "center",
+          }}
+          className=" flex flex-col md:flex-row justify-between items-center md:items-center "
         >
-          <h1 className="text-xl font-extrabold">
+          <h1 className="text-xl font-extrabold p-0">
             {getNames(profile.lastName)}
           </h1>
-          <button className="flex gap-3 items-center px-5 py-3 border border-[#8DD3BB] rounded-sm">
+          <button className="flex gap-2 items-center px-5 py-1 border border-[#8DD3BB] rounded-sm">
             <HiPencilSquare color="black" />
             <p className="text-sm font-bold">Change</p>
           </button>
         </Fieldset>
+
         <Fieldset
           legend="Email"
+          style={{
+            paddingInlineEnd: 20,
+            paddingBlock: 10,
+            display: "flex",
+            alignItems: "center",
+          }}
           className="w-full flex flex-col md:flex-row justify-between items-start md:items-center gap-3"
         >
           <h1 className="text-xl font-extrabold">{profile.email}</h1>
           <div className="flex flex-col md:flex-row items-start md:items-center mt-4 md:mt-auto gap-4 md:gap-2">
-            <button className="flex gap-3 items-center px-5 py-3 border border-[#8DD3BB] rounded-sm">
+            <button className="flex gap-2 items-center px-5 py-1 border border-[#8DD3BB] rounded-sm">
               <HiPencilSquare color="black" />
               <p className="text-sm font-bold">Add another email</p>
             </button>
-            <button className="flex gap-3 items-center px-5 py-3 border border-[#8DD3BB] rounded-sm">
+            <button className="flex gap-2 items-center px-5 py-1 border border-[#8DD3BB] rounded-sm">
               <HiPencilSquare color="black" />
               <p className="text-sm font-bold">Change</p>
             </button>
           </div>
         </Fieldset>
         <Fieldset
+          style={{
+            paddingInlineEnd: 20,
+            paddingBlock: 10,
+            display: "flex",
+            alignItems: "center",
+          }}
           legend="Password"
           className="w-full flex flex-col md:flex-row justify-between items-start md:items-center gap-3"
         >
           <h1 className="text-xl font-extrabold">{"****************"}</h1>
-          <button className="flex gap-3 items-center px-5 py-3 border border-[#8DD3BB] rounded-sm">
+          <button className="flex gap-2 items-center px-5 py-1 border border-[#8DD3BB] rounded-sm">
             <HiPencilSquare color="black" />
             <p className="text-sm font-bold">Change</p>
           </button>
         </Fieldset>
         <Fieldset
+          style={{
+            paddingInlineEnd: 20,
+            paddingBlock: 10,
+            display: "flex",
+            alignItems: "center",
+          }}
           legend="Phone Number"
           className="w-full flex flex-col md:flex-row justify-between items-start md:items-center gap-3"
         >
           <h1 className="text-xl font-extrabold">
             {separatePhoneNumber(`+${profile.phone}`)}
           </h1>
-          <button className="flex gap-3 items-center px-5 py-3 border border-[#8DD3BB] rounded-sm">
+          <button className="flex gap-2 items-center px-5 py-1 border border-[#8DD3BB] rounded-sm">
             <HiPencilSquare color="black" />
             <p className="text-sm font-bold">Change</p>
           </button>
