@@ -103,17 +103,18 @@ export default function Login() {
   }, [isLoggedIn, navigate, user]);
 
   return (
-    <div className="w-full h-screen flex justify-between items-center md:px-[7vw] px-4">
-      <div className="w-full md:w-[45%] h-[90%] flex flex-col">
+    <div className="w-full h-screen flex justify-between items-center md:px-[14vw] px-4">
+      <div className="w-full md:w-[50%] h-[90%] flex flex-col">
         <Link to={"/"} className="font-extrabold text-lg">
           <Brand />
         </Link>
 
         <form
           onSubmit={handleSubmit}
-          className="w-full md:w-[90%] flex flex-col items-start gap-4 mt-[10vh]"
+          className="w-full md:w-[90%] flex flex-col items-start  mt-[10vh]"
         >
-          <h1 className="text-4xl font-extrabold mb-[5vh]">Login</h1>
+          <h1 className="text-5xl font-extrabold mb-[1vh]">Login</h1>
+          <p className="text-sm mb-[5vh]">Login to access your Place pulse account account</p>
 
           <div className="w-full flex flex-col items-start gap-6">
             <AnimatedInput
@@ -121,6 +122,7 @@ export default function Login() {
               type="email"
               handleChange={handleEmailChange}
               value={email}
+
             />
             <AnimatedInput
               label="Password"
@@ -143,7 +145,7 @@ export default function Login() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full mt-4 py-3 text-center font-bold rounded-md text-white bg-[#699BFE]"
+            className="w-full mt-4 py-2.5 text-center font-bold rounded text-white text-lg bg-[#699BFE]"
           >
             {loading ? (
               <div className="w-full h-full flex items-center justify-center">
@@ -165,7 +167,7 @@ export default function Login() {
           </div>
         </form>
       </div>
-      <div className="md:w-[40%] hidden md:flex h-[90%]">
+      <div className="md:w-[45%] hidden md:flex h-[90%]">
         <img src={loginImg} alt="Hotel Image 1" className="w-full h-full" />
       </div>
     </div>

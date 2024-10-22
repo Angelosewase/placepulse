@@ -57,18 +57,18 @@ export default function Register() {
       .finally(() => setLoading(false));
   };
   return (
-    <div className="w-full h-screen flex justify-between items-center md:px-[7vw] px-4">
-      <div className="md:w-[40%] hidden md:flex h-[90%]">
+    <div className="w-full h-screen flex justify-between items-center md:px-[14vw] px-4">
+      <div className="md:w-[50%] hidden md:flex h-[90%]">
         <img src={loginImg} alt="Hotel Image 1" className="w-full h-full" />
       </div>
-      <div className="w-full md:w-[50%] h-[90%] flex flex-col">
+      <div className="w-full md:w-[45%] h-[90%] flex flex-col">
         <Brand />
 
         <form
           onSubmit={handleSubmit}
           className="w-full  flex flex-col items-start gap-4 mt-[5vh]"
         >
-          <h1 className="text-4xl font-extrabold mb-[4vh]">Register </h1>
+          <h1 className="text-5xl font-extrabold mb-[4vh]">Register </h1>
           <div className="w-full flex justify-between gap-6">
             <AnimatedInput
               label="Email"
@@ -84,7 +84,7 @@ export default function Register() {
             />
           </div>
 
-          <div className="w-full flex flex-col items-start gap-6">
+          <div className="w-full flex flex-col items-start ">
             <AnimatedInput
               label="Password"
               type="password"
@@ -94,24 +94,27 @@ export default function Register() {
               className=""
             />
           </div>
-          <div className="w-full flex justify-center gap-10 mt-2">
+          <div className="w-full flex  gap-2 mt-2 items-end  text-sm ">
+            I agree to the
             <Link
               to={"/public/terms"}
               className="text-[#FF8682] font-extrabold text-sm"
             >
               Terms{" "}
             </Link>
+            and
             <Link
               to={"/public/privacy"}
               className="text-[#FF8682] font-extrabold text-sm"
             >
+              
               Privacy Policy{" "}
             </Link>
           </div>
           <button
             type="submit"
             disabled={loading}
-            className="w-full mt-4 py-3 text-center font-bold rounded-md text-white bg-[#699BFE]"
+            className="w-full py-3 text-center font-bold rounded text-white bg-[#699BFE] text-lg"
           >
             {loading ? (
               <div className="w-full h-full flex items-center justify-center">

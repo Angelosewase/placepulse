@@ -42,7 +42,7 @@ const AnimatedInput = ({
     <div className="w-full flex flex-col items-start gap-2 relative">
       <label
         htmlFor={label}
-        className={`absolute left-3 top-3 transition-transform duration-200 ${
+        className={`absolute  text-lg left-3 top-3 transition-transform duration-200 ${
           isFocused || value
             ? "transform -translate-y-6 scale-75 z-50 bg-white text-[#1C1B1F] font-medium"
             : "transform translate-y-0 scale-100"
@@ -58,7 +58,7 @@ const AnimatedInput = ({
         onBlur={handleBlur}
         onChange={handleChange}
         maxLength={maxLength}
-        className={`${className} ${category === "phone" && isFocused ? "pl-12" : ""} p-3 py-4 w-full border border-[#79747E] rounded-md text-sm text-[#1C1B1F] focus:outline-none focus:border-[#79747E]`}
+        className={`${className} ${category === "phone" && isFocused ? "pl-12" : ""} p-3 py-3 w-full border border-[#79747E] rounded text-md text-[#1C1B1F] focus:outline-none focus:border-[#79747E] `}
       />
       {showEye && (
         <div className="absolute top-5 right-3 cursor-pointer">
