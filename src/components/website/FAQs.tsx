@@ -40,8 +40,8 @@ const FAQPage = () => {
     </Accordion.Item>
   ));
   return (
-    <div className="w-full mt-10 flex flex-col md:flex-row justify-between  px-10 lg:px-6 py-10">
-      <h1 className="text-4xl font-extrabold md:w-[30%] w-full mb-4 md:mb-auto text-center">
+    <div className="w-full mt-10 flex flex-col md:flex-row justify-between  py-10 ">
+      <h1 className="text-4xl font-extrabold md:w-[40%]  w-full mb-4 md:mb-auto  ">
         Your Questions, Answered
       </h1>
       <Accordion className="w-full md:w-[50%] flex flex-col ">

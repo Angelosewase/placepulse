@@ -43,10 +43,10 @@ const ReviewsCarousel = () => {
           {reviews.map((review, index) => (
             <div
               key={index}
-              className="  flex flex-col items-center p-4 mt-20    w-full"
+              className="  flex flex-col items-center p-4 mt-20    w-full "
               style={{ minWidth: "100%" }}
             >
-              <div className=" relative flex flex-col w-[40%] bg-white  py-20 px-0  rounded-xl ">
+              <div className=" relative flex flex-col w-[40%] bg-white  py-20 px-0  rounded-xl shadow-md shadow-gray-100 ">
                 <img src={Quotes} className="absolute top-10 left-10" />
                 <img
                   src={review.image}

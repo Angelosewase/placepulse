@@ -4,8 +4,6 @@ import landingImage2 from "../../assets/images/landing2.png";
 import landingImage3 from "../../assets/images/landing3.png";
 import { Link, useNavigate } from "react-router-dom";
 import { CiLocationOn } from "react-icons/ci";
-import { GrKey } from "react-icons/gr";
-import { IoTimeSharp } from "react-icons/io5";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import cookie from "react-cookies";
@@ -14,6 +12,10 @@ import FAQPage from "./FAQs";
 import ReviewsCarousel from "./Reviews";
 import { Skeleton } from "@mantine/core";
 import { useSelector } from "react-redux";
+import Icon1 from "@/assets/images/Group.png";
+import Icon2 from "@/assets/images/Group1.png";
+import Icon3 from "@/assets/images/Group2.png";
+import { FiMapPin } from "react-icons/fi";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -43,7 +45,7 @@ const Home = () => {
       <Helmet>
         <title>Home - Place Pulse</title>
       </Helmet>
-      <div className="w-full px-10 lg:px-28 flex flex-col md:flex-row items-center justify-between mt-[10vh]">
+      <div className="w-full px-10 lg:px-28  mt-[10vh] flex md:flex-row flex-col-reverse justify-between">
         <div className="w-full md:w-2/5 mb-10 md:mb-auto mt-16">
           <h1 className="w-full mb-5 text-6xl uppercase font-extrabold text-start">
             the adventure begins here
@@ -95,119 +97,114 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="mt-[20vh] px-10 lg:px-28 flex md:flex-row flex-col-reverse justify-between items-start ">
-        <div className="w-full md:w-[100%] flex flex-col md:flex-row gap-8">
+      <div className="mt-[5vh] px-10 lg:px-28 flex  flex-col-reverse justify-between items-start ">
+        <div className="w-full md:w-[100%] flex flex-col md:flex-row gap-8 ">
           {loading ? (
             <>
+              <Skeleton height={250} width="100%" />
               <Skeleton height={250} width="100%" />
               <Skeleton height={250} width="100%" />
             </>
           ) : (
             <>
-              <div className="relative flex justify-center w-full shadow-xl shadow-gray-400">
-                <img
-                  src={accommodations[0]?.images[0]}
-                  alt="Weekly Hotel 1"
-                  className="w-full"
-                />
-                <div className="bg-white w-[80%] absolute bottom-[-2.3rem] rounded-lg px-3 pt-2 py-3">
-                  <h2 className="font-extrabold">{accommodations[0]?.name}</h2>
-                  <Link
-                    to={"/places"}
-                    className="font-extrabold text-[#396FF9] flex items-center gap-2"
+              {accommodations
+                ?.slice(0, 5)
+                .map((accommodation: any, index: number) => (
+                  <div
+                    key={index}
+                    className="relative flex justify-center w-[270px] h-[350px] rounded-lg"
                   >
-                    Get Reservation <CiLocationOn size={15} color="#396FF9" />
-                  </Link>
-                </div>
-              </div>
-
-              <div className="relative flex justify-center w-full">
-                <img
-                  src={accommodations[1]?.images[0]}
-                  alt="Weekly Hotel 2"
-                  className="w-full"
-                />
-                <div className="bg-white w-[80%] absolute bottom-[-2.3rem] rounded-lg px-3 pt-2 py-3">
-                  <h2 className="font-extrabold">{accommodations[1]?.name}</h2>
-                  <Link
-                    to={"/places"}
-                    className="font-extrabold text-[#396FF9] flex items-center gap-2"
-                  >
-                    Get Reservation <CiLocationOn size={15} color="#396FF9" />
-                  </Link>
-                </div>
-              </div>
-
-              <div className="relative flex justify-center w-full">
-                <img
-                  src={accommodations[2]?.images[0]}
-                  alt="Weekly Hotel 2"
-                  className="w-full"
-                />
-                <div className="bg-white w-[80%] absolute bottom-[-2.3rem] rounded-lg px-3 pt-2 py-3">
-                  <h2 className="font-extrabold">{accommodations[1]?.name}</h2>
-                  <Link
-                    to={"/places"}
-                    className="font-extrabold text-[#396FF9] flex items-center gap-2"
-                  >
-                    Get Reservation <CiLocationOn size={15} color="#396FF9" />
-                  </Link>
-                </div>
-              </div>
+                    <img
+                      src={accommodation?.images?.[0]}
+                      alt={`Weekly Hotel ${index + 1}`}
+                      className="w-full rounded-xl h-ful"
+                    />
+                    <div className="bg-transparent w-[80%] absolute bottom-2  rounded-lg px-3 pt-2 py-3 text-white">
+                      <h2 className="font-extrabold text-lg">{accommodation?.name}</h2>
+                      <p className="flex gap-1 items-center text-gray-50"><FiMapPin size={15} className="text-gray-50 "/>{accommodation.location}</p>
+                      <Link
+                        to="/places"
+                        className="font-extrabold bg-[#396FF9] text-white flex items-center gap-2 px-3 py-2 rounded"
+                      >
+                        Get Reservation{" "}
+                        <CiLocationOn size={15} color="#396FF9" />
+                      </Link>
+                    </div>
+                  </div>
+                ))}
             </>
           )}
         </div>
-        {/* <div className="flex flex-col justify-start mb-20 md:mb-auto">
-          <h1 className="text-2xl uppercase font-extrabold mt-5">
+
+        <div className="flex flex-col justify-start mb-20 md:mb-10 w-full">
+          <h1 className="text-4xl uppercase font-extrabold mt-5">
             THIS WEEK’S TOP PICKS
           </h1>
-          <h6 className="mt-4 w-4/5 text-justify">
-            Esse voluptas cumque vel exercitationem. Reiciendis est hic
-            accusamus. Non ipsam
-          </h6>
-          <button
-            onClick={() => navigate("/places")}
-            className="w-[8rem] mt-4 py-2 px-4 bg-[#396FF9] rounded-lg text-white"
-          >
-            Find Place
-          </button>
-        </div> */}
-      </div>
-
-      <div className="w-full flex flex-col md:flex-row items-center justify-center my-20 bg-[#396ff911] py-[10vh] gap-4">
-        <div className="w-[90%] md:w-[25%] h-auto flex flex-col gap-5 items-center justify-center bg-white py-10 rounded-lg">
-          <button className="p-4 bg-[#396FF9]">
-            <GrKey color="white" />
-          </button>
-          <h2 className="font-extrabold">Signup</h2>
-          <h6 className="w-full px-4 text-center text-sm">
-            Esse voluptas cumque vel exercitationem.Reiciendis est hic accusamus
-          </h6>
-        </div>
-        <div className="w-[90%] md:w-[25%] h-auto flex flex-col gap-5 items-center justify-center bg-white py-10 rounded-lg">
-          <button className="p-4 bg-[#396FF9]">
-            <IoTimeSharp color="white" size={17} />
-          </button>
-          <h2 className="font-extrabold">Save Time</h2>
-          <h6 className="w-full px-4 text-center text-sm">
-            Esse voluptas cumque vel exercitationem.Reiciendis est hic accusamus
-          </h6>
-        </div>
-        <div className="w-[90%] md:w-[25%] h-auto flex flex-col gap-5 items-center justify-center bg-white py-10 rounded-lg">
-          <button className="p-4 bg-[#396FF9]">
-            <GrKey color="white" />
-          </button>
-          <h2 className="font-extrabold">Reservation</h2>
-          <h6 className="w-full px-4 text-center text-sm">
-            Esse voluptas cumque vel exercitationem.Reiciendis est hic accusamus
-          </h6>
+          <div className="flex justify-between items-center w-[100%] ">
+            <h6 className="mt-4 text-justify max-w-[75%]">
+            Going somewhere to celebrate this season? Whether you’re going home or somewhere to roam, we’ve got the travel tools to get you to your destination.
+            </h6>
+            <button
+              onClick={() => navigate("/places")}
+              className="w-[8rem] mt-4 py-2 px-4 bg-[#396FF9] rounded text-white"
+            >
+              Find Place
+            </button>
+          </div>
         </div>
       </div>
 
-      <section className="pb-[10vh] px-10 flex flex-col justify-center">
-        <h1 className="text-3xl font-extrabold my-[5vh] w-full text-center">
-          Popular Accommodations
+      <div className="w-full  my-0 bg-[#396ff911] pb-[10vh] pt-[3vh] gap-4 mt-[10vh]">
+        <div>
+          <h1 className="text-4xl font-extrabold mt-10 mb-3 w-full text-center">
+            What you need <span className="text-4xl text-blue-500">to do </span>
+          </h1>
+          <p className="md:max-w-[30%] text-center mx-auto mb-10 text-base text-gray-500">
+            We ensure that you’ll embark on a perfectly planned, safe
+            reservation at a price you can afford.
+          </p>
+        </div>
+
+        {/* steps to follow */}
+        <div className="flex flex-col md:flex-row items-center justify-center gap-10">
+          {/* first step */}
+          <div className="w-[90%] md:w-[20%]  shadow-lg shadow-gray-200 h-auto flex flex-col gap-5 items-start px-6  bg-white py-5 rounded-xl">
+            <img src={Icon1} alt="" className="h-10" />
+            <h2 className="font-extrabold text-xl">Signup</h2>
+            <h6 className="w-full  text-sm">
+              Completes all the work associated with planning and processing
+            </h6>
+          </div>
+
+          {/* second step */}
+          <div className="w-[90%] md:w-[20%]  shadow-lg shadow-gray-200 h-auto flex flex-col gap-5 items-start px-6  bg-white py-5 rounded-xl">
+            <img src={Icon2} alt="" className="h-10" />
+            <h2 className="font-extrabold text-xl">Worth of Money</h2>
+            <h6 className="w-full  text-sm">
+              After successful access then book from exclusive deals & pricing
+            </h6>
+          </div>
+          {/* third step  */}
+          <div className="w-[90%] md:w-[20%]  shadow-lg shadow-gray-200 h-auto flex flex-col gap-5 items-start px-6  bg-white py-5 rounded-xl">
+            <img src={Icon3} alt="" className="h-10" />
+            <h2 className="font-extrabold text-xl">Exciting Travel</h2>
+            <h6 className="w-full  text-sm">
+              Start and explore a wide range of exciting travel experience.
+            </h6>
+          </div>
+        </div>
+      </div>
+
+      <section className="pb-[10vh] px-10 lg:px-28 flex flex-col justify-center">
+        <h1 className="text-4xl font-extrabold my-[5vh] w-full text-center">
+          Explore Popular Retreats
         </h1>
+        <p className="md:max-w-[50%] mx-auto mb-10 text-base text-gray-500">
+          Find your next getaway with our handpicked accommodations that boast
+          top reviews, premium amenities, and stunning locations—offering the
+          ideal retreat for relaxation, adventure, or simply enjoying life's
+          best moments.
+        </p>
         {loading ? (
           <Skeleton height={300} width="100%" />
         ) : (
@@ -215,14 +212,13 @@ const Home = () => {
         )}
       </section>
 
-
       <section id="reviews" className="mb-20">
         <section className="w-full  ">
           <ReviewsCarousel />
         </section>
       </section>
 
-      <section className="w-full  px-20 mb-[20vh]">
+      <section className="w-full  px-10 lg:px-28 mb-[20vh]">
         <FAQPage />
       </section>
     </div>
