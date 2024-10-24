@@ -13,20 +13,21 @@ const OwnerNavbar = ({ type }: { type: string }) => {
     getEarnings({ dispatch });
   }, [dispatch]);
   return (
-    <div className="w-full flex h-[10vh] border-b border-b-gray-300 items-center justify-end pr-9">
-      <div className="flex gap-4 items-center userNav">
-        <button className="p-3 hover:bg-neutral-100 rounded-full">
+    <div className="w-full flex h-[8vh] shadow shadow-gray-200 items-center justify-end pr-9">
+      <div className="flex gap-2 items-center userNav h-full">
+        <button className="p-2 hover:bg-neutral-100 rounded-full">
           <GoSearch color="black" size={19} />
         </button>
+        <hr className="border border-black h-[50%] "/>
         <button
           onClick={() => navigate(`/${type}/notifications`)}
-          className="p-3 hover:bg-neutral-100 rounded-full"
+          className="p-2 hover:bg-neutral-100 rounded-full"
         >
           <GoBell color="black" size={19} />
         </button>
         <button
           onClick={() => navigate(`/${type}/account`)}
-          className="p-3 bg-blue-50 rounded-full"
+          className="p-2 bg-blue-50 rounded-full"
         >
           <IoPersonOutline color="black" size={19} />
         </button>

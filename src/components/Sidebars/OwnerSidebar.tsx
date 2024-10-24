@@ -10,13 +10,12 @@ const OwnerSidebar = ({ tabs }: { tabs: any[] }) => {
   const [isLogout, { open, close }] = useDisclosure();
   return (
     <div
-      className="flex flex-col pt-[5vh] h-full bg-[#F8F8FC]"
-      style={{ width: "calc(100% - 4px)" }}
+      className="flex flex-col pt-[5vh] h-full bg-[#F8F8FC] w-full"
     >
-      <h1 className="text-2xl font-extrabold w-full text-center pl-8">
+      <h1 className="text-2xl font-extrabold pl-10 text-center mb-8">
         <Brand />
       </h1>
-      <div className="w-full flex flex-col mt-7 sidebar-owsadm gap-3">
+      <div className="w-full flex flex-col mt-7 sidebar-owsadm gap-3 flex-1">
         {tabs.map((tab, index) => {
           return (
             <>
@@ -24,7 +23,7 @@ const OwnerSidebar = ({ tabs }: { tabs: any[] }) => {
                 <SubRoutesTab key={index} tab={tab} />
               ) : (
                 <NavLink
-                  className="w-full flex justify-start items-center gap-10 py-4 px-6 font-bold"
+                  className="w-full flex justify-start items-center gap-3  py-2.5 px-6 font-bold"
                   key={index}
                   to={tab.path}
                 >
@@ -38,7 +37,7 @@ const OwnerSidebar = ({ tabs }: { tabs: any[] }) => {
 
         <button
           onClick={open}
-          className="w-full flex justify-start items-center gap-10 py-4 px-6 font-bold mt-10 hover:bg-red-500 hover:text-white"
+          className="w-full flex justify-start items-center gap-3 py-4 px-6 font-bold mb-5 hover:bg-red-500 hover:text-white mt-auto"
         >
           <CiLogout size={23} />
           <h5>Logout</h5>

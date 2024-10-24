@@ -12,7 +12,7 @@ const SubRoutesTab = ({ tab }: { tab: any }) => {
         onClick={toggle}
         className="w-full flex items-center justify-between cursor-pointer  px-6 py-2 hover:bg-[#F8F8FC] hover:text-[#112211]"
       >
-        <div className="flex items-center gap-10">
+        <div className="flex items-center gap-3">
           {tab.icon}
           <h1 className="text-lg font-extrabold">{tab.label}</h1>
         </div>
@@ -29,7 +29,7 @@ const SubRoutesTab = ({ tab }: { tab: any }) => {
           {tab.subRoutes.map((tab: any, index: number) => {
             return (
               <NavLink
-                className="w-full flex justify-start items-center gap-10 py-4 px-6 pl-12 font-bold"
+                className="w-full flex justify-start items-center gap-3 py-2.5 my-2  px-6 pl-12 font-bold"
                 key={index}
                 to={tab.path}
               >

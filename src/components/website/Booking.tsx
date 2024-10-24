@@ -85,7 +85,7 @@ const BookingPage = () => {
   };
 
   return (
-    <div className="w-full md:px-12 pt-28  pb-[50vh]">
+    <div className="w-full md:px-12  pt-3 pb-[50vh]">
       <Helmet>
         <title>Booking - Place Pulse</title>
       </Helmet>
