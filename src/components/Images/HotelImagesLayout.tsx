@@ -8,14 +8,14 @@ const HotelImageLayout = ({ images, id }: any) => {
     : [];
   return (
     <div
-      className={`w-full grid ${newImages.length > 1 && "md:grid-cols-2"} grid-cols-1 gap-3`}
+      className={`w-full grid  md:h-[68vh]  ${newImages.length > 1 && "md:flex"} grid-cols-1 gap-3`}
     >
-      <div className="w-full h-full aspect-w-16 aspect-h-9">
+      <div className="w-full h-full pb-2 flex items-center justify-center">
         {images && (
           <img
             src={images && images[0]}
             alt=""
-            className="w-full object-fill rounded-md"
+            className="w-full  rounded-lg h-full"
           />
         )}
       </div>
@@ -26,11 +26,11 @@ const HotelImageLayout = ({ images, id }: any) => {
               <img
                 src={image}
                 alt=""
-                className="w-full h-full object-cover rounded-md"
+                className="w-full h-full object-cover rounded-lg"
               />
             </div>
           ))}
-        <div className="aspect-w-1 aspect-h-1 flex items-center justify-center rounded-md">
+        <div className="aspect-w-1 aspect-h-1 flex items-center justify-center rounded-lg">
           <button
             onClick={() => navigate(`/places/${id}/photos`)}
             className="bg-blue-700 font-semibold text-sm absolute bottom-4 right-3 py-3 px-6 text-white"

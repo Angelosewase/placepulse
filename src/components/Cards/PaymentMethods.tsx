@@ -31,7 +31,7 @@ const PaymentMethodCard = ({
   };
   return (
     <div
-      className={`${className} w-[328px] h-[160px] flex flex-col justify-between rounded-xl p-1 cursor-pointer ${selected ? " bg-[#1976D2] pt-2" : name?.trim() == "MTN" ? "bg-[#FFC107]" : "bg-[#d04c4c]"}`}
+      className={`${className} w-[300px] h-[160px] flex flex-col justify-between rounded-xl p-1 cursor-pointer ${selected ? " bg-[#1976D2] pt-2" : name?.trim() == "MTN" ? "bg-[#FFC107]" : "bg-[#d04c4c]"}`}
       onClick={() => !disableSelect && setSelected(card)}
     >
       <div className="w-full flex justify-between items-center px-2">

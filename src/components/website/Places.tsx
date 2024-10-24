@@ -113,13 +113,13 @@ const Places = () => {
   };
 
   return (
-    <div className="w-full flex px-10 pt-[10vh] pb-[50vh]">
+    <div className="w-full flex px-10 lg:px-24 pt-[4vh] pb-[50vh] ">
       <Helmet>
         <title>Places - Place Pulse</title>
       </Helmet>
-      <div className="md:w-[35%]">
-        <h1 className="text-2xl font-extrabold">Filters</h1>
-        <div className="w-[80%] flex flex-col gap-10 mt-6">
+      <div className="md:w-[28%] border-r border-[#111b18]">
+        <h1 className="text-2xl font-extrabold ">Filters</h1>
+        <div className="w-[90%] flex flex-col gap-10 mt-6">
           {/* Location Filter */}
           <FilterCollapsible
             label="Location"
@@ -228,7 +228,7 @@ const Places = () => {
           />
         </div>
       </div>
-      <div className="w-full md:w-[65%] flex flex-col">
+      <div className="w-full md:w-[72%] flex flex-col md:ml-10">
         <div className="w-full flex items-center mb-5 gap-4 places_tabs_cont">
           <ButtonSliderComponent
             activeAcc={activeAcc}
@@ -236,6 +236,8 @@ const Places = () => {
             accommodations_data={accommodations_data}
           />
         </div>
+
+
         <div className="">
           {loading ? (
             <div className="flex flex-col gap-4">
@@ -254,79 +256,87 @@ const Places = () => {
           ) : filteredAccommodations.length > 0 ? (
             <div className="flex flex-col gap-4">
               {currentItems.map((accommodation: any, index: number) => (
-                <div
-                  key={index}
-                  className="w-full h-[38vh] flex justify-between rounded-xl"
-                >
-                  <div className="w-[35%] h-full relative">
-                    <img
-                      src={accommodation.images[0]}
-                      alt=""
-                      className="w-full h-full rounded-l-xl"
-                    />
-                    <button className="absolute top-2 right-2 p-2 text-sm font-bold text-[#112211b3] flex items-center gap-1 rounded-lg bg-[#ffffff7c]">
-                      {accommodation.images.length}
-                      <h6>Images</h6>
-                    </button>
-                  </div>
-                  <div className="w-[60%] flex flex-col items-start justify-start relative pb-3">
-                    <h1 className="w-[70%] font-extrabold text-xl">
-                      {accommodation.name}
-                    </h1>
-                    <div className="flex items-center gap-3">
-                      <FaLocationDot color="black" />
-                      <h6 className="text-[#112211] text-sm font-medium">
-                        {accommodation.location}
-                      </h6>
-                    </div>
-                    <div className="flex items-center gap-3 mt-2">
-                      <Rating value={accommodation.rating} />
-                      <h6 className="text-sm font-bold text-[#112211]">
-                        {accommodation.rating} Star {activeAcc}
-                      </h6>
-                      <h6 className="flex items-center gap-2 ml-5">
-                        <FaCoffee color="black" />
-                        <p className="text-sm">
-                          {accommodation.amenities.length}+ Amenities
-                        </p>
-                      </h6>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <button className="w-[3rem] h-[2rem] rounded-sm border border-[#8DD3BB] mt-3 font-bold">
-                        {accommodation.rating}
-                      </button>
-                      <h5 className="text-sm font-extrabold">Very Good</h5>
-                      <p className="text-sm font-semibold">
-                        {Math.floor(Math.random() * 1000) + 1} Reviews
-                      </p>
-                    </div>
-                    <hr className="hotel_divider border border-[#ccc] w-full mt-4" />
-                    <div className="w-full flex items-center gap-3 mt-3">
-                      <button className="w-[4rem] h-[3rem] flex items-center justify-center rounded-md border border-[#8DD3BB] font-bold">
-                        {accommodation.liked ? (
-                          <FaHeart color="black" />
-                        ) : (
-                          <FaRegHeart color="black" />
-                        )}
-                      </button>
-                      <button
-                        onClick={() => navigate(`/places/${accommodation.id}`)}
-                        className="w-full py-3 rounded-md flex items-center font-extrabold justify-center bg-[#699bfe52]"
-                      >
-                        View Place
-                      </button>
-                    </div>
-                    <div className="absolute right-3 top-2">
-                      <h6 className="font-bold text-[#1122118f] text-sm">
-                        Starting From{" "}
-                      </h6>
-                      <h1 className="text-xl text-[#396FF9] font-extrabold text-right">
-                        {accommodation.price}
-                      </h1>
-                      <p className="text-sm text-right">excl. tax</p>
-                    </div>
-                  </div>
-                </div>
+
+
+<div
+key={index}
+className="w-full h-[38vh] flex justify-between rounded-xl bg-white shadow-md hover:shadow-lg transition-shadow duration-300 pr-2"
+>
+{/* Image Section */}
+<div className="w-[39%] h-full relative rounded-l-xl overflow-hidden">
+  <img
+    src={accommodation.images[0]}
+    alt={accommodation.name}
+    className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+  />
+  <button className="absolute top-2 right-2 px-3 py-1 text-sm font-bold text-[#112211b3] flex items-center gap-1 rounded-lg bg-white bg-opacity-75 shadow-sm">
+    {accommodation.images.length}
+    <h6>Images</h6>
+  </button>
+</div>
+
+{/* Content Section */}
+<div className="w-[60%] flex flex-col justify-start relative pb-3 px-4 space-y-2">
+  <h1 className="font-extrabold text-xl text-gray-800 truncate">
+    {accommodation.name}
+  </h1>
+
+  <div className="flex items-center gap-3">
+    <FaLocationDot color="black" />
+    <h6 className="text-[#112211] text-sm font-medium">
+      {accommodation.location}
+    </h6>
+  </div>
+
+  <div className="flex items-center gap-3 mt-2">
+    <Rating value={accommodation.rating} />
+    <h6 className="text-sm font-bold text-[#112211]">
+      {accommodation.rating} Star {activeAcc}
+    </h6>
+    <h6 className="flex items-center gap-2 ml-5">
+      <FaCoffee color="black" />
+      <p className="text-sm">
+        {accommodation.amenities.length}+ Amenities
+      </p>
+    </h6>
+  </div>
+
+  <div className="flex items-center gap-3">
+    <button className="w-[3rem] h-[2rem] rounded-sm border border-[#8DD3BB] mt-3 font-bold">
+      {accommodation.rating}
+    </button>
+    <h5 className="text-sm font-extrabold">Very Good</h5>
+    <p className="text-sm font-semibold">
+      {Math.floor(Math.random() * 1000) + 1} Reviews
+    </p>
+  </div>
+
+  <hr className="border-t border-gray-300 w-full mt-4" />
+
+  <div className="w-full flex items-center gap-3 mt-3">
+    <button className="w-[4rem] h-[3rem] flex items-center justify-center rounded-md border border-[#8DD3BB] font-bold">
+      {accommodation.liked ? <FaHeart color="black" /> : <FaRegHeart color="black" />}
+    </button>
+    <button
+      onClick={() => navigate(`/places/${accommodation.id}`)}
+      className="w-full py-3 rounded-md flex items-center justify-center font-extrabold bg-[#2a5dc2ec] hover:bg-[#699BFE] text-white transition-colors duration-300"
+    >
+      View Place
+    </button>
+  </div>
+
+  {/* Price Section */}
+  <div className="absolute right-3 top-2 text-right">
+    <h6 className="font-bold text-[#1122118f] text-sm">Starting From</h6>
+    <h1 className="text-xl text-[#396FF9] font-extrabold">{accommodation.price}</h1>
+    <p className="text-sm text-gray-600">excl. tax</p>
+  </div>
+</div>
+</div>
+
+
+
+
               ))}
               <div className="flex justify-center mt-8">
                 {Array.from({ length: totalPages }, (_, index) => (

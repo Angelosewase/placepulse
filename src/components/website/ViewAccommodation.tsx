@@ -40,11 +40,13 @@ const ViewAccommodation = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="w-full flex flex-col md:px-10 pt-10 pb-[50vh]">
+    <div className="w-full flex flex-col  pt-2 md:px-24 pb-[50vh]">
       <Helmet>
         <title>Accommodation - Place Pulse</title>
       </Helmet>
       {loading ? (
+
+        // skeletons
         <>
           <div className="w-full flex justify-between relative">
             <div className="w-[60%] flex flex-col gap-2 items-start">
@@ -107,25 +109,25 @@ const ViewAccommodation = () => {
         </>
       ) : (
         <>
-          <div className="w-full flex justify-between relative">
-            <div className="w-[60%] flex flex-col gap-2 items-start">
-              <div className="flex items-center gap-6">
-                <h1 className="text-2xl font-extrabold">
+          <div className="w-full flex justify-between relative shadow-sm">
+            <div className="w-[60%] flex flex-col  items-start   space-y-1">
+              <div className="flex items-center ">
+                <h1 className="text-2xl font-extrabold mr-10">
                   {accommodation?.name}
                 </h1>
                 <Rating value={accommodation?.rating} />
-                <h6 className="text-sm font-medium text-[#112211d1]">
+                <h6 className="text-xs font-medium text-[#112211d1] ml-1 self-center ">
                   {accommodation?.rating} Star {accommodation?.type}
                 </h6>
               </div>
-              <div className="flex items-center gap-3 ml-3">
+              <div className="flex items-center  ">
                 <FaLocationDot color="#112211d1" />
                 <h6 className="text-[#112211d1] text-sm font-medium">
                   {accommodation?.location}
                 </h6>
               </div>
-              <div className="h-[2.5rem] flex items-center gap-3 mt-3 ml-3">
-                <button className="w-[3rem] h-full rounded-sm border border-[#8DD3BB] font-bold">
+              <div className="h-10 flex items-center gap-3   ">
+                <button className="w-[3rem] h-7 rounded border border-[#8DD3BB] font-bold">
                   {accommodation?.rating}
                 </button>
                 <h5 className="text-sm font-extrabold">Very Good</h5>
@@ -133,7 +135,7 @@ const ViewAccommodation = () => {
                   {Math.floor(Math.random() * 1000) + 1} Reviews
                 </p>
               </div>
-              <h6 className="ml-3 text-base font-semibold text-[#112211d1] flex gap-2 items-center mt-3">
+              <h6 className=" text-base font-semibold text-[#112211d1] flex gap-2 items-center ">
                 <FaPhone /> Owner's Contacts:{" "}
                 <span className="font-extrabold">{"+250 793 245 434"}</span>
               </h6>
@@ -151,8 +153,8 @@ const ViewAccommodation = () => {
                     : "/accommodation"}
                 </span>
               </h1>
-              <div className="flex w-full justify-between items-center gap-3 mt-4">
-                <button className="w-[4rem] h-[3rem] flex items-center justify-center rounded-sm border border-[#8DD3BB] font-bold">
+              <div className="flex w-full justify-between items-center gap-3 mt-2">
+                <button className="w-[4rem] h-[3rem] flex items-center justify-center rounded-lg border border-[#8DD3BB] font-bold">
                   {accommodation?.liked ? (
                     <FaHeart color="black" />
                   ) : (
@@ -164,7 +166,7 @@ const ViewAccommodation = () => {
                   onClick={() => {
                     navigate(`/booking/place/${accommodation_id}`);
                   }}
-                  className="px-6 py-3 rounded-sm flex items-center font-extrabold justify-center bg-[#396FF9] text-white"
+                  className="px-6 py-3 rounded-lg flex items-center font-extrabold justify-center bg-[#396FF9] text-white"
                 >
                   Book Now
                 </button>
@@ -185,7 +187,7 @@ const ViewAccommodation = () => {
             </p>
 
             <div className="w-full flex justify-start gap-8 mt-5">
-              <div className="w-[30vh] h-[25vh] bg-[#0075FF] rounded-lg relative flex flex-col justify-end p-3 px-4">
+              <div className="w-[18vh] h-[14vh] bg-[#0075FF] rounded-lg  relative flex flex-col justify-end p-3 px-4">
                 <button className="absolute font-extrabold text-2xl top-2 left-4 text-white flex items-center gap-2">
                   {accommodation?.rating}
                   <Rating value={accommodation?.rating} readOnly />
@@ -200,7 +202,7 @@ const ViewAccommodation = () => {
                   return (
                     <div
                       key={index}
-                      className="w-[28vh] h-[25vh] border border-[#396FF9] rounded-lg relative flex flex-col justify-end p-3"
+                      className="w-[18vh] h-[14vh] border border-[#396FF9] rounded-lg  relative flex flex-col justify-end p-3"
                     >
                       <button className="absolute top-2 left-2">
                         <WiStars color="black" size={30} />
@@ -221,35 +223,37 @@ const ViewAccommodation = () => {
                 {rooms?.map((roomType: any, index: number) => {
                   return (
                     <div
-                      key={index}
-                      className={`w-full flex justify-between ${index !== rooms?.length - 1 && "border-b border-b-[#ccc]"} pb-2`}
-                    >
-                      <div className="flex items-center gap-3">
-                        <img
-                          src={roomType?.images[0]}
-                          width={90}
-                          height={90}
-                          className="rounded-sm"
-                        />
-                        <h1 className="font-extrabold text-lg">
-                          {roomType?.name}
-                        </h1>
-                      </div>
-                      <div className="flex items-center gap-4">
-                        <h1 className="font-extrabold">
-                          {roomType.price}{" "}
-                          <span className="text-sm">/night</span>
-                        </h1>
-                        <button
-                          onClick={() => {
-                            navigate(`/booking/place/${accommodation_id}`);
-                          }}
-                          className="px-6 py-3 rounded-sm flex items-center font-extrabold justify-center bg-[#396FF9] text-white text-sm"
-                        >
-                          Book Now
-                        </button>
-                      </div>
+                    key={index}
+                    className={`w-full flex justify-between items-center gap-6 p-4 bg-white rounded-lg shadow-md ${
+                      index !== rooms?.length - 1 ? "mb-4" : ""
+                    }`}
+                  >
+                    <div className="flex items-center gap-4">
+                      <img
+                        src={roomType?.images[0]}
+                        width={90}
+                        height={90}
+                        className="rounded-lg object-cover"
+                        alt={roomType?.name}
+                      />
+                      <h1 className="font-bold text-xl text-gray-800">{roomType?.name}</h1>
                     </div>
+                    <div className="flex items-center gap-8">
+                      <h1 className="font-bold text-lg text-gray-700">
+                        ${roomType.price}{" "}
+                        <span className="text-sm text-gray-500">/night</span>
+                      </h1>
+                      <button
+                        onClick={() => {
+                          navigate(`/booking/place/${accommodation_id}`);
+                        }}
+                        className="px-5 py-2 rounded-lg font-semibold bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300"
+                      >
+                        Book Now
+                      </button>
+                    </div>
+                  </div>
+                  
                   );
                 })}
               </div>
@@ -262,7 +266,7 @@ const ViewAccommodation = () => {
               <Link
                 to={`https://www.google.com/maps/place/${accommodation?.location}`}
                 target="_blank"
-                className="px-6 py-3 rounded-sm flex items-center font-extrabold justify-center bg-[#396FF9] text-white text-sm"
+                className="px-6 py-3 rounded-lg flex items-center font-extrabold justify-center bg-[#396FF9] text-white text-sm"
               >
                 View on google maps
               </Link>
@@ -279,13 +283,13 @@ const ViewAccommodation = () => {
           <hr className="w-full hotel_divider my-[9vh]" />
           <div className="w-full mt-5">
             <h1 className="text-xl font-extrabold mb-4">Freebies</h1>
-            <div className="w-full grid md:grid-cols-3 gap-3 mt-4">
+            <div className="w-full grid md:grid-cols-6 gap-3 mt-4">
               {accommodation?.freebies &&
                 accommodation?.freebies[0].map((amenity: any) => {
                   return (
                     <div
                       key={amenity}
-                      className="w-full flex items-center gap-3 pl-4"
+                      className="w-full flex items-center gap-3 pl-4 shadow rounded-lg"
                     >
                       <WiStars color="black" size={30} />
                       <h1 className="font-extrabold">

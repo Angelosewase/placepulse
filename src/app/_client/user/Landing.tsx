@@ -33,7 +33,7 @@ const UserLanding = () => {
 
   return (
     <div className="w-full">
-      <div className="w-full md:h-[90vh] relative">
+      <div className="w-full md:h-[80vh] relative">
         <img
           src={mabBgImg}
           className="w-full h-[90vh] md:h-full object-cover"
@@ -50,26 +50,27 @@ const UserLanding = () => {
               </button>
             ))}
           </div>
+          {/* res */}
           <div className="flex md:hidden mt-5 justify-end px-3">
             <MdPending size={23} color="white" />
           </div>
-          <div className="px-3 md:px-20">
-            <h1 className="text-5xl md:text-6xl font-extrabold uppercase w-full md:w-[50%] text-start text-white">
+          <div className="px-3 md:px-20 md:mt-20">
+            <h1 className="text-4xl md:text-5xl font-bold uppercase w-full md:w-[50%] text-start text-white">
               Make Your Choice Destination,{" "}
               <span className="text-5xl md:text-6xl lowercase">
                 We'll do the rest
               </span>
             </h1>
-            <h3 className="text-xl text-white font-medium ml-2">
+            <h3 className="text-xl text-white font-medium ml-2 mt-4">
               Special offers to suit your plan
             </h3>
           </div>
-          <div className="w-full md:absolute bottom-0 flex justify-center">
-            <div className="w-full md:w-[85%] bg-white rounded-t-2xl p-6">
+          <div className="w-full md:absolute -bottom-32  flex justify-center ">
+            <div className="w-full md:w-[80%] bg-white rounded-2xl py-4 pb-8 px-6 shadow ">
               <h1 className="text-2xl font-extrabold text-[#112211]">
                 Where are you Heading?
               </h1>
-              <div className="w-full flex flex-col md:flex-row justify-between gap-4 mt-10">
+              <div className="w-full flex flex-col md:flex-row justify-between gap-4 mt-4">
                 {loading ? (
                   <Skeleton height={50} width="100%" radius="md" />
                 ) : (
@@ -80,15 +81,8 @@ const UserLanding = () => {
           </div>
         </div>
       </div>
-      <section className="w-full px-3 md:px-20 mt-[30vh] md:mt-6">
-        <div className="w-full flex justify-end">
-          <button
-            onClick={() => navigate(`/_client/home/find`)}
-            className="px-6 py-3 rounded-sm flex text-sm items-center font-extrabold justify-center bg-[#396FF9] text-white"
-          >
-            Show Places
-          </button>
-        </div>
+      <section className="w-full px-3 md:px-20 mt-[30vh] md:mt-40">
+
         <div className="w-full mt-8">
           <div className="w-full mt-[10vh]">
             <div className="w-full flex flex-col md:flex-row justify-between items-start gap-4 md:items-center mt-[12vh]">
@@ -99,7 +93,6 @@ const UserLanding = () => {
                 </p>
               </div>
               <button
-                onClick={() => navigate(`/_client/info/Bookings`)}
                 className="py-2 px-6 border border-[#8DD3BB] rounded-sm font-semibold"
               >
                 See All
@@ -123,7 +116,7 @@ const UserLanding = () => {
                 <h1 className="font-extrabold">No Bookings Found!</h1>
               </div>
             ) : (
-              <div className="w-full h-[60vh] grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-x-10 gap-y-3 mt-10">
+              <div className="w-full h-[60vh] grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-x-10 gap-y-3 mt-10">
                 {bookings.slice(0, 3).map((place: any, index: number) => (
                   <BookingLandCard data={place} key={index} />
                 ))}
@@ -137,11 +130,11 @@ const UserLanding = () => {
                 Search Places Here from our most popular places
               </p>
             </div>
-            <button className="py-2 px-6 border border-[#8DD3BB] rounded-sm font-semibold">
+            <button className="py-2 px-6 border border-[#8DD3BB] rounded-sm font-semibold" onClick={() => navigate(`/_client/info/Bookings`)}>
               See more places
             </button>
           </div>
-          <div className="w-full grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-12 mt-10">
+          <div className="w-full grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-12 mt-10">
             {loading
               ? Array(9)
                   .fill(0)
@@ -170,7 +163,7 @@ const UserLanding = () => {
                 See All
               </button>
             </div>
-            <div className="w-full h-[60vh] grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-3 mt-10">
+            <div className="w-full h-[60vh] grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 mt-10">
               {loading
                 ? Array(4)
                     .fill(0)

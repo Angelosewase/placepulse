@@ -45,35 +45,39 @@ const SelectComponent = () => {
   console.log(formatDate(selectedCheckIn));
   const navigate = useNavigate();
   return (
-    <div className="w-full flex justify-between gap-4">
-      <div className="w-[30rem] h-14">
-        <LandingSelect
-          label="Type"
-          data={["Hotel", "Garden", "Restaurant", "Conference Room", "Motel"]}
-          handleChange={(e: any) => setSelected(e)}
-          value={selected}
+    <div className="w-full flex  flex-col gap-4">
+      <div className="flex flex-1 justify-between">
+        <div className="w-[30rem] h-14">
+          <LandingSelect
+            label="Type"
+            data={["Hotel", "Garden", "Restaurant", "Conference Room", "Motel"]}
+            handleChange={(e: any) => setSelected(e)}
+            value={selected}
+          />
+        </div>
+        <CalendarPicker
+          label="Check In"
+          min={new Date()}
+          max={""}
+          selectedDate={selectedCheckIn}
+          setSelectedDate={setSelectedCheckIn}
+        />
+        <CalendarPicker
+          label="Check Out"
+          min={selectedCheckIn}
+          max={""}
+          selectedDate={selectedCheckOut}
+          setSelectedDate={setSelectedCheckOut}
         />
       </div>
-      <CalendarPicker
-        label="Check In"
-        min={new Date()}
-        max={""}
-        selectedDate={selectedCheckIn}
-        setSelectedDate={setSelectedCheckIn}
-      />
-      <CalendarPicker
-        label="Check Out"
-        min={selectedCheckIn}
-        max={""}
-        selectedDate={selectedCheckOut}
-        setSelectedDate={setSelectedCheckOut}
-      />
-      <div className="">
+
+      <div className="self-end">
         <button
-          className="rounded-full p-4 bg-[#FF385C] hover:bg-[#E51D56]"
+          className="rounded p-2 bg-blue-500 flex items-center gap-2 text-white"
           onClick={() => navigate(`/_client/home/find/${selected}`)}
         >
           <IoSearch color="white" size={23} />
+          <p>Find places </p>
         </button>
       </div>
     </div>

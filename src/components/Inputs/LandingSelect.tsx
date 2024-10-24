@@ -23,11 +23,11 @@ const LandingSelect = ({
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="w-full h-full flex flex-col items-start gap-2 relative">
+    <div className="w-full h-full flex flex-col items-start gap-2 relative border rounded ">
       <label
         htmlFor={label}
         className={
-          "absolute left-3 top-3 transition-transform duration-200 transform -translate-y-6 scale-75 z-50 bg-white text-[#112211] font-medium"
+          "absolute left-3 top-3 transition-transform duration-200 transform -translate-y-6 scale-75 z-50 bg-white text-[#112211] font-medium  "
         }
       >
         {label}

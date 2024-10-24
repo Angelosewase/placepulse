@@ -112,12 +112,12 @@ const Home = () => {
                 .map((accommodation: any, index: number) => (
                   <div
                     key={index}
-                    className="relative flex justify-center w-[270px] h-[350px] rounded-lg"
+                    className="relative flex justify-center w-[270px] h-[400px] rounded-lg"
                   >
                     <img
                       src={accommodation?.images?.[0]}
                       alt={`Weekly Hotel ${index + 1}`}
-                      className="w-full rounded-xl h-ful"
+                      className="w-full rounded-xl h-full object-cover"
                     />
                     <div className="bg-transparent w-[80%] absolute bottom-2  rounded-lg px-3 pt-2 py-3 text-white">
                       <h2 className="font-extrabold text-lg">{accommodation?.name}</h2>

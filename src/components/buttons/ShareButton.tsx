@@ -26,7 +26,7 @@ const ShareButton = ({ accommodation }: { accommodation: any }) => {
     <div>
       <button
         onClick={open}
-        className="w-[4rem] h-[3rem] flex items-center justify-center rounded-sm border border-[#8DD3BB] font-bold"
+        className="w-[4rem] h-[3rem] flex items-center justify-center rounded-lg border border-[#8DD3BB] font-bold"
       >
         <HiShare color="black" size={20} />
       </button>
@@ -45,7 +45,7 @@ const ShareButton = ({ accommodation }: { accommodation: any }) => {
                 setLink({ text: link.text, copied: true });
                 close();
               }}
-              className={`py-3 w-full rounded-md border mt-4 flex items-center justify-center gap-3 ${link.copied ? "border-green-400 bg-green-300 font-bold text-white" : ""}`}
+              className={`py-3 w-full rounded-lg border mt-4 flex items-center justify-center gap-3 ${link.copied ? "border-green-400 bg-green-300 font-bold text-white" : ""}`}
             >
               {link.copied ? (
                 <>

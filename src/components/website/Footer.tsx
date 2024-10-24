@@ -46,15 +46,15 @@ const WebFooter = () => {
       .finally(() => setLoading(false));
   };
   return (
-    <div className="w-full md:h-[55vh] relative flex md:items-start flex-wrap gap-10  md:flex-row  justify-between  md:px-[8%] md:pt-[24vh]  bg-[#396ff965] pb-8 md:pb-0">
-      <div className="md:flex flex-col gap-4 hidden">
+    <div className="w-full md:h-[55vh] relative flex md:items-start flex-wrap gap-10  md:flex-row  justify-between  md:px-[8%] md:pt-[24vh]  pt-[21vh] bg-[#396ff965] pb-8 md:pb-0">
+      <div className="lg:flex flex-col gap-4 hidden">
         <div>
           <Brand />
         </div>
-    
-          <p className="text-xs font-semibold">
-            &copy; {new Date().getFullYear()} Place Pulse. All rights reserved.
-          </p>
+
+        <p className="text-xs font-semibold">
+          &copy; {new Date().getFullYear()} Place Pulse. All rights reserved.
+        </p>
       </div>
       <div className="flex flex-col text-xl gap-2 px-3 ">
         <h3 className="font-extrabold ">Quick Links</h3>
@@ -75,12 +75,30 @@ const WebFooter = () => {
         <Link to={"/"}>Our Story</Link>
         <Link to={"/about"}>Work With Us</Link>
       </div>
+      <div className="hidden md:block">
+        <h1 className="text-lg mb-4 font-extrabold">Follow us</h1>
+        <div className="flex justify-between items-center gap-2  ">
+          <Link to={""}>
+            <FaInstagram size={23} />
+          </Link>
+          <Link to={""}>
+            <FaSquareXTwitter size={20} />
+          </Link>
+          <Link to={""}>
+            <FaFacebook size={20} />
+          </Link>{" "}
+          <Link to={""}>
+            <FaYoutube size={25} />
+          </Link>
+        </div>
+      </div>
 
       <div className="w-full md:w-[85%] h-[40vh] rounded-[1rem] py-5 px-10 absolute top-[-20vh] bg-[#97B2F6]">
         <h1 className="md:w-1/5 w-full text-4xl font-extrabold">
           Subscribe Newsletter
         </h1>
-        <div className="w-[50%] flex flex-col relative">
+
+        <div className=" w-full md:w-[50%] flex flex-col relative">
           <h1 className="mt-[5%] font-extrabold text-[#112211]">The Travel</h1>
           <p className="text-[#112211] font-semibold text-sm">
             Get inspired! Receive tour discounts, tips and good place to get
@@ -94,7 +112,7 @@ const WebFooter = () => {
               onChange={(e) => setEmail(e.target.value)}
               type="email"
               placeholder="Enter your email address"
-              className="w-[60%] px-3 py-3 rounded outline-none font-semibold"
+              className="w-[70%] px-3 py-3 rounded outline-none font-semibold"
             />
             <button
               disabled={loading}
@@ -116,23 +134,7 @@ const WebFooter = () => {
           />
         </div>
       </div>
-      <div>
-        <h1 className="text-lg mb-4 font-extrabold">Follow us</h1>
-        <div className="flex justify-between items-center gap-2  ">
-          <Link to={""}>
-            <FaInstagram size={23} />
-          </Link>
-          <Link to={""}>
-            <FaSquareXTwitter size={20} />
-          </Link>
-          <Link to={""}>
-            <FaFacebook size={20} />
-          </Link>{" "}
-          <Link to={""}>
-            <FaYoutube size={25} />
-          </Link>
-        </div>
-      </div>
+
       <div className="absolute bottom-0 right-5 ">
         <h1>
           Powered By{" "}

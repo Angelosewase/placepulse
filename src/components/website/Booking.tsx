@@ -6,7 +6,7 @@ import CheckInCheckOutDates from "../Calendar/CheckInOut";
 import { differenceInDays, format } from "date-fns";
 import { Collapse, Radio, Skeleton } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { IoChevronBackCircleOutline } from "react-icons/io5";
+// import { IoChevronBackCircleOutline } from "react-icons/io5";
 import LoginModal from "../Modals/LoginModal";
 import { AxiosAPI } from "../../utils/AxiosInstance";
 import { useDispatch, useSelector } from "react-redux";
@@ -85,10 +85,11 @@ const BookingPage = () => {
   };
 
   return (
-    <div className="w-full md:px-12 pt-5 pb-[50vh]">
+    <div className="w-full md:px-12 pt-28  pb-[50vh]">
       <Helmet>
         <title>Booking - Place Pulse</title>
       </Helmet>
+      {/* skeletons */}
       {loading ? (
         <div className="w-full">
           <div className="w-full flex justify-start mb-5">
@@ -113,207 +114,183 @@ const BookingPage = () => {
         </div>
       ) : (
         <>
-          <div className="w-full flex justify-start">
-            <button onClick={() => history.back()} className="p-3">
-              <IoChevronBackCircleOutline color="black" size={23} />
-            </button>
+          <div className="w-full flex justify-start mb-4">
+  
           </div>
-          <div className="w-full flex justify-between md:px-8">
-            <div className="w-[63%]">
-              <div className="w-full">
-                <h1 className="w-[70%] text-xl text-start font-extrabold">
-                  {/* {accommodation.roomTypes[0].type} */}
-                  {accommodation?.name}
-                </h1>
-                <div className="md:w-[80%] border border-[#699BFE] py-3 rounded-lg pl-3 mt-5">
-                  <h1 className="text-xl font-extrabold">
-                    {accommodation?.name}
+
+          <div className="w-full flex flex-col md:flex-row justify-between md:px-8 gap-6">
+            <div className="w-full md:w-[63%]">
+              <h1 className="text-2xl font-bold text-gray-800 mb-3">
+                {accommodation?.name}
+              </h1>
+
+              <div className="border border-[#699BFE] p-4 rounded-lg mt-5">
+                <h1 className="text-xl font-bold">{accommodation?.name}</h1>
+                <div className="flex items-center gap-2 mt-2">
+                  <FaLocationDot color="#112211d1" />
+                  <h6 className="text-sm text-gray-600">
+                    {accommodation?.location}
+                  </h6>
+                </div>
+              </div>
+
+              <div className="w-full flex flex-wrap justify-between mt-5 gap-4">
+                <div className="w-[48%]">
+                  <h1 className="font-semibold text-sm">Check In</h1>
+                  <h1 className="text-2xl font-bold">
+                    {formatDate(checkIn, "Check In")}
                   </h1>
-                  <div className="flex items-center gap-3">
-                    <FaLocationDot color="#112211d1" />
-                    <h6 className="text-[#112211d1] text-sm font-medium">
-                      {accommodation?.location}
-                    </h6>
-                  </div>
-                </div>
-                <div className="w-full flex items-center justify-between mt-5">
-                  <div>
-                    <h1 className="font-semibold text-xs">Check In</h1>
-                    <h1 className="text-2xl font-extrabold">
-                      {formatDate(checkIn, "Check In")}
-                    </h1>
-                    <div className="border rounded-sm mt-4 p-3">
-                      <CheckInCheckOutDates
-                        value={checkIn}
-                        onChange={setCheckIn}
-                        min={new Date()}
-                        max={checkOut}
-                        bookedDays={bookedDays}
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <h1 className="font-semibold text-sm">Check Out</h1>
-                    <h1 className="text-2xl font-extrabold">
-                      {formatDate(checkOut, "Check Out")}
-                    </h1>
-                    <div className="border rounded-sm mt-4 p-3">
-                      <CheckInCheckOutDates
-                        min={checkIn}
-                        value={checkOut}
-                        onChange={setCheckOut}
-                        bookedDays={bookedDays}
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="w-full flex flex-col gap-2 mt-5">
-                  <div
-                    onClick={() => setPaymentPortion("full")}
-                    className={`w-full flex items-center justify-between px-3 rounded-lg py-3 cursor-pointer ${
-                      paymentPortion === "full"
-                        ? "bg-[#1877F2]"
-                        : " shadow shadow-gray-300"
-                    }`}
-                  >
-                    <div>
-                      <h1
-                        className={`${paymentPortion === "full" && "text-white"} font-extrabold text-md`}
-                      >
-                        Pay in full
-                      </h1>
-                      <p
-                        className={`${paymentPortion === "full" && "text-white"} font-medium text-xs`}
-                      >
-                        Pay the total and you're all set
-                      </p>
-                    </div>
-                    <Radio
-                      checked={paymentPortion === "full"}
-                      variant="outline"
-                      className=""
-                      color="#fff"
-                      onChange={() => {}}
-                      label=""
+                  <div className="border rounded-md mt-4 p-3 shadow bg-white">
+                    <CheckInCheckOutDates
+                      value={checkIn}
+                      onChange={setCheckIn}
+                      min={new Date()}
+                      max={checkOut}
+                      bookedDays={bookedDays}
                     />
                   </div>
-                  <div
-                    onClick={() => setPaymentPortion("partial")}
-                    className={`w-full flex items-center justify-between px-3 rounded-lg py-3 cursor-pointer ${
-                      paymentPortion === "partial"
-                        ? "bg-[#1877F2]"
-                        : " shadow shadow-gray-300"
-                    }`}
-                  >
-                    <div className="w-[70%]">
-                      <h1
-                        className={`${paymentPortion === "partial" && "text-white"} font-extrabold text-md`}
-                      >
-                        Pay part now, part later
-                      </h1>
-                      <p
-                        className={`${paymentPortion === "partial" && "text-white"} font-medium text-xs`}
-                      >
-                        Pay {priceToPay()} now, and the rest ({priceToPay()})
-                        will be automatically charged to the same payment method
-                        on Nov 14, 2022. No extra fees.
-                      </p>
-                      <button
-                        className="text-sm underline mt-4"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          toggle();
-                        }}
-                      >
-                        More Info
-                      </button>
-                      <Collapse in={openedInfo}>
-                        <p
-                          className={`${paymentPortion === "partial" && "text-white"} font-medium text-xs mt-5`}
-                        >
-                          Pay {priceToPay()} now, and the rest ({priceToPay()})
-                          will be automatically charged to the same payment
-                          method on Nov 14, 2022. No extra fees.
-                        </p>
-                      </Collapse>
-                    </div>
-                    <Radio
-                      checked={paymentPortion === "partial"}
-                      variant="outline"
-                      className=""
-                      color="#fff"
-                      onChange={() => {}}
-                      label=""
+                </div>
+                <div className="w-[48%]">
+                  <h1 className="font-semibold text-sm">Check Out</h1>
+                  <h1 className="text-2xl font-bold">
+                    {formatDate(checkOut, "Check Out")}
+                  </h1>
+                  <div className="border rounded-md mt-4 p-3 ">
+                    <CheckInCheckOutDates
+                      min={checkIn}
+                      value={checkOut}
+                      onChange={setCheckOut}
+                      bookedDays={bookedDays}
                     />
                   </div>
+                </div>
+              </div>
+
+              <div className="mt-5 space-y-3">
+                <div
+                  onClick={() => setPaymentPortion("full")}
+                  className={`flex items-center justify-between p-4 rounded-lg cursor-pointer transition-all duration-300 ${
+                    paymentPortion === "full"
+                      ? "bg-blue-600 text-white"
+                      : "bg-white shadow-lg"
+                  }`}
+                >
+                  <div>
+                    <h1 className="font-bold">Pay in full</h1>
+                    <p className="text-sm">Pay the total and you're all set</p>
+                  </div>
+                  <Radio
+                    checked={paymentPortion === "full"}
+                    variant="outline"
+                    color={paymentPortion === "full" ? "white" : "black"}
+                  />
+                </div>
+
+                <div
+                  onClick={() => setPaymentPortion("partial")}
+                  className={`flex items-center justify-between p-4 rounded-lg cursor-pointer transition-all duration-300 ${
+                    paymentPortion === "partial"
+                      ? "bg-blue-600 text-white"
+                      : "bg-white shadow-lg"
+                  }`}
+                >
+                  <div>
+                    <h1 className="font-bold">Pay part now, part later</h1>
+                    <p className="text-sm">
+                      Pay {priceToPay()} now, and the rest will be automatically
+                      charged to the same payment method on Nov 14, 2022. No
+                      extra fees.
+                    </p>
+                    <button
+                      className="text-sm underline mt-2"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggle();
+                      }}
+                    >
+                      More Info
+                    </button>
+                    <Collapse in={openedInfo}>
+                      <p className="mt-3">
+                        Pay {priceToPay()} now, and the rest will be
+                        automatically charged to the same payment method on Nov
+                        14, 2022. No extra fees.
+                      </p>
+                    </Collapse>
+                  </div>
+                  <Radio
+                    checked={paymentPortion === "partial"}
+                    variant="outline"
+                    color={paymentPortion === "partial" ? "white" : "black"}
+                  />
                 </div>
               </div>
             </div>
-            <div className="w-[30%]">
-              <div className="w-full h-fit shadow shadow-[#c4c4c4] rounded-lg p-2">
-                <div className="w-full flex justify-between gap-5">
+
+            <div className="w-full md:w-[30%]">
+              <div className="w-full bg-white shadow-md rounded-lg p-5">
+                <div className="flex gap-4 items-center">
                   <img
-                    // src={accommodation.roomTypes[0].images[0]}
                     src={accommodation?.images[0]}
-                    alt=""
-                    width={100}
-                    height={100}
-                    className="rounded-lg"
+                    alt={accommodation?.name}
+                    className="w-24 h-24 rounded-lg object-cover"
                   />
-                  <div className="flex flex-col">
-                    <h1 className="text-md font-semibold text-[#444343]">{`${accommodation?.name?.slice(0, 20)} ...`}</h1>
+                  <div>
+                    <h1 className="text-md font-bold">{`${accommodation?.name?.slice(
+                      0,
+                      20
+                    )}...`}</h1>
                     <h1 className="text-lg font-extrabold">
-                      {/* {accommodation.roomTypes[0].type} */}
                       {accommodation?.type}
                     </h1>
-                    <div className="h-[2.5rem] flex items-center gap-3 mt-2">
-                      <button className="w-[3rem] h-full rounded-sm border border-[#8DD3BB] font-bold">
+                    <div className="flex items-center gap-2 mt-2">
+                      <button className="px-2 py-1 border border-[#8DD3BB] rounded-md font-bold">
                         {accommodation?.rating}
                       </button>
-                      <h5 className="text-xs font-extrabold">Very Good</h5>
-                      <p className="text-xs font-semibold">
-                        {Math?.floor(Math.random() * 1000) + 1} Reviews
+                      <h5 className="text-xs font-semibold">Very Good</h5>
+                      <p className="text-xs font-medium">
+                        {Math.floor(Math.random() * 1000) + 1} Reviews
                       </p>
                     </div>
                   </div>
                 </div>
-                <hr className="hotel_divider mt-5 mb-3" />
-                <h1 className="text-sm font-medium text-[#112211]">
-                  Your Booking is protected by{" "}
-                  <span className="text-black font-extrabold">Place Pulse</span>
-                </h1>
-                <hr className="hotel_divider mt-3 mb-5" />
 
-                <div>
-                  <h1 className="text-sm font-bold mb-2">Price Details</h1>
-                  <div className="w-full flex justify-between items-center mb-2">
-                    <h1 className="text-sm font-medium">Base Fare</h1>
-                    <p className="text-md font-bold">{priceToPay()} </p>
-                  </div>
-                  <div className="w-full flex justify-between items-center mb-2">
-                    <h1 className="text-sm font-medium">Discount</h1>
-                    <p className="text-md font-bold">{0}</p>
-                  </div>
-                  <div className="w-full flex justify-between items-center mb-2">
-                    <h1 className="text-sm font-medium">Taxes</h1>
-                    <p className="text-md font-bold">{0}</p>
-                  </div>
-                  <hr className="hotel_divider mt-5 mb-3" />
-                  <div className="w-full flex justify-between items-center mb-2">
-                    <h1 className="text-sm font-medium">Total</h1>
-                    <p className="text-md font-bold">{priceToPay()} </p>
-                  </div>
+                <hr className="my-4" />
+
+                <h1 className="text-sm font-bold">Price Details</h1>
+                <div className="flex justify-between items-center">
+                  <h1 className="text-sm font-medium">Base Fare</h1>
+                  <p className="font-bold">{priceToPay()}</p>
+                </div>
+                <div className="flex justify-between items-center">
+                  <h1 className="text-sm font-medium">Discount</h1>
+                  <p className="font-bold">{0}</p>
+                </div>
+                <div className="flex justify-between items-center">
+                  <h1 className="text-sm font-medium">Taxes</h1>
+                  <p className="font-bold">{0}</p>
+                </div>
+
+                <hr className="my-4" />
+
+                <div className="flex justify-between items-center">
+                  <h1 className="text-sm font-medium">Total</h1>
+                  <p className="font-bold">{priceToPay()}</p>
                 </div>
               </div>
+
               <button
                 onClick={handlePaymentCheckout}
-                className="w-full py-3 mt-3 rounded-sm flex items-center font-extrabold justify-center bg-[#396FF9] text-white"
+                className="w-full py-3 mt-4 rounded-lg bg-blue-600 text-white font-bold hover:bg-blue-700 transition duration-300"
               >
                 Pay {priceToPay()} FRW
               </button>
-              <p className="text-red-500 font-bold text-sm mt-2">{error}</p>
+              {error && (
+                <p className="text-red-500 font-bold text-sm mt-2">{error}</p>
+              )}
             </div>
           </div>
+
           {!isLoggedIn && (
             <LoginModal
               id={accommodation_id}

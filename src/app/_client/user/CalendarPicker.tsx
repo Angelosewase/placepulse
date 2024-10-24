@@ -18,7 +18,7 @@ const CalendarPicker = ({
 }) => {
   const [showCalendar, setShowCalendar] = useState(false);
   return (
-    <div className="relative">
+    <div className="relative ">
       <div className="w-[20rem] h-14">
         <LandingSelect
           label={label}
