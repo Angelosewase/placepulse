@@ -10,20 +10,20 @@ const InfoLayout = ({ children }: { children: React.ReactElement }) => {
   const buttons = ["Account", "Bookings", "Payment Methods"];
   const { user } = useSelector((state: any) => state.auth);
   return (
-    <div className="w-full md:px-20 px-3 mt-20">
+    <div className="w-full md:px-20 px-3 pt-2 ">
       <div className="relative w-full flex flex-col items-center">
         <img
           src={coverImg}
           alt=""
-          className="w-full h-[35vh] object-fit rounded-lg"
+          className="w-full h-[40vh] object-fit rounded-lg"
           loading="lazy"
         />
         <div className="relative mt-[-10vh] rounded-full">
           <img
             src={personImg}
             alt=""
-            width={150}
-            height={150}
+            width={140}
+            height={140}
             className="object-fill"
           />
           <button className="absolute bottom-7 flex items-center justify-center right-3 p-3 rounded-full bg-[#FF8682]">
@@ -40,7 +40,7 @@ const InfoLayout = ({ children }: { children: React.ReactElement }) => {
         </div>
       </div>
 
-      <div className="w-full flex items-center justify-evenly mb-16 gap-4 shadow-sm shadow-[#c8c8c863] rounded-lg p-3 mt-9">
+      <div className="w-full flex items-center justify-evenly mb-8 gap-4 shadow shadow-[#c8c8c863] rounded-lg p-2 mt-9 ">
         {buttons.map((button, index) => {
           return (
             <div className="w-[20%] flex justify-center info-buttons ">
@@ -50,7 +50,7 @@ const InfoLayout = ({ children }: { children: React.ReactElement }) => {
                 className="w-full flex "
               >
                 <div
-                  className={`w-[98%] pb-4 pr-[20%] flex flex-col gap-2 pt-1 items-center`}
+                  className={`w-[98%] pb-4 pr-[20%] flex flex-col gap-2  items-center`}
                 >
                   <h1 className="font-extrabold text-medium">{button}</h1>
                 </div>

@@ -13,20 +13,23 @@ const UserNavbar = () => {
     getUserBookings({ dispatch });
   }, []);
   return (
-    <div className="w-full flex py-3 items-center justify-between px-3 md:px-10 shadow-md fixed top-0 z-50 bg-white">
+    <div className="w-full flex py-3 items-center justify-between px-3 md:px-10 md:pl-16 shadow shadow-gray-100 sticky top-0 z-50 bg-white">
       <div className="flex gap-5">
         <Link to={"/_client/home"} className="flex items-center gap-2">
           <Brand />
         </Link>
-        <div className="relative ml-10 hidden md:flex md:w-[20vw]">
-          <input
-            onClick={spotlight.open}
-            className="py-3 pl-12 pr-2 border rounded-3xl outline-none w-full text-sm"
-            placeholder="Search ..."
-          />
-          <button className="absolute top-3 left-3">
+        <div className="relative ml-10 hidden md:flex md:w-[20vw] md:items-center  border rounded-xl outline-none w-full items-center gap-2 px-2">
+          <button className=" ">
             <CiSearch size={20} color="#00000050" />
           </button>
+          <div
+            onClick={spotlight.open}
+            className="py-1.5 pr-2 flex flex-1 justify-between  text- text-gray-500 
+            "
+          >
+            <p>search ....</p>
+            <span>Ctrl + K </span>
+          </div>
         </div>
       </div>
       <div className="flex gap-1 items-center userNav">
@@ -36,7 +39,7 @@ const UserNavbar = () => {
         >
           <GoHome color="black" size={20} />
         </NavLink>
-        <hr className="border border-black h-5"/>
+        <hr className="border border-black h-5" />
         <NavLink
           to={"/_client/notifications"}
           className="p-2 hover:bg-neutral-100 rounded-full"

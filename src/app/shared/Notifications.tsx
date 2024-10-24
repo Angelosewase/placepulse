@@ -40,8 +40,8 @@ const OwnerNotificationsPage = () => {
   }, [notifications]);
 
   return (
-    <div className="w-full pb-20 flex flex-col gap-3">
-      <h1 className="text-lg font-bold mb-4">Notifications</h1>
+    <div className="w-full pb-20 flex flex-col gap-3  px-32 ">
+      <h1 className="text-2xl font-bold mb-4">Notifications</h1>
       <div className="w-full">
         {notifications?.length === 0 ? (
           <div className="w-full flex flex-col items-center">

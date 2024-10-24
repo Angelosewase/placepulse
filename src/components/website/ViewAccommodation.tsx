@@ -40,7 +40,7 @@ const ViewAccommodation = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="w-full flex flex-col  pt-2 md:px-24 pb-[50vh]">
+    <div className="w-full flex flex-col pt-4  md:px-28 pb-[50vh]">
       <Helmet>
         <title>Accommodation - Place Pulse</title>
       </Helmet>

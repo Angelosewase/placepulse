@@ -4,7 +4,7 @@ import Brand from "../ui/brand";
 const WebNavbar = () => {
   const isShow = useLocation().pathname === "/";
   return (
-    <div className="w-full flex py-6 items-center justify-between px-10 lg:px-24 backdrop-blur-xl sticky top-0 z-50">
+    <div className="w-full flex py-6 items-center justify-between px-10 lg:px-24 backdrop-blur-xl sticky top-0 z-50 shadow shadow-gray-100">
       <Link to={"/"} className="flex items-center gap-2">
         <Brand />
       </Link>
