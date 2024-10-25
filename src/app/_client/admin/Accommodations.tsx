@@ -14,9 +14,9 @@ const AdminAccommodations = () => {
     (state: any) => state.accommodations,
   );
   return (
-    <div className="w-full">
-      <h1 className="text-2xl font-extrabold">Accommodations Registered</h1>
-      <p>All accommodations that you registered in the system</p>
+    <div className="w-full mt-1">
+      <h1 className="text-2xl font-extrabold mb-1">Accommodations Registered</h1>
+      <p className="">All accommodations that you registered in the system</p>
 
       <div className="w-full">
         <div className="w-full flex justify-end gap-4 mt-10">
@@ -44,7 +44,7 @@ const AdminAccommodations = () => {
             <h1 className="font-extrabold">No Accommodations Registered Yet</h1>
           </div>
         ) : (
-          <div className="w-full grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-7 my-3 ">
+          <div className="w-full grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-7 my-3  mt-10">
             {accommodations.map((place: any, index: any) => {
               return (
                 <ViewAccomCard

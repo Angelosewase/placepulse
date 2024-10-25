@@ -40,7 +40,7 @@ const ViewAdminAccommodation = () => {
   }, []);
   const navigate = useNavigate();
   return (
-    <div className="w-full flex flex-col md:px-10 pt-10 pb-[50vh]">
+    <div className="w-full flex flex-col md:px-10 pt-10 pb-10">
       {loading ? (
         <div className="w-full flex items-center justify-center">
           <ClipLoader color="black" size={23} />
@@ -105,8 +105,8 @@ const ViewAdminAccommodation = () => {
             <p className="text-sm font-semibold">{accommodation.description}</p>
 
             <div className="w-full flex justify-start gap-8 mt-5">
-              <div className="w-[30vh] h-[25vh] bg-[#0075FF] rounded-lg relative flex flex-col justify-end p-3 px-4">
-                <button className="absolute font-extrabold text-2xl top-2 left-4 text-white">
+              <div className="w-[18vh] h-[14vh] bg-[#0075FF] rounded-lg  relative flex flex-col justify-end p-3 px-4">
+                <button className="absolute font-extrabold text-2xl top-2 left-4 text-white flex items-center gap-2">
                   {accommodation.rating}
                 </button>
                 <h1 className="font-extrabold text-white">Very Good</h1>
@@ -117,62 +117,63 @@ const ViewAdminAccommodation = () => {
               {accommodation.amenities[0].map((amenity: any, index: number) => {
                 return (
                   <div
-                    key={index}
-                    className="w-[28vh] h-[25vh] border border-[#396FF9] rounded-lg relative flex flex-col justify-end p-3"
-                  >
-                    <button className="absolute top-2 left-2">
-                      <WiStars color="black" size={30} />
-                    </button>
-                    <h1 className="font-extrabold">
-                      {SnakeCaseToPascalCaseSpaced(amenity)}
-                    </h1>
-                  </div>
+                      key={index}
+                      className="w-[18vh] h-[14vh] border border-[#396FF9] rounded-lg  relative flex flex-col justify-end p-3"
+                    >
+                      <button className="absolute top-2 left-2">
+                        <WiStars color="black" size={30} />
+                      </button>
+                      <h1 className="font-extrabold">
+                        {SnakeCaseToPascalCaseSpaced(amenity)}
+                      </h1>
+                    </div>
                 );
               })}
             </div>
           </div>
           <hr className="w-full hotel_divider my-[5vh]" />
-          {accommodation.type === "hotel" && (
-            <>
-              <div className="w-full mt-5">
-                <h1 className="text-xl font-extrabold mb-4">Available Rooms</h1>
-                <div className="w-full flex flex-col gap-4">
-                  {rooms.map((roomType: any, index: number) => {
-                    return (
-                      <div
-                        key={index}
-                        className={`w-full flex justify-between ${index !== rooms.length - 1 && "border-b border-b-[#ccc]"} pb-2`}
+          {accommodation?.type === "hotel" && (
+            <div className="w-full mt-5">
+              <h1 className="text-xl font-extrabold mb-4">Available Rooms</h1>
+              <div className="w-full flex flex-col gap-4">
+                {rooms?.map((roomType: any, index: number) => {
+                  return (
+                    <div
+                    key={index}
+                    className={`w-full flex justify-between items-center gap-6 p-4 bg-white rounded-lg shadow-md ${
+                      index !== rooms?.length - 1 ? "mb-4" : ""
+                    }`}
+                  >
+                    <div className="flex items-center gap-4">
+                      <img
+                        src={roomType?.images[0]}
+                        width={90}
+                        height={90}
+                        className="rounded-lg object-cover"
+                        alt={roomType?.name}
+                      />
+                      <h1 className="font-bold text-xl text-gray-800">{roomType?.name}</h1>
+                    </div>
+                    <div className="flex items-center gap-8">
+                      <h1 className="font-bold text-lg text-gray-700">
+                        ${roomType.price}{" "}
+                        <span className="text-sm text-gray-500">/night</span>
+                      </h1>
+                      <button
+                        onClick={() => {
+                          navigate(`/booking/place/${accommodation_id}`);
+                        }}
+                        className="px-5 py-2 rounded-lg font-semibold bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300"
                       >
-                        <div className="flex items-center gap-3">
-                          <img
-                            src={roomType.images[0]}
-                            width={90}
-                            height={90}
-                            className="rounded-sm"
-                          />
-                          <h1 className="font-extrabold">{roomType.name}</h1>
-                        </div>
-                        <div className="flex items-center gap-4">
-                          <h1 className="font-extrabold">
-                            {roomType.price}{" "}
-                            <span className="text-sm">/night</span>
-                          </h1>
-                          <button
-                            onClick={() => {
-                              navigate(`/booking/place/${accommodation_id}`);
-                            }}
-                            className="px-6 py-3 rounded-sm flex items-center font-extrabold justify-center bg-[#396FF9] text-white text-sm"
-                          >
-                            Book Now
-                          </button>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
+                        Book Now
+                      </button>
+                    </div>
+                  </div>
+                  
+                  );
+                })}
               </div>
-              <hr className="w-full hotel_divider my-[9vh]" />
-            </>
+            </div>
           )}
           <div className="w-full mt-5">
             <div className="w-full flex justify-between items-center">
@@ -196,20 +197,21 @@ const ViewAdminAccommodation = () => {
           <hr className="w-full hotel_divider my-[9vh]" />
           <div className="w-full mt-5">
             <h1 className="text-xl font-extrabold mb-4">Freebies</h1>
-            <div className="w-full grid md:grid-cols-3 gap-3 mt-4">
-              {accommodation.freebies[0].map((amenity: any) => {
-                return (
-                  <div
-                    key={amenity}
-                    className="w-full flex items-center gap-3 pl-4"
-                  >
-                    <WiStars color="black" size={30} />
-                    <h1 className="font-extrabold">
-                      {SnakeCaseToPascalCaseSpaced(amenity)}
-                    </h1>
-                  </div>
-                );
-              })}
+            <div className="w-full grid md:grid-cols-6 gap-3 mt-4">
+              {accommodation?.freebies &&
+                accommodation?.freebies[0].map((amenity: any) => {
+                  return (
+                    <div
+                      key={amenity}
+                      className="w-full flex items-center gap-3 pl-4 shadow rounded-lg"
+                    >
+                      <WiStars color="black" size={30} />
+                      <h1 className="font-extrabold">
+                        {SnakeCaseToPascalCaseSpaced(amenity)}
+                      </h1>
+                    </div>
+                  );
+                })}
             </div>
           </div>
         </>

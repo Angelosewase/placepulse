@@ -13,11 +13,11 @@ const AdminBookings = () => {
           <p>All customer bookings</p>
         </div>
         <div className="w-full flex justify-end gap-2 mt-10">
-          <button className="px-4 py-2 border border-blue-300 font-bold text-sm">
+          <button className="px-4 py-2 border border-blue-300 font-bold text-sm rounded-lg">
             View more
           </button>
           <button
-            className="flex items-center gap-2 bg-blue-500 rounded-sm py-2 px-4"
+            className="flex items-center gap-2 bg-blue-500 py-2 px-4 rounded-lg"
             // onClick={fetch}
           >
             <h1 className="font-bold text-white">Reload</h1>

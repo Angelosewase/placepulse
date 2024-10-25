@@ -259,9 +259,9 @@ const OwnerAddAccommodations = () => {
               </div>
             </div>
           </div>
-          <div className="w-full rounded-lg p-3 mt-3">
-            <header className="font-extrabold text-xl">Price And Stock</header>
-            <div className="w-full flex justify-between gap-3">
+          <div className="w-full rounded-lg p-3">
+            <header className="font-extrabold">Price And Stock</header>
+            <div className="w-full flex justify-between gap-3 mt-3">
               <div className="w-full">
                 <label htmlFor="price" className="text-sm font-medium">
                   Best Pricing{" "}
@@ -298,26 +298,6 @@ const OwnerAddAccommodations = () => {
                   value={formData.discount}
                   onChange={handleChange}
                   className="w-full text-sm py-3 pl-4 pr-3 outline-none border border-neutral-400 rounded-md"
-                />
-              </div>
-              <div className="w-full h-11">
-                <label htmlFor="discountType" className="text-sm font-medium">
-                  Discount Type
-                </label>
-                <Select
-                  id="discountType"
-                  value={formData.type}
-                  onChange={(e: any) => setFormData({ ...formData, type: e })}
-                  data={[
-                    {
-                      label: "Percentage",
-                      value: "percentage",
-                    },
-                    {
-                      label: "FRW",
-                      value: "FRW",
-                    },
-                  ]}
                 />
               </div>
             </div>

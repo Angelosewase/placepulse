@@ -96,12 +96,11 @@ const OwnerHome = () => {
     },
   ];
   return (
-    <div className="w-full h-  flex-1 ">
+    <div className="w-full  flex-1 ">
       <div className="w-full grid grid-cols-4 gap-4 mt-2 p-1">
         {dashboardStats.map((stat: any, index: number) => {
           return (
             <DashboardCard data={stat} key={index} color={stat.color}>
-              {" "}
               {stat.icon}
             </DashboardCard>
           );

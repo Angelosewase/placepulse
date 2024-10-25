@@ -9,7 +9,7 @@ import { Modal } from "@mantine/core";
 const BookingViewCard = ({ data }: { data: any }) => {
   const [viewTicket, setViewTicket] = useState(false);
   return (
-    <div className="w-full pt-3 pb-5 flex justify-between px-4 shadow-md shadow-gray-200">
+    <div className="w-full pt-2 pb-3 flex justify-between px-4 shadow-md shadow-gray-200 bg-white rounded-lg">
       <div className="w-[50%] flex items-center justify-between">
         <div className="flex justify-between items-center gap-4">
           <img

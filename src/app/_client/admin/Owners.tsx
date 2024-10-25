@@ -9,18 +9,18 @@ const AccommodationOwnersPage = () => {
   const { owners, loading } = useSelector((state: any) => state.owners);
   console.log(owners, loading);
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-ful mt-3">
       <div className="w-full flex justify-between items-center">
-        <h1>Accommodations Owners</h1>
+        <h1 className="text-2xl font-semibold">Accommodations Owners</h1>
         <button
           onClick={open}
-          className="py-2 px-7 bg-blue-300 hover:bg-blue-400 rounded-md font-semibold"
+          className="py-2 px-7 bg-blue-300 hover:bg-blue-400 rounded-lg font-semibold "
         >
           New
         </button>
       </div>
 
-      <div className="w-full grid grid-cols-3 gap-x-4 gap-y-8 mt-10">
+      <div className="w-full  gap-4 flex gap-y-8 mt-10">
         {owners?.map((owner: any) => {
           return <OwnerComponent data={owner} />;
         })}

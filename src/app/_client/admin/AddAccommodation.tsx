@@ -80,7 +80,7 @@ const AdminAddAccommodations = () => {
         headers: {
           "Content-Type": "multipart/form-data",
         },
-      },
+      }
     )
       .then((res) => {
         console.log("response --> ", res.data);
@@ -116,11 +116,11 @@ const AdminAddAccommodations = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full pb-10 min-h-[150vh]"
+      className="w-full pb-10 min-h-[100vh] pt-2"
       encType="multipart/form-data"
     >
-      <div className="w-full flex justify-between items-center">
-        <h1 className="text-[#3B9DF8] font-extrabold">
+      <div className="w-full flex justify-between items-center px-4">
+        <h1 className="text-[#3B9DF8] text-2xl font-extrabold">
           Register new accommodation
         </h1>
         <div className="flex gap-3 items-center">
@@ -150,9 +150,9 @@ const AdminAddAccommodations = () => {
         </div>
       </div>
       <div className="w-full flex justify-between mt-10">
-        <div className="w-[60%] flex flex-col gap-3">
+      <div className="w-[60%] flex flex-col gap-3 bg-white shadow p-3 rounded-lg">
           <div className="w-full rounded-lg p-3">
-            <header className="font-extrabold">General Information</header>
+            <header className="font-extrabold text-xl">General Information</header>
 
             <div className="mt-3 flex flex-col gap-2 ">
               <label htmlFor="name" className="text-sm font-medium">
@@ -327,9 +327,9 @@ const AdminAddAccommodations = () => {
               <ImagesDropCard
                 selectedImage={images[0]}
                 setSelectedImage={handleAddImage}
-                minHeight={"38vh"}
+                minHeight={"30vh"}
               />
-              <div className="w-full grid grid-cols-2 gap-6 mt-4">
+              <div className="w-full grid grid-cols-2 gap-4 mt-4">
                 <ImagesDropCard
                   selectedImage={images[1]}
                   setSelectedImage={handleAddImage}
@@ -398,8 +398,8 @@ const AdminAddAccommodations = () => {
                   },
                 ]}
               />
-              <div className="mt-3 flex flex-col gap-2">
-                <label htmlFor="rating" className="text-sm font-medium">
+              <div className="mt-3 flex flex-col gap-1">
+                <label htmlFor="rating" className="font-medium">
                   Rating
                 </label>
                 <input
@@ -412,8 +412,8 @@ const AdminAddAccommodations = () => {
                   className="w-full text-sm py-3 pl-4 pr-3 outline-none border border-neutral-400 rounded-md"
                 />
               </div>
-              <div className="mt-3 flex flex-col gap-2">
-                <label htmlFor="type" className="text-sm font-medium">
+              <div className="mt-3 flex flex-col gap-1">
+                <label htmlFor="type" className=" font-medium">
                   Accommodation Owner
                 </label>
                 <div className="h-11">
