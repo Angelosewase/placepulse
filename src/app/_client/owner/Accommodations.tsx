@@ -42,14 +42,16 @@ const OwnerAccommodations = () => {
     fetch();
   }, []);
   return (
-    <div className="w-full">
-      <h1 className="text-2xl font-extrabold">Accommodations Registered</h1>
+    <div className="w-full h-full flex-1 p-3">
+      <h1 className="text-2xl font-extrabold mb-2 ">
+        Registered Accommodations{" "}
+      </h1>
       <p>All accommodations that you registered in the system</p>
 
-      <div className="w-full">
-        <div className="w-full flex justify-end mt-10">
+      <div className="w-full bg-white rounded-lg  shadow mt-10 ">
+        <div className="w-full flex justify-end px-2  py-4 ">
           <button
-            className="flex items-center gap-2 bg-blue-500 rounded-sm py-2 px-4"
+            className="flex items-center gap-2 bg-blue-500 rounded-lg py-2 px-4"
             onClick={fetch}
           >
             <h1 className="font-bold text-white">Reload</h1>
@@ -57,11 +59,11 @@ const OwnerAccommodations = () => {
           </button>
         </div>
         {loading ? (
-          <div className="w-full flex justify-center my-10">
+          <div className="w-full flex justify-center  pb-9">
             <ClipLoader size={20} color="black" />
           </div>
         ) : accommodations.length === 0 ? (
-          <div className="w-full mt-3 flex justify-center">
+          <div className="w-full mt-3 flex justify-center pb-5">
             <h1 className="font-extrabold">No Accommodations Registered Yet</h1>
           </div>
         ) : (

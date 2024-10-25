@@ -13,7 +13,7 @@ const OwnerNavbar = ({ type }: { type: string }) => {
     getEarnings({ dispatch });
   }, [dispatch]);
   return (
-    <div className="w-full flex h-[8vh] shadow shadow-gray-200 items-center justify-end pr-9">
+    <div className="w-full flex min-h-[7vh]  bg-[#fbfbff] items-center justify-end pr-9  sticky top-0 z-50">
       <div className="flex gap-2 items-center userNav h-full">
         <button className="p-2 hover:bg-neutral-100 rounded-full">
           <GoSearch color="black" size={19} />

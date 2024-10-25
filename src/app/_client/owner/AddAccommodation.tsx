@@ -122,11 +122,11 @@ const OwnerAddAccommodations = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full pb-10 min-h-[150vh]"
+      className="w-full p-3 pt-5  flex flex-col gap-3  relative "
       encType="multipart/form-data"
     >
-      <div className="w-full flex justify-between items-center">
-        <h1 className="text-[#3B9DF8] font-extrabold">
+      <div className="w-full flex justify-between items-center px-4">
+        <h1 className="text-[#3B9DF8] text-2xl font-extrabold">
           Register new accommodation
         </h1>
         <div className="flex gap-3 items-center">
@@ -155,10 +155,10 @@ const OwnerAddAccommodations = () => {
           </button>
         </div>
       </div>
-      <div className="w-full flex justify-between mt-10">
-        <div className="w-[60%] flex flex-col gap-3">
+      <div className="w-full flex justify-between mt-1">
+        <div className="w-[60%] flex flex-col gap-3 bg-white shadow p-3 rounded-lg">
           <div className="w-full rounded-lg p-3">
-            <header className="font-extrabold">General Information</header>
+            <header className="font-extrabold text-xl">General Information</header>
 
             <div className="mt-3 flex flex-col gap-2 ">
               <label htmlFor="name" className="text-sm font-medium">
@@ -259,9 +259,9 @@ const OwnerAddAccommodations = () => {
               </div>
             </div>
           </div>
-          <div className="w-full rounded-lg p-3">
-            <header className="font-extrabold">Price And Stock</header>
-            <div className="w-full flex justify-between gap-3 mt-3">
+          <div className="w-full rounded-lg p-3 mt-3">
+            <header className="font-extrabold text-xl">Price And Stock</header>
+            <div className="w-full flex justify-between gap-3">
               <div className="w-full">
                 <label htmlFor="price" className="text-sm font-medium">
                   Best Pricing{" "}
@@ -346,16 +346,16 @@ const OwnerAddAccommodations = () => {
             </div>
           )}
         </div>
-        <div className="w-[37%] flex flex-col gap-3">
+        <div className="w-[37%] flex flex-col gap-3 ">
           <div className="w-full rounded-lg p-3">
-            <header className="font-extrabold">Upload Place Images</header>
+            <header className="font-extrabold text-lg">Upload Place Images</header>
             <div className="w-full mt-4">
               <ImagesDropCard
                 selectedImage={images[0]}
                 setSelectedImage={handleAddImage}
-                minHeight={"38vh"}
+                minHeight={"30vh"}
               />
-              <div className="w-full grid grid-cols-2 gap-6 mt-4">
+              <div className="w-full grid grid-cols-2 gap-2 mt-4">
                 <ImagesDropCard
                   selectedImage={images[1]}
                   setSelectedImage={handleAddImage}
@@ -378,13 +378,15 @@ const OwnerAddAccommodations = () => {
                   /> */}
               </div>
             </div>
-            <div className="w-full h-11">
-              <label htmlFor="type" className="text-sm font-medium">
+    
+            <div className="w-full h-11 mt-4 ">
+              <label htmlFor="type" className="t font-medium">
                 Accommodation Category
               </label>
               <Select
                 value={formData.type}
                 onChange={(e: any) => setFormData({ ...formData, type: e })}
+                className="border"
                 data={[
                   {
                     label: "Hotel",
@@ -424,8 +426,8 @@ const OwnerAddAccommodations = () => {
                   },
                 ]}
               />
-              <div className="mt-3 flex flex-col gap-2">
-                <label htmlFor="rating" className="text-sm font-medium">
+              <div className="mt-3 flex flex-col gap-1">
+                <label htmlFor="rating" className=" font-medium">
                   Rating
                 </label>
                 <input

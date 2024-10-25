@@ -6,7 +6,7 @@ import { ClipLoader } from "react-spinners";
 const AdminBookings = () => {
   const { bookings, loading } = useSelector((state: any) => state.bookings);
   return (
-    <div className="w-full mb-20">
+    <div className="w-full  ">
       <div className="w-full flex justify-between items-center">
         <div className="w-full">
           <h1 className="text-2xl font-extrabold">Bookings/Invoices</h1>

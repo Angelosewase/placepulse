@@ -10,7 +10,7 @@ const OwnerSidebar = ({ tabs }: { tabs: any[] }) => {
   const [isLogout, { open, close }] = useDisclosure();
   return (
     <div
-      className="flex flex-col pt-[5vh] h-full bg-[#F8F8FC] w-full"
+      className="flex flex-col pt-[5vh] max-h-[95vh] w-[17vw]   sticky left-0 top-0"
     >
       <h1 className="text-2xl font-extrabold pl-10 text-center mb-8">
         <Brand />
@@ -23,7 +23,7 @@ const OwnerSidebar = ({ tabs }: { tabs: any[] }) => {
                 <SubRoutesTab key={index} tab={tab} />
               ) : (
                 <NavLink
-                  className="w-full flex justify-start items-center gap-3  py-2.5 px-6 font-bold"
+                  className="w-[95%] flex justify-start items-center gap-3  py-2.5 px-6 font-bold mx-auto rounded-lg"
                   key={index}
                   to={tab.path}
                 >
@@ -37,7 +37,7 @@ const OwnerSidebar = ({ tabs }: { tabs: any[] }) => {
 
         <button
           onClick={open}
-          className="w-full flex justify-start items-center gap-3 py-4 px-6 font-bold mb-5 hover:bg-red-500 hover:text-white mt-auto"
+          className="w-[95%] mx-auto flex justify-start items-center gap-3 py-4 px-6 font-bold  hover:bg-red-500 hover:text-white mt-auto"
         >
           <CiLogout size={23} />
           <h5>Logout</h5>
